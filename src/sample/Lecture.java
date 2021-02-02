@@ -27,7 +27,7 @@ public class Lecture {
                 " on " + date +
                 " which is a " + day;
         if(extraText!=null){
-            toReturn+=" it's '" + extraText;
+            toReturn+=" / " + extraText;
         }
         return toReturn;
     }

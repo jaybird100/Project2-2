@@ -1,30 +1,22 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.ParseException;
 
 
 public class Main extends Application {
     Data d = new Data();
     final int windowWidth= 800;
-    final int windowHeight = 400;
+    final int windowHeight = 700;
 
     public Main() throws IOException {
     }
@@ -39,7 +31,11 @@ public class Main extends Application {
         Label label = new Label("");
         label.setWrapText(true);
         button.setOnAction(action -> {
-            d.setPrint(textField.getText());
+            try {
+                d.setPrint(textField.getText());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             label.setText(Data.toPrint);
         });
         GridPane root = new GridPane();
