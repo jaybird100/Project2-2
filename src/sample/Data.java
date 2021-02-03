@@ -16,10 +16,7 @@ public class Data {
 
     static ArrayList<Skill> everySkill = new ArrayList<>();
 
-    public Data() throws IOException {
-        fillData();
-    }
-    void fillData() throws IOException {
+    static void fillData() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("Lectures.csv"));
         String row = reader.readLine();
         while(row != null){
@@ -47,7 +44,7 @@ public class Data {
         everySkill.add(new Tomorrow());
         everySkill.add(new LecturesInDays());
         everySkill.add(new LecturesOn());
-       // System.out.println(everySkill.size());
+        //System.out.println(everySkill.size());
     }
 
 

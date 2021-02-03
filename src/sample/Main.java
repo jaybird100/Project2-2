@@ -16,7 +16,6 @@ import java.text.ParseException;
 
 
 public class Main extends Application {
-    Data d = new Data();
     final int windowWidth= 700;
     final int windowHeight = 500;
 
@@ -60,7 +59,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Data.fillData();
         launch(args);
     }
 
