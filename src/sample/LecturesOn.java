@@ -16,25 +16,25 @@ public class LecturesOn extends CalenderLectures{
         int today = new Date().getDay();
         int compare = -1;
         if (input.length > 2) {
-            if (input[2].equals("Monday")) {
+            if (input[2].equalsIgnoreCase("Monday")) {
                 compare = 1;
             }
-            if (input[2].equals("Tuesday")) {
+            if (input[2].equalsIgnoreCase("Tuesday")) {
                 compare = 2;
             }
-            if (input[2].equals("Wednesday")) {
+            if (input[2].equalsIgnoreCase("Wednesday")) {
                 compare = 3;
             }
-            if (input[2].equals("Thursday")) {
+            if (input[2].equalsIgnoreCase("Thursday")) {
                 compare = 4;
             }
-            if (input[2].equals("Friday")) {
+            if (input[2].equalsIgnoreCase("Friday")) {
                 compare = 5;
             }
-            if (input[2].equals("Saturday")) {
+            if (input[2].equalsIgnoreCase("Saturday")) {
                 compare = 6;
             }
-            if (input[2].equals("Sunday")) {
+            if (input[2].equalsIgnoreCase("Sunday")) {
                 compare = 0;
             }
         }
