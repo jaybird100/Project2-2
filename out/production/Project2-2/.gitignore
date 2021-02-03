@@ -1,0 +1,13 @@
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/PlayItBackgammon.iml
+.idea/libraries/lib.xml
+out/production/Project2-2/Main.class
+*.class
+*.bin
+*.xml
+*.iml
+out/production/Project2-2/.idea/Project2-2.iml
+/bin/
+.idea/
