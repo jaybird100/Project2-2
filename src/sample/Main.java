@@ -1,32 +1,25 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.text.ParseException;
 
 
 public class Main extends Application {
-    Data d = new Data();
     final int windowWidth= 700;
     final int windowHeight = 500;
 
-    public Main() throws IOException {
-    }
-
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Project 2-2");
         primaryStage.initStyle(StageStyle.DECORATED);
         TextField textField = new TextField();
@@ -42,18 +35,13 @@ public class Main extends Application {
             }
 
         });
-        textField.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
-            @Override
-            public void handle(KeyEvent ke)
+        textField.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER))
             {
-                if (ke.getCode().equals(KeyCode.ENTER))
-                {
-                    try {
-                        label.setText(Data.p.parse(textField.getText()));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    label.setText(Data.p.parse(textField.getText()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });

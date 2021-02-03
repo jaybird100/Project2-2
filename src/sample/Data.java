@@ -3,15 +3,12 @@ package sample;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Data {
     static Parser p = new Parser();
     static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
-
-    public static String toPrint="";
 
     static String date;
 

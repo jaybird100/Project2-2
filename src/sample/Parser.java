@@ -1,8 +1,6 @@
 package sample;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Parser {
     String parse(String input) throws ParseException {
@@ -15,14 +13,14 @@ public class Parser {
        }
     }
     Skill findSkill(String[] input){
-        System.out.println("input: "+ Arrays.toString(input));
+       // System.out.println("input: "+ Arrays.toString(input));
         for(Skill sk:Data.everySkill){
             boolean theOne=true;
-            System.out.println(Arrays.toString(sk.keywords.toArray()));
+            //System.out.println(Arrays.toString(sk.keywords.toArray()));
             for(int i=0;i<sk.keywords.size();i++){
-
-                if(!(input.length>sk.wordPlacements.get(i)&&input[sk.wordPlacements.get(i)].equalsIgnoreCase(sk.keywords.get(i)))){
-                    theOne=false;
+                if (!(input.length > sk.wordPlacements.get(i) && input[sk.wordPlacements.get(i)].equalsIgnoreCase(sk.keywords.get(i)))) {
+                    theOne = false;
+                    break;
                 }
             }
             if(theOne){
