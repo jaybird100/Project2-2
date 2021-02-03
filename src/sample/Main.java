@@ -11,12 +11,17 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 
 public class Main extends Application {
+    Data d = new Data();
     final int windowWidth= 700;
     final int windowHeight = 500;
+
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage primaryStage) {

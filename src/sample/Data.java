@@ -47,6 +47,7 @@ public class Data {
         everySkill.add(new Tomorrow());
         everySkill.add(new LecturesInDays());
         everySkill.add(new LecturesOn());
+       // System.out.println(everySkill.size());
     }
 
 

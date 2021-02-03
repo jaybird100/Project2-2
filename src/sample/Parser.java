@@ -1,6 +1,7 @@
 package sample;
 
 import java.text.ParseException;
+import java.util.Arrays;
 
 public class Parser {
     String parse(String input) throws ParseException {
@@ -13,7 +14,8 @@ public class Parser {
        }
     }
     Skill findSkill(String[] input){
-       // System.out.println("input: "+ Arrays.toString(input));
+      //  System.out.println("input: "+ Arrays.toString(input));
+     //   System.out.println(Data.everySkill.size());
         for(Skill sk:Data.everySkill){
             boolean theOne=true;
             //System.out.println(Arrays.toString(sk.keywords.toArray()));
