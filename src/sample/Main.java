@@ -1,11 +1,14 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -33,11 +36,26 @@ public class Main extends Application {
         label.setWrapText(true);
         button.setOnAction(action -> {
             try {
-                d.setPrint(textField.getText());
+                label.setText(Data.p.parse(textField.getText()));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            label.setText(Data.toPrint);
+
+        });
+        textField.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                    try {
+                        label.setText(Data.p.parse(textField.getText()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         });
         ScrollPane sp = new ScrollPane();
         sp.setContent(label);
