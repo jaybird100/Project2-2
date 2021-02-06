@@ -11,6 +11,7 @@ public class Data {
     static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
     // <DATE> = Inputted ADate, <DAY> = Inputted day, Date<TODAY> = today, <DATE><TODAY+<NUM>> = in <NUM> days, NEXT<DAY> = next <DAY>, <NUM> = number
+    // Date<YESTERDAY> = yesterday, Date<TOMORROW> = tomorrow
     // Date<Today+<Num>>==0, NEXT<DAY> == 1 in ADate
     static ArrayList<String> codes = new ArrayList<>();
     static ArrayList<Attribute> correspondingAtt = new ArrayList<>();
@@ -39,6 +40,10 @@ public class Data {
         correspondingAtt.add(new ADate(1));
         codes.add("<NUM>");
         correspondingAtt.add(new Number());
+        codes.add("Date<YESTERDAY>");
+        correspondingAtt.add(new ADate(today.date.minusDays(1)));
+        codes.add("Date<TOMORROW>");
+        correspondingAtt.add(new ADate(today.date.plusDays(1)));
         BufferedReader reader = new BufferedReader(new FileReader("Lectures.csv"));
         String row = reader.readLine();
         while(row != null){

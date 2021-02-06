@@ -29,3 +29,15 @@ Lecture
 Date<TODAY>
 all
 -
+lectures tomorrow
+Fetch
+Lecture
+Date<TOMORROW>
+all
+-
+lectures yesterday
+Fetch
+Lecture
+Date<YESTERDAY>
+all
+-

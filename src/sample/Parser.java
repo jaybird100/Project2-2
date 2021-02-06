@@ -55,7 +55,13 @@ public class Parser {
                                 }
                                 if (id == 0) {
                                     int num = Integer.parseInt(words[2]);
-                                    ADate date = new ADate(Data.today.date.plusDays(num));
+                                    ADate date;
+                                    if(num>=0) {
+                                        date = new ADate(Data.today.date.plusDays(num));
+                                    }else{
+                                        num=Math.abs(num);
+                                        date= new ADate(Data.today.date.minusDays(num));
+                                    }
                                     theLimiters.remove(i);
                                     theLimiters.add(i, date);
                                 }
