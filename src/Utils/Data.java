@@ -36,6 +36,7 @@ public class Data {
     public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();
 
     public static void fillData() throws IOException {
+        //TODO: UI; make a screen to get paths for files for data and how to parse them
         codes.add("<DATE>");
         correspondingAtt.add(new ADate());
         codes.add("<DAY>");
@@ -52,6 +53,8 @@ public class Data {
         correspondingAtt.add(new ADate(today.date.minusDays(1)));
         codes.add("Date<TOMORROW>");
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
+
+        //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
         String row = reader.readLine();
         while(row != null){
@@ -71,7 +74,9 @@ public class Data {
             }
             row = reader.readLine();
         }
-        reader = new BufferedReader(new FileReader("skills.txt"));
+
+        //read LecturePhrases for Phrases pertaining to lecture queries
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_SKILL_PARSER_FILE_PATH+"LecturePhrases.txt"));
         row=reader.readLine();
         while(row!=null){
             row=reader.readLine();
@@ -118,6 +123,8 @@ public class Data {
             }
             row=reader.readLine();
         }
+
+        //read other files....
 
     }
 
