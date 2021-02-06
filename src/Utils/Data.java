@@ -1,4 +1,12 @@
-package sample;
+package Utils;
+
+import Articles.Lecture;
+import Attributes.*;
+import Attributes.Number;
+import Articles.Article;
+import Attributes.Attribute;
+import Skills.Fetch;
+import Skills.Skill;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Data {
-    static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+    public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
     // <DATE> = Inputted ADate, <DAY> = Inputted day, Date<TODAY> = today, <DATE><TODAY+<NUM>> = in <NUM> days, NEXT<DAY> = next <DAY>, <NUM> = number
     // Date<YESTERDAY> = yesterday, Date<TOMORROW> = tomorrow
@@ -19,15 +27,15 @@ public class Data {
 
     static ADate today = new ADate(LocalDate.now());
 
-    static ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+    public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();
 
-    static ArrayList<String> commands = new ArrayList<>();
-    static ArrayList<Skill> toCall = new ArrayList<>();
-    static ArrayList<Article> objectsFromTxt = new ArrayList<>();
-    static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();
-    static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();
+    public static ArrayList<String> commands = new ArrayList<>();
+    public static ArrayList<Skill> toCall = new ArrayList<>();
+    public static ArrayList<Article> objectsFromTxt = new ArrayList<>();
+    public static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();
+    public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();
 
-    static void fillData() throws IOException {
+    public static void fillData() throws IOException {
         codes.add("<DATE>");
         correspondingAtt.add(new ADate());
         codes.add("<DAY>");
@@ -44,7 +52,7 @@ public class Data {
         correspondingAtt.add(new ADate(today.date.minusDays(1)));
         codes.add("Date<TOMORROW>");
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
-        BufferedReader reader = new BufferedReader(new FileReader("Lectures.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
         String row = reader.readLine();
         while(row != null){
             String[] data = row.split(",");

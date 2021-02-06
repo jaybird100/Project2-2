@@ -1,6 +1,6 @@
-package sample;
+package Attributes;
 
-public class ExtraText extends Attribute{
+public class ExtraText extends Attribute {
     String extraText;
     public ExtraText(String e){
         super(false);

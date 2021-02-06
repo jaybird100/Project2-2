@@ -1,8 +1,8 @@
-package sample;
+package Attributes;
 
 import java.time.DayOfWeek;
 
-public class Day extends Attribute{
+public class Day extends Attribute {
     DayOfWeek day;
 
     public Day(DayOfWeek d){

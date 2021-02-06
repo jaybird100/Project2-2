@@ -1,4 +1,10 @@
-package sample;
+package Utils;
+
+import Attributes.ADate;
+import Skills.Fetch;
+import Articles.Article;
+import Attributes.Attribute;
+import Utils.Data;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -8,7 +14,7 @@ public class Parser {
     public static String parse(String input){
         String[] words = input.split(" ");
         int commandID=-1;
-        for(int i=0;i<Data.commands.size();i++){
+        for(int i = 0; i< Data.commands.size(); i++){
             ArrayList<Integer> codeIDs = new ArrayList<>();
             String[] command = Data.commands.get(i).split(" ");
             if(words.length==command.length) {

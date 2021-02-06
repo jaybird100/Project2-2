@@ -1,6 +1,6 @@
-package sample;
+package Attributes;
 
-public class Number extends Attribute{
+public class Number extends Attribute {
     int num;
     public Number(int n) {
         super(false);

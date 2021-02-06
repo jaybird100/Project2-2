@@ -1,8 +1,13 @@
-package sample;
+package Skills;
+
+import Articles.Lecture;
+import Articles.Article;
+import Attributes.Attribute;
+import Utils.Data;
 
 import java.util.ArrayList;
 
-public class Fetch extends Skill{
+public class Fetch extends Skill {
     public void setType(Article type) {
         this.type = type;
     }

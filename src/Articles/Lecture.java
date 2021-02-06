@@ -1,8 +1,13 @@
-package sample;
+package Articles;
+
+import Attributes.ADate;
+import Attributes.Course;
+import Attributes.ExtraText;
+import Attributes.Time;
 
 import java.util.ArrayList;
 
-public class Lecture extends Article{
+public class Lecture extends Article {
     // attributes: 0=course, 1=time, 2= date, 3= extra
     Course course;
     Time time;

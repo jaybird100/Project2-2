@@ -1,4 +1,6 @@
-package sample;
+package Attributes;
+
+import Utils.Data;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -7,19 +9,19 @@ import java.util.Locale;
 
 public class ADate extends Attribute {
 
-    int id=-1;
+    public int id=-1;
     public LocalDate getDate() {
         return date;
     }
 
-    LocalDate date;
+    public LocalDate date;
     public ADate(LocalDate d){
         super(false);
         date=d;
     }
     public ADate(String s){
         super(false);
-        date=LocalDate.parse(s,Data.dateFormatter);
+        date=LocalDate.parse(s, Data.dateFormatter);
     }
     public ADate(){
         super(true);

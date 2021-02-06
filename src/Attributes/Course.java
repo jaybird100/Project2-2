@@ -1,6 +1,6 @@
-package sample;
+package Attributes;
 
-public class Course extends Attribute{
+public class Course extends Attribute {
     String courseName;
     public Course(String cN){
         super(false);

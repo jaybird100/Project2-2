@@ -1,8 +1,8 @@
-package sample;
+package Attributes;
 
 import java.time.LocalTime;
 
-public class Time extends Attribute{
+public class Time extends Attribute {
     LocalTime time;
     public Time(LocalTime t){
         super(false);
