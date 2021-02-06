@@ -12,15 +12,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.text.ParseException;
-
+import java.util.Arrays;
 
 public class Main extends Application {
+
     final int windowWidth= 700;
     final int windowHeight = 500;
 
-    public Main() throws IOException {
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -32,21 +30,13 @@ public class Main extends Application {
         Label label = new Label("");
         label.setWrapText(true);
         button.setOnAction(action -> {
-            try {
-                label.setText(Data.p.parse(textField.getText()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            label.setText(Parser.parse(textField.getText()));
 
         });
         textField.setOnKeyPressed(ke -> {
             if (ke.getCode().equals(KeyCode.ENTER))
             {
-                try {
-                    label.setText(Data.p.parse(textField.getText()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                label.setText(Parser.parse(textField.getText()));
             }
         });
         ScrollPane sp = new ScrollPane();
@@ -59,10 +49,16 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+
+
     public static void main(String[] args) throws IOException {
         Data.fillData();
+        System.out.println(Arrays.deepToString(Data.commands.toArray()));
+        System.out.println(Arrays.deepToString(Data.toCall.toArray()));
+        System.out.println(Arrays.deepToString(Data.objectsFromTxt.toArray()));
+        System.out.println(Arrays.deepToString(Data.limiters.toArray()));
+        System.out.println(Arrays.deepToString(Data.attributeIndexes.toArray()));
+        //System.out.println(Arrays.deepToString(Data.lectures.toArray()));
         launch(args);
     }
-
-
 }

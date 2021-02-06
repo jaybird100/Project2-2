@@ -1,0 +1,31 @@
+-
+all lectures
+Fetch
+Lecture
+all
+all
+-
+lectures on <DAY>
+Fetch
+Lecture
+NEXT<DAY>
+all
+-
+all lectures on <DATE>
+Fetch
+Lecture
+<DATE>
+all
+-
+lectures in <NUM> days
+Fetch
+Lecture
+<DATE><TODAY+<NUM>>
+all
+-
+lectures today
+Fetch
+Lecture
+Date<TODAY>
+all
+-

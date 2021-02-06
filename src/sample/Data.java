@@ -3,60 +3,111 @@ package sample;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Data {
-    static Parser p = new Parser();
-    static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+    static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
-    static String date;
+    // <DATE> = Inputted ADate, <DAY> = Inputted day, Date<TODAY> = today, <DATE><TODAY+<NUM>> = in <NUM> days, NEXT<DAY> = next <DAY>, <NUM> = number
+    // Date<Today+<Num>>==0, NEXT<DAY> == 1 in ADate
+    static ArrayList<String> codes = new ArrayList<>();
+    static ArrayList<Attribute> correspondingAtt = new ArrayList<>();
 
-    static ArrayList<Lecture> lectures = new ArrayList<>();
 
-    static ArrayList<Skill> everySkill = new ArrayList<>();
+    static ADate today = new ADate(LocalDate.now());
+
+    static ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+
+    static ArrayList<String> commands = new ArrayList<>();
+    static ArrayList<Skill> toCall = new ArrayList<>();
+    static ArrayList<Article> objectsFromTxt = new ArrayList<>();
+    static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();
+    static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();
 
     static void fillData() throws IOException {
+        codes.add("<DATE>");
+        correspondingAtt.add(new ADate());
+        codes.add("<DAY>");
+        correspondingAtt.add(new Day());
+        codes.add("Date<TODAY>");
+        correspondingAtt.add(today);
+        codes.add("<DATE><TODAY+<NUM>>");
+        correspondingAtt.add(new ADate(0));
+        codes.add("Next<DAY>");
+        correspondingAtt.add(new ADate(1));
+        codes.add("<NUM>");
+        correspondingAtt.add(new Number());
         BufferedReader reader = new BufferedReader(new FileReader("Lectures.csv"));
         String row = reader.readLine();
         while(row != null){
             String[] data = row.split(",");
             if(!data[0].equals("Course")){
                 Lecture lecture;
+                Course c = new Course(data[0].trim());
+                Time t = new Time(data[1].trim());
+                ADate d = new ADate(data[2].trim());
                 if(data.length>4){
-                    lecture = new Lecture(data[0].trim(),data[1].trim(),data[2].trim(),data[3].trim(),data[4].trim());
+                    ExtraText ex = new ExtraText(data[4].trim());
+                    lecture = new Lecture(c,t,d,ex);
                 }else{
-                    lecture = new Lecture(data[0].trim(),data[1].trim(),data[2].trim(),data[3].trim());
+                    lecture = new Lecture(c,t,d);
                 }
                 lectures.add(lecture);
             }
             row = reader.readLine();
         }
-        /*
-        for(Lecture a:lectures){
-            System.out.println(a.toString());
-        }
-        */
-        date = formatter.format(new Date());
-       // System.out.println(date);
-        everySkill.add(new Yesterday());
-        everySkill.add(new Today());
-        everySkill.add(new Tomorrow());
-        everySkill.add(new LecturesInDays());
-        everySkill.add(new LecturesOn());
-        //System.out.println(everySkill.size());
-    }
-
-
-
-
-    static ArrayList<Lecture> searchDates(String in){
-        ArrayList<Lecture> toReturn = new ArrayList<>();
-        for(Lecture lec:lectures){
-            if(lec.day.equalsIgnoreCase(in)||lec.date.equalsIgnoreCase(in)){
-                toReturn.add(lec);
+        reader = new BufferedReader(new FileReader("skills.txt"));
+        row=reader.readLine();
+        while(row!=null){
+            row=reader.readLine();
+            if(row==null){
+                break;
             }
+            commands.add(row);
+            row=reader.readLine();
+            if(row.trim().equalsIgnoreCase("Fetch")){
+                toCall.add(new Fetch());
+            }else{
+                toCall.add(null);
+            }
+            row=reader.readLine();
+            if(row.trim().equalsIgnoreCase("Lecture")){
+                objectsFromTxt.add(new Lecture());
+            }else{
+                objectsFromTxt.add(null);
+            }
+            row = reader.readLine();
+            if(row.trim().equalsIgnoreCase("all")){
+                limiters.add(null);
+            }else{
+                String[] eachLimiter = row.split("&&");
+                ArrayList<Attribute> limits = new ArrayList<>();
+                for(String r:eachLimiter) {
+                    for(int a=0;a<codes.size();a++){
+                        if(r.equalsIgnoreCase(codes.get(a))){
+                            limits.add(correspondingAtt.get(a));
+                        }
+                    }
+                }
+                limiters.add(limits);
+            }
+            row=reader.readLine();
+            if(row.trim().equalsIgnoreCase("all")){
+                attributeIndexes.add(null);
+            }else{
+                ArrayList<Integer> toAdd = new ArrayList<>();
+                String[] r = row.split(" ");
+                for(String w:r){
+                    toAdd.add(Integer.parseInt(w));
+                }
+            }
+            row=reader.readLine();
         }
-        return toReturn;
+
     }
+
+
+
 }

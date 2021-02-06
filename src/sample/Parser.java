@@ -1,34 +1,84 @@
 package sample;
 
-import java.text.ParseException;
-import java.util.Arrays;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Parser {
-    String parse(String input) throws ParseException {
-        String[] in = input.split(" ");
-       Skill sk = findSkill(in);
-       if(sk==null){
-           return "No match found";
-       }else{
-           return sk.action(in);
-       }
-    }
-    Skill findSkill(String[] input){
-     //   System.out.println("input: "+ Arrays.toString(input));
-      //  System.out.println(Data.everySkill.size());
-        for(Skill sk:Data.everySkill){
-            boolean theOne=true;
-            //System.out.println(Arrays.toString(sk.keywords.toArray()));
-            for(int i=0;i<sk.keywords.size();i++){
-                if (!(input.length > sk.wordPlacements.get(i) && input[sk.wordPlacements.get(i)].equalsIgnoreCase(sk.keywords.get(i)))) {
-                    theOne = false;
+    public static String parse(String input){
+        String[] words = input.split(" ");
+        int commandID=-1;
+        for(int i=0;i<Data.commands.size();i++){
+            ArrayList<Integer> codeIDs = new ArrayList<>();
+            String[] command = Data.commands.get(i).split(" ");
+            if(words.length==command.length) {
+                for (int q = 0; q < command.length; q++) {
+                    for (int a = 0; a < Data.codes.size(); a++) {
+                        if (command[q].equalsIgnoreCase(Data.codes.get(a))) {
+                            codeIDs.add(q);
+                        }
+                    }
+                }
+                boolean everyWordMatch = true;
+                for (int v = 0; v < command.length; v++) {
+                    if (!codeIDs.contains(v)) {
+                        if (!words[v].equalsIgnoreCase(command[v])) {
+                            everyWordMatch = false;
+                        }
+                    }
+                }
+                if (everyWordMatch) {
+                    System.out.println("EWM: " + Data.commands.get(i) + " == " + input);
+                    commandID = i;
                     break;
                 }
             }
-            if(theOne){
-                return sk;
-            }
         }
-        return null;
+        if(Data.toCall.get(commandID) instanceof Fetch){
+            Article theObject = Data.objectsFromTxt.get(commandID);
+            ArrayList<Attribute> theLimiters;
+            if (Data.limiters.get(commandID) == null) {
+                theLimiters=null;
+            } else {
+                theLimiters = new ArrayList<>(Data.limiters.get(commandID));
+            }
+            if(theLimiters!=null) {
+                for (int i = theLimiters.size() - 1; i >= 0; i--) {
+                    if (theLimiters.get(i) != null) {
+                        if (theLimiters.get(i) instanceof ADate) {
+                            if (theLimiters.get(i).toBeInputted) {
+                                int id = ((ADate) theLimiters.get(i)).id;
+                                if (id == -1) {
+                                    ADate date = new ADate(words[3]);
+                                    theLimiters.remove(i);
+                                    theLimiters.add(i, date);
+                                }
+                                if (id == 0) {
+                                    int num = Integer.parseInt(words[2]);
+                                    ADate date = new ADate(Data.today.date.plusDays(num));
+                                    theLimiters.remove(i);
+                                    theLimiters.add(i, date);
+                                }
+                                if (id == 1) {
+                                    String theDay = words[2];
+                                    theDay=theDay.toUpperCase();
+                                    DayOfWeek day = DayOfWeek.valueOf(theDay);
+                                    LocalDate date = Data.today.date.plusDays(1);
+                                    while (!date.getDayOfWeek().equals(day)) {
+                                        date = date.plusDays(1);
+                                    }
+                                    ADate date1 = new ADate(date);
+                                    theLimiters.remove(i);
+                                    theLimiters.add(i, date1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Fetch f = new Fetch(theObject,theLimiters,Data.attributeIndexes.get(commandID));
+            return f.action();
+        }
+        return "No match found";
     }
 }

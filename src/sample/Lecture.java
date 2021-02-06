@@ -1,34 +1,46 @@
 package sample;
 
-public class Lecture {
-    public String course;
-    public String time;
-    public String date;
-    public String day;
-    public String extraText;
-    public Lecture(String c, String t,String da, String d){
-        course=c;
-        time=t;
-        date=da;
-        day=d;
+import java.util.ArrayList;
+
+public class Lecture extends Article{
+    // attributes: 0=course, 1=time, 2= date, 3= extra
+    Course course;
+    Time time;
+    ADate date;
+    ExtraText extraText;
+    public Lecture(){
+        super(new ArrayList<>());
     }
-    public Lecture(String c, String t,String da, String d, String extra){
+    public Lecture(Course c, Time t, ADate da){
+        super(new ArrayList<>());
+        attributes.add(c);
+        attributes.add(t);
+        attributes.add(da);
         course=c;
         time=t;
         date=da;
-        day=d;
+    }
+    public Lecture(Course c, Time t, ADate da, ExtraText extra){
+        super(new ArrayList<>());
+        attributes.add(c);
+        attributes.add(t);
+        attributes.add(da);
+        attributes.add(extra);
+        course=c;
+        time=t;
+        date=da;
         extraText=extra;
     }
 
     @Override
     public String toString() {
-        String toReturn =  course  +
-                " at " + time +
-                " on " + date +
-                " which is a " + day;
-        if(extraText!=null){
-            toReturn+=" / " + extraText;
+        if(course==null){
+            return "null lecture";
         }
-        return toReturn;
+        if(extraText!=null) {
+            return course.toString() + "| " + time.toString() + "| " + date.toString() + "| " + extraText.toString();
+        }else{
+            return course.toString() + "| " + time.toString() + "| " + date.toString();
+        }
     }
 }

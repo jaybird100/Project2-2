@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Skill {
     public ArrayList<Attribute> attributes= new ArrayList<>();
-    public Skill(){
-    }
+    public Skill(){}
     public Skill(ArrayList<Attribute>a){
         this.attributes=a;
     }
