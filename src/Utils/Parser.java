@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Parser {
     public static String parse(String input){
+        //split entry by " "
         String[] words = input.split(" ");
         int commandID=-1;
         // these are the indexes of the placements of to be inputted attributes within the command, like <DAY> or <DATE>
@@ -21,6 +22,7 @@ public class Parser {
         ArrayList<Integer> timePlacement= new ArrayList<>();
         ArrayList<Integer> numPlacement= new ArrayList<>();
         ArrayList<Integer> dayPlacement = new ArrayList<>();
+        //look through all the possible queries in skills.txt
         for(int i = 0; i< Data.commands.size(); i++){
             ArrayList<Integer> tempDatePlacements= new ArrayList<>();
             ArrayList<Integer> tempCoursePlacements= new ArrayList<>();
@@ -28,11 +30,14 @@ public class Parser {
             ArrayList<Integer> tempNumPlacements= new ArrayList<>();
             ArrayList<Integer> tempDayPlacements = new ArrayList<>();
             ArrayList<Integer> codeIDs = new ArrayList<>();
+            //split the current query
             String[] command = Data.commands.get(i).split(" ");
-            if(words.length==command.length) {
-                for (int q = 0; q < command.length; q++) {
-                    for (int a = 0; a < Data.codes.size(); a++) {
-                        if (command[q].equalsIgnoreCase(Data.codes.get(a))) {
+            if(words.length==command.length) {//if the number of words in the entry(words)== number of words in the current query
+                for (int q = 0; q < command.length; q++) {//for every word in the current query
+                    for (int a = 0; a < Data.codes.size(); a++) {//check every code in Data.codes
+                        if (command[q].equalsIgnoreCase(Data.codes.get(a))) {//if the current word in the command is a code
+                           //check if it is a date, course,number,time, or day and add the index of the code to to the respective arraylist
+                            //index of <> in command == index of the value of <> in query
                             if(command[q].equalsIgnoreCase("<DATE>")){
                                 tempDatePlacements.add(q);
                             }
@@ -55,13 +60,16 @@ public class Parser {
                 boolean everyWordMatch = true;
                 for (int v = 0; v < command.length; v++) {
                     if (!codeIDs.contains(v)) {
+                        //if the index v in command is not a code, it should match the index v in the query(words),
+                        // otherwise, every word does not match
                         if (!words[v].equalsIgnoreCase(command[v])) {
                             everyWordMatch = false;
                         }
                     }
                 }
-                if (everyWordMatch) {
+                if (everyWordMatch) {//if every word matches then we have found the right command and we can exit the loop
                     System.out.println("EWM: " + Data.commands.get(i) + " == " + input);
+                    //these store the indices of code types
                     datePlacements=tempDatePlacements;
                     coursePlacement=tempCoursePlacements;
                     numPlacement=tempNumPlacements;
@@ -78,9 +86,12 @@ public class Parser {
         int numCounter = 0;
         int timeCounter =0;
         int dayCounter =0;
+        //if the command is linked to a fetch action
         if(Data.toCall.get(commandID) instanceof Fetch){
+            //get the article associated with the matched query(referenced by commandID)
             Article theObject = Data.objectsFromTxt.get(commandID);
             ArrayList<Attribute> theLimiters;
+            //parse through for the proper limiters
             if (Data.limiters.get(commandID) == null) {
                 theLimiters=null;
             } else {
@@ -137,6 +148,7 @@ public class Parser {
                     }
                 }
             }
+            //create the fetch object and execute its action
             Fetch f = new Fetch(theObject,theLimiters,Data.attributeIndexes.get(commandID));
             return f.action();
         }
