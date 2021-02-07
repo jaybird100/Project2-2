@@ -41,3 +41,21 @@ Lecture
 Date<YESTERDAY>
 all
 -
+all <COURSE> lectures
+Fetch
+Lecture
+<COURSE>
+1 2 3
+-
+<COURSE> lectures on <DATE>
+Fetch
+Lecture
+<COURSE> && <DATE>
+all
+-
+<COURSE> lectures next <DAY>
+Fetch
+Lecture
+<COURSE> && NEXT<DAY>
+all
+-

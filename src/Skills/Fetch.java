@@ -83,7 +83,9 @@ public class Fetch extends Skill {
             String toAdd = "";
             if(!allAtt) {
                 for (Integer i : attributeIDs) {
-                    toAdd += a.attributes.get(i).toString() + " ";
+                    if(i<a.attributes.size()) {
+                        toAdd += a.attributes.get(i).toString() + " ";
+                    }
                 }
             }else{
                 for(Attribute at:a.attributes){

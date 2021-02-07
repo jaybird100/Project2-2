@@ -2,9 +2,16 @@ package Attributes;
 
 public class Course extends Attribute {
     String courseName;
+    String courseCode;
+
     public Course(String cN){
         super(false);
         courseName=cN;
+        String[] courseWords = courseName.split(" ");
+        courseCode="";
+        for(String s:courseWords){
+            courseCode+=s.charAt(0);
+        }
     }
     public Course(){
         super(true);
@@ -18,7 +25,11 @@ public class Course extends Attribute {
     public boolean equalsTo(Attribute input) {
         if(input instanceof Course){
             Course c = (Course)(input);
-            return courseName.equalsIgnoreCase(c.courseName);
+            if(courseName.equalsIgnoreCase(c.courseName)){
+                return true;
+            }else{
+                return courseCode.equalsIgnoreCase(c.courseName);
+            }
         }
         return false;
     }

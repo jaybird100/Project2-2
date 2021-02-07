@@ -16,10 +16,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Data {
+    // for skill editor GUI
+    public static ArrayList<Skill> allSkills = new ArrayList<>();
+    public static ArrayList<Article> allArticles = new ArrayList<>();
+    public static ArrayList<ArrayList<Attribute>> eachArticlesAttributes = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> limiterOptionForEachArticle = new ArrayList<>();
+
+
     public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
     // <DATE> = Inputted ADate, <DAY> = Inputted day, Date<TODAY> = today, <DATE><TODAY+<NUM>> = in <NUM> days, NEXT<DAY> = next <DAY>, <NUM> = number
-    // Date<YESTERDAY> = yesterday, Date<TOMORROW> = tomorrow
+    // Date<YESTERDAY> = yesterday, Date<TOMORROW> = tomorrow, <COURSE> = inputted course
     // Date<Today+<Num>>==0, NEXT<DAY> == 1 in ADate
     //Indices of the two below should match
     static ArrayList<String> codes = new ArrayList<>();//Variables we are looking for and in their <> forms
@@ -56,7 +63,8 @@ public class Data {
         correspondingAtt.add(new ADate(today.date.minusDays(1)));
         codes.add("Date<TOMORROW>");
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
-
+        codes.add("<COURSE>");
+        correspondingAtt.add(new Course());
 
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
@@ -89,7 +97,7 @@ public class Data {
 
 
         //read the possible query entries from the .txt file for Phrases pertaining to queries
-        reader = new BufferedReader(new FileReader(Variables.DEFAULT_SKILL_PARSER_FILE_PATH+"LecturePhrases.txt"));
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_SKILL_PARSER_FILE_PATH+"skills.txt"));
         row=reader.readLine();
         //read every line that is not empty
         while(row!=null){
@@ -125,6 +133,7 @@ public class Data {
                 limiters.add(null);
             }else{
                 String[] eachLimiter = row.split("&&");
+                trimArray(eachLimiter);
                 ArrayList<Attribute> limits = new ArrayList<>();
                 for(String r:eachLimiter) {
                     for(int a=0;a<codes.size();a++){
@@ -146,6 +155,7 @@ public class Data {
                 for(String w:r){
                     toAdd.add(Integer.parseInt(w));
                 }
+                attributeIndexes.add(toAdd);
             }
             row=reader.readLine();
         }
@@ -153,7 +163,11 @@ public class Data {
         //read other files....
 
     }
-
+    public static void trimArray(String[] in){
+        for(int s=0;s<in.length;s++){
+            in[s]=in[s].trim();
+        }
+    }
 
 
 }
