@@ -21,22 +21,25 @@ public class Data {
     // <DATE> = Inputted ADate, <DAY> = Inputted day, Date<TODAY> = today, <DATE><TODAY+<NUM>> = in <NUM> days, NEXT<DAY> = next <DAY>, <NUM> = number
     // Date<YESTERDAY> = yesterday, Date<TOMORROW> = tomorrow
     // Date<Today+<Num>>==0, NEXT<DAY> == 1 in ADate
-    static ArrayList<String> codes = new ArrayList<>();
-    static ArrayList<Attribute> correspondingAtt = new ArrayList<>();
+    //Indices of the two below should match
+    static ArrayList<String> codes = new ArrayList<>();//Variables we are looking for and in their <> forms
+    static ArrayList<Attribute> correspondingAtt = new ArrayList<>();//Corresponding attribute to the above codes
 
-
+    //Significant Variables
     static ADate today = new ADate(LocalDate.now());
 
-    public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();
+    //Lists of stored Articles from files
+    public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
 
-    public static ArrayList<String> commands = new ArrayList<>();
-    public static ArrayList<Skill> toCall = new ArrayList<>();
-    public static ArrayList<Article> objectsFromTxt = new ArrayList<>();
-    public static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();
-    public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();
+    //indices of the below should match
+    public static ArrayList<String> commands = new ArrayList<>();//Possible query entries(line 1 of the agreed upon skill.txt file)
+    public static ArrayList<Skill> toCall = new ArrayList<>();//Skill to call to match the query(line 2)
+    public static ArrayList<Article> objectsFromTxt = new ArrayList<>();//Article being looked for by the query(line 3)
+    public static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();//Attribute limiters based on the ArrayList<String> codes(Line 4)
+    public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();//each Article has arrayList of Attributes, this selects which Attributes of the article are printed out(Line 5)
 
     public static void fillData() throws IOException {
-        //TODO: UI; make a screen to get paths for files for data and how to parse them
+        //fill in the codes we are looking for & corresponding attributes
         codes.add("<DATE>");
         correspondingAtt.add(new ADate());
         codes.add("<DAY>");
@@ -54,12 +57,17 @@ public class Data {
         codes.add("Date<TOMORROW>");
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
 
+
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
         String row = reader.readLine();
+        //read every line that is not empty
         while(row != null){
+            //split each line by ,
             String[] data = row.split(",");
+            //skip the first line in this file since that is just a guide
             if(!data[0].equals("Course")){
+                //otherwise create a Lecture based on the Course, Time, Date, and possible Extra Text in the line
                 Lecture lecture;
                 Course c = new Course(data[0].trim());
                 Time t = new Time(data[1].trim());
@@ -70,33 +78,49 @@ public class Data {
                 }else{
                     lecture = new Lecture(c,t,d);
                 }
+                //add the new lecture to the lectures ArrayList
                 lectures.add(lecture);
             }
             row = reader.readLine();
         }
 
-        //read LecturePhrases for Phrases pertaining to lecture queries
+        //parse other files when they exist and add their objects to the respective ArrayList
+
+
+
+        //read the possible query entries from the .txt file for Phrases pertaining to queries
         reader = new BufferedReader(new FileReader(Variables.DEFAULT_SKILL_PARSER_FILE_PATH+"LecturePhrases.txt"));
         row=reader.readLine();
+        //read every line that is not empty
         while(row!=null){
             row=reader.readLine();
             if(row==null){
                 break;
             }
+            //add the command
             commands.add(row);
+            //read next line
             row=reader.readLine();
+            //add the call
+                //add the check for other skills to this ifelse
             if(row.trim().equalsIgnoreCase("Fetch")){
                 toCall.add(new Fetch());
             }else{
                 toCall.add(null);
             }
+            //read the next line
             row=reader.readLine();
+            //add the Article being queried
+                //add checks to other Articles to this ifelse
             if(row.trim().equalsIgnoreCase("Lecture")){
                 objectsFromTxt.add(new Lecture());
             }else{
                 objectsFromTxt.add(null);
             }
+            //read next line
             row = reader.readLine();
+            //check for limiters based on codes
+                //if the codes were added to the ArrayList<String> before nothing extra is needed here
             if(row.trim().equalsIgnoreCase("all")){
                 limiters.add(null);
             }else{
@@ -111,7 +135,9 @@ public class Data {
                 }
                 limiters.add(limits);
             }
+            //read the next line
             row=reader.readLine();
+            //check for which out Attributes are wanted from the Article
             if(row.trim().equalsIgnoreCase("all")){
                 attributeIndexes.add(null);
             }else{

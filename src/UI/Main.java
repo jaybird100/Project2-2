@@ -54,6 +54,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
+        //premptive preparation of data for query answering
         Data.fillData();
         System.out.println(Arrays.deepToString(Data.commands.toArray()));
         System.out.println(Arrays.deepToString(Data.toCall.toArray()));
