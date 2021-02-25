@@ -37,7 +37,7 @@ public class ADate extends Attribute {
     @Override
     public String toString() {
         if(date==null){
-            return "Null date: "+id;
+            return "<DATE>";
         }
         return date.getDayOfMonth()+"/"+date.getMonth()+"/"+date.getYear();
     }

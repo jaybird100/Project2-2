@@ -102,6 +102,6 @@ public class Fetch extends Skill {
     }
     @Override
     public String toString(){
-        return "FETCH";
+        return "Fetch";
     }
 }

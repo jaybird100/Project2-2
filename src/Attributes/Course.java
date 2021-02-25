@@ -18,6 +18,9 @@ public class Course extends Attribute {
     }
     @Override
     public String toString() {
+        if(courseName==null){
+            return "<COURSE>";
+        }
         return courseName;
     }
 

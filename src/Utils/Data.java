@@ -5,22 +5,25 @@ import Attributes.*;
 import Attributes.Number;
 import Articles.Article;
 import Attributes.Attribute;
+import Inputs.Input;
+import Inputs.LectureInput;
+import Inputs.SEFetch;
 import Skills.Fetch;
 import Skills.Skill;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Data {
-    // for skill editor GUI
+
+
     public static ArrayList<Skill> allSkills = new ArrayList<>();
-    public static ArrayList<Article> allArticles = new ArrayList<>();
-    public static ArrayList<ArrayList<Attribute>> eachArticlesAttributes = new ArrayList<>();
-    public static ArrayList<ArrayList<String>> limiterOptionForEachArticle = new ArrayList<>();
+    public static SEFetch seFetch = new SEFetch();
 
 
     public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
@@ -46,6 +49,10 @@ public class Data {
     public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();//each Article has arrayList of Attributes, this selects which Attributes of the article are printed out(Line 5)
 
     public static void fillData() throws IOException {
+        // Each skill gets added
+        allSkills.add(new Fetch());
+
+
         //fill in the codes we are looking for & corresponding attributes
         codes.add("<DATE>");
         correspondingAtt.add(new ADate());
@@ -65,6 +72,10 @@ public class Data {
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
         codes.add("<COURSE>");
         correspondingAtt.add(new Course());
+        codes.add("<EXTRA>");
+        correspondingAtt.add(new ExtraText());
+        codes.add("<TIME>");
+        correspondingAtt.add(new Time());
 
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));

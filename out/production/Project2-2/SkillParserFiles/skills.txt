@@ -59,9 +59,3 @@ Lecture
 <COURSE> && NEXT<DAY>
 all
 -
-get <DAY>
-Fetch
-Lecture
-NEXT<DAY>
-all
--

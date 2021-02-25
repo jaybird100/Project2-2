@@ -18,7 +18,7 @@ public class Time extends Attribute {
     @Override
     public String toString() {
         if(time==null){
-            return "null time";
+            return "<TIME>";
         }
         return time.toString();
     }
