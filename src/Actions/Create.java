@@ -1,8 +1,8 @@
-package Skills;
+package Actions;
 
 import Articles.Article;
 
-public class Create extends Skill{
+public class Create extends Action {
     public Create(){}
     Article itemToCreate;
     String pathToRelevantLocation;

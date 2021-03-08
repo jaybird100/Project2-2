@@ -21,7 +21,7 @@ public class ADate extends Attribute {
     }
     public ADate(String s){
         super(false);
-        date=LocalDate.parse(s, Data.dateFormatter);
+        date=LocalDate.parse(s.trim(), Data.dateFormatter);
     }
     public ADate(){
         super(true);

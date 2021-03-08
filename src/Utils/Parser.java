@@ -2,7 +2,7 @@ package Utils;
 
 import Attributes.ADate;
 import Attributes.Course;
-import Skills.Fetch;
+import Actions.Fetch;
 import Articles.Article;
 import Attributes.Attribute;
 import Utils.Data;

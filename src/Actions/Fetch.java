@@ -1,5 +1,6 @@
-package Skills;
+package Actions;
 
+import Articles.Event;
 import Articles.Lecture;
 import Articles.Article;
 import Attributes.Attribute;
@@ -7,7 +8,7 @@ import Utils.Data;
 
 import java.util.ArrayList;
 
-public class Fetch extends Skill {
+public class Fetch extends Action {
     public void setType(Article type) {
         this.type = type;
     }
@@ -47,8 +48,8 @@ public class Fetch extends Skill {
     }
     public String action(){
         ArrayList<Article> items = new ArrayList<>();
+        ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
         if(type instanceof Lecture) {
-            ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
             for (Lecture l : Data.lectures) {
                 if(noLimit){
                     items.add(l);
@@ -75,6 +76,35 @@ public class Fetch extends Skill {
                 }
                 if(allTrue){
                     items.add(Data.lectures.get(i));
+                }
+            }
+        }else if(type instanceof Event){
+            for (Event e : Data.events) {
+                if(noLimit){
+                    items.add(e);
+                }else {
+                    ArrayList<Boolean> temp = new ArrayList<>();
+                    for (Attribute limit : limiters) {
+                        boolean t = false;
+                        for (Attribute a : e.attributes) {
+                            if(a.equalsTo(limit)){
+                                t=true;
+                            }
+                        }
+                        temp.add(t);
+                    }
+                    checklist.add(temp);
+                }
+            }
+            for(int i=0;i<checklist.size();i++){
+                boolean allTrue=true;
+                for(boolean b:checklist.get(i)){
+                    if(!b){
+                        allTrue=false;
+                    }
+                }
+                if(allTrue){
+                    items.add(Data.events.get(i));
                 }
             }
         }

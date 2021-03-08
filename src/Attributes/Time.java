@@ -10,7 +10,7 @@ public class Time extends Attribute {
     }
     public Time(String input){
         super(false);
-        time=LocalTime.parse(input);
+        time=LocalTime.parse(input.trim());
     }
     public Time(){
         super(true);

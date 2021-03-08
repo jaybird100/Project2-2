@@ -5,8 +5,8 @@ import Attributes.*;
 import Attributes.Number;
 import Articles.Article;
 import Attributes.Attribute;
-import Skills.Fetch;
-import Skills.Skill;
+import Actions.Fetch;
+import Actions.Action;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Data {
     // for skill editor GUI
-    public static ArrayList<Skill> allSkills = new ArrayList<>();
+    public static ArrayList<Action> allActions = new ArrayList<>();
     public static ArrayList<Article> allArticles = new ArrayList<>();
     public static ArrayList<ArrayList<Attribute>> eachArticlesAttributes = new ArrayList<>();
     public static ArrayList<ArrayList<String>> limiterOptionForEachArticle = new ArrayList<>();
