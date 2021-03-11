@@ -44,24 +44,6 @@ public class PageController {
         stage = primaryStage;
         stage.setTitle("Project 2-2");
         setScene("frontpage");
-        String skill = "RULE    <S>:    <ACTION>\n" +
-                "RULE   <ACTION>:   <LOCATION> | <SCHEDULE>\n" +
-                "RULE   <SCHEDULE>: WHICH LECTURES ARE THERE <TIMEEXPRESSION> | <TIMEEXPRESSION> WHICH LECTURES ARE THERE\n"+
-                "RULE   <TIMEEXPRESSION>:   ON <DAY> AT <TIME> | AT <TIME> ON <DAY>\n" +
-                "RULE   <TIME>: 12 | 9 \n" +
-                "RULE   <LOCATION>: WHERE IS <ROOM> | HOW DO <PRO> GET TO <ROOM> | WHERE IS <ROOM> LOCATED\n" +
-                "RULE   <PRO>: I | YOU | HE | SHE\n" +
-                "RULE   <ROOM>: DEEPSPACE | SPACEBOX\n" +
-                "RULE   <DAY>: MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY\n" +
-                "Action <SCHEDULE> *,  <DAY>  Saturday|Sunday :  There are no lectures on Saturday\n" +
-                "Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 9 : We start the week with math\n" +
-                "Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 12: On Monday noon we have Theoratical Computer Science\n" +
-                "Action <LOCATION> *,  <ROOM> DeepSpace : DeepSpace is the first room after the entrance\n" +
-                "Action <LOCATION> * : <ROOM> is in the first floor\n" +
-                "Action : I have no idea\n" +
-                "Action <GREETING> *: Hello :)";
-
-        FileParser.addSkillRegex(skill);
     }
 
     private void setScene(String scene) throws IOException {
