@@ -21,10 +21,11 @@ public class Main extends Application {
     final int windowWidth= 700;
     final int windowHeight = 500;
 
+    PageController controller;
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Project 2-2");
+    public void start(Stage primaryStage) throws IOException {
+        /*primaryStage.setTitle("Project 2-2");
         primaryStage.initStyle(StageStyle.DECORATED);
         TextField textField = new TextField();
         textField.setPrefWidth(windowWidth-100);
@@ -48,7 +49,8 @@ public class Main extends Application {
         root.add(button,6,0,1,3);
         root.add(sp,0,3,9,5);
         primaryStage.setScene(new Scene(root,windowWidth,windowHeight));
-        primaryStage.show();
+        primaryStage.show();*/
+        controller = PageController.createInstance(primaryStage, windowWidth, windowHeight);
     }
 
 
