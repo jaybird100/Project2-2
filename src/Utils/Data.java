@@ -40,7 +40,7 @@ public class Data {
 
     //indices of the below should match
     public static ArrayList<String> commands = new ArrayList<>();//Possible query entries(line 1 of the agreed upon skill.txt file)
-    public static ArrayList<Skill> toCall = new ArrayList<>();//Skill to call to match the query(line 2)
+    public static ArrayList<Action> toCall = new ArrayList<>();//Skill to call to match the query(line 2)
     public static ArrayList<Article> objectsFromTxt = new ArrayList<>();//Article being looked for by the query(line 3)
     public static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();//Attribute limiters based on the ArrayList<String> codes(Line 4)
     public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();//each Article has arrayList of Attributes, this selects which Attributes of the article are printed out(Line 5)
