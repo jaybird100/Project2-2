@@ -1,15 +1,20 @@
 package Utils;
 
+import Articles.Webpage;
 import Attributes.ADate;
 import Attributes.Course;
 import Actions.Fetch;
 import Articles.Article;
 import Attributes.Attribute;
-import Utils.Data;
+import Actions.Open;
+import Attributes.WebpageTag;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
@@ -22,6 +27,8 @@ public class Parser {
         ArrayList<Integer> timePlacement= new ArrayList<>();
         ArrayList<Integer> numPlacement= new ArrayList<>();
         ArrayList<Integer> dayPlacement = new ArrayList<>();
+        ArrayList<Integer> extraTextPlacement = new ArrayList<>();
+        ArrayList<Integer> webPageTagPlacement = new ArrayList<>();
         //look through all the possible queries in skills.txt
         for(int i = 0; i< Data.commands.size(); i++){
             ArrayList<Integer> tempDatePlacements= new ArrayList<>();
@@ -29,6 +36,8 @@ public class Parser {
             ArrayList<Integer> tempTimePlacements= new ArrayList<>();
             ArrayList<Integer> tempNumPlacements= new ArrayList<>();
             ArrayList<Integer> tempDayPlacements = new ArrayList<>();
+            ArrayList<Integer> tempExtraTextPlacement = new ArrayList<>();
+            ArrayList<Integer> tempWebPageTagPlacement = new ArrayList<>();
             ArrayList<Integer> codeIDs = new ArrayList<>();
             //split the current query
             String[] command = Data.commands.get(i).split(" ");
@@ -37,7 +46,7 @@ public class Parser {
                     for (int a = 0; a < Data.codes.size(); a++) {//check every code in Data.codes
                         if (command[q].equalsIgnoreCase(Data.codes.get(a))) {//if the current word in the command is a code
                            //check if it is a date, course,number,time, or day and add the index of the code to to the respective arraylist
-                            //index of <> in command == index of the value of <> in query
+                            // index of <> in command == index of the value of <> in query
                             if(command[q].equalsIgnoreCase("<DATE>")){
                                 tempDatePlacements.add(q);
                             }
@@ -53,6 +62,11 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<DAY>")){
                                 tempDayPlacements.add(q);
                             }
+                            if(command[q].equalsIgnoreCase("<WEBTAG>")){
+                                tempWebPageTagPlacement.add(q);
+                            }
+
+
                             codeIDs.add(q);
                         }
                     }
@@ -75,6 +89,7 @@ public class Parser {
                     numPlacement=tempNumPlacements;
                     timePlacement=tempTimePlacements;
                     dayPlacement=tempDayPlacements;
+                    webPageTagPlacement=tempWebPageTagPlacement;
                     commandID = i;
                     break;
                 }
@@ -86,6 +101,7 @@ public class Parser {
         int numCounter = 0;
         int timeCounter =0;
         int dayCounter =0;
+
         //if the command is linked to a fetch action
         if(Data.toCall.get(commandID) instanceof Fetch){
             //get the article associated with the matched query(referenced by commandID)
@@ -97,6 +113,7 @@ public class Parser {
             } else {
                 theLimiters = new ArrayList<>(Data.limiters.get(commandID));
             }
+//            System.out.println(Arrays.toString(theLimiters.toArray()));
             if(theLimiters!=null) {
                 for (int i = theLimiters.size() - 1; i >= 0; i--) {
                     if (theLimiters.get(i) != null) {
@@ -151,7 +168,27 @@ public class Parser {
             //create the fetch object and execute its action
             Fetch f = new Fetch(theObject,theLimiters,Data.attributeIndexes.get(commandID));
             return f.action();
+        }else if(Data.toCall.get(commandID) instanceof Open){
+            Article theObject = Data.objectsFromTxt.get(commandID);
+
+            if(theObject instanceof Webpage){
+                if(webPageTagPlacement.size()==1) {
+                    theObject = new Webpage(new WebpageTag(words[webPageTagPlacement.get(0)]));
+
+                }
+            }
+            Open o= new Open(theObject);
+            try {
+                return o.action();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
+        System.out.println(Arrays.toString(Data.toCall.toArray()));
         return "No match found";
     }
 }

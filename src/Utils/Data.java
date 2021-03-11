@@ -1,11 +1,14 @@
 package Utils;
 
+import Articles.Event;
 import Articles.Lecture;
+import Articles.Webpage;
 import Attributes.*;
 import Attributes.Number;
 import Articles.Article;
 import Attributes.Attribute;
 import Actions.Fetch;
+import Actions.Open;
 import Actions.Action;
 
 import java.io.BufferedReader;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Data {
     // for skill editor GUI
@@ -37,10 +41,12 @@ public class Data {
 
     //Lists of stored Articles from files
     public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
+    public static ArrayList<Event> events= new ArrayList<>();
+    public static ArrayList<Webpage> webpages= new ArrayList<>();
 
     //indices of the below should match
     public static ArrayList<String> commands = new ArrayList<>();//Possible query entries(line 1 of the agreed upon skill.txt file)
-    public static ArrayList<Skill> toCall = new ArrayList<>();//Skill to call to match the query(line 2)
+    public static ArrayList<Action> toCall = new ArrayList<>();//Skill to call to match the query(line 2)
     public static ArrayList<Article> objectsFromTxt = new ArrayList<>();//Article being looked for by the query(line 3)
     public static ArrayList<ArrayList<Attribute>> limiters = new ArrayList<>();//Attribute limiters based on the ArrayList<String> codes(Line 4)
     public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();//each Article has arrayList of Attributes, this selects which Attributes of the article are printed out(Line 5)
@@ -65,6 +71,9 @@ public class Data {
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
         codes.add("<COURSE>");
         correspondingAtt.add(new Course());
+        codes.add("<WEBTAG>");
+        correspondingAtt.add(new WebpageTag());
+
 
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
@@ -93,7 +102,32 @@ public class Data {
         }
 
         //parse other files when they exist and add their objects to the respective ArrayList
-
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Events.csv"));
+        row=reader.readLine();
+        while(row!=null) {
+            String[] data = row.split(",");
+            System.out.println(Arrays.toString(data));
+            Event e;
+            ExtraText title=new ExtraText(data[0]);
+            Time time=new Time(data[1]);
+            ADate date=new ADate(data[2]);
+            if(data.length==4){
+                 ExtraText notes= new ExtraText(data[3]);
+                 e=new Event(title,time,date,notes);
+            }else{
+                e=new Event(title, time, date);
+            }
+            events.add(e);
+            row = reader.readLine();
+        }
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Links.csv"));
+        row=reader.readLine();
+        while(row!=null) {
+            String[] data = row.split(",");
+            System.out.println(Arrays.toString(data));
+            webpages.add(new Webpage(data[0],data[1].trim()));
+            row = reader.readLine();
+        }
 
 
         //read the possible query entries from the .txt file for Phrases pertaining to queries
@@ -113,6 +147,8 @@ public class Data {
                 //add the check for other skills to this ifelse
             if(row.trim().equalsIgnoreCase("Fetch")){
                 toCall.add(new Fetch());
+            }else if(row.trim().equalsIgnoreCase("Open")){
+                toCall.add(new Open());
             }else{
                 toCall.add(null);
             }
@@ -122,6 +158,10 @@ public class Data {
                 //add checks to other Articles to this ifelse
             if(row.trim().equalsIgnoreCase("Lecture")){
                 objectsFromTxt.add(new Lecture());
+            }else if(row.trim().equalsIgnoreCase("Event")) {
+                objectsFromTxt.add(new Event());
+            }else if(row.trim().equalsIgnoreCase("Webpage")){
+                objectsFromTxt.add(new Webpage());
             }else{
                 objectsFromTxt.add(null);
             }

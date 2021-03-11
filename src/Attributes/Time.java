@@ -1,8 +1,9 @@
 package Attributes;
 
 import java.time.LocalTime;
+import java.time.temporal.TemporalAmount;
 
-public class Time extends Attribute {
+public class Time extends Attribute{
     LocalTime time;
     public Time(LocalTime t){
         super(false);
@@ -30,4 +31,5 @@ public class Time extends Attribute {
         }
         return false;
     }
+    public LocalTime getTime(){return time;}
 }
