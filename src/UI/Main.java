@@ -1,7 +1,9 @@
 package UI;
 
 import Utils.Data;
+import Utils.Help;
 import Utils.Parser;
+import Utils.saveToCSV;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,6 +31,8 @@ public class Main extends Application {
         TextField textField = new TextField();
         textField.setPrefWidth(windowWidth-100);
         Button button = new Button("Enter");
+        Button help=new Button("Help");
+        Button  addInfo=new Button("Add");
         Label label = new Label("");
         label.setWrapText(true);
         button.setOnAction(action -> {
@@ -41,12 +45,30 @@ public class Main extends Application {
                 label.setText(Parser.parse(textField.getText()));
             }
         });
+        help.setOnAction(action->{
+            try {
+                Help.displayCommands(label);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        addInfo.setOnAction(action->{
+            try {
+                saveToCSV.convertToCSV(textField.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
         ScrollPane sp = new ScrollPane();
         sp.setContent(label);
         GridPane root = new GridPane();
         root.add(textField,0,0,1,5);
         root.add(button,6,0,1,3);
         root.add(sp,0,3,9,5);
+        root.add(help,5,0,1,3);
+        root.add(addInfo,4,0,1,3);
         primaryStage.setScene(new Scene(root,windowWidth,windowHeight));
         primaryStage.show();
     }

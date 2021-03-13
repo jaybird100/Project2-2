@@ -1,6 +1,7 @@
 package Utils;
 
 import Articles.Lecture;
+import Articles.Notification;
 import Attributes.*;
 import Attributes.Number;
 import Articles.Article;
@@ -37,6 +38,7 @@ public class Data {
 
     //Lists of stored Articles from files
     public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
+    public static ArrayList<Notification> notifications= new ArrayList<Notification>();
 
     //indices of the below should match
     public static ArrayList<String> commands = new ArrayList<>();//Possible query entries(line 1 of the agreed upon skill.txt file)
@@ -91,7 +93,24 @@ public class Data {
             }
             row = reader.readLine();
         }
+//Read Notifications.csv and turn all notifications to notification objects
+        BufferedReader notificationReader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Notifications.csv"));
+        String notificationRow=notificationReader.readLine();
+        while(notificationRow!=null){
+            String[] notificationData = notificationRow.split(",");
+            if (!notificationData[0].equals("Course")) {
+                Notification notification;
+                Course c = new Course(notificationData[0].trim());
+                Time t = new Time(notificationData[1].trim());
+                ADate d = new ADate(notificationData[2].trim());
+                ExtraText ex = new ExtraText(notificationData[3].trim());
+                notification = new Notification(c, t, d, ex);
+                notifications.add(notification);
 
+
+            }
+            notificationRow=reader.readLine();
+        }
         //parse other files when they exist and add their objects to the respective ArrayList
 
 
@@ -122,7 +141,11 @@ public class Data {
                 //add checks to other Articles to this ifelse
             if(row.trim().equalsIgnoreCase("Lecture")){
                 objectsFromTxt.add(new Lecture());
-            }else{
+            }else if(row.trim().equalsIgnoreCase("Notification")){
+                objectsFromTxt.add(new Notification());
+
+            }
+            else{
                 objectsFromTxt.add(null);
             }
             //read next line
