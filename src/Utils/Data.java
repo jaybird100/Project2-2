@@ -73,6 +73,8 @@ public class Data {
         correspondingAtt.add(new Course());
         codes.add("<WEBTAG>");
         correspondingAtt.add(new WebpageTag());
+        codes.add("<TIME>");
+        correspondingAtt.add(new Time());
 
 
         //read the lectures csv and turn all lectures to Lecture objects
