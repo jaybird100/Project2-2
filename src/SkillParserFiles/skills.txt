@@ -59,3 +59,9 @@ Lecture
 <COURSE> && NEXT<DAY>
 all
 -
+all lectures
+Fetch
+Notification
+all
+all
+-

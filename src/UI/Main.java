@@ -37,7 +37,6 @@ public class Main extends Application {
         label.setWrapText(true);
         button.setOnAction(action -> {
             label.setText(Parser.parse(textField.getText()));
-
         });
         textField.setOnKeyPressed(ke -> {
             if (ke.getCode().equals(KeyCode.ENTER))

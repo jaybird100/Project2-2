@@ -8,5 +8,5 @@ lectures yesterday:returns all lectures that were yesterday
 all <COURSE> lectures: returns all lectures of a specific course
 <COURSE> lectures on <DATE>:returns all lectures of a specific course on a specific date
 <COURSE> lectures next <DAY>:returns all lectures of a specific course for the next specified day:
-Add <Filemame> <item 1> <item 2> ,,,,<item n> :adds information directly to the file specified
+Add to-<FILE NAME>-<COURSE>,<TIME>,<DATE>,<DAY>,<EXTRA>
 
