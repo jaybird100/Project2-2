@@ -1,0 +1,6 @@
+get <DATE>
+Fetch
+Lecture
+<DATE>
+all
+-

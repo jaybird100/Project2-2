@@ -11,6 +11,9 @@ public class ExtraText extends Attribute {
     }
     @Override
     public String toString() {
+        if(extraText==null){
+            return "<EXTRA>";
+        }
         return extraText;
     }
     @Override

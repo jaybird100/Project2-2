@@ -1,15 +1,18 @@
 package Utils;
 
-import Attributes.ADate;
-import Attributes.Course;
+import Actions.Open;
+import Articles.Webpage;
+import Attributes.*;
 import Actions.Fetch;
 import Articles.Article;
 import Attributes.Attribute;
-import Utils.Data;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
@@ -22,22 +25,27 @@ public class Parser {
         ArrayList<Integer> timePlacement= new ArrayList<>();
         ArrayList<Integer> numPlacement= new ArrayList<>();
         ArrayList<Integer> dayPlacement = new ArrayList<>();
-        //look through all the possible queries in skills.txt
+        ArrayList<Integer> extraPlacement = new ArrayList<>();
+        ArrayList<Integer> webPageTagPlacement = new ArrayList<>();
+        ArrayList<Integer> urlPlacenment = new ArrayList<>();
+        System.out.println("W: "+Arrays.deepToString(words));
         for(int i = 0; i< Data.commands.size(); i++){
             ArrayList<Integer> tempDatePlacements= new ArrayList<>();
             ArrayList<Integer> tempCoursePlacements= new ArrayList<>();
             ArrayList<Integer> tempTimePlacements= new ArrayList<>();
             ArrayList<Integer> tempNumPlacements= new ArrayList<>();
             ArrayList<Integer> tempDayPlacements = new ArrayList<>();
+            ArrayList<Integer> tempExtraPlacements = new ArrayList<>();
+            ArrayList<Integer> tempWebPageTagPlacement = new ArrayList<>();
+            ArrayList<Integer> tempURLPlacement = new ArrayList<>();
             ArrayList<Integer> codeIDs = new ArrayList<>();
             //split the current query
             String[] command = Data.commands.get(i).split(" ");
-            if(words.length==command.length) {//if the number of words in the entry(words)== number of words in the current query
-                for (int q = 0; q < command.length; q++) {//for every word in the current query
-                    for (int a = 0; a < Data.codes.size(); a++) {//check every code in Data.codes
-                        if (command[q].equalsIgnoreCase(Data.codes.get(a))) {//if the current word in the command is a code
-                           //check if it is a date, course,number,time, or day and add the index of the code to to the respective arraylist
-                            //index of <> in command == index of the value of <> in query
+            if(words.length==command.length) {
+                System.out.println(Arrays.deepToString(command));
+                for (int q = 0; q < command.length; q++) {
+                    for (int a = 0; a < Data.codes.size(); a++) {
+                        if (command[q].equalsIgnoreCase(Data.codes.get(a))) {
                             if(command[q].equalsIgnoreCase("<DATE>")){
                                 tempDatePlacements.add(q);
                             }
@@ -53,21 +61,36 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<DAY>")){
                                 tempDayPlacements.add(q);
                             }
+                            if(command[q].equalsIgnoreCase("<TIME>")){
+                                tempExtraPlacements.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase("<WEBTAG>")){
+                                System.out.println("Webtag: "+q);
+                                tempWebPageTagPlacement.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase(("<URL>"))){
+                                System.out.println("URL: "+q);
+                                tempURLPlacement.add(q);
+                            }
                             codeIDs.add(q);
                         }
                     }
                 }
                 boolean everyWordMatch = true;
                 for (int v = 0; v < command.length; v++) {
+                    System.out.println(command[v]);
                     if (!codeIDs.contains(v)) {
+                        System.out.println("Not code ID");
                         //if the index v in command is not a code, it should match the index v in the query(words),
                         // otherwise, every word does not match
                         if (!words[v].equalsIgnoreCase(command[v])) {
+                            System.out.println("Falase");
                             everyWordMatch = false;
+                            break;
                         }
                     }
                 }
-                if (everyWordMatch) {//if every word matches then we have found the right command and we can exit the loop
+                if (everyWordMatch) {
                     System.out.println("EWM: " + Data.commands.get(i) + " == " + input);
                     //these store the indices of code types
                     datePlacements=tempDatePlacements;
@@ -75,6 +98,9 @@ public class Parser {
                     numPlacement=tempNumPlacements;
                     timePlacement=tempTimePlacements;
                     dayPlacement=tempDayPlacements;
+                    extraPlacement=tempExtraPlacements;
+                    webPageTagPlacement=tempWebPageTagPlacement;
+                    urlPlacenment=tempURLPlacement;
                     commandID = i;
                     break;
                 }
@@ -86,7 +112,7 @@ public class Parser {
         int numCounter = 0;
         int timeCounter =0;
         int dayCounter =0;
-        //if the command is linked to a fetch action
+        int extraCounter =0;
         if(Data.toCall.get(commandID) instanceof Fetch){
             //get the article associated with the matched query(referenced by commandID)
             Article theObject = Data.objectsFromTxt.get(commandID);
@@ -145,13 +171,45 @@ public class Parser {
                                 theLimiters.add(i,c);
                             }
                         }
+                        if(theLimiters.get(i) instanceof Time){
+                            if(theLimiters.get(i).toBeInputted){
+                                Time t = new Time(words[timePlacement.get(timeCounter)]);
+                                timeCounter++;
+                                theLimiters.remove(i);
+                                theLimiters.add(i,t);
+                            }
+                        }
+                        if(theLimiters.get(i) instanceof ExtraText){
+                            if(theLimiters.get(i).toBeInputted){
+                                ExtraText e = new ExtraText(words[extraPlacement.get(extraCounter)]);
+                                extraCounter++;
+                                theLimiters.remove(i);
+                                theLimiters.add(i,e);
+                            }
+                        }
                     }
                 }
+
             }
             //create the fetch object and execute its action
             Fetch f = new Fetch(theObject,theLimiters,Data.attributeIndexes.get(commandID));
             return f.action();
+        }else if(Data.toCall.get(commandID) instanceof Open){
+            Article theObject = Data.objectsFromTxt.get(commandID);
+            if(theObject instanceof Webpage){
+                System.out.println("WEBPAGE: "+webPageTagPlacement.size()+" URL: "+urlPlacenment.size());
+                if(webPageTagPlacement.size()==1) {
+                    theObject = new Webpage(new WebpageTag(words[webPageTagPlacement.get(0)]));
+                }
+                if(urlPlacenment.size()==1){
+                    theObject=new Webpage(words[urlPlacenment.get(0)]);
+                }
+            }
+            Open o= new Open(theObject);
+            return o.action();
         }
         return "No match found";
     }
+
+
 }
