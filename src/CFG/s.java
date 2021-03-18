@@ -1,8 +1,7 @@
 package CFG;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.List;
 
 public class s{
     static HashMap<String, Rule> ruleDatabase;
@@ -31,8 +30,8 @@ public class s{
                 "Action : I have no idea";
 
         FileParser.addSkillRegex(skill);
-        List<Action> responses = InputParser.parse("which lectures are there at 12 on monday");
-        for (Action response : responses) {
+        List<Match> responses = InputParser.parse("which lectures are there at 12 on monday");
+        for (Match response : responses) {
             System.out.println(response);
         }
 

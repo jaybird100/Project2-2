@@ -2,6 +2,7 @@ package UI.MainPage;
 
 import CFG.Action;
 import CFG.InputParser;
+import CFG.Match;
 import UI.Page;
 import UI.PageController;
 import javafx.collections.ObservableList;
@@ -60,12 +61,12 @@ public class MainPage extends Page {
             }
             Message m = new Message(askTextField.getText(), PageController.getInstance().username, LocalDateTime.now());
             ((MessagingBoard)logTextField.getChildren().get(0)).addMessage(m, true);
-            askTextField.clear();
+            askTextField.setText("");
             PageController.getInstance().log.add(m);
-            List<Action> responses = InputParser.parse(m.message);
-            for (Action response : responses) {
-                m = new Message(response.response, "Karen");
-                ((MessagingBoard)logTextField.getChildren().get(0)).addMessage(m, false);
+            List<Match> responses = InputParser.parse(m.message);
+            if(responses.size()!=0 && responses.get(0).isValid(2)) {
+                m = new Message(responses.get(0).getResponse(), "Karen");
+                ((MessagingBoard) logTextField.getChildren().get(0)).addMessage(m, false);
                 PageController.getInstance().log.add(m);
             }
         }

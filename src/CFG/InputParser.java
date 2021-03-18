@@ -1,12 +1,12 @@
 package CFG;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InputParser {
 
+    public static void init(){
+        ruleDatabase.put("<s>", new Rule("<s>"));
+    }
     protected static void add(HashMap<String, Rule> rules, List<Action> actions){
         for (Map.Entry<String, Rule> e : rules.entrySet()) {
             if(InputParser.ruleDatabase.containsKey(e.getKey())){
@@ -22,7 +22,7 @@ public class InputParser {
     public static HashMap<String, Rule> ruleDatabase = new HashMap<>();
     public static List<Action> actionDatabase = new ArrayList<>();
 
-    public static List<Action> parse(String action){
+    public static List<Match> parse(String action){
         HashMap<String, String> map = decode(action);
         return analyse(map, action);
     }
@@ -76,19 +76,13 @@ public class InputParser {
         return action;
     }
 
-    public static List<Action> analyse(HashMap<String, String> map, String input){
-        List<Action> actions = new ArrayList<>();
+    public static List<Match> analyse(HashMap<String, String> map, String input){
         List<Match> matches = new ArrayList<>();
         for (Action action : actionDatabase) {
             matches.add(new Match(map, action, input));
-            if(action.matches(map)){
-                actions.add(action);
-            }
         }
-        for (Match match : matches) {
-            System.out.println(match);
-        }
-        return actions;
+        Collections.sort(matches);
+        return matches;
     }
 
 }

@@ -1,5 +1,6 @@
 package UI;
 
+import CFG.InputParser;
 import Utils.Data;
 import Utils.Parser;
 import javafx.application.Application;
@@ -64,6 +65,7 @@ public class Main extends Application {
         System.out.println(Arrays.deepToString(Data.limiters.toArray()));
         System.out.println(Arrays.deepToString(Data.attributeIndexes.toArray()));
         //System.out.println(Arrays.deepToString(Data.lectures.toArray()));
+        InputParser.init();
         launch(args);
     }
 }
