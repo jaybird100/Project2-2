@@ -10,6 +10,7 @@ import Actions.Fetch;
 import Actions.Action;
 import Inputs.SEOpen;
 
+import javax.swing.plaf.metal.MetalDesktopIconUI;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class Data {
     static ADate today = new ADate(LocalDate.now());
 
     //Lists of stored Articles from files
+    public static ArrayList<MedicationCourse> medicationCourses = new ArrayList<>();
     public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
     public static ArrayList<Event> events= new ArrayList<>();
     public static ArrayList<Webpage> webpages= new ArrayList<>();
@@ -59,6 +61,7 @@ public class Data {
         codes = new ArrayList<>();
         correspondingAtt = new ArrayList<>();
         lectures = new ArrayList<>();
+
         events= new ArrayList<>();
         webpages= new ArrayList<>();
         commands = new ArrayList<>();
@@ -104,6 +107,9 @@ public class Data {
         correspondingAtt.add(new WebpageTag());
         codes.add("<URL>");
         correspondingAtt.add(new URLAtt());
+
+        codes.add("MEDICATION");
+        correspondingAtt.add(new Medication());
 
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
@@ -159,6 +165,22 @@ public class Data {
             row = reader.readLine();
         }
 
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"MedicationCourses.csv"));
+        row=reader.readLine();
+        while(row!=null) {
+            String[] data = row.split(",");
+            System.out.println(Arrays.toString(data));
+            ExtraText title = new ExtraText(data[0].trim());
+            Medication medication = new Medication(data[1].trim(), Integer.parseInt(data[2].trim()),
+                                                                   Integer.parseInt(data[3].trim()));
+            ADate start_date = new ADate(data[4].trim());
+            ADate finish_date = new ADate(data[5].trim());
+            MedicationCourse currentMedicationCourse = new MedicationCourse(title, medication, start_date, finish_date);
+            medicationCourses.add(currentMedicationCourse);
+            row = reader.readLine();
+
+            System.out.println(currentMedicationCourse);
+        }
 
         //read the possible query entries from the .txt file for Phrases pertaining to queries
         reader = new BufferedReader(new FileReader(Variables.DEFAULT_SKILL_PARSER_FILE_PATH+"skills.txt"));
