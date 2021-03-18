@@ -22,9 +22,13 @@ public class InputParser {
     public static HashMap<String, Rule> ruleDatabase = new HashMap<>();
     public static List<Action> actionDatabase = new ArrayList<>();
 
-    public static List<Match> parse(String action){
+    public static Match parse(String action){
         HashMap<String, String> map = decode(action);
-        return analyse(map, action);
+        List<Match> matches = analyse(map, action);
+        if(matches.size()!=0 && matches.get(0).isValid(2)){
+            return matches.get(0);
+        }
+        return null;
     }
 
     public static HashMap<String, String> decode(String action){

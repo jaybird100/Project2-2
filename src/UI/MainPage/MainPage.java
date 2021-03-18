@@ -63,12 +63,13 @@ public class MainPage extends Page {
             ((MessagingBoard)logTextField.getChildren().get(0)).addMessage(m, true);
             askTextField.setText("");
             PageController.getInstance().log.add(m);
-            List<Match> responses = InputParser.parse(m.message);
-            if(responses.size()!=0 && responses.get(0).isValid(2)) {
-                m = new Message(responses.get(0).getResponse(), "Karen");
-                ((MessagingBoard) logTextField.getChildren().get(0)).addMessage(m, false);
-                PageController.getInstance().log.add(m);
+            Match responses = InputParser.parse(m.message);
+            if(responses==null){
+                return;
             }
+            m = new Message(responses.getResponse(), "Karen");
+            ((MessagingBoard) logTextField.getChildren().get(0)).addMessage(m, false);
+            PageController.getInstance().log.add(m);
         }
     }
 
