@@ -84,3 +84,22 @@ Webpage
 add <ARTICLE>
 Create
 -
+<COURSE> lectures next <DAY>
+Fetch
+Lecture
+<COURSE> && NEXT<DAY>
+all
+-
+<COURSE> and <DATE>
+Fetch
+Lecture
+<DATE> && <COURSE>
+all
+-
+o <URL>
+Open
+Webpage
+-
+c <ARTICLE>
+Create
+-

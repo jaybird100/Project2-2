@@ -294,8 +294,7 @@ public class SkillEditor {
         root.add(sp,0,3,9,5);
         root.add(skillEditor,7,0,3,2);
         root.add(calc,7,5);
-        primaryStage.setScene(new Scene(root,700,500));
-        primaryStage.show();
+        //primaryStage.setScene(new Scene(root,700,500));
     }
 
 
