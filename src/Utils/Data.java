@@ -1,12 +1,15 @@
 package Utils;
 
-import Articles.Lecture;
+import Actions.Create;
+import Actions.Open;
+import Articles.*;
 import Attributes.*;
 import Attributes.Number;
-import Articles.Article;
 import Attributes.Attribute;
+import Inputs.SEFetch;
 import Actions.Fetch;
 import Actions.Action;
+import Inputs.SEOpen;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,13 +17,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Data {
-    // for skill editor GUI
-    public static ArrayList<Action> allActions = new ArrayList<>();
-    public static ArrayList<Article> allArticles = new ArrayList<>();
-    public static ArrayList<ArrayList<Attribute>> eachArticlesAttributes = new ArrayList<>();
-    public static ArrayList<ArrayList<String>> limiterOptionForEachArticle = new ArrayList<>();
+
+    public static ArrayList<Article> allArticle= new ArrayList<>();
+    public static ArrayList<Action> allSkills = new ArrayList<>();
+    public static SEFetch seFetch = new SEFetch();
+    public static SEOpen seOpen = new SEOpen();
 
 
     public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
@@ -37,6 +41,8 @@ public class Data {
 
     //Lists of stored Articles from files
     public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
+    public static ArrayList<Event> events= new ArrayList<>();
+    public static ArrayList<Webpage> webpages= new ArrayList<>();
 
     //indices of the below should match
     public static ArrayList<String> commands = new ArrayList<>();//Possible query entries(line 1 of the agreed upon skill.txt file)
@@ -46,6 +52,34 @@ public class Data {
     public static ArrayList<ArrayList<Integer>> attributeIndexes = new ArrayList<>();//each Article has arrayList of Attributes, this selects which Attributes of the article are printed out(Line 5)
 
     public static void fillData() throws IOException {
+        //Reset the data
+        allArticle= new ArrayList<>();
+        allSkills = new ArrayList<>();
+        seFetch = new SEFetch();
+        seOpen = new SEOpen();
+        codes = new ArrayList<>();
+        correspondingAtt = new ArrayList<>();
+        lectures = new ArrayList<>();
+        events= new ArrayList<>();
+        webpages= new ArrayList<>();
+        commands = new ArrayList<>();
+        toCall = new ArrayList<>();
+        objectsFromTxt = new ArrayList<>();
+        limiters = new ArrayList<>();
+        attributeIndexes = new ArrayList<>();
+
+        allArticle.add(new Event());
+        allArticle.add(new Lecture());
+        allArticle.add(new Timer());
+        allArticle.add(new Webpage());
+        allArticle.add(new Notification());
+
+        // Each skill gets added
+        allSkills.add(new Fetch());
+        allSkills.add(new Open());
+        allSkills.add(new Create());
+
+
         //fill in the codes we are looking for & corresponding attributes
         codes.add("<DATE>");
         correspondingAtt.add(new ADate());
@@ -65,6 +99,16 @@ public class Data {
         correspondingAtt.add(new ADate(today.date.plusDays(1)));
         codes.add("<COURSE>");
         correspondingAtt.add(new Course());
+        codes.add("<EXTRA>");
+        correspondingAtt.add(new ExtraText());
+        codes.add("<TIME>");
+        correspondingAtt.add(new Time());
+        codes.add("<WEBTAG>");
+        correspondingAtt.add(new WebpageTag());
+        codes.add("<URL>");
+        correspondingAtt.add(new URLAtt());
+        codes.add("<ARTICLE>");
+        correspondingAtt.add(new GenericArticle());
 
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv"));
@@ -93,7 +137,31 @@ public class Data {
         }
 
         //parse other files when they exist and add their objects to the respective ArrayList
-
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Events.csv"));
+        row=reader.readLine();
+        while(row!=null) {
+            String[] data = row.split(",");
+            System.out.println(Arrays.toString(data));
+            Event e;
+            ExtraText title=new ExtraText(data[0]);
+            Time time=new Time(data[1].trim());
+            ADate date=new ADate(data[2].trim());
+            if(data.length==4){
+                ExtraText notes= new ExtraText(data[3]);
+                e=new Event(title,time,date,notes);
+            }else{
+                e=new Event(title, time, date);
+            }
+            events.add(e);
+            row = reader.readLine();
+        }
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Links.csv"));
+        row=reader.readLine();
+        while(row!=null) {
+            String[] data = row.split(",");
+            webpages.add(new Webpage(data[0],data[1].trim()));
+            row = reader.readLine();
+        }
 
 
         //read the possible query entries from the .txt file for Phrases pertaining to queries
@@ -111,55 +179,70 @@ public class Data {
             row=reader.readLine();
             //add the call
                 //add the check for other skills to this ifelse
-            if(row.trim().equalsIgnoreCase("Fetch")){
-                toCall.add(new Fetch());
-            }else{
-                toCall.add(null);
+            Action ac=null;
+            for(Action a:allSkills){
+                if(row.trim().equalsIgnoreCase(a.toString())){
+                    toCall.add(a);
+                    ac=a;
+                }
             }
-            //read the next line
-            row=reader.readLine();
-            //add the Article being queried
-                //add checks to other Articles to this ifelse
-            if(row.trim().equalsIgnoreCase("Lecture")){
-                objectsFromTxt.add(new Lecture());
-            }else{
-                objectsFromTxt.add(null);
-            }
-            //read next line
             row = reader.readLine();
-            //check for limiters based on codes
-                //if the codes were added to the ArrayList<String> before nothing extra is needed here
-            if(row.trim().equalsIgnoreCase("all")){
-                limiters.add(null);
-            }else{
-                String[] eachLimiter = row.split("&&");
-                trimArray(eachLimiter);
-                ArrayList<Attribute> limits = new ArrayList<>();
-                for(String r:eachLimiter) {
-                    for(int a=0;a<codes.size();a++){
-                        if(r.equalsIgnoreCase(codes.get(a))){
-                            limits.add(correspondingAtt.get(a));
-                        }
+            if(ac instanceof Fetch) {
+                //add the Article being queried
+                //add checks to other Articles to this ifelse
+                ///  needs list of articles and subsequent code
+                for (Article a : allArticle) {
+                    if (row.trim().equalsIgnoreCase(a.toString())) {
+                        objectsFromTxt.add(a);
                     }
                 }
-                limiters.add(limits);
-            }
-            //read the next line
-            row=reader.readLine();
-            //check for which out Attributes are wanted from the Article
-            if(row.trim().equalsIgnoreCase("all")){
-                attributeIndexes.add(null);
-            }else{
-                ArrayList<Integer> toAdd = new ArrayList<>();
-                String[] r = row.split(" ");
-                for(String w:r){
-                    toAdd.add(Integer.parseInt(w));
+                //read next line
+                row = reader.readLine();
+                //check for limiters based on codes
+                //if the codes were added to the ArrayList<String> before nothing extra is needed here
+                if (row.trim().equalsIgnoreCase("all")) {
+                    limiters.add(null);
+                } else {
+                    String[] eachLimiter = row.split("&&");
+                    trimArray(eachLimiter);
+                    ArrayList<Attribute> limits = new ArrayList<>();
+                    for (String r : eachLimiter) {
+                        for (int a = 0; a < codes.size(); a++) {
+                            if (r.equalsIgnoreCase(codes.get(a))) {
+                                limits.add(correspondingAtt.get(a));
+                            }
+                        }
+                    }
+                    limiters.add(limits);
                 }
-                attributeIndexes.add(toAdd);
+                //read the next line
+                row = reader.readLine();
+                //check for which out Attributes are wanted from the Article
+                if (row.trim().equalsIgnoreCase("all")) {
+                    attributeIndexes.add(null);
+                } else {
+                    ArrayList<Integer> toAdd = new ArrayList<>();
+                    String[] r = row.split(" ");
+                    for (String w : r) {
+                        toAdd.add(Integer.parseInt(w));
+                    }
+                    attributeIndexes.add(toAdd);
+                }
+                row = reader.readLine();
             }
-            row=reader.readLine();
+            if(ac instanceof Open){
+                //add the Article being queried
+                row=reader.readLine();
+                objectsFromTxt.add(new Webpage());
+                limiters.add(null);
+                attributeIndexes.add(null);
+            }
+            if(ac instanceof Create){
+                objectsFromTxt.add(null);
+                limiters.add(null);
+                attributeIndexes.add(null);
+            }
         }
-
         //read other files....
 
     }

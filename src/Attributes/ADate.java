@@ -21,7 +21,7 @@ public class ADate extends Attribute {
     }
     public ADate(String s){
         super(false);
-        date=LocalDate.parse(s.trim(), Data.dateFormatter);
+        date=LocalDate.parse(s, Data.dateFormatter);
     }
     public ADate(){
         super(true);
@@ -37,7 +37,7 @@ public class ADate extends Attribute {
     @Override
     public String toString() {
         if(date==null){
-            return "Null date: "+id;
+            return "<DATE>";
         }
         return date.getDayOfMonth()+"/"+date.getMonth()+"/"+date.getYear();
     }

@@ -31,7 +31,7 @@ public class Calculator extends Application {
 			primaryStage.setScene(scene);
 
 			primaryStage.setWidth(228);
-			primaryStage.setHeight(260);
+			primaryStage.setHeight(320);
 
 			primaryStage.setResizable(false);
 			

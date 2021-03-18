@@ -1,5 +1,6 @@
 package Actions;
 
+import Articles.Event;
 import Articles.Lecture;
 import Articles.Article;
 import Attributes.Attribute;
@@ -47,8 +48,8 @@ public class Fetch extends Action {
     }
     public String action(){
         ArrayList<Article> items = new ArrayList<>();
-        ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
         if(type instanceof Lecture) {
+            ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
             for (Lecture l : Data.lectures) {
                 if(noLimit){
                     items.add(l);
@@ -78,6 +79,37 @@ public class Fetch extends Action {
                 }
             }
         }
+        if(type instanceof Event){
+            ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
+            for (Event l : Data.events) {
+                if(noLimit){
+                    items.add(l);
+                }else {
+                    ArrayList<Boolean> temp = new ArrayList<>();
+                    for (Attribute limit : limiters) {
+                        boolean t = false;
+                        for (Attribute a : l.attributes) {
+                            if(a.equalsTo(limit)){
+                                t=true;
+                            }
+                        }
+                        temp.add(t);
+                    }
+                    checklist.add(temp);
+                }
+            }
+            for(int i=0;i<checklist.size();i++){
+                boolean allTrue=true;
+                for(boolean b:checklist.get(i)){
+                    if(!b){
+                        allTrue=false;
+                    }
+                }
+                if(allTrue){
+                    items.add(Data.events.get(i));
+                }
+            }
+        }
         ArrayList<String> toReturn = new ArrayList<>();
         for(Article a:items){
             String toAdd = "";
@@ -102,6 +134,6 @@ public class Fetch extends Action {
     }
     @Override
     public String toString(){
-        return "FETCH";
+        return "Fetch";
     }
 }
