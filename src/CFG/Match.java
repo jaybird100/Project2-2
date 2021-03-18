@@ -1,5 +1,7 @@
 package CFG;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,11 +75,13 @@ public class Match implements Comparable<Match>{
         return value()>=valueThreshold;
     }
     public String getResponse(){
-        String s = action.response.toLowerCase();
-        for (String key : map.keySet()) {
-            s = s.replace(key, map.get(key));
+        String s = action.response;
+        while(s.matches(".*<.*>.*")) {
+            for (String key : map.keySet()) {
+                s = s.replace(key, map.get(key));
+            }
         }
-        return s;
+        return StringUtils.capitalize(s);
     }
     //Util
     public boolean in(String s, String[] arr){

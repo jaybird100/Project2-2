@@ -1,9 +1,6 @@
 package CFG;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +11,6 @@ public class FileParser {
         HashMap<String, Rule> toAdd = FileParser.createRules(d.get("rule"));
         InputParser.add(toAdd, createActions(d.get("action")));
     }
-
     private static HashMap<String, List<String>> extractData(String skill){
         HashMap<String, List<String>> data = new HashMap<>();
         data.put("action", new ArrayList<>());
@@ -30,7 +26,6 @@ public class FileParser {
         }
         return data;
     }
-
     private static Rule createRule(String rule){
         String[] data = rule.split(":", 2);
         Rule r = new Rule(data[0].trim());
@@ -40,7 +35,6 @@ public class FileParser {
         }
         return r;
     }
-
     private static HashMap<String, Rule> createRules(List<String> rules){
         HashMap<String , Rule> ruleList = new HashMap<>();
         for (String rule : rules) {
@@ -49,13 +43,11 @@ public class FileParser {
         }
         return ruleList;
     }
-
     private static Action createAction(String action){
         //TODO
         System.out.println("TODO createAction(String action)");
         return new Action("", null);
     }
-
     private static List<Action> createActions(List<String> actions){
         List<Action> actionList = new ArrayList<>();
         for (String action : actions) {
@@ -65,17 +57,22 @@ public class FileParser {
     }
 
     public static void addSkillRegex(String skill){
-        skill = skill.toLowerCase();
+        Matcher m = Pattern.compile("<.+>").matcher(skill);
+
+        StringBuilder sb = new StringBuilder();
+        int last = 0;
+        while (m.find()) {
+            sb.append(skill, last, m.start());
+            sb.append(m.group(0).toLowerCase());
+            last = m.end();
+        }
+        sb.append(skill.substring(last));
+        skill = sb.toString();
+
         HashMap<String, Rule> toAdd = FileParser.ruleRegex(skill);
         InputParser.add(toAdd, FileParser.actionRegex(skill));
     }
-
     public static HashMap<String, Rule> ruleRegex(String skill){
-        /*
-        rule = (im?)^\s*rule\s*(key)\s*:\s*(replacements)\s*$
-        key(group 1) = <.+>
-        replacements(group 2) = [[^\\|]*?\\|?]+?
-        */
         HashMap<String, Rule> rules = new HashMap<>();
         String keyRegex = "<.+?>"; // <*at least 1 character*>
         String repRegex = "[[^\\|]*?\\|?]+?"; // something (| something)*
@@ -83,7 +80,7 @@ public class FileParser {
         Matcher m = Pattern.compile(ruleRegex).matcher(skill);
         while(m.find()) {
             String key = m.group("key");
-            String[] temp = m.group("replacements").split("\\|");
+            String[] temp = m.group("replacements").toLowerCase().split("\\|");
             Rule r = new Rule(key);
             for (String s : temp) {
                 r.add(s.trim());
@@ -94,14 +91,11 @@ public class FileParser {
     }
 
     public static List<Action> actionRegex(String skill){
-        /*
-        ^action <key_1> value_1j(|value_1j)*(,<key_i> value_ij(|value_ij)*) : response1$
-         */
         List<Action> actions = new ArrayList<>();
         String ruleRegex = "(?im)^\\s*action\\s*.*?:.*?$";
         Matcher m = Pattern.compile(ruleRegex).matcher(skill);
         while(m.find()) {
-            String action = m.group().replace("action", "").trim();
+            String action = m.group().replaceFirst("(?im)action", "").trim();
             String[] temp = action.split(":", 2);
             String[] prereqs = temp[0].split(",");
             String response = temp[1].trim();

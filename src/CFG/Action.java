@@ -12,15 +12,6 @@ public class Action {
         this.preRequisites = preRequisites;
     }
 
-    public boolean matches(HashMap<String, String> extractedFormat){
-        for (Map.Entry<String, String[]> e : preRequisites.entrySet()) {
-            if(!in(extractedFormat.get(e.getKey()), e.getValue())){
-                return false;
-            }
-        }
-        return true;
-    }
-
     public String toString(){
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String[]> e : preRequisites.entrySet()) {
