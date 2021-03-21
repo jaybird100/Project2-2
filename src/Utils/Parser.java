@@ -2,12 +2,9 @@ package Utils;
 
 import Actions.Create;
 import Actions.Open;
-import Articles.Event;
-import Articles.Lecture;
-import Articles.Webpage;
+import Articles.*;
 import Attributes.*;
 import Actions.Fetch;
-import Articles.Article;
 import Attributes.Attribute;
 
 import java.io.IOException;
@@ -224,6 +221,10 @@ public class Parser {
             if(word.equalsIgnoreCase("Event")){
                 Create c = new Create(new Event());
                 return c.action();
+            }
+            if(word.equalsIgnoreCase("Notification")){
+                Create n=new Create(new Notification());
+                return n.action();
             }
         }
         return "No match found";

@@ -3,6 +3,7 @@ package Actions;
 import Articles.Event;
 import Articles.Lecture;
 import Articles.Article;
+import Articles.Notification;
 import Attributes.Attribute;
 import Utils.Data;
 
@@ -107,6 +108,37 @@ public class Fetch extends Action {
                 }
                 if(allTrue){
                     items.add(Data.events.get(i));
+                }
+            }
+        }
+        if(type instanceof Notification){
+            ArrayList<ArrayList<Boolean>> checklist=new ArrayList<>();
+            for(Notification n:Data.notifications){
+                if(noLimit){
+                    items.add(n);
+                } else{
+                    ArrayList<Boolean> temp=new ArrayList<>();
+                    for(Attribute limit:limiters){
+                        boolean t=false;
+                        for(Attribute a:n.attributes){
+                            if(a.equalsTo(limit)){
+                                t=true;
+                            }
+                        }
+                        temp.add(t);
+                    }
+                    checklist.add(temp);
+                }
+            }
+            for(int i=0;i<checklist.size();i++){
+                boolean allTrue=true;
+                for(boolean b:checklist.get(i)){
+                    if(!b){
+                        allTrue=false;
+                    }
+                }
+                if(allTrue){
+                    items.add(Data.notifications.get(i));
                 }
             }
         }

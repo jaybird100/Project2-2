@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -101,9 +102,11 @@ public class Main extends Application {
 
         Scene scene = new Scene(root, windowWidth/2, windowHeight/2, Color.LAVENDER);
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
+            if(ENTER.getCode().equals(KeyCode.ENTER)){
             title.setText(name.getText() + "'s Personal Assistant");
             getName.close();
             primaryStage.show();
+            }
 
         });
 
