@@ -40,7 +40,7 @@ public class Lecture extends Article {
     @Override
     public String toString() {
         if(course==null){
-            return "null lecture";
+            return "Lecture";
         }
         if(extraText!=null) {
             return course.toString() + "| " + time.toString() + "| " + date.toString() + "| " + extraText.toString();

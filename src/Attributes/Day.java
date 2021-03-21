@@ -14,6 +14,14 @@ public class Day extends Attribute {
     }
 
     @Override
+    public String toString(){
+        if(day==null){
+            return "<DAY>";
+        }
+        return day.toString();
+    }
+
+    @Override
     public boolean equalsTo(Attribute input) {
         if(input instanceof Day){
             DayOfWeek d1 = day;
