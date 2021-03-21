@@ -1,5 +1,6 @@
 package UI;
 
+import Utils.Variables;
 import javafx.scene.shape.Rectangle;
 
 import java.io.*;
@@ -27,7 +28,7 @@ public class Date {
 
     private void setLectures() throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
-        File file = new File("C:\\Users\\ranja\\Desktop\\DKE\\Year 2\\Semester 2\\Project 2-2\\Project2-2\\src\\CSVFiles/Lectures.csv");
+        File file = new File(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv");
         Scanner sc = new Scanner(file);
         String line = "";
         try {
