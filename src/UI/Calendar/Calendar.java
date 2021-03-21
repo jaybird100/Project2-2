@@ -1,5 +1,6 @@
-package UI;
+package UI.Calendar;
 
+import UI.Page;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,10 +21,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
-public class Calendar {
+public class Calendar extends Page {
 
-    Stage primaryStage;
-    Group root;
+    public Group root;
     LocalDate date;
     Label week;
     Date[] dates;
@@ -40,9 +40,8 @@ public class Calendar {
 
     //
 
-    public Calendar(Stage primaryStage, Group root) throws IOException {
-        this.primaryStage = primaryStage;
-        this.root = root;
+    public Calendar() throws IOException {
+        root = new Group();
         date = LocalDate.now(ZoneId.of("Europe/Amsterdam"));
         dates = new Date[7];
         dateLabels = new Label[7];
@@ -242,8 +241,8 @@ public class Calendar {
                 Stage expandedLectures = new Stage();
                 expandedLectures.setTitle("Lectures on " + formatter.format(dates[finalI].getDate()));
                 expandedLectures.setScene(lectures);
-                expandedLectures.setX(rectangle.getX() + primaryStage.getX());
-                expandedLectures.setY(rectangle.getY() + primaryStage.getY() + height / 1.8);
+                expandedLectures.setX(rectangle.getX());
+                expandedLectures.setY(rectangle.getY() + height / 1.8);
                 expandedLectures.show();
             });
         }

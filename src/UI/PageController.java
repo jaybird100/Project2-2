@@ -1,6 +1,7 @@
 package UI;
 
 import CFG.FileParser;
+import UI.Calendar.Calendar;
 import UI.MainPage.Message;
 import UI.Temp.Temp;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,7 @@ public class PageController {
     final int windowHeight;
     HashMap<String, Page> controllers = new HashMap<>();
 
-    public static PageController createInstance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
+    public static PageController   createInstance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
         instance = new PageController(primaryStage, windowWidth, windowHeight);
         return instance;
     }
@@ -57,6 +58,10 @@ public class PageController {
                     case "temp":
                         Temp t = new Temp();
                         init(scene, t.root, t);
+                        break;
+                    case "calendar":
+                        Calendar c = new Calendar();
+                        init(scene, c.root, c);
                         break;
                 }
             }

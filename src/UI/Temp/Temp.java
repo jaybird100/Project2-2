@@ -22,10 +22,6 @@ public class Temp extends Page {
     }
 
     @Override
-    public void show() {
-
-    }
-    @Override
     public void init(){
         scene.getStylesheets().addAll("UI/theme.css", "UI/MainPage/mainPage.css");
         scene.setOnKeyPressed(new EventHandler<KeyEvent>(){

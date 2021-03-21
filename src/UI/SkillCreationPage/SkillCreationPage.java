@@ -22,11 +22,6 @@ public class SkillCreationPage extends Page {
     @FXML
     TextArea skillTextArea;
 
-    @Override
-    public void show() {
-
-    }
-
     @FXML
     protected void backButton(Event event) throws IOException {
         PageController.scene("mainpage");
