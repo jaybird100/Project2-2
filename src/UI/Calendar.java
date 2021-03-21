@@ -142,6 +142,7 @@ public class Calendar {
     }
 
 
+
     private void SetButtons(){
         Button previous = new Button();
         previous.setGraphic(new ImageView(new Image("Skins/Previous.jpg", 25, 25, true, true)));
