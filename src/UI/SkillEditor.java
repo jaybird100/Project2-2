@@ -288,13 +288,6 @@ public class SkillEditor {
             }
         };
         calc.setOnAction(event6);
-        GridPane root = new GridPane();
-        root.add(textField,0,0,1,5);
-        root.add(button,6,0,1,3);
-        root.add(sp,0,3,9,5);
-        root.add(skillEditor,7,0,3,2);
-        root.add(calc,7,5);
-        //primaryStage.setScene(new Scene(root,700,500));
     }
 
 

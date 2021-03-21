@@ -94,7 +94,7 @@ public class Calendar {
                     //heading.setPrefSize(width, height*2);
                     root.getChildren().add(heading);
                 } else if (i == 2 && j == 0) {
-                    Label heading = new Label("Deadlines");
+                    Label heading = new Label("Events");
                     heading.setLayoutX(25);
                     heading.setLayoutY(height * 4.3);
                     //heading.setPrefSize(width, height*2);
