@@ -10,7 +10,7 @@ RULE   <DAY>: MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUND
 Action <SCHEDULE> *, <DAY> Monday, <TIME> 9: We have math <TIMEEXPRESSION>
 Action <SCHEDULE> *,  <DAY>  Saturday|Sunday :  There are no lectures on Saturday
 Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 9 : We start the week with math
-Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 12: On Monday noon we have Theoratical Computer Science
+Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 12: On Monday at noon we have Theoratical Computer Science
 Action <LOCaTION> *,  <ROOM> DeepSpace : DeepSpace is the first room after the entrance
 Action <LOCATION> * : <ROOM> is in the first floor
 Action : I have no idea

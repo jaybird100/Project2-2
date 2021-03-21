@@ -85,6 +85,7 @@ public class Match implements Comparable<Match>{
     }
     //Util
     public boolean in(String s, String[] arr){
+        System.out.println("");
         if(s == null){
             return false;
         }

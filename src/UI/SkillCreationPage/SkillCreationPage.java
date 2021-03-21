@@ -51,8 +51,8 @@ public class SkillCreationPage extends Page {
         }
     }
 
-    private static String usingBufferedReader(File file)
-    {
+    // Utils
+    public static String usingBufferedReader(File file) {
         StringBuilder contentBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(file)))
         {

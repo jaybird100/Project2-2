@@ -1,39 +1,93 @@
 package CFG;
 
+import CFG.v2.Rulev2;
+import UI.SkillCreationPage.SkillCreationPage;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 public class s{
-    static HashMap<String, Rule> ruleDatabase;
-    static List<Action> actionDatabase;
     /*
-    Format:
-    \nrule <id>: value1|value2|... // <id> can take value1, value2, ...
-    \naction <id>*: <id1>-value1 <id2>-value2 ... -> return value // if <id> has <id1> = value1, <id2> = value2, etc... send return value
-    \naction->return value // if all else fails, send return value
+    Atomic members
      */
+    static String key = "(?<key><\\w+?>)"; // any word made of [a-zA-Z_0-9]+ between angle brackets
+    static String dtype = "(?<dtype>\\(\\(\\w+\\)\\))?"; //optional (int, double or string). Defaults to string
+    /*
+    int and double specifics: <% functions %>
+    functions:
+        smaller *value* (all ints/doubles smaller than value inclusive),
+        bigger *value* (all ints/doubles bigger than value inclusive),
+        * (all ints/doubles),
+        and,
+        or (to implement),
+        not (to implement)
+
+     */
+    static String type = "(?<type>rule|action)"; //rule or action
+    static String ruleOption = "([^\\|]*?)"; // anything that isn't |
+    static String ruleAllOptions = "(?<options>"+ruleOption+"[\\|"+ruleOption+"]*)"; // at least 1 option, then repeat (| option) for any additional
+    /*
+    Composite members
+     */
+    static String surfaceLvl = "(?im)^\\s*"+type+"(?<rest>.*)$";
+    // line that starts with a type
+    static String rule = "\\s*"+key+"\\s*"+dtype+"\\s*:\\s*"+ruleAllOptions;
+    // base structure (any spaces can [0,inf], will recognize): rule <key> ((dtype)) : op1 [| op2]*
+
     public static void main(String[] args){
-        String skill = "RULE    <S>:    <ACTION>\n" +
-                "RULE   <ACTION>:   <LOCATION> | <SCHEDULE>\n" +
-                "RULE   <SCHEDULE>: WHICH LECTURES ARE THERE <TIMEEXPRESSION> | <TIMEEXPRESSION> WHICH LECTURES ARE THERE\n"+
-                "RULE   <TIMEEXPRESSION>:   ON <DAY> AT <TIME> | AT <TIME> ON <DAY>\n" +
-                "RULE   <TIME>: 12 | 9 \n" +
-                "RULE   <LOCATION>: WHERE IS <ROOM> | HOW DO <PRO> GET TO <ROOM> | WHERE IS <ROOM> LOCATED\n" +
-                "RULE   <PRO>: I | YOU | HE | SHE\n" +
-                "RULE   <ROOM>: DEEPSPACE | SPACEBOX\n" +
-                "RULE   <DAY>: MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY\n" +
-                "Action <SCHEDULE> *,  <DAY>  Saturday|Sunday :  There are no lectures on Saturday\n" +
-                "Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 9 : We start the week with math\n" +
-                "Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 12: On Monday noon we have Theoratical Computer Science\n" +
-                "Action <LOCATION> *,  <ROOM> DeepSpace : DeepSpace is the first room after the entrance\n" +
-                "Action <LOCATION> * : <ROOM> is in the first floor\n" +
-                "Action : I have no idea";
-
-        FileParser.addSkillRegex(skill);
-        List<Match> responses = InputParser.parse("which lectures are there at 12 on monday");
-        for (Match response : responses) {
-            System.out.println(response);
+        File f = new File("src/CFG/testSkill.txt");
+        String fileString = SkillCreationPage.usingBufferedReader(f);
+        List<Rulev2> rules = new ArrayList<>();
+        List<Action> actions = new ArrayList<>();
+        parseSkill(fileString, rules, actions);
+        for (Rulev2 rulev2 : rules) {
+            System.out.println(rulev2);
         }
+    }
 
+    public static void parseSkill(String skill, List<Rulev2> rList, List<Action> aList){
+        Matcher surfaceMatcher = Pattern.compile(surfaceLvl).matcher(skill);
+        while(surfaceMatcher.find()){
+            String t = surfaceMatcher.group("type");
+            String r = surfaceMatcher.group("rest");
+            if(t.equalsIgnoreCase("rule")){
+                rList.add(extractRule(r));
+            }
+            else if(t.equalsIgnoreCase("action")){
+                aList.add(extractAction(r));
+            }
+        }
+    }
+    public static Rulev2 extractRule(String line){
+        Matcher m = Pattern.compile(rule).matcher(line);
+        if(m.find()){
+            String key = m.group("key").toLowerCase();
+            String dtype = m.group("dtype");
+            if(dtype!=null){
+                dtype = dtype.replace("((","").replace("))", "");
+            }
+            String[] options = m.group("options").split("\\|");
+            Rulev2 r = new Rulev2(key, dtype);
+            r.options(Arrays.stream(options).map(String::trim).collect(Collectors.toList()));
+            return r;
+        }
+        return null;
+    }
+    public static Action extractAction(String line){
+        String[] l = line.split(":", 2);
+        String[] preReq = l[0].split(",");
+        String response = l[1].trim();
+        HashMap<String, String[]> map = new HashMap<>();
+        for (String s : preReq) {
+            System.out.println(s);
+        }
+        Action a = new Action(response, map);
+        System.out.println(response+" "+Arrays.toString(preReq));
+        return a;
     }
 }
