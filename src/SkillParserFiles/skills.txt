@@ -109,30 +109,6 @@ Lecture
 
 all
 -
-google.com
-Fetch
-Lecture
-Date<YESTERDAY>
-all
--
-google.com
-Fetch
-Event
-Date<YESTERDAY>
-all
--
-
-Fetch
-Event
-
-all
--
-
-Fetch
-Notification
-
-all
--
 
 Fetch
 Lecture
@@ -151,16 +127,10 @@ Lecture
 
 all
 -
-
+all lectures
 Fetch
-Notification
-
-all
--
-
-Fetch
-Event
-
+Lecture
+Date<TOMORROW>
 all
 -
 
@@ -173,5 +143,17 @@ all
 Fetch
 Lecture
 
+all
+-
+
+Fetch
+Lecture
+Date<TODAY>
+all
+-
+
+Fetch
+Lecture
+Date<TODAY>
 all
 -

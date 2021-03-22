@@ -41,6 +41,11 @@ public class SkillEditor {
     }
 
     public void createEditor(){
+        Label label = new Label("");
+        label.setWrapText(true);
+        label.setTranslateX(100);
+        label.setTranslateY(150);
+
         TextField textField = new TextField();
         textField.setPrefWidth(300);
         root.getChildren().add(textField);
@@ -51,11 +56,16 @@ public class SkillEditor {
         root.getChildren().add(button);
         button.setTranslateX(390);
         button.setTranslateY(100);
+        button.setOnAction(action -> {
+            label.setText(Parser.parse(textField.getText()));
+        });
 
-        Label label = new Label("");
-        label.setWrapText(true);
-        label.setTranslateX(100);
-        label.setTranslateY(150);
+        textField.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER))
+            {
+                label.setText(Parser.parse(textField.getText()));
+            }
+        });
 
         Button calendarButton = new Button("Calendar");
         root.getChildren().add(calendarButton);
@@ -90,16 +100,6 @@ public class SkillEditor {
             hint.show();
         });
 
-        button.setOnAction(action -> {
-            label.setText(Parser.parse(textField.getText()));
-
-        });
-        textField.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER))
-            {
-                label.setText(Parser.parse(textField.getText()));
-            }
-        });
         ScrollPane sp = new ScrollPane();
         sp.setContent(label);
         root.getChildren().add(sp);
@@ -278,7 +278,7 @@ public class SkillEditor {
             stage.show();
         });
         Button calc = new Button("Calculator");
-        EventHandler<ActionEvent> event6 = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> event7 = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Calculator calc2 = new Calculator();
@@ -287,7 +287,7 @@ public class SkillEditor {
                 sta.show();
             }
         };
-        calc.setOnAction(event6);
+        calc.setOnAction(event7);
     }
 
 
