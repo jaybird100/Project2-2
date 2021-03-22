@@ -49,13 +49,13 @@ public class Set extends Action{
                         System.out.println("done");
                         stage.close();
                     }else{
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        long s =System.nanoTime()-lastTime[0];
+                        if(TimeUnit.SECONDS.convert(s,TimeUnit.NANOSECONDS)>=1) {
+                            timeInterval.setText("Time remaining: " + a[0].minusSeconds(1));
+                            a[0] = a[0].minusSeconds(1);
+                            lastTime[0]= System.nanoTime();
                         }
-                        timeInterval.setText("Time remaining: " + a[0].minusSeconds(1));
-                        a[0] = a[0].minusSeconds(1);
+
                     }
                 }
 
