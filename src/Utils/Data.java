@@ -271,17 +271,21 @@ public class Data {
                     }
                     limiters.add(null);
                     attributeIndexes.add(null);
+                    row= reader.readLine();
+                    continue;
                 }
                 if (ac instanceof Create) {
                     objectsFromTxt.add(null);
                     limiters.add(null);
                     attributeIndexes.add(null);
+                    continue;
                 }
                 if (ac instanceof Set) {
                     row = reader.readLine();
                     objectsFromTxt.add(new Timer());
                     limiters.add(null);
                     attributeIndexes.add(null);
+                    continue;
                 }
             }
             //read other files....

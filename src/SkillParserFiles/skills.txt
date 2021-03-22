@@ -80,3 +80,15 @@ Webpage
 add <ARTICLE>
 Create
 -
+open file <FolderTag>
+Open
+FolderLocation
+-
+open path <PATH>
+Open
+FolderLocation
+-
+set timer <TIME>
+Set
+Timer
+-

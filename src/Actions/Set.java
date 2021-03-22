@@ -39,14 +39,14 @@ public class Set extends Action{
 
             stage.setScene(new Scene(root, Variables.SCREEN_WIDTH/10, Variables.SCREEN_HEIGHT/10));
             stage.show();
-            while(t.tf.getTime().isAfter(LocalTime.now())) {
-                if (ti == 1000) {
-                    timeInterval.setText("Time remaining: " + a.minusSeconds(1));
-                } else {
-                    ti = LocalTime.now().getSecond() + ti;
-                }
-
-            }
+//            while(t.tf.getTime().isAfter(LocalTime.now())) {
+//                if (ti == 1000) {
+//                    timeInterval.setText("Time remaining: " + a.minusSeconds(1));
+//                } else {
+//                    ti = LocalTime.now().getSecond() + ti;
+//                }
+//
+//            }
         }
 
         return "reached outside";
