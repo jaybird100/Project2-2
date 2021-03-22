@@ -34,6 +34,8 @@ public class SkillEditor {
     Stage primaryStage;
     Group root;
 
+    //change for push ignore this
+
     public SkillEditor(Stage primaryStage, Group root){
         this.primaryStage = primaryStage;
         this.root = root;
