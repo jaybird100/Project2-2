@@ -1,9 +1,11 @@
 package Actions;
 
 import Articles.Article;
+import Articles.FolderLocation;
 import Articles.Webpage;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,34 +25,36 @@ public class Open extends Action {
             Webpage temp = (Webpage) type;
             if(temp.getUrl().length()>0) {
                 System.out.println("getURL: " + temp.getUrl());
-                try {
-                    Desktop.getDesktop().browse(URI.create(temp.getUrl()));
-                } catch (IOException e) {
-                    return "Not valid URL";
+                if(Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().browse(URI.create(temp.getUrl()));
+                    } catch (IOException e) {
+                        return "Not valid URL";
+                    }
+                }else{
+                    //for macOS
+                    try {
+                        Runtime.getRuntime().exec("xdg-open " + ((Webpage) type).getUrl());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return "Not Valid URL";
+                    }
                 }
             }
-            /*
-            if(Desktop.isDesktopSupported()){
-                Desktop desktop = Desktop.getDesktop();
-                try {
-                    desktop.browse(new URI(((Webpage)type).getUrl()));
-                    return "Webpage open";
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                    return "Webpage not found";
-                }
-            }else{
-                Runtime runtime = Runtime.getRuntime();
-                try {
-                    runtime.exec("xdg-open " + ((Webpage) type).getUrl());
-                    return "Webpage open";
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return "Webpage not found";
-                }
 
-             */
+        }else if( type instanceof FolderLocation){
+            try {
+                FolderLocation temp = (FolderLocation) type;
+                if(temp.getPath().length()>0) {
+                    System.out.println("getPath: " + temp.getPath());
+                    Desktop.getDesktop().open(new File(temp.getPath()));
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Not valid Path";
             }
+        }
         return null;
     }
 
