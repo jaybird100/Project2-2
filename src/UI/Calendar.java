@@ -218,7 +218,6 @@ public class Calendar {
             }
         });
     }
-//temp
     private void fillMiniAgenda(){
         for(int i=0; i<dates.length; i++){
             Rectangle rectangle = dates[i].getMiniAgenda()[0];
