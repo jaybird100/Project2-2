@@ -1,9 +1,6 @@
 package UI;
 
-import Actions.Action;
-import Actions.Create;
-import Actions.Fetch;
-import Actions.Open;
+import Actions.*;
 import Calc.Calculator;
 import Inputs.SEFetchArticles;
 import Utils.Data;
@@ -28,7 +25,7 @@ import java.util.ArrayList;
 
 public class SkillEditor {
 
-    final int skillEditorWidth=450;
+    final int skillEditorWidth=700;
     final int skillEditorHeight=450;
 
     private Calendar calendar;
@@ -191,10 +188,15 @@ public class SkillEditor {
                                 ObservableList<String> inpus = FXCollections.observableArrayList(inp);
                                 inputs.setItems(inpus);
                             }
+                            if(skills.getValue() instanceof Set){
+                                ArrayList<String> inp = new ArrayList<>();
+                                inp.add("<TIME>");
+                                ObservableList<String> inpus = FXCollections.observableArrayList(inp);
+                                inputs.setItems(inpus);
+                            }
                         }
                     };
             skills.setOnAction(setAc);
-
             final SEFetchArticles[] in = {null};
             inputs.setMinWidth(200);
             EventHandler<ActionEvent> event =
@@ -285,54 +287,72 @@ public class SkillEditor {
             root.add(cm,0,0,1,1);
             root.add(commandInput,1,0);
             root.add(interpret,2,0);
-            root.add(skills,0,1);
-            root.add(objects,0,2);
-            root.add(inputs,0,3);
+            root.add(skills,1,1);
+            Label skillLabel = new Label("Choose action");
+            root.add(skillLabel,0,1);
+            root.add(objects,1,2);
+            Label objectLabel = new Label("Choose article (if applicable)");
+            objectLabel.setWrapText(true);
+            root.add(objectLabel,0,2);
+            root.add(inputs,1,3);
+            Label inputLabel = new Label("Choose user input, click 'Enter Key' to insert it in the command line");
+            inputLabel.setWrapText(true);
+            root.add(inputLabel,0,3);
             root.add(enterInput,2,3);
             root.add(limiters,0,5);
-            root.add(limiterText,0,6,5,2);
+            Label limiterLabel = new Label("Click interpret on the command line to see what limiters are available for your user inputs.");
+            limiterLabel.setWrapText(true);
+            root.add(limiterLabel,0,6);
+            root.add(limiterText,0,7,5,2);
             root.add(addLimiter,1,5);
             root.add(removeLimiter,2,5);
             Button generate = new Button("Generate");
             EventHandler<ActionEvent> event6 = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
-                        FileWriter writer = new FileWriter("src/SkillParserFiles/skills.txt",true);
-                        if(!Create.newLineExists(new File("src/SkillParserFiles/skills.txt"))){
-                            writer.write("\n");
+                    if(!commandInput.getText().equalsIgnoreCase("")) {
+                        try {
+                            FileWriter writer = new FileWriter("src/SkillParserFiles/skills.txt",true);
+                            if(!Create.newLineExists(new File("src/SkillParserFiles/skills.txt"))){
+                                writer.write("\n");
+                            }
+                            if(ac[0] instanceof Fetch) {
+                                writer.write(commandInput.getText() + "\n");
+                                writer.write(skills.getValue().toString() + "\n");
+                                writer.write(objects.getValue().toString() + "\n");
+                                writer.write(limiterText.getText() + "\n");
+                                writer.write("all" + "\n");
+                                writer.write("-");
+                            }
+                            if(ac[0] instanceof Open){
+                                writer.write(commandInput.getText()+"\n");
+                                writer.write(ac[0].toString()+"\n");
+                                writer.write("Webpage"+"\n");
+                                writer.write("-");
+                            }
+                            if(ac[0] instanceof Create){
+                                writer.write(commandInput.getText()+"\n");
+                                writer.write(ac[0].toString()+"\n");
+                                writer.write("-");
+                            }
+                            if(ac[0] instanceof Set){
+                                writer.write(commandInput.getText()+"\n");
+                                writer.write(ac[0].toString()+"\n");
+                                writer.write("Timer"+"\n");
+                                writer.write("-");
+                            }
+                            writer.close();
+                            System.out.println("Data length: "+Data.commands.size());
+                            Data.fillData();
+                            System.out.println("Data length2:"+Data.commands.size());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        if(ac[0] instanceof Fetch) {
-                            writer.write(commandInput.getText() + "\n");
-                            writer.write(skills.getValue().toString() + "\n");
-                            writer.write(objects.getValue().toString() + "\n");
-                            writer.write(limiterText.getText() + "\n");
-                            writer.write("all" + "\n");
-                            writer.write("-");
-                        }
-                        if(ac[0] instanceof Open){
-                            writer.write(commandInput.getText()+"\n");
-                            writer.write(ac[0].toString()+"\n");
-                            writer.write("Webpage"+"\n");
-                            writer.write("-");
-                        }
-                        if(ac[0] instanceof Create){
-                            writer.write(commandInput.getText()+"\n");
-                            writer.write(ac[0].toString()+"\n");
-                            writer.write("-");
-                        }
-                        writer.close();
-                        System.out.println("Data length: "+Data.commands.size());
-                        Data.fillData();
-                        System.out.println("Data length2:"+Data.commands.size());
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
-
                 }
             };
             generate.setOnAction(event6);
-            root.add(generate,0,8);
+            root.add(generate,0,9);
             stage.setTitle("Skill Editor");
             stage.setScene(new Scene(root, skillEditorWidth, skillEditorHeight));
             stage.show();

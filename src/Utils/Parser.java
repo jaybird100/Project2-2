@@ -152,12 +152,20 @@ public class Parser {
                                 int id = ((ADate) theLimiters.get(i)).id;
                                 if (id == -1) {
                                     ADate date = new ADate(words[datePlacements.get(dateCounter)]);
+                                    if(!date.recognizedDate){
+                                        return "Date not recognized, must be in dd/MM/yy format";
+                                    }
                                     dateCounter++;
                                     theLimiters.remove(i);
                                     theLimiters.add(i, date);
                                 }
                                 if (id == 0) {
-                                    int num = Integer.parseInt(words[numPlacement.get(numCounter)]);
+                                    int num;
+                                    try{
+                                        num = Integer.parseInt(words[numPlacement.get(numCounter)]);
+                                    }catch (NumberFormatException a){
+                                        return "Number not recognized";
+                                    }
                                     numCounter++;
                                     ADate date;
                                     if(num>=0) {
@@ -173,7 +181,12 @@ public class Parser {
                                     String theDay = words[dayPlacement.get(dayCounter)];
                                     dayCounter++;
                                     theDay=theDay.toUpperCase();
-                                    DayOfWeek day = DayOfWeek.valueOf(theDay);
+                                    DayOfWeek day;
+                                    try{
+                                        day = DayOfWeek.valueOf(theDay);
+                                    }catch (IllegalArgumentException f){
+                                        return "Does not recognize day";
+                                    }
                                     LocalDate date = Data.today.date.plusDays(1);
                                     while (!date.getDayOfWeek().equals(day)) {
                                         date = date.plusDays(1);
@@ -225,7 +238,9 @@ public class Parser {
                 if(urlPlacenment.size()==1){
                     theObject=new Webpage(words[urlPlacenment.get(0)]);
                 }
-            }else if(theObject instanceof FolderLocation){
+            }
+            /*
+            else if(theObject instanceof FolderLocation){
                 System.out.println("FOLDERLOCATION: "+folderTagPlacement.size()+" PATH: "+pathPlacement.size());
                 if(folderTagPlacement.size()==1) {
                     theObject = new FolderLocation(new FolderTag(words[folderTagPlacement.get(0)]));
@@ -234,8 +249,11 @@ public class Parser {
                     theObject=new FolderLocation(words[pathPlacement.get(0)]);
                 }
             }
+             */
             Open o= new Open(theObject);
             return o.action();
+
+
         }else if(Data.toCall.get(commandID) instanceof Create){
             String word = words[articlePlacement.get(0)];
             if(word.equalsIgnoreCase("Lecture")){
@@ -254,7 +272,11 @@ public class Parser {
         }else if(Data.toCall.get(commandID) instanceof Set){
             Article theObject = Data.objectsFromTxt.get(commandID);
             if(theObject instanceof Timer &&timePlacement.size()==1){
-                theObject= new Timer(new Time(words[timePlacement.get(0)]));
+                Time time = new Time(words[timePlacement.get(0)]);
+                if(!time.couldParseTime){
+                    return "Couldn't parse time correctly, make sure it's in hh:mm format";
+                }
+                theObject= new Timer(time);
             }
             Set s = new Set(theObject);
             return s.action();

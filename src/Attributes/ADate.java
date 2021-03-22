@@ -4,11 +4,12 @@ import Utils.Data;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class ADate extends Attribute {
-
+    public boolean recognizedDate=true;
     public int id=-1;
     public LocalDate getDate() {
         return date;
@@ -21,7 +22,11 @@ public class ADate extends Attribute {
     }
     public ADate(String s){
         super(false);
-        date=LocalDate.parse(s, Data.dateFormatter);
+        try {
+            date = LocalDate.parse(s, Data.dateFormatter);
+        }catch(DateTimeParseException e){
+            recognizedDate=false;
+        }
     }
     public ADate(){
         super(true);

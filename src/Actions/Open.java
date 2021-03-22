@@ -23,6 +23,9 @@ public class Open extends Action {
     public String action(){
         if(type instanceof Webpage) {
             Webpage temp = (Webpage) type;
+            if(temp.getUrl()==null){
+                return "Doesn't recognize webpage";
+            }
             if(temp.getUrl().length()>0) {
                 System.out.println("getURL: " + temp.getUrl());
                 if(Desktop.isDesktopSupported()) {
