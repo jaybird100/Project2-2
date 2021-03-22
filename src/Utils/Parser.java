@@ -2,6 +2,7 @@ package Utils;
 
 import Actions.Create;
 import Actions.Open;
+import Actions.Set;
 import Articles.*;
 import Attributes.*;
 import Actions.Fetch;
@@ -28,6 +29,8 @@ public class Parser {
         ArrayList<Integer> extraPlacement = new ArrayList<>();
         ArrayList<Integer> webPageTagPlacement = new ArrayList<>();
         ArrayList<Integer> urlPlacenment = new ArrayList<>();
+        ArrayList<Integer> pathPlacement = new ArrayList<>();
+        ArrayList<Integer> folderTagPlacement = new ArrayList<>();
         ArrayList<Integer> articlePlacement = new ArrayList<>();
         System.out.println("W: "+Arrays.deepToString(words));
         for(int i = 0; i< Data.commands.size(); i++){
@@ -39,6 +42,8 @@ public class Parser {
             ArrayList<Integer> tempExtraPlacements = new ArrayList<>();
             ArrayList<Integer> tempWebPageTagPlacement = new ArrayList<>();
             ArrayList<Integer> tempURLPlacement = new ArrayList<>();
+            ArrayList<Integer> tempPathPlacement = new ArrayList<>();
+            ArrayList<Integer> tempFolderTagPlacement = new ArrayList<>();
             ArrayList<Integer> tempArticlePlacement = new ArrayList<>();
             ArrayList<Integer> codeIDs = new ArrayList<>();
             //split the current query
@@ -75,13 +80,21 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<ARTICLE>")){
                                 tempArticlePlacement.add(q);
                             }
+                            if(command[q].equalsIgnoreCase("<PATH>")){
+                                tempPathPlacement.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase("<FOLDERTAG>")){
+                                tempFolderTagPlacement.add(q);
+                            }
+
+
                             codeIDs.add(q);
                         }
                     }
                 }
                 boolean everyWordMatch = true;
                 for (int v = 0; v < command.length; v++) {
-                    System.out.println(command[v]);
+                    System.out.println("Comm" +command[v]);
                     if (!codeIDs.contains(v)) {
                         //if the index v in command is not a code, it should match the index v in the query(words),
                         // otherwise, every word does not match
@@ -103,6 +116,8 @@ public class Parser {
                     webPageTagPlacement=tempWebPageTagPlacement;
                     urlPlacenment=tempURLPlacement;
                     articlePlacement=tempArticlePlacement;
+                    folderTagPlacement=tempFolderTagPlacement;
+                    pathPlacement=tempPathPlacement;
                     commandID = i;
                     break;
                 }
@@ -118,6 +133,7 @@ public class Parser {
         if(commandID==-1){
             return "No command recognized";
         }
+        System.out.println(Data.toCall.size());
         if(Data.toCall.get(commandID) instanceof Fetch){
             //get the article associated with the matched query(referenced by commandID)
             Article theObject = Data.objectsFromTxt.get(commandID);
@@ -209,6 +225,14 @@ public class Parser {
                 if(urlPlacenment.size()==1){
                     theObject=new Webpage(words[urlPlacenment.get(0)]);
                 }
+            }else if(theObject instanceof FolderLocation){
+                System.out.println("FOLDERLOCATION: "+folderTagPlacement.size()+" PATH: "+pathPlacement.size());
+                if(folderTagPlacement.size()==1) {
+                    theObject = new FolderLocation(new FolderTag(words[folderTagPlacement.get(0)]));
+                }
+                if(pathPlacement.size()==1){
+                    theObject=new FolderLocation(words[pathPlacement.get(0)]);
+                }
             }
             Open o= new Open(theObject);
             return o.action();
@@ -226,6 +250,16 @@ public class Parser {
                 Create n=new Create(new Notification());
                 return n.action();
             }
+
+        }else if(Data.toCall.get(commandID) instanceof Set){
+            Article theObject = Data.objectsFromTxt.get(commandID);
+            if(theObject instanceof Timer &&timePlacement.size()==1){
+                theObject= new Timer(new Time(words[timePlacement.get(0)]));
+            }
+            Set s = new Set(theObject);
+            return s.action();
+
+
         }
         return "No match found";
     }
