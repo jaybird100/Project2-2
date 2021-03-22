@@ -274,7 +274,7 @@ public class Parser {
             if(theObject instanceof Timer &&timePlacement.size()==1){
                 Time time = new Time(words[timePlacement.get(0)]);
                 if(!time.couldParseTime){
-                    return "Couldn't parse time correctly, make sure it's in hh:mm format";
+                    return "Couldn't parse time correctly, make sure it's in hh:mm or hh:mm:ss format";
                 }
                 theObject= new Timer(time);
             }

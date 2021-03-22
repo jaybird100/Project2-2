@@ -58,6 +58,7 @@ public class Calendar {
     }
 
     public void InitializeCalendar() throws IOException {
+        root.getChildren().clear();
         WeekFields wf = WeekFields.of(Locale.getDefault()) ;
         weekCurrent = Integer.parseInt(String.format("%02d",date.get(wf.weekOfWeekBasedYear())));
         weekTemp = weekCurrent;
