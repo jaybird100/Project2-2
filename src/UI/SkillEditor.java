@@ -97,9 +97,9 @@ public class SkillEditor {
         ScrollPane sp = new ScrollPane();
         sp.setContent(label);
         root.getChildren().add(sp);
-        sp.setTranslateX(90);
-        sp.setTranslateY(150);
-        sp.setPrefWidth(450);
+        sp.setTranslateX(15);
+        sp.setTranslateY(140);
+        sp.setPrefWidth(650);
         sp.setPrefHeight(340);
 
         TextField textField = new TextField();
@@ -110,7 +110,7 @@ public class SkillEditor {
 
         Button button = new Button("Enter");
         root.getChildren().add(button);
-        button.setTranslateX(410);
+        button.setTranslateX(415);
         button.setTranslateY(100);
         button.setOnAction(action -> {
             label.setText(Parser.parse(textField.getText()));
@@ -125,7 +125,7 @@ public class SkillEditor {
 
         Button calendarButton = new Button("Calendar");
         root.getChildren().add(calendarButton);
-        calendarButton.setTranslateX(480);
+        calendarButton.setTranslateX(470);
         calendarButton.setTranslateY(100);
         calendarButton.setOnAction(e -> {
             try {
@@ -137,7 +137,7 @@ public class SkillEditor {
 
         Button clarify = new Button("?");
         root.getChildren().add(clarify);
-        clarify.setTranslateX(560);
+        clarify.setTranslateX(550);
         clarify.setTranslateY(100);
         clarify.setOnAction(e -> {
             Group root = new Group();
@@ -339,7 +339,7 @@ public class SkillEditor {
         });
         Button calc = new Button("Calculator");
         root.getChildren().add(calc);
-        calc.setTranslateX(590);
+        calc.setTranslateX(578);
         calc.setTranslateY(100);
         EventHandler<ActionEvent> event7 = new EventHandler<ActionEvent>() {
             @Override
