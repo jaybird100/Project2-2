@@ -1,5 +1,6 @@
 package UI;
 
+import Actions.Create;
 import Utils.Data;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -16,8 +17,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main extends Application {
 
@@ -70,49 +72,87 @@ public class Main extends Application {
 
     }
 
-    public void findName(Stage primaryStage){
-        Group root = new Group();
-        Stage getName = new Stage();
-        getName.setTitle("An important question");
-
-        Label question = new Label("What would you like to be called?");
-        question.setLayoutX(30);
-        question.setLayoutY(30);
-        root.getChildren().add(question);
-
-        TextField name = new TextField();
-        name.setPrefWidth(100);
-        name.setLayoutX(30);
-        name.setLayoutY(50);
-        root.getChildren().add(name);
-
-        Button enter = new Button();
-        enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
-        enter.setLayoutX(135);
-        enter.setLayoutY(50);
-        enter.setOnAction(e -> {
-            title.setText(name.getText() + "'s Personal Assistant");
-            getName.close();
-            primaryStage.show();
-
-        });
-        root.getChildren().add(enter);
-
-        Scene scene = new Scene(root, windowWidth/2, windowHeight/2, Color.LAVENDER);
-        scene.setOnKeyPressed((KeyEvent ENTER) -> {
-            if(ENTER.getCode().equals(KeyCode.ENTER)){
-            title.setText(name.getText() + "'s Personal Assistant");
-            getName.close();
-            primaryStage.show();
+    public static boolean doesTextExist(File file){
+        try {
+            Scanner scanner = new Scanner(file);
+            if(scanner.hasNext()){
+                return true;
+            }else{
+                return false;
             }
+        } catch(FileNotFoundException e) {
+            System.out.println("No file exists");
+            return false;
+        }
+    }
 
-        });
+    public void findName(Stage primaryStage){
+        if(!doesTextExist(new File("name.txt"))) {
+            Group root = new Group();
+            Stage getName = new Stage();
+            getName.setTitle("An important question");
 
-        getName.setScene(scene);
-        getName.setX(windowWidth/2);
-        getName.setY(windowHeight/2);
+            Label question = new Label("What would you like to be called?");
+            question.setLayoutX(30);
+            question.setLayoutY(30);
+            root.getChildren().add(question);
 
-        getName.show();
+            TextField name = new TextField();
+            name.setPrefWidth(100);
+            name.setLayoutX(30);
+            name.setLayoutY(50);
+            root.getChildren().add(name);
+
+            Button enter = new Button();
+            enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
+            enter.setLayoutX(135);
+            enter.setLayoutY(50);
+            enter.setOnAction(e -> {
+                try {
+                    FileWriter writer = new FileWriter("name.txt");
+                    writer.write(name.getText());
+                    writer.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                title.setText(name.getText() + "'s Personal Assistant");
+                getName.close();
+                primaryStage.show();
+
+            });
+            root.getChildren().add(enter);
+
+            Scene scene = new Scene(root, windowWidth / 2, windowHeight / 2, Color.LAVENDER);
+            scene.setOnKeyPressed((KeyEvent ENTER) -> {
+                if (ENTER.getCode().equals(KeyCode.ENTER)) {
+                    try {
+                        FileWriter writer = new FileWriter("name.txt");
+                        writer.write(name.getText());
+                        writer.close();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    title.setText(name.getText() + "'s Personal Assistant");
+                    getName.close();
+                    primaryStage.show();
+                }
+
+            });
+            getName.setScene(scene);
+            getName.setX(windowWidth / 2);
+            getName.setY(windowHeight / 2);
+
+            getName.show();
+        }else{
+            try {
+                Scanner scanner = new Scanner(new File("name.txt"));
+                String name = scanner.nextLine();
+                username=name;
+                primaryStage.show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

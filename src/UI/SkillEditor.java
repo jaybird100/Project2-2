@@ -16,6 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -46,6 +47,52 @@ public class SkillEditor {
     public void createEditor(){
         Label label = new Label("");
         label.setWrapText(true);
+
+        Button setName = new Button("Set name");
+        setName.setOnAction(action -> {
+            Stage stage = new Stage();
+            Label text = new Label("Enter name");
+            Label text2 = new Label("Needs relaunch to show");
+            text2.setPrefWidth(300);
+            TextField nameInput = new TextField();
+            nameInput.setPrefWidth(300);
+            Button enter = new Button("Enter");
+            EventHandler<ActionEvent> enterEvent = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        FileWriter writer = new FileWriter("name.txt");
+                        writer.write(nameInput.getText());
+                        writer.close();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    stage.close();
+                }
+            };
+            enter.setOnAction(enterEvent);
+            GridPane root = new GridPane();
+            root.add(text,0,0);
+            root.add(nameInput,1,0);
+            root.add(enter,2,0);
+            root.add(text2,0,1);
+            Scene scene = new Scene(root,350,100);
+            scene.setOnKeyPressed((KeyEvent ENTER) -> {
+                if (ENTER.getCode().equals(KeyCode.ENTER)) {
+                    try {
+                        FileWriter writer = new FileWriter("name.txt");
+                        writer.write(nameInput.getText());
+                        writer.close();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    stage.close();
+                }
+            });
+            stage.setScene(scene);
+            stage.show();
+        });
+        root.getChildren().add(setName);
 
         ScrollPane sp = new ScrollPane();
         sp.setContent(label);
