@@ -43,6 +43,7 @@ public class Data {
     public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
     public static ArrayList<Event> events= new ArrayList<>();
     public static ArrayList<Webpage> webpages= new ArrayList<>();
+    public static ArrayList<Notification> notifications = new ArrayList<>();
 
     //indices of the below should match
     public static ArrayList<String> commands = new ArrayList<>();//Possible query entries(line 1 of the agreed upon skill.txt file)
@@ -62,6 +63,7 @@ public class Data {
         lectures = new ArrayList<>();
         events= new ArrayList<>();
         webpages= new ArrayList<>();
+        notifications=new ArrayList<>();
         commands = new ArrayList<>();
         toCall = new ArrayList<>();
         objectsFromTxt = new ArrayList<>();
@@ -160,6 +162,23 @@ public class Data {
         while(row!=null) {
             String[] data = row.split(",");
             webpages.add(new Webpage(data[0],data[1].trim()));
+            row = reader.readLine();
+        }
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH+"Notifications.csv"));
+        row = reader.readLine();
+        while(row != null){
+            String[] data = row.split(",");
+            if(!data[0].equals("Course")){
+                Notification n;
+                Course c = new Course(data[0].trim());
+                Time t = new Time(data[1].trim());
+                ADate d = new ADate(data[2].trim());
+
+                    ExtraText ex = new ExtraText(data[4].trim());
+                   n= new Notification(c,t,d,ex);
+
+                notifications.add(n);
+            }
             row = reader.readLine();
         }
 

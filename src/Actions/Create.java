@@ -3,6 +3,7 @@ package Actions;
 import Articles.Article;
 import Articles.Event;
 import Articles.Lecture;
+import Articles.Notification;
 import Attributes.ADate;
 import Utils.Data;
 import javafx.event.ActionEvent;
@@ -109,6 +110,52 @@ public class Create extends Action {
                         }
                         writer.write('\n'+title.getText()+","+time.getText()+","+date.getText()+","+notes.getText());
                         writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            add.setOnAction(addE);
+            root.add(add,0,4);
+            stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
+            stage.show();
+        }
+        if(itemToCreate instanceof Notification){
+            TextField course = new TextField();
+            TextField time = new TextField();
+            TextField date = new TextField();
+            TextField extraText = new TextField();
+            Label lCourse = new Label("Course");
+            Label lTime = new Label("Due Time");
+            Label lDate = new Label("Due Date (dd/MM/yy)");
+            Label lET = new Label("Details");
+            GridPane root = new GridPane();
+            root.add(course,1,0);
+            root.add(lCourse,0,0);
+            root.add(time,1,1);
+            root.add(lTime,0,1);
+            root.add(date,1,2);
+            root.add(lDate,0,2);
+            root.add(extraText,1,3);
+            root.add(lET,0,3);
+            Button add = new Button("Add");
+            EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        FileWriter writer = new FileWriter("src/CSVFiles/Notifications.csv",true);
+                        String day = new ADate(date.getText()).getDay();
+                        if(newLineExists(new File("src/CSVFiles/Notifications.csv"))){
+                            writer.write(course.getText()+","+time.getText()+","+date.getText()+","+day+","+extraText.getText());
+                        }else {
+                            writer.write('\n' + course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                        }
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Data.fillData();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
