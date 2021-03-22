@@ -58,12 +58,12 @@ public class SkillEditor {
         TextField textField = new TextField();
         textField.setPrefWidth(300);
         root.getChildren().add(textField);
-        textField.setTranslateX(90);
+        textField.setTranslateX(110);
         textField.setTranslateY(100);
 
         Button button = new Button("Enter");
         root.getChildren().add(button);
-        button.setTranslateX(390);
+        button.setTranslateX(410);
         button.setTranslateY(100);
         button.setOnAction(action -> {
             label.setText(Parser.parse(textField.getText()));
@@ -78,7 +78,7 @@ public class SkillEditor {
 
         Button calendarButton = new Button("Calendar");
         root.getChildren().add(calendarButton);
-        calendarButton.setTranslateX(450);
+        calendarButton.setTranslateX(480);
         calendarButton.setTranslateY(100);
         calendarButton.setOnAction(e -> {
             try {
@@ -90,7 +90,7 @@ public class SkillEditor {
 
         Button clarify = new Button("?");
         root.getChildren().add(clarify);
-        clarify.setTranslateX(520);
+        clarify.setTranslateX(560);
         clarify.setTranslateY(100);
         clarify.setOnAction(e -> {
             Group root = new Group();
@@ -102,7 +102,7 @@ public class SkillEditor {
             explain.setTranslateY(20);
             root.getChildren().add(explain);
 
-            Scene scene = new Scene(root, 200, 100, Color.LAVENDER);
+            Scene scene = new Scene(root, 400, 100, Color.LAVENDER);
             hint.setScene(scene);
             hint.setX(700);
             hint.setY(250);
@@ -292,8 +292,8 @@ public class SkillEditor {
         });
         Button calc = new Button("Calculator");
         root.getChildren().add(calc);
-        calc.setTranslateX(450);
-        calc.setTranslateY(130);
+        calc.setTranslateX(590);
+        calc.setTranslateY(100);
         EventHandler<ActionEvent> event7 = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
