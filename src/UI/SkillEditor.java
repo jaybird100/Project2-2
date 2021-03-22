@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,16 +46,14 @@ public class SkillEditor {
     public void createEditor(){
         Label label = new Label("");
         label.setWrapText(true);
-        label.setPrefHeight(50);
-
 
         ScrollPane sp = new ScrollPane();
         sp.setContent(label);
         root.getChildren().add(sp);
         sp.setTranslateX(90);
         sp.setTranslateY(150);
-        sp.setPrefWidth(330);
-        sp.setPrefHeight(200);
+        sp.setPrefWidth(450);
+        sp.setPrefHeight(340);
 
         TextField textField = new TextField();
         textField.setPrefWidth(300);
@@ -253,8 +252,11 @@ public class SkillEditor {
                 public void handle(ActionEvent event) {
                     try {
                         FileWriter writer = new FileWriter("src/SkillParserFiles/skills.txt",true);
+                        if(!Create.newLineExists(new File("src/SkillParserFiles/skills.txt"))){
+                            writer.write("\n");
+                        }
                         if(ac[0] instanceof Fetch) {
-                            writer.write("\n" + commandInput.getText() + "\n");
+                            writer.write(commandInput.getText() + "\n");
                             writer.write(skills.getValue().toString() + "\n");
                             writer.write(objects.getValue().toString() + "\n");
                             writer.write(limiterText.getText() + "\n");
@@ -262,13 +264,13 @@ public class SkillEditor {
                             writer.write("-");
                         }
                         if(ac[0] instanceof Open){
-                            writer.write("\n"+commandInput.getText()+"\n");
+                            writer.write(commandInput.getText()+"\n");
                             writer.write(ac[0].toString()+"\n");
                             writer.write("Webpage"+"\n");
                             writer.write("-");
                         }
                         if(ac[0] instanceof Create){
-                            writer.write("\n"+commandInput.getText()+"\n");
+                            writer.write(commandInput.getText()+"\n");
                             writer.write(ac[0].toString()+"\n");
                             writer.write("-");
                         }

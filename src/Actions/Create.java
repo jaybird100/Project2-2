@@ -173,7 +173,7 @@ public class Create extends Action {
         return "Create";
     }
 
-    boolean newLineExists(File file) throws IOException {
+    public static boolean newLineExists(File file) throws IOException {
         RandomAccessFile fileHandler = new RandomAccessFile(file, "r");
         long fileLength = fileHandler.length() - 1;
         if (fileLength < 0) {
