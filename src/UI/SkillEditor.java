@@ -43,9 +43,16 @@ public class SkillEditor {
     public void createEditor(){
         Label label = new Label("");
         label.setWrapText(true);
-        label.setPrefHeight(200);
-        label.setTranslateX(100);
-        label.setTranslateY(150);
+        label.setPrefHeight(50);
+
+
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(label);
+        root.getChildren().add(sp);
+        sp.setTranslateX(90);
+        sp.setTranslateY(150);
+        sp.setPrefWidth(330);
+        sp.setPrefHeight(200);
 
         TextField textField = new TextField();
         textField.setPrefWidth(300);
@@ -101,13 +108,6 @@ public class SkillEditor {
             hint.show();
         });
 
-        ScrollPane sp = new ScrollPane();
-        sp.setContent(label);
-        root.getChildren().add(sp);
-        sp.setTranslateX(90);
-        sp.setTranslateY(150);
-        sp.setPrefWidth(330);
-        sp.setPrefHeight(70);
 
         Button skillEditor = new Button("Skill editor");
         root.getChildren().add(skillEditor);
