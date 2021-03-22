@@ -139,3 +139,27 @@ Lecture
 
 all
 -
+
+Fetch
+Lecture
+
+all
+-
+
+Fetch
+Lecture
+Date<TODAY>
+all
+-
+
+Fetch
+Lecture
+Date<TODAY>
+all
+-
+<DAY> <DAY>
+Fetch
+Lecture
+Date<TOMORROW>
+all
+-

@@ -1,11 +1,11 @@
 package UI;
 
+import Actions.Action;
 import Actions.Create;
 import Actions.Fetch;
 import Actions.Open;
 import Calc.Calculator;
 import Inputs.SEFetchArticles;
-import Actions.Action;
 import Utils.Data;
 import Utils.Parser;
 import javafx.collections.FXCollections;
@@ -43,6 +43,7 @@ public class SkillEditor {
     public void createEditor(){
         Label label = new Label("");
         label.setWrapText(true);
+        label.setPrefHeight(200);
         label.setTranslateX(100);
         label.setTranslateY(150);
 
@@ -145,18 +146,20 @@ public class SkillEditor {
                         }
                     };
             skills.setOnAction(setAc);
+
             final SEFetchArticles[] in = {null};
             inputs.setMinWidth(200);
-
             EventHandler<ActionEvent> event =
                     new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e)
                         {
-                            in[0] = (SEFetchArticles)(objects.getValue());
-                            ObservableList<String> inputList = FXCollections.observableArrayList(in[0].inputs);
-                            inputs.setItems(inputList);
-                            ObservableList<String> initialLimits = FXCollections.observableArrayList(in[0].eachInputsLimiters.get(0));
-                            limiters.setItems(initialLimits);
+                            if(ac[0] instanceof Fetch) {
+                                in[0] = (SEFetchArticles) (objects.getValue());
+                                ObservableList<String> inputList = FXCollections.observableArrayList(in[0].inputs);
+                                inputs.setItems(inputList);
+                                ObservableList<String> initialLimits = FXCollections.observableArrayList(in[0].eachInputsLimiters.get(0));
+                                limiters.setItems(initialLimits);
+                            }
                         }
                     };
 
@@ -176,21 +179,23 @@ public class SkillEditor {
             EventHandler<ActionEvent> event3 = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    ArrayList<Integer> possibleLimiters = new ArrayList<>();
-                    String[] toAnalyze = commandInput.getText().split(" ");
-                    for(int p=0;p<in[0].inputs.size();p++){
-                        for(String s:toAnalyze){
-                            if(s.equalsIgnoreCase(in[0].inputs.get(p))){
-                                possibleLimiters.add(p+1);
+                    if(ac[0] instanceof Fetch) {
+                        ArrayList<Integer> possibleLimiters = new ArrayList<>();
+                        String[] toAnalyze = commandInput.getText().split(" ");
+                        for (int p = 0; p < in[0].inputs.size(); p++) {
+                            for (String s : toAnalyze) {
+                                if (s.equalsIgnoreCase(in[0].inputs.get(p))) {
+                                    possibleLimiters.add(p + 1);
+                                }
                             }
                         }
+                        ArrayList<String> limits = in[0].eachInputsLimiters.get(0);
+                        for (Integer i : possibleLimiters) {
+                            limits.addAll(in[0].eachInputsLimiters.get(i));
+                        }
+                        ObservableList<String> limits2 = FXCollections.observableArrayList(limits);
+                        limiters.setItems(limits2);
                     }
-                    ArrayList<String> limits = in[0].eachInputsLimiters.get(0);
-                    for(Integer i:possibleLimiters){
-                        limits.addAll(in[0].eachInputsLimiters.get(i));
-                    }
-                    ObservableList<String> limits2 = FXCollections.observableArrayList(limits);
-                    limiters.setItems(limits2);
                 }
             };
             Button interpret = new Button("Interpret");
@@ -200,10 +205,12 @@ public class SkillEditor {
             EventHandler<ActionEvent> event4 = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    if(limiterText.getText().length()>1){
-                        limiterText.setText(limiterText.getText().trim()+" && "+limiters.getValue().toString());
-                    }else{
-                        limiterText.setText(limiters.getValue().toString());
+                    if(ac[0] instanceof Fetch) {
+                        if (limiterText.getText().length() > 1) {
+                            limiterText.setText(limiterText.getText().trim() + " && " + limiters.getValue().toString());
+                        } else {
+                            limiterText.setText(limiters.getValue().toString());
+                        }
                     }
                 }
             };
@@ -212,15 +219,17 @@ public class SkillEditor {
             EventHandler<ActionEvent> event5 = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    String[] temp = limiterText.getText().split("&&");
-                    String toEnter = "";
-                    for(int i =0;i<temp.length-2;i++){
-                        toEnter+=temp[i];
-                        if(i!=temp.length-2){
-                            toEnter+=" && ";
+                    if(ac[0] instanceof Fetch) {
+                        String[] temp = limiterText.getText().split("&&");
+                        String toEnter = "";
+                        for (int i = 0; i < temp.length - 2; i++) {
+                            toEnter += temp[i];
+                            if (i != temp.length - 2) {
+                                toEnter += " && ";
+                            }
                         }
+                        limiterText.setText(toEnter);
                     }
-                    limiterText.setText(toEnter);
                 }
             };
             removeLimiter.setOnAction(event5);
@@ -278,6 +287,9 @@ public class SkillEditor {
             stage.show();
         });
         Button calc = new Button("Calculator");
+        root.getChildren().add(calc);
+        calc.setTranslateX(450);
+        calc.setTranslateY(130);
         EventHandler<ActionEvent> event7 = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

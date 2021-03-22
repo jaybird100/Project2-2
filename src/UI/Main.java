@@ -27,7 +27,7 @@ public class Main extends Application {
     private Group root;
     //Mat matrix = null;
     SkillEditor skillEditor;
-    Label title;
+    public static Label title;
 
     public static void main(String[] args) throws IOException {
         //premptive preparation of data for query answering
@@ -49,8 +49,6 @@ public class Main extends Application {
         findName(primaryStage);
         title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
         root.getChildren().add(title);
-        //title.setPrefSize(primaryStage.getWidth(), 50);
-        //title.setTextAlignment(TextAlignment.CENTER);
         title.setLayoutX(180);
         title.setLayoutY(20);
         title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));

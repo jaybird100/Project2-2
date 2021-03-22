@@ -157,3 +157,9 @@ Lecture
 Date<TODAY>
 all
 -
+<DAY> <DAY>
+Fetch
+Lecture
+Date<TOMORROW>
+all
+-

@@ -217,6 +217,19 @@ public class Calendar {
                 lectureLabels[i].setText(Integer.toString(dates[i].getLectures().size()));
             }
         });
+
+        Button backButton = new Button("Back");
+        backButton.setTextAlignment(TextAlignment.CENTER);
+        backButton.setTranslateX(20);
+        backButton.setTranslateY(20);
+        backButton.setPrefSize(50, 10);
+        root.getChildren().add(backButton);
+        backButton.setOnAction(e -> {
+            root.getChildren().clear();
+            root.getChildren().add(Main.title);
+            new SkillEditor(primaryStage, root);
+        });
+
     }
 
 //temp
