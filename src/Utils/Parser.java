@@ -239,7 +239,7 @@ public class Parser {
                     theObject=new Webpage(words[urlPlacenment.get(0)]);
                 }
             }
-            /*
+
             else if(theObject instanceof FolderLocation){
                 System.out.println("FOLDERLOCATION: "+folderTagPlacement.size()+" PATH: "+pathPlacement.size());
                 if(folderTagPlacement.size()==1) {
@@ -249,7 +249,7 @@ public class Parser {
                     theObject=new FolderLocation(words[pathPlacement.get(0)]);
                 }
             }
-             */
+
             Open o= new Open(theObject);
             return o.action();
 

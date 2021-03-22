@@ -84,3 +84,11 @@ set timer <TIME>
 Set
 Timer
 -
+open folder <FOLDERTAG>
+Open
+FolderLocation
+-
+open path <PATH>
+Open
+FolderLocation
+-

@@ -3,6 +3,7 @@ package Actions;
 import Articles.Article;
 import Articles.FolderLocation;
 import Articles.Webpage;
+import Utils.Variables;
 
 import java.awt.*;
 import java.io.File;
@@ -50,7 +51,7 @@ public class Open extends Action {
                 FolderLocation temp = (FolderLocation) type;
                 if(temp.getPath().length()>0) {
                     System.out.println("getPath: " + temp.getPath());
-                    Desktop.getDesktop().open(new File(temp.getPath()));
+                    Desktop.getDesktop().open(new File(Variables.USER_HOME_PATH+temp.getPath()));
 
                 }
             } catch (IOException e) {

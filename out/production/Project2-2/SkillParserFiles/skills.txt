@@ -77,89 +77,18 @@ open <WEBTAG>
 Open
 Webpage
 -
-O <URL>
-Open
-Webpage
--
 add <ARTICLE>
 Create
 -
-<COURSE> lectures next <DAY>
-Fetch
-Lecture
-<COURSE> && NEXT<DAY>
-all
+set timer <TIME>
+Set
+Timer
 -
-<COURSE> and <DATE>
-Fetch
-Lecture
-<DATE> && <COURSE>
-all
--
-o <URL>
+open folder <FOLDERTAG>
 Open
-Webpage
+FolderLocation
 -
-c <ARTICLE>
-Create
--
-
-Fetch
-Lecture
-
-all
--
-
-Fetch
-Lecture
-
-all
--
-
-Fetch
-Lecture
-
-all
--
-
-Fetch
-Lecture
-
-all
--
-all lectures
-Fetch
-Lecture
-Date<TOMORROW>
-all
--
-
-Fetch
-Lecture
-
-all
--
-
-Fetch
-Lecture
-
-all
--
-
-Fetch
-Lecture
-Date<TODAY>
-all
--
-
-Fetch
-Lecture
-Date<TODAY>
-all
--
-<DAY> <DAY>
-Fetch
-Lecture
-Date<TOMORROW>
-all
+open path <PATH>
+Open
+FolderLocation
 -
