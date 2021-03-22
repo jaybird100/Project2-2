@@ -7,7 +7,7 @@ public class Variables {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static final double SCREEN_WIDTH= screenSize.width;
     public static final double SCREEN_HEIGHT = screenSize.height;
-    public static final String USER_HOME_PATH=System.getProperty("user.home");
+    public static final String USER_HOME_PATH=System.getProperty("user.home")+"\\";
 
 
     public static final String FILE_SEPARATOR =System.getProperty("file.separator");
