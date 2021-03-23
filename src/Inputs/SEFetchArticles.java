@@ -10,10 +10,12 @@ public class SEFetchArticles {
     Article article;
     public ArrayList<String> inputs = new ArrayList<>();
     public ArrayList<ArrayList<String>> eachInputsLimiters = new ArrayList<>();
+    public boolean nonInputLimiter=false;
 
     public SEFetchArticles(Article a){
         article=a;
         if(a instanceof Lecture){
+            nonInputLimiter=true;
             inputs.add(new ADate().toString());
             inputs.add(new Course().toString());
             inputs.add(new Time().toString());
@@ -52,6 +54,7 @@ public class SEFetchArticles {
             eachInputsLimiters.add(num);
         }
         if(a instanceof Event){
+            nonInputLimiter=true;
             inputs.add(new ADate().toString());
             inputs.add(new Time().toString());
             inputs.add(new ExtraText().toString());
@@ -85,6 +88,7 @@ public class SEFetchArticles {
             eachInputsLimiters.add(num);
         }
         if(a instanceof Notification){
+            nonInputLimiter=true;
             inputs.add(new ADate().toString());
             inputs.add(new Course().toString());
             inputs.add(new Time().toString());
@@ -129,7 +133,7 @@ public class SEFetchArticles {
             ArrayList<String> extra = new ArrayList<>();
             extra.add("<EXTRA>");
             eachInputsLimiters.add(extra);
-
+            // <DEADLINE> limiters
             ArrayList<String> dl = new ArrayList<>();
             dl.add("<DEADLINE>");
             eachInputsLimiters.add(dl);

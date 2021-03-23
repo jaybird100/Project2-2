@@ -273,7 +273,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
-                                ObservableList<String> initialLimits = FXCollections.observableArrayList(in[0].eachInputsLimiters.get(0));
+                                ObservableList<String> initialLimits;
+                                if(in[0].nonInputLimiter) {
+                                    initialLimits = FXCollections.observableArrayList(in[0].eachInputsLimiters.get(0));
+                                }else{
+                                    initialLimits=FXCollections.observableArrayList(new ArrayList<>());
+                                }
                                 limiters.setItems(initialLimits);
                                 limiters.setVisible(true);
                                 limiterLabel.setVisible(true);
@@ -305,14 +310,22 @@ public class SkillEditor {
                         String[] toAnalyze = commandInput.getText().split(" ");
                         for (int p = 0; p < in[0].inputs.size(); p++) {
                             for (String s : toAnalyze) {
+                                System.out.println(s);
                                 if (s.equalsIgnoreCase(in[0].inputs.get(p))) {
-                                    possibleLimiters.add(p + 1);
+                                    System.out.println(in[0].inputs.get(p));
+                                    if(in[0].nonInputLimiter) {
+                                        possibleLimiters.add(p + 1);
+                                    }else{
+                                        possibleLimiters.add(p);
+                                    }
                                 }
                             }
                         }
                         ArrayList<String> limits = new ArrayList<>();
-                        for(int i =0;i<in[0].eachInputsLimiters.get(0).size();i++){
-                            limits.add(in[0].eachInputsLimiters.get(0).get(i));
+                        if(in[0].nonInputLimiter) {
+                            for (int i = 0; i < in[0].eachInputsLimiters.get(0).size(); i++) {
+                                limits.add(in[0].eachInputsLimiters.get(0).get(i));
+                            }
                         }
                         for (Integer i : possibleLimiters) {
                             limits.addAll(in[0].eachInputsLimiters.get(i));
