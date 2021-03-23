@@ -380,7 +380,11 @@ public class SkillEditor {
                                 writer.write(commandInput.getText() + "\n");
                                 writer.write(skills.getValue().toString() + "\n");
                                 writer.write(objects.getValue().toString() + "\n");
-                                writer.write(limiterText.getText() + "\n");
+                                if(limiterText.getText().length()==0){
+                                    writer.write("all"+ "\n");
+                                }else {
+                                    writer.write(limiterText.getText() + "\n");
+                                }
                                 writer.write("all" + "\n");
                                 writer.write("-");
                             }
