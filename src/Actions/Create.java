@@ -256,8 +256,8 @@ public class Create extends Action {
                 public void handle(ActionEvent event) {
                     if(medication.getText().length()>0&&illness.getText().length()>0) {
                         try {
-                            FileWriter writer = new FileWriter("src/CSVFiles/Notifications.csv", true);
-                            if (newLineExists(new File("src/CSVFiles/Notifications.csv"))) {
+                            FileWriter writer = new FileWriter("src/CSVFiles/Meds.csv", true);
+                            if (newLineExists(new File("src/CSVFiles/Meds.csv"))) {
                                 writer.write(medication.getText() + "," + illness.getText());
                             } else {
                                 writer.write('\n' +medication.getText() + "," + illness.getText());
