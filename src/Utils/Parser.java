@@ -272,6 +272,15 @@ public class Parser {
                 Create n=new Create(new Notification());
                 return n.action();
             }
+            if(word.equalsIgnoreCase("Webpage")){
+                Create n=new Create(new Webpage());
+                return n.action();
+            }
+            if(word.equalsIgnoreCase("FolderLocation")){
+                Create n=new Create(new FolderLocation());
+                return n.action();
+            }
+
 
         }else if(Data.toCall.get(commandID) instanceof Set){
             Article theObject = Data.objectsFromTxt.get(commandID);
