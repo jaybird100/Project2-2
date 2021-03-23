@@ -5,14 +5,27 @@ import UI.Pages.MainPage.Message;
 import UI.Pages.Page;
 import UI.Pages.Temp;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class PageController {
 
@@ -28,7 +41,22 @@ public class PageController {
 
     public static PageController createInstance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
         instance = new PageController(primaryStage, windowWidth, windowHeight);
+        init();
         return instance;
+    }
+    private static void init() throws IOException {
+        File f = new File("src/UserInfo.txt");
+        if(!f.isFile()) {
+            getInstance().setScene("frontpage");
+        }else{
+            try {
+                Scanner scanner = new Scanner(f);
+                getInstance().username= scanner.nextLine();
+                getInstance().setScene("mainpage");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static PageController getInstance(){
@@ -43,8 +71,6 @@ public class PageController {
         this.windowHeight = windowHeight;
         this.windowWidth = windowWidth;
         stage = primaryStage;
-        stage.setTitle("Project 2-2");
-        setScene("frontpage");
     }
 
     private void setScene(String scene) throws IOException {
