@@ -123,8 +123,8 @@ public class Create extends Action {
             TextField date = new TextField();
             TextField extraText = new TextField();
             Label lCourse = new Label("Course");
-            Label lTime = new Label("Due Time");
-            Label lDate = new Label("Due Date (dd/MM/yy)");
+            Label lTime = new Label("Time");
+            Label lDate = new Label("Date (dd/MM/yy)");
             Label lET = new Label("Details");
             GridPane root = new GridPane();
             root.add(course,1,0);
