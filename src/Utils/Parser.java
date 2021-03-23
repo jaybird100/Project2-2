@@ -29,6 +29,7 @@ public class Parser {
         ArrayList<Integer> numPlacement= new ArrayList<>();
         ArrayList<Integer> dayPlacement = new ArrayList<>();
         ArrayList<Integer> extraPlacement = new ArrayList<>();
+        ArrayList<Integer> deadlinePlacement = new ArrayList<>();
         ArrayList<Integer> webPageTagPlacement = new ArrayList<>();
         ArrayList<Integer> urlPlacenment = new ArrayList<>();
         ArrayList<Integer> pathPlacement = new ArrayList<>();
@@ -42,6 +43,7 @@ public class Parser {
             ArrayList<Integer> tempNumPlacements= new ArrayList<>();
             ArrayList<Integer> tempDayPlacements = new ArrayList<>();
             ArrayList<Integer> tempExtraPlacements = new ArrayList<>();
+            ArrayList<Integer> tempDeadlinePlacement = new ArrayList<>();
             ArrayList<Integer> tempWebPageTagPlacement = new ArrayList<>();
             ArrayList<Integer> tempURLPlacement = new ArrayList<>();
             ArrayList<Integer> tempPathPlacement = new ArrayList<>();
@@ -88,6 +90,9 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<EXTRA>")){
                                 tempExtraPlacements.add(q);
                             }
+                            if(command[q].equalsIgnoreCase("<DEADLINE>")){
+                                tempDeadlinePlacement.add(q);
+                            }
 
                             codeIDs.add(q);
                         }
@@ -114,6 +119,7 @@ public class Parser {
                     timePlacement=tempTimePlacements;
                     dayPlacement=tempDayPlacements;
                     extraPlacement=tempExtraPlacements;
+                    deadlinePlacement=tempDeadlinePlacement;
                     webPageTagPlacement=tempWebPageTagPlacement;
                     urlPlacenment=tempURLPlacement;
                     articlePlacement=tempArticlePlacement;
@@ -131,6 +137,7 @@ public class Parser {
         int timeCounter =0;
         int dayCounter =0;
         int extraCounter =0;
+        int deadlineCounter = 0;
         if(commandID==-1){
             return "No command recognized";
         }
@@ -226,6 +233,21 @@ public class Parser {
                                 */
                                 ExtraText e = new ExtraText(words[extraPlacement.get(extraCounter)]);
                                 extraCounter++;
+                                theLimiters.remove(i);
+                                theLimiters.add(i,e);
+                            }
+                        }
+                        if(theLimiters.get(i) instanceof ADeadline){
+                            if(theLimiters.get(i).toBeInputted){
+                                System.out.println(theLimiters.get(i));
+                                for (String current_srt : words)
+                                    System.out.println(current_srt);
+                                System.out.println(deadlineCounter);
+                                for (Integer current_int: deadlinePlacement)
+                                    System.out.println(current_int);
+
+                                ADeadline e = new ADeadline(words[deadlinePlacement.get(deadlineCounter)]);
+                                deadlineCounter++;
                                 theLimiters.remove(i);
                                 theLimiters.add(i,e);
                             }

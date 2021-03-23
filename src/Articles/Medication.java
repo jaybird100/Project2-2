@@ -1,25 +1,25 @@
 package Articles;
 
-import Attributes.ADate;
-import Attributes.Course;
-import Attributes.ExtraText;
-import Attributes.Time;
-
+import Attributes.*;
 import java.util.ArrayList;
+import java.time.*;
 
 public class Medication extends Article {
     ExtraText medicationName;
     ExtraText courseName;
+    ADeadline deadline;
 
     public Medication(){
         super(new ArrayList<>());
     }
-    public Medication(ExtraText medicationName, ExtraText courseName){
+    public Medication(ExtraText medicationName, ExtraText courseName, ADeadline deadline){
         super(new ArrayList<>());
         attributes.add(medicationName);
         attributes.add(courseName);
+        attributes.add(deadline);
         this.medicationName = medicationName;
         this.courseName = courseName;
+        this.deadline = deadline;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class Medication extends Article {
         if (medicationName == null) {
             return "Medication";
         }
-        return medicationName.toString() + "| " + courseName.toString();
+        return medicationName.toString() + "| " + courseName.toString() + "| " + deadline.toString();
     }
 }

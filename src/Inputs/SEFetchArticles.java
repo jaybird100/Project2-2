@@ -124,10 +124,17 @@ public class SEFetchArticles {
         }
         if (a instanceof Medication) {
             inputs.add(new ExtraText().toString());
+            inputs.add(new ADeadline().toString());
             // <EXTRA> limiters
             ArrayList<String> extra = new ArrayList<>();
             extra.add("<EXTRA>");
             eachInputsLimiters.add(extra);
+
+            ArrayList<String> dl = new ArrayList<>();
+            dl.add("<DEADLINE>");
+            eachInputsLimiters.add(dl);
+
+
         }
     }
 
