@@ -25,7 +25,10 @@ The user can open websites or folders on their computer.
 #### Set
 Sets a timer according to hh:mm or hh:mm:ss format.
 
-### Skill editor
+#### Calculator
+You can enter in equations in the command line and it will show the result. It doesn't work with decimals or exponents.
+
+### Skill editor 
 Usage of the skill editor differs for fetch.
 ##### Fetch
 1. Select "Fetch" from the list of actions.
