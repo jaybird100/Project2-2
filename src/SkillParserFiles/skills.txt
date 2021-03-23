@@ -116,3 +116,9 @@ Medication
 <EXTRA> && <EXTRA>
 all
 -
+show notifications
+Fetch
+Notification
+all
+all
+-

@@ -16,6 +16,7 @@ public class Time extends Attribute {
             time=LocalTime.parse(input);
         }catch(DateTimeParseException e){
             couldParseTime=false;
+            toBeInputted=true;
         }
     }
     public Time(){

@@ -1,10 +1,17 @@
 package Actions;
 import Calc.Calculator_command;
+
+import java.util.regex.Pattern;
+
 public class Calc extends Action{
     public boolean isCalc=true;
     String input;
     public Calc(String in){
-        input=formatting(in);
+        if (in.matches(".*[a-z].*")) {
+            isCalc=false;
+        }else {
+            input = formatting(in);
+        }
     }
     @Override
     public String action() {

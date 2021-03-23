@@ -1,9 +1,6 @@
 package Actions;
 
-import Articles.Article;
-import Articles.Event;
-import Articles.Lecture;
-import Articles.Notification;
+import Articles.*;
 import Attributes.ADate;
 import Utils.Data;
 import javafx.event.ActionEvent;
@@ -161,11 +158,60 @@ public class Create extends Action {
                     }
                 }
             };
+
             add.setOnAction(addE);
             root.add(add,0,4);
             stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
             stage.show();
         }
+        if(itemToCreate instanceof Webpage || itemToCreate instanceof FolderLocation){
+            TextField tag= new TextField();
+            TextField rul= new TextField();
+            Label ltag= new Label("Tag");
+            Label lurl= new Label("URL");
+            if(itemToCreate instanceof FolderLocation)
+                lurl.setText("Path");
+
+            GridPane root = new GridPane();
+            root.add(ltag,0,0);
+            root.add(tag,1,0);
+            root.add(lurl,0,1);
+            root.add(rul,1,1);
+            String filePath="src/CSVFiles/Links.csv";
+            if(itemToCreate instanceof FolderLocation)
+                filePath="src/CSVFiles/Paths.csv";
+            Button add = new Button("Add");
+            String finalFilePath = filePath;
+            EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        FileWriter writer = new FileWriter(finalFilePath,true);
+                        if(newLineExists(new File(finalFilePath))){
+                            writer.write(tag.getText()+","+rul.getText());
+                        }else {
+                            writer.write('\n' + tag.getText()+","+rul.getText());
+                        }
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Data.fillData();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            add.setOnAction(addE);
+            root.add(add,0,4);
+            stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
+            stage.show();
+
+
+        }
+
         return "Opening create menu";
     }
     @Override
