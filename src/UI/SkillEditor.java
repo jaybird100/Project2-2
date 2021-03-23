@@ -141,16 +141,24 @@ public class SkillEditor {
         clarify.setOnAction(e -> {
             Group root = new Group();
             Stage hint = new Stage();
-            hint.setTitle("???");
+            hint.setTitle("Command Help");
 
-            Label explain = new Label("Displays the entire calendar");
+            TextArea explain = new TextArea();
+            String ex="";
+            for(int i=0;i<Data.commands.size();i++){
+                ex+=Data.commands.get(i)+"\n";
+            }
+            explain.setText(ex);
             explain.setTranslateX(20);
             explain.setTranslateY(20);
+            explain.setPrefWidth(360);
+            explain.setPrefHeight(340);
+            explain.setEditable(false);
             root.getChildren().add(explain);
 
-            Scene scene = new Scene(root, 400, 100, Color.LAVENDER);
+            Scene scene = new Scene(root, 400, 400, Color.LAVENDER);
             hint.setScene(scene);
-            hint.setX(700);
+            hint.setX(400);
             hint.setY(250);
             hint.show();
         });
