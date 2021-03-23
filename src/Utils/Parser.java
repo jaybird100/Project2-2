@@ -70,7 +70,7 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<DAY>")){
                                 tempDayPlacements.add(q);
                             }
-                            if(command[q].equalsIgnoreCase("<TIME>")){
+                            if(command[q].equalsIgnoreCase("<EXTRA>")){
                                 tempExtraPlacements.add(q);
                             }
                             if(command[q].equalsIgnoreCase("<WEBTAG>")){

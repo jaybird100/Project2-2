@@ -36,9 +36,11 @@ public class SEFetchArticles {
             eachInputsLimiters.add(course);
             // <TIME> limiters
             ArrayList<String> time = new ArrayList<>();
+            time.add("<TIME>");
             eachInputsLimiters.add(time);
             // <EXTRA> limiters
             ArrayList<String> extra = new ArrayList<>();
+            extra.add("<EXTRA>");
             eachInputsLimiters.add(extra);
             // <DAY> limiters
             ArrayList<String> day = new ArrayList<>();
