@@ -102,14 +102,14 @@ public class SkillEditor {
         sp.setPrefHeight(340);
 
         TextField textField = new TextField();
-        textField.setPrefWidth(300);
+        textField.setPrefWidth(380);
         root.getChildren().add(textField);
         textField.setTranslateX(110);
         textField.setTranslateY(100);
 
         Button button = new Button("Enter");
         root.getChildren().add(button);
-        button.setTranslateX(415);
+        button.setTranslateX(495);
         button.setTranslateY(100);
         button.setOnAction(action -> {
             label.setText(Parser.parse(textField.getText()));
@@ -124,7 +124,7 @@ public class SkillEditor {
 
         Button calendarButton = new Button("Calendar");
         root.getChildren().add(calendarButton);
-        calendarButton.setTranslateX(470);
+        calendarButton.setTranslateX(553);
         calendarButton.setTranslateY(100);
         calendarButton.setOnAction(e -> {
             try {
@@ -136,7 +136,7 @@ public class SkillEditor {
 
         Button clarify = new Button("?");
         root.getChildren().add(clarify);
-        clarify.setTranslateX(550);
+        clarify.setTranslateX(636);
         clarify.setTranslateY(100);
         clarify.setOnAction(e -> {
             Group root = new Group();
@@ -207,6 +207,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
+                                objectLabel.setVisible(false);
+                                objects.setVisible(false);
+                                limiterLabel.setVisible(false);
+                                limiters.setVisible(false);
+                                addLimiter.setVisible(false);
+                                removeLimiter.setVisible(false);
                             }
                             if(skills.getValue() instanceof Create){
                                 objects.setItems(null);
@@ -218,6 +224,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
+                                objectLabel.setVisible(false);
+                                objects.setVisible(false);
+                                limiterLabel.setVisible(false);
+                                limiters.setVisible(false);
+                                addLimiter.setVisible(false);
+                                removeLimiter.setVisible(false);
                             }
                             if(skills.getValue() instanceof Set){
                                 objects.setItems(null);
@@ -229,6 +241,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
+                                objectLabel.setVisible(false);
+                                objects.setVisible(false);
+                                limiterLabel.setVisible(false);
+                                limiters.setVisible(false);
+                                addLimiter.setVisible(false);
+                                removeLimiter.setVisible(false);
                             }
                         }
                     };
@@ -399,21 +417,7 @@ public class SkillEditor {
             stage.setScene(new Scene(root, skillEditorWidth, skillEditorHeight));
             stage.show();
         });
-        Button calc = new Button("Calculator");
-        root.getChildren().add(calc);
-        calc.setTranslateX(578);
-        calc.setTranslateY(100);
-        EventHandler<ActionEvent> event7 = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Calculator calc2 = new Calculator();
-                Stage sta = new Stage();
-                calc2.start(sta);
-                sta.show();
-            }
-        };
-        calc.setOnAction(event7);
+
+
     }
-
-
 }

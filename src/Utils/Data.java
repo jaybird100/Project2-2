@@ -327,9 +327,13 @@ public class Data {
             }
         }
         public static String checkNotifications(ArrayList<String> list){
-      String returnString="";
+      String returnString="Upcoming Deadlines: "+ "\n";
         for(String n:list){
-            returnString=returnString+n+"\n";
+            String [] words=n.split(",");
+            for(int i=0; i < words.length; i++){
+                returnString=returnString+words[i]+" ";
+            }
+            returnString=returnString+"\n";
 
             }
         return returnString;

@@ -50,31 +50,38 @@ public class Create extends Action {
             root.add(lDate,0,2);
             root.add(extraText,1,3);
             root.add(lET,0,3);
+            Label error = new Label("Incomplete entry");
+            error.setVisible(false);
             Button add = new Button("Add");
             EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
-                        FileWriter writer = new FileWriter("src/CSVFiles/Lectures.csv",true);
-                        String day = new ADate(date.getText()).getDay();
-                        if(newLineExists(new File("src/CSVFiles/Lectures.csv"))){
-                            writer.write(course.getText()+","+time.getText()+","+date.getText()+","+day+","+extraText.getText());
-                        }else {
-                            writer.write('\n' + course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                    if(course.getText().length()>0&&time.getText().length()>0&&date.getText().length()>0) {
+                        try {
+                            FileWriter writer = new FileWriter("src/CSVFiles/Lectures.csv", true);
+                            String day = new ADate(date.getText()).getDay();
+                            if (newLineExists(new File("src/CSVFiles/Lectures.csv"))) {
+                                writer.write(course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                            } else {
+                                writer.write('\n' + course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                            }
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        Data.fillData();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        try {
+                            Data.fillData();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        error.setVisible(true);
                     }
                 }
             };
             add.setOnAction(addE);
             root.add(add,0,4);
+            root.add(error,0,5);
             stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
             stage.show();
         }
@@ -96,24 +103,31 @@ public class Create extends Action {
             root.add(lDate,0,2);
             root.add(notes,1,3);
             root.add(lET,0,3);
+            Label error = new Label("Incomplete entry");
+            error.setVisible(false);
             Button add = new Button("Add");
             EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
-                        FileWriter writer = new FileWriter("src/CSVFiles/Events.csv",true);
-                        if(newLineExists(new File("src/CSVFiles/Lectures.csv"))){
-                            writer.write(title.getText()+","+time.getText()+","+date.getText()+","+notes.getText());
+                    if(time.getText().length()>0&&date.getText().length()>0) {
+                        try {
+                            FileWriter writer = new FileWriter("src/CSVFiles/Events.csv", true);
+                            if (newLineExists(new File("src/CSVFiles/Lectures.csv"))) {
+                                writer.write(title.getText() + "," + time.getText() + "," + date.getText() + "," + notes.getText());
+                            }
+                            writer.write('\n' + title.getText() + "," + time.getText() + "," + date.getText() + "," + notes.getText());
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        writer.write('\n'+title.getText()+","+time.getText()+","+date.getText()+","+notes.getText());
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    }else{
+                        error.setVisible(true);
                     }
                 }
             };
             add.setOnAction(addE);
             root.add(add,0,4);
+            root.add(error,0,5);
             stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
             stage.show();
         }
@@ -123,8 +137,8 @@ public class Create extends Action {
             TextField date = new TextField();
             TextField extraText = new TextField();
             Label lCourse = new Label("Course");
-            Label lTime = new Label("Due Time");
-            Label lDate = new Label("Due Date (dd/MM/yy)");
+            Label lTime = new Label("Time");
+            Label lDate = new Label("Date (dd/MM/yy)");
             Label lET = new Label("Details");
             GridPane root = new GridPane();
             root.add(course,1,0);
@@ -135,32 +149,39 @@ public class Create extends Action {
             root.add(lDate,0,2);
             root.add(extraText,1,3);
             root.add(lET,0,3);
+            Label error = new Label("Incomplete entry");
+            error.setVisible(false);
             Button add = new Button("Add");
             EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
-                        FileWriter writer = new FileWriter("src/CSVFiles/Notifications.csv",true);
-                        String day = new ADate(date.getText()).getDay();
-                        if(newLineExists(new File("src/CSVFiles/Notifications.csv"))){
-                            writer.write(course.getText()+","+time.getText()+","+date.getText()+","+day+","+extraText.getText());
-                        }else {
-                            writer.write('\n' + course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                    if(course.getText().length()>0&&time.getText().length()>0&&date.getText().length()>0&&extraText.getText().length()>0) {
+                        try {
+                            FileWriter writer = new FileWriter("src/CSVFiles/Notifications.csv", true);
+                            String day = new ADate(date.getText()).getDay();
+                            if (newLineExists(new File("src/CSVFiles/Notifications.csv"))) {
+                                writer.write(course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                            } else {
+                                writer.write('\n' + course.getText() + "," + time.getText() + "," + date.getText() + "," + day + "," + extraText.getText());
+                            }
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        Data.fillData();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        try {
+                            Data.fillData();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        error.setVisible(true);
                     }
                 }
             };
 
             add.setOnAction(addE);
             root.add(add,0,4);
+            root.add(error,0,5);
             stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
             stage.show();
         }
@@ -182,36 +203,86 @@ public class Create extends Action {
                 filePath="src/CSVFiles/Paths.csv";
             Button add = new Button("Add");
             String finalFilePath = filePath;
+            Label error = new Label("Incomplete entry");
+            error.setVisible(false);
             EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
-                        FileWriter writer = new FileWriter(finalFilePath,true);
-                        if(newLineExists(new File(finalFilePath))){
-                            writer.write(tag.getText()+","+rul.getText());
-                        }else {
-                            writer.write('\n' + tag.getText()+","+rul.getText());
+                    if(tag.getText().length()>0&&rul.getText().length()>0) {
+                        try {
+                            FileWriter writer = new FileWriter(finalFilePath, true);
+                            if (newLineExists(new File(finalFilePath))) {
+                                writer.write(tag.getText() + "," + rul.getText());
+                            } else {
+                                writer.write('\n' + tag.getText() + "," + rul.getText());
+                            }
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        try {
+                            Data.fillData();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        error.setVisible(true);
                     }
-                    try {
-                        Data.fillData();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                }
+            };
+            add.setOnAction(addE);
+            root.add(add,0,4);
+            root.add(error,0,5);
+            stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
+            stage.show();
+
+
+        }
+        if(itemToCreate instanceof Medication){
+            TextField medication = new TextField();
+            TextField illness = new TextField();
+            Label lMed = new Label("Medication");
+            Label lIll = new Label("Illness");
+            GridPane root = new GridPane();
+            root.add(medication,1,0);
+            root.add(lMed,0,0);
+            root.add(illness,1,1);
+            root.add(lIll,0,1);
+            Label error = new Label("Incomplete entry");
+            error.setVisible(false);
+            Button add = new Button("Add");
+            EventHandler<ActionEvent> addE = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(medication.getText().length()>0&&illness.getText().length()>0) {
+                        try {
+                            FileWriter writer = new FileWriter("src/CSVFiles/Notifications.csv", true);
+                            if (newLineExists(new File("src/CSVFiles/Notifications.csv"))) {
+                                writer.write(medication.getText() + "," + illness.getText());
+                            } else {
+                                writer.write('\n' +medication.getText() + "," + illness.getText());
+                            }
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            Data.fillData();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        error.setVisible(true);
                     }
                 }
             };
 
             add.setOnAction(addE);
             root.add(add,0,4);
+            root.add(error,0,5);
             stage.setScene(new Scene(root, createMenuWidth, createMenuHeight));
             stage.show();
-
-
         }
-
         return "Opening create menu";
     }
     @Override
