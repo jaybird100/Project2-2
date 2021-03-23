@@ -190,6 +190,7 @@ public class SkillEditor{
         root.add(generate,0,8);
         stage.setTitle("Skill Editor");
         stage.setScene(new Scene(root, skillEditorWidth, skillEditorHeight));
+        stage.getScene().getStylesheets().add("UI/CSS/theme.css");
         stage.show();
     }
 }

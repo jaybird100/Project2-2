@@ -1,13 +1,13 @@
  .arrow-button{
         -fx-shape: "M5.975 17.504l14.287.001-6.367 6.366L16.021 26l10.004-10.003L16.029 6l-2.128 2.129 6.367 6.366H5.977z";
-        -fx-background-color: black;
+        -fx-background-color: -primary;
     }
     .arrow-button:hover{
-        -fx-translate-x: 10px;
-        -fx-background-color: #696969;
+        -fx-translate-x: 5px;
+        -fx-background-color: -primary_lighter;
     }
     .arrow-button:pressed{
-        -fx-background-color: #808080;
+        -fx-background-color: -primary_darker;
     }
     .hello-size{
         -fx-font-size: 43px;

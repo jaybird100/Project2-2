@@ -42,6 +42,7 @@ public class Calendar extends Page {
 
     public Calendar() throws IOException {
         root = new Group();
+        root.getStylesheets().add("UI/CSS/theme.css");
         date = LocalDate.now(ZoneId.of("Europe/Amsterdam"));
         dates = new Date[7];
         dateLabels = new Label[7];
@@ -225,9 +226,9 @@ public class Calendar extends Page {
             rectangle.setOnMouseClicked(event -> {
                 Group smallRoot = new Group();
                 Scene lectures = new Scene(smallRoot, 500, 30*((dates[finalI].getLectures().size())+2), Color.LAVENDER);
+                lectures.getStylesheets().add("UI/CSS/theme.css");
                 for(int j=0; j<dates[finalI].getLectures().size(); j++) {
                     Label lectureDetails = new Label("You have " + dates[finalI].getLectures().get(j)[0] + " on " + dates[finalI].getLectures().get(j)[3] + " at " + dates[finalI].getLectures().get(j)[1]);
-                    lectureDetails.setFont(Font. font("Verdana"));
                     smallRoot.getChildren().add(lectureDetails);
                     lectureDetails.setLayoutX(5);
                     lectureDetails.setLayoutY(10 + j*20);

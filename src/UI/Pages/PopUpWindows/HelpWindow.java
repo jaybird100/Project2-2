@@ -11,13 +11,13 @@ public class HelpWindow {
         Group root = new Group();
         Stage hint = new Stage();
         hint.setTitle("???");
-
         Label explain = new Label("Displays the entire calendar");
         explain.setTranslateX(20);
         explain.setTranslateY(20);
         root.getChildren().add(explain);
 
-        Scene scene = new Scene(root, 200, 100, Color.LAVENDER);
+        Scene scene = new Scene(root, 200, 100);
+        scene.getStylesheets().add("UI/CSS/theme.css");
         hint.setScene(scene);
         hint.setX(700);
         hint.setY(250);

@@ -26,7 +26,7 @@ public class PageController {
     final int windowHeight;
     HashMap<String, Page> controllers = new HashMap<>();
 
-    public static PageController   createInstance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
+    public static PageController createInstance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
         instance = new PageController(primaryStage, windowWidth, windowHeight);
         return instance;
     }
