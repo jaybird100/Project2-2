@@ -118,6 +118,8 @@ public class Data {
         correspondingAtt.add(new Path());
         codes.add("<FOLDERTAG>");
         correspondingAtt.add(new FolderTag());
+        codes.add("<DEADLINE>");
+        correspondingAtt.add(new ADeadline());
 
         //read the lectures csv and turn all lectures to Lecture objects
         BufferedReader reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH + "Lectures.csv"));
@@ -175,8 +177,12 @@ public class Data {
             ExtraText medTitle = new ExtraText(data[0]);
             //System.out.println(data[0]);
             ExtraText courseTitle = new ExtraText(data[1]);
-            System.out.println(data[1]);
-            e = new Medication(medTitle, courseTitle);
+            //System.out.println(data[1]);
+            ADeadline medDeadline = new ADeadline(data[2]);
+            System.out.println(data[2]);
+            System.out.println(medDeadline);
+
+            e = new Medication(medTitle, courseTitle, medDeadline);
             medications.add(e);
             row = reader.readLine();
         }
