@@ -186,8 +186,8 @@ public class Calendar {
         Button reset = new Button("RESET");
         reset.setTextAlignment(TextAlignment.CENTER);
         reset.setTranslateX(535);
-        reset.setTranslateY(37);
-        reset.setPrefSize(50, 10);
+        reset.setTranslateY(30);
+        reset.setPrefSize(100, 10);
         root.getChildren().add(reset);
         reset.setOnAction(e -> {
             week.setText("Week " + (weekCurrent));
@@ -214,8 +214,10 @@ public class Calendar {
                     }} catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                dateLabels[i].setText(formatter.format(dates[i].getDate()));
-                lectureLabels[i].setText(Integer.toString(dates[i].getLectures().size()));
+                if(i!=7) {
+                    dateLabels[i].setText(formatter.format(dates[i].getDate()));
+                    lectureLabels[i].setText(Integer.toString(dates[i].getLectures().size()));
+                }
             }
         });
 
