@@ -11,9 +11,9 @@ The items that can be fetched are lectures, events and notifications.
 The lists of items are stored in .csv files.
 
 A "lecture" item stores 4 attributes; the course, the date, the time and any extra text. 
-The skill "lectures on <DAY>" fetches all of the lectures that fall on the next "<DAY>", the <DAY> depending on the user's input. So the input "lectures on Monday" returns all lectures that happen next Monday.
-The skill "all <COURSE> lectures" fetches all of the lectures for that course.
-Limiters can be doubled up, the skill "<COURSE> lectures on <DATE>" fetches all lectures in that course on that date.
+The skill "lectures on < DAY >" fetches all of the lectures that fall on the next "< DAY >", the < DAY > depending on the user's input. So the input "lectures on Monday" returns all lectures that happen next Monday.
+The skill "all < COURSE > lectures" fetches all of the lectures for that course.
+Limiters can be doubled up, the skill "< COURSE > lectures on < DATE >" fetches all lectures in that course on that date.
 For example if a user inputs "MM lectures next Monday", it will return all Mathematical Modelling lectures on the next Monday.
 
 #### Add
