@@ -179,12 +179,16 @@ public class Fetch extends Action {
             if(!allAtt) {
                 for (Integer i : attributeIDs) {
                     if(i<a.attributes.size()) {
-                        toAdd += a.attributes.get(i).toString() + " ";
+                        if(!a.attributes.get(i).toBeInputted) {
+                            toAdd += a.attributes.get(i).toString() + " ";
+                        }
                     }
                 }
             }else{
                 for(Attribute at:a.attributes){
-                    toAdd+=at.toString()+" ";
+                    if(!at.toBeInputted) {
+                        toAdd += at.toString() + " ";
+                    }
                 }
             }
             toReturn.add(toAdd);
