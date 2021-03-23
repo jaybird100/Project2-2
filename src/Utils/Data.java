@@ -23,9 +23,7 @@ public class Data {
     public static SEFetch seFetch = new SEFetch();
     public static SEOpen seOpen = new SEOpen();
 
-
     public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-
 
     // <DATE> = Inputted ADate, <DAY> = Inputted day, Date<TODAY> = today, <DATE><TODAY+<NUM>> = in <NUM> days, NEXT<DAY> = next <DAY>, <NUM> = number
     // Date<YESTERDAY> = yesterday, Date<TOMORROW> = tomorrow, <COURSE> = inputted course
@@ -41,6 +39,7 @@ public class Data {
     public static ArrayList<Lecture> lectures = new ArrayList<Lecture>();//lectures from a stored file
     public static ArrayList<Event> events= new ArrayList<>();
     public static ArrayList<Webpage> webpages= new ArrayList<>();
+    public static ArrayList<Medication> medications = new ArrayList<>();
 
     public static ArrayList<Notification> notifications = new ArrayList<>();
     public static ArrayList<FolderLocation> folderLocations=new ArrayList<>();
@@ -63,6 +62,7 @@ public class Data {
         lectures = new ArrayList<>();
         events = new ArrayList<>();
         webpages = new ArrayList<>();
+        medications = new ArrayList<>();
         notifications = new ArrayList<>();
         commands = new ArrayList<>();
         toCall = new ArrayList<>();
@@ -74,6 +74,7 @@ public class Data {
         allArticle.add(new Lecture());
         allArticle.add(new Timer());
         allArticle.add(new Webpage());
+        allArticle.add(new Medication());
         allArticle.add(new Notification());
         allArticle.add(new FolderLocation());
 
@@ -82,7 +83,6 @@ public class Data {
         allSkills.add(new Open());
         allSkills.add(new Create());
         allSkills.add(new Set());
-
 
         //fill in the codes we are looking for & corresponding attributes
         codes.add("<DATE>");
@@ -125,7 +125,7 @@ public class Data {
         while (row != null) {
             //split each line by ,
             String[] data = row.split(",");
-            //skip the first line in this file since that is just a guide
+            //skip the first line in this file since that is just a guideD
             if (!data[0].equals("Course")) {
                 //otherwise create a Lecture based on the Course, Time, Date, and possible Extra Text in the line
                 Lecture lecture;
@@ -163,6 +163,20 @@ public class Data {
             events.add(e);
             row = reader.readLine();
         }
+
+        reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH + "Meds.csv"));
+        row = reader.readLine();
+        while (row != null) {
+            String[] data = row.split(",");
+            System.out.println(Arrays.toString(data));
+            Medication e;
+            ExtraText medTitle = new ExtraText(data[0]);
+            ExtraText courseTitle = new ExtraText(data[1]);
+            e = new Medication(medTitle, courseTitle);
+            medications.add(e);
+            row = reader.readLine();
+        }
+
         reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH + "Links.csv"));
         row = reader.readLine();
         while (row != null) {

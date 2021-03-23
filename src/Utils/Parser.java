@@ -84,9 +84,11 @@ public class Parser {
                                 tempPathPlacement.add(q);
                             }
                             if(command[q].equalsIgnoreCase("<FOLDERTAG>")){
+                               tempFolderTagPlacement.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase("<EXTRA>")){
                                 tempFolderTagPlacement.add(q);
                             }
-
 
                             codeIDs.add(q);
                         }

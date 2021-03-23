@@ -1,9 +1,6 @@
 package Actions;
 
-import Articles.Event;
-import Articles.Lecture;
-import Articles.Article;
-import Articles.Notification;
+import Articles.*;
 import Attributes.Attribute;
 import Utils.Data;
 
@@ -50,6 +47,7 @@ public class Fetch extends Action {
     public String action(){
         ArrayList<Article> items = new ArrayList<>();
         if(type instanceof Lecture) {
+            System.out.println("in lecture");
             ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
             for (Lecture l : Data.lectures) {
                 if(noLimit){
@@ -142,6 +140,39 @@ public class Fetch extends Action {
                 }
             }
         }
+        if(type instanceof Medication) {
+            System.out.println("in medication");
+            ArrayList<ArrayList<Boolean>> checklist=new ArrayList<>();
+            for(Medication n:Data.medications){
+                if(noLimit){
+                    items.add(n);
+                } else{
+                    ArrayList<Boolean> temp=new ArrayList<>();
+                    for(Attribute limit:limiters){
+                        boolean t=false;
+                        for(Attribute a:n.attributes){
+                            if(a.equalsTo(limit)){
+                                t=true;
+                            }
+                        }
+                        temp.add(t);
+                    }
+                    checklist.add(temp);
+                }
+            }
+            for(int i=0;i<checklist.size();i++){
+                boolean allTrue=true;
+                for(boolean b:checklist.get(i)){
+                    if(!b){
+                        allTrue=false;
+                    }
+                }
+                if(allTrue){
+                    items.add(Data.medications.get(i));
+                }
+            }
+        }
+
         ArrayList<String> toReturn = new ArrayList<>();
         for(Article a:items){
             String toAdd = "";

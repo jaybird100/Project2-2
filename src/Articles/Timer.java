@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Timer extends Article{
+public class Timer extends Article {
    public Time tf;
     public int hr,min,sec;
     public Timer(){super(new ArrayList<>());}
