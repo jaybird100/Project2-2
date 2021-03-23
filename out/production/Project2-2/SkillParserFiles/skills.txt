@@ -92,3 +92,27 @@ open path <PATH>
 Open
 FolderLocation
 -
+all medication
+Fetch
+Medication
+all
+all
+-
+all <EXTRA> medication
+Fetch
+Medication
+<EXTRA>
+all
+-
+all medication against <EXTRA>
+Fetch
+Medication
+<EXTRA>
+all
+-
+all <EXTRA> medication from <EXTRA>
+Fetch
+Medication
+<EXTRA> && <EXTRA>
+all
+-
