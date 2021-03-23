@@ -265,28 +265,12 @@ public class Parser {
 
         }else if(Data.toCall.get(commandID) instanceof Create){
             String word = words[articlePlacement.get(0)];
-            if(word.equalsIgnoreCase("Lecture")){
-                Create c = new Create(new Lecture());
-                return c.action();
+            for(Article a:Data.allArticle){
+                if(word.equalsIgnoreCase(a.toString())){
+                    Create c = new Create(a);
+                    return c.action();
+                }
             }
-            if(word.equalsIgnoreCase("Event")){
-                Create c = new Create(new Event());
-                return c.action();
-            }
-            if(word.equalsIgnoreCase("Notification")){
-                Create n=new Create(new Notification());
-                return n.action();
-            }
-            if(word.equalsIgnoreCase("Webpage")){
-                Create n=new Create(new Webpage());
-                return n.action();
-            }
-            if(word.equalsIgnoreCase("FolderLocation")){
-                Create n=new Create(new FolderLocation());
-                return n.action();
-            }
-
-
         }else if(Data.toCall.get(commandID) instanceof Set){
             Article theObject = Data.objectsFromTxt.get(commandID);
             if(theObject instanceof Timer &&timePlacement.size()==1){
