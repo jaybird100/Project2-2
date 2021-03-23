@@ -1,11 +1,8 @@
 package Utils;
 
-import Actions.Create;
-import Actions.Open;
-import Actions.Set;
+import Actions.*;
 import Articles.*;
 import Attributes.*;
-import Actions.Fetch;
 import Attributes.Attribute;
 
 import java.io.IOException;
@@ -17,6 +14,11 @@ import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
+        Calc calc = new Calc(input);
+        calc.action();
+        if(calc.isCalc){
+            return calc.action();
+        }
         //split entry by " "
         String[] words = input.split(" ");
         int commandID=-1;
