@@ -207,6 +207,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
+                                objectLabel.setVisible(false);
+                                objects.setVisible(false);
+                                limiterLabel.setVisible(false);
+                                limiters.setVisible(false);
+                                addLimiter.setVisible(false);
+                                removeLimiter.setVisible(false);
                             }
                             if(skills.getValue() instanceof Create){
                                 objects.setItems(null);
@@ -218,6 +224,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
+                                objectLabel.setVisible(false);
+                                objects.setVisible(false);
+                                limiterLabel.setVisible(false);
+                                limiters.setVisible(false);
+                                addLimiter.setVisible(false);
+                                removeLimiter.setVisible(false);
                             }
                             if(skills.getValue() instanceof Set){
                                 objects.setItems(null);
@@ -229,6 +241,12 @@ public class SkillEditor {
                                 inputLabel.setVisible(true);
                                 interpret.setVisible(true);
                                 enterInput.setVisible(true);
+                                objectLabel.setVisible(false);
+                                objects.setVisible(false);
+                                limiterLabel.setVisible(false);
+                                limiters.setVisible(false);
+                                addLimiter.setVisible(false);
+                                removeLimiter.setVisible(false);
                             }
                         }
                     };
