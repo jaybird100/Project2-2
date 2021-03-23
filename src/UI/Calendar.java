@@ -186,7 +186,7 @@ public class Calendar {
         Button reset = new Button("RESET");
         reset.setTextAlignment(TextAlignment.CENTER);
         reset.setTranslateX(535);
-        reset.setTranslateY(30);
+        reset.setTranslateY(20);
         reset.setPrefSize(100, 10);
         root.getChildren().add(reset);
         reset.setOnAction(e -> {
@@ -225,7 +225,7 @@ public class Calendar {
         backButton.setTextAlignment(TextAlignment.CENTER);
         backButton.setTranslateX(20);
         backButton.setTranslateY(20);
-        backButton.setPrefSize(50, 10);
+        backButton.setPrefSize(100, 10);
         root.getChildren().add(backButton);
         backButton.setOnAction(e -> {
             root.getChildren().clear();
