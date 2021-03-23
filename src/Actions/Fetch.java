@@ -141,14 +141,16 @@ public class Fetch extends Action {
             }
         }
         if(type instanceof Medication) {
-            System.out.println("in medication");
+            //System.out.println("in medication");
             ArrayList<ArrayList<Boolean>> checklist=new ArrayList<>();
             for(Medication n:Data.medications){
+                //System.out.println(n);
                 if(noLimit){
                     items.add(n);
                 } else{
                     ArrayList<Boolean> temp=new ArrayList<>();
-                    for(Attribute limit:limiters){
+                    for(Attribute limit:limiters) {
+                        //System.out.println(limit);
                         boolean t=false;
                         for(Attribute a:n.attributes){
                             if(a.equalsTo(limit)){

@@ -70,9 +70,6 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<DAY>")){
                                 tempDayPlacements.add(q);
                             }
-                            if(command[q].equalsIgnoreCase("<TIME>")){
-                                tempExtraPlacements.add(q);
-                            }
                             if(command[q].equalsIgnoreCase("<WEBTAG>")){
                                 tempWebPageTagPlacement.add(q);
                             }
@@ -89,7 +86,7 @@ public class Parser {
                                tempFolderTagPlacement.add(q);
                             }
                             if(command[q].equalsIgnoreCase("<EXTRA>")){
-                                tempFolderTagPlacement.add(q);
+                                tempExtraPlacements.add(q);
                             }
 
                             codeIDs.add(q);
@@ -219,6 +216,14 @@ public class Parser {
                         }
                         if(theLimiters.get(i) instanceof ExtraText){
                             if(theLimiters.get(i).toBeInputted){
+                                /*System.out.println(theLimiters.get(i));
+                                for (String current_srt : words)
+                                    System.out.println(current_srt);
+                                System.out.println(extraCounter);
+                                for (Integer current_int: extraPlacement)
+                                    System.out.println(current_int);
+                                //ExtraText e = new ExtraText("Acne");
+                                */
                                 ExtraText e = new ExtraText(words[extraPlacement.get(extraCounter)]);
                                 extraCounter++;
                                 theLimiters.remove(i);
