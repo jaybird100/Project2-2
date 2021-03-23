@@ -1,9 +1,9 @@
 package UI;
 
-import CFG.FileParser;
-import UI.Calendar.Calendar;
-import UI.MainPage.Message;
-import UI.Temp.Temp;
+import UI.Pages.Calendar.Calendar;
+import UI.Pages.MainPage.Message;
+import UI.Pages.Page;
+import UI.Pages.Temp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -77,13 +77,13 @@ public class PageController {
         String path ="";
         switch(scene){
             case "frontpage":
-                path = "/UI/FrontPage/FrontPage.fxml";
+                path = "/UI/FXML/FrontPage.fxml";
                 break;
             case "mainpage":
-                path = "/UI/MainPage/MainPage.fxml";
+                path = "/UI/FXML/MainPage.fxml";
                 break;
             case "skillcreation":
-                path = "/UI/SkillCreationPage/skillCreationPage.fxml";
+                path = "/UI/FXML/skillCreationPage.fxml";
                 break;
         }
         assert !path.equals("");

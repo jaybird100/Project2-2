@@ -1,8 +1,7 @@
-package UI.Temp;
+package UI.Pages;
 
-import UI.MainPage.Message;
-import UI.MainPage.MessagingBoard;
-import UI.Page;
+import UI.Pages.MainPage.Message;
+import UI.Pages.MainPage.MessagingBoard;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -23,7 +22,7 @@ public class Temp extends Page {
 
     @Override
     public void init(){
-        scene.getStylesheets().addAll("UI/theme.css", "UI/MainPage/mainPage.css");
+        scene.getStylesheets().addAll("UI/CSS/theme.css", "UI/CSS/mainPage.css");
         scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
             @Override
             public void handle(KeyEvent event) {

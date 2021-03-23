@@ -1,7 +1,5 @@
-package UI.PopUpWindows;
+package UI.Pages.PopUpWindows;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class Calculator {

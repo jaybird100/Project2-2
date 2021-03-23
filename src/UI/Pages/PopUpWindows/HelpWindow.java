@@ -1,4 +1,4 @@
-package UI.PopUpWindows;
+package UI.Pages.PopUpWindows;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;

@@ -1,6 +1,6 @@
-package UI.Calendar;
+package UI.Pages.Calendar;
 
-import UI.Page;
+import UI.Pages.Page;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -144,7 +144,7 @@ public class Calendar extends Page {
 
     private void SetButtons(){
         Button previous = new Button();
-        previous.setGraphic(new ImageView(new Image("Skins/Previous.jpg", 25, 25, true, true)));
+        previous.setGraphic(new ImageView(new Image("UI/Resources/Previous.jpg", 25, 25, true, true)));
         previous.setTranslateX(20);
         previous.setTranslateY(63);
         previous.setPrefSize(25, 25);
@@ -163,7 +163,7 @@ public class Calendar extends Page {
         root.getChildren().add(previous);
 
         Button next = new Button();
-        next.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
+        next.setGraphic(new ImageView(new Image("UI/Resources/Next.jpg", 25, 25, true, true)));
         next.setTranslateX(545);
         next.setTranslateY(63);
         next.setPrefSize(25, 25);

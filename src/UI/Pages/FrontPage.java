@@ -1,10 +1,8 @@
-package UI.FrontPage;
+package UI.Pages;
 
-import UI.Page;
 import UI.PageController;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;

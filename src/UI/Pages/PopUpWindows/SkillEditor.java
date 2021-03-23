@@ -1,25 +1,21 @@
-package UI.PopUpWindows;
+package UI.Pages.PopUpWindows;
 
+import Actions.Action;
 import Actions.Create;
 import Actions.Fetch;
 import Actions.Open;
-import Calc.Calculator;
 import Inputs.SEFetchArticles;
-import Actions.Action;
-import UI.Calendar.Calendar;
-import UI.Page;
 import Utils.Data;
-import Utils.Parser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileWriter;
@@ -195,9 +191,5 @@ public class SkillEditor{
         stage.setTitle("Skill Editor");
         stage.setScene(new Scene(root, skillEditorWidth, skillEditorHeight));
         stage.show();
-    }
-    public void calculator(){
-        Button calc = new Button("Calculator");
-
     }
 }

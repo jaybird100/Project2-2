@@ -1,12 +1,12 @@
-package UI.MainPage;
+package UI.Pages.MainPage;
 
 import CFG.InputParser;
 import CFG.Match;
-import UI.Page;
 import UI.PageController;
-import UI.PopUpWindows.Calculator;
-import UI.PopUpWindows.HelpWindow;
-import UI.PopUpWindows.SkillEditor;
+import UI.Pages.Page;
+import UI.Pages.PopUpWindows.Calculator;
+import UI.Pages.PopUpWindows.HelpWindow;
+import UI.Pages.PopUpWindows.SkillEditor;
 import Utils.Parser;
 import javafx.event.Event;
 import javafx.fxml.FXML;

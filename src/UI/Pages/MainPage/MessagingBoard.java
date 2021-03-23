@@ -1,4 +1,4 @@
-package UI.MainPage;
+package UI.Pages.MainPage;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;

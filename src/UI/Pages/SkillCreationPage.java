@@ -1,7 +1,6 @@
-package UI.SkillCreationPage;
+package UI.Pages;
 
 import CFG.FileParser;
-import UI.Page;
 import UI.PageController;
 import javafx.event.Event;
 import javafx.fxml.FXML;

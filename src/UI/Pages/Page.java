@@ -1,4 +1,4 @@
-package UI;
+package UI.Pages;
 
 import javafx.scene.Scene;
 

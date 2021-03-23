@@ -1,7 +1,7 @@
 package CFG;
 
 import CFG.v2.Rulev2;
-import UI.SkillCreationPage.SkillCreationPage;
+import UI.Pages.SkillCreationPage;
 
 import java.io.File;
 import java.util.ArrayList;

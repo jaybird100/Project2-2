@@ -1,4 +1,4 @@
-package UI.MainPage;
+package UI.Pages.MainPage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
