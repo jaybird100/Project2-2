@@ -5,8 +5,7 @@ import Articles.*;
 import Attributes.*;
 import Attributes.Attribute;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,7 +34,6 @@ public class Parser {
         ArrayList<Integer> pathPlacement = new ArrayList<>();
         ArrayList<Integer> folderTagPlacement = new ArrayList<>();
         ArrayList<Integer> articlePlacement = new ArrayList<>();
-        System.out.println("W: "+Arrays.deepToString(words));
         for(int i = 0; i< Data.commands.size(); i++){
             ArrayList<Integer> tempDatePlacements= new ArrayList<>();
             ArrayList<Integer> tempCoursePlacements= new ArrayList<>();
@@ -53,7 +51,6 @@ public class Parser {
             //split the current query
             String[] command = Data.commands.get(i).split(" ");
             if(words.length==command.length) {
-                System.out.println(Arrays.deepToString(command));
                 for (int q = 0; q < command.length; q++) {
                     for (int a = 0; a < Data.codes.size(); a++) {
                         if (command[q].equalsIgnoreCase(Data.codes.get(a))) {
@@ -100,7 +97,6 @@ public class Parser {
                 }
                 boolean everyWordMatch = true;
                 for (int v = 0; v < command.length; v++) {
-                    System.out.println("Comm" +command[v]);
                     if (!codeIDs.contains(v)) {
                         //if the index v in command is not a code, it should match the index v in the query(words),
                         // otherwise, every word does not match
@@ -141,7 +137,6 @@ public class Parser {
         if(commandID==-1){
             return "No command recognized";
         }
-        System.out.println(Data.toCall.size());
         if(Data.toCall.get(commandID) instanceof Fetch){
             //get the article associated with the matched query(referenced by commandID)
             Article theObject = Data.objectsFromTxt.get(commandID);
@@ -223,14 +218,6 @@ public class Parser {
                         }
                         if(theLimiters.get(i) instanceof ExtraText){
                             if(theLimiters.get(i).toBeInputted){
-                                /*System.out.println(theLimiters.get(i));
-                                for (String current_srt : words)
-                                    System.out.println(current_srt);
-                                System.out.println(extraCounter);
-                                for (Integer current_int: extraPlacement)
-                                    System.out.println(current_int);
-                                //ExtraText e = new ExtraText("Acne");
-                                */
                                 ExtraText e = new ExtraText(words[extraPlacement.get(extraCounter)]);
                                 extraCounter++;
                                 theLimiters.remove(i);
@@ -239,13 +226,6 @@ public class Parser {
                         }
                         if(theLimiters.get(i) instanceof ADeadline){
                             if(theLimiters.get(i).toBeInputted){
-                                System.out.println(theLimiters.get(i));
-                                for (String current_srt : words)
-                                    System.out.println(current_srt);
-                                System.out.println(deadlineCounter);
-                                for (Integer current_int: deadlinePlacement)
-                                    System.out.println(current_int);
-
                                 ADeadline e = new ADeadline(words[deadlinePlacement.get(deadlineCounter)]);
                                 deadlineCounter++;
                                 theLimiters.remove(i);
@@ -262,7 +242,6 @@ public class Parser {
         }else if(Data.toCall.get(commandID) instanceof Open){
             Article theObject = Data.objectsFromTxt.get(commandID);
             if(theObject instanceof Webpage){
-                System.out.println("WEBPAGE: "+webPageTagPlacement.size()+" URL: "+urlPlacenment.size());
                 if(webPageTagPlacement.size()==1) {
                     theObject = new Webpage(new WebpageTag(words[webPageTagPlacement.get(0)]));
                 }
@@ -272,7 +251,6 @@ public class Parser {
             }
 
             else if(theObject instanceof FolderLocation){
-                System.out.println("FOLDERLOCATION: "+folderTagPlacement.size()+" PATH: "+pathPlacement.size());
                 if(folderTagPlacement.size()==1) {
                     theObject = new FolderLocation(new FolderTag(words[folderTagPlacement.get(0)]));
                 }

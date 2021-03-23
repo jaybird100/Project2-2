@@ -6,7 +6,6 @@ import Utils.Variables;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -15,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Set extends Action{
     Article type;
-    int ti=0;
     public Set(){}
     public Set(Article obj){
         type=obj;

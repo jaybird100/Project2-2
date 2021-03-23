@@ -7,7 +7,6 @@ public class ExtraText extends Attribute {
         super(false);
         extraText=e;
         extraCode="";
-        System.out.println(e);
         String[] extraWords = extraText.split(" ");
         if(extraWords.length>1) {
             for (String s : extraWords) {

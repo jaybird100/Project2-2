@@ -6,7 +6,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class ADeadline extends Attribute {
@@ -32,10 +31,7 @@ public class ADeadline extends Attribute {
     public ADeadline(){
         super(true);
     }
-    public ADeadline(int id){
-        super(true);
-        this.id=id;
-    }
+
     public String getDay(){
         DayOfWeek day = date.getDayOfWeek();
         return day.getDisplayName(TextStyle.FULL,new Locale("en"));

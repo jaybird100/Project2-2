@@ -1,6 +1,5 @@
 package Inputs;
 
-import Actions.Action;
 import Actions.Open;
 import Attributes.URLAtt;
 import Attributes.WebpageTag;

@@ -1,6 +1,5 @@
 package UI;
 
-import Actions.Create;
 import Utils.Data;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -34,17 +33,11 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException {
         //premptive preparation of data for query answering
         Data.fillData();
-        System.out.println(Arrays.deepToString(Data.commands.toArray()));
-        System.out.println(Arrays.deepToString(Data.toCall.toArray()));
-        System.out.println(Arrays.deepToString(Data.objectsFromTxt.toArray()));
-        System.out.println(Arrays.deepToString(Data.limiters.toArray()));
-        System.out.println(Arrays.deepToString(Data.attributeIndexes.toArray()));
-        //System.out.println(Arrays.deepToString(Data.lectures.toArray()));
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         root = new Group();
         primaryStage.setTitle("Virtual Assistant");
 
@@ -75,11 +68,7 @@ public class Main extends Application {
     public static boolean doesTextExist(File file){
         try {
             Scanner scanner = new Scanner(file);
-            if(scanner.hasNext()){
-                return true;
-            }else{
-                return false;
-            }
+            return scanner.hasNext();
         } catch(FileNotFoundException e) {
             System.out.println("No file exists");
             return false;
@@ -146,8 +135,7 @@ public class Main extends Application {
         }else{
             try {
                 Scanner scanner = new Scanner(new File("name.txt"));
-                String name = scanner.nextLine();
-                username=name;
+                username= scanner.nextLine();
                 primaryStage.show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

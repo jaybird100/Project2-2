@@ -7,7 +7,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Date {
@@ -27,7 +26,7 @@ public class Date {
     }
 
     private void setLectures() throws IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         File file = new File(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv");
         Scanner sc = new Scanner(file);
         String line = "";

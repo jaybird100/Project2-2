@@ -2,7 +2,6 @@ package Articles;
 
 import Attributes.*;
 import java.util.ArrayList;
-import java.time.*;
 
 public class Medication extends Article {
     ExtraText medicationName;

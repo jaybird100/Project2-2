@@ -2,7 +2,6 @@ package Articles;
 
 import Attributes.Attribute;
 import Attributes.FolderTag;
-import Attributes.WebpageTag;
 import Utils.Data;
 
 import java.util.ArrayList;

@@ -1,8 +1,6 @@
 package Actions;
 import Calc.Calculator_command;
 
-import java.util.regex.Pattern;
-
 public class Calc extends Action{
     public boolean isCalc=true;
     String input;
@@ -26,7 +24,7 @@ public class Calc extends Action{
         for(int i = s.length()-1;i>0;i--){
             if(!new Character(s.charAt(i)).equals(' ')&&!new Character(s.charAt(i-1)).equals(' ')){
                 if(!Character.isDigit(s.charAt(i))||(Character.isDigit(s.charAt(i))&&!Character.isDigit(s.charAt(i-1)))){
-                    if(!new Character(s.charAt(i-1)).equals(" ")){
+                    if(!new Character(s.charAt(i-1)).equals(' ')){
                         String one = s.substring(0,i);
                         String two = s.substring(i);
                         s= one + " " + two;

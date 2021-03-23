@@ -7,24 +7,6 @@ import Utils.Data;
 import java.util.ArrayList;
 
 public class Fetch extends Action {
-    public void setType(Article type) {
-        this.type = type;
-    }
-
-    public void setLimiter(Attribute limiter) {
-        this.limiters.add(limiter);
-        noLimit=false;
-    }
-
-    public void setAttributeIDs(ArrayList<Integer> attributeIDs) {
-        this.attributeIDs = attributeIDs;
-        allAtt=false;
-    }
-
-    public void setLimiters(ArrayList<Attribute> limiters) {
-        this.limiters = limiters;
-    }
-
     Article type;
     ArrayList<Attribute> limiters = new ArrayList<>();
     boolean noLimit=true;
@@ -47,7 +29,6 @@ public class Fetch extends Action {
     public String action(){
         ArrayList<Article> items = new ArrayList<>();
         if(type instanceof Lecture) {
-            System.out.println("in lecture");
             ArrayList<ArrayList<Boolean>> checklist = new ArrayList<>();
             for (Lecture l : Data.lectures) {
                 if(noLimit){
@@ -69,8 +50,9 @@ public class Fetch extends Action {
             for(int i=0;i<checklist.size();i++){
                 boolean allTrue=true;
                 for(boolean b:checklist.get(i)){
-                    if(!b){
-                        allTrue=false;
+                    if (!b) {
+                        allTrue = false;
+                        break;
                     }
                 }
                 if(allTrue){
@@ -100,8 +82,9 @@ public class Fetch extends Action {
             for(int i=0;i<checklist.size();i++){
                 boolean allTrue=true;
                 for(boolean b:checklist.get(i)){
-                    if(!b){
-                        allTrue=false;
+                    if (!b) {
+                        allTrue = false;
+                        break;
                     }
                 }
                 if(allTrue){
@@ -131,8 +114,9 @@ public class Fetch extends Action {
             for(int i=0;i<checklist.size();i++){
                 boolean allTrue=true;
                 for(boolean b:checklist.get(i)){
-                    if(!b){
-                        allTrue=false;
+                    if (!b) {
+                        allTrue = false;
+                        break;
                     }
                 }
                 if(allTrue){
@@ -141,16 +125,13 @@ public class Fetch extends Action {
             }
         }
         if(type instanceof Medication) {
-            //System.out.println("in medication");
             ArrayList<ArrayList<Boolean>> checklist=new ArrayList<>();
             for(Medication n:Data.medications){
-                //System.out.println(n);
                 if(noLimit){
                     items.add(n);
                 } else{
                     ArrayList<Boolean> temp=new ArrayList<>();
                     for(Attribute limit:limiters) {
-                        //System.out.println(limit);
                         boolean t=false;
                         for(Attribute a:n.attributes){
                             if(a.equalsTo(limit)){
@@ -165,8 +146,9 @@ public class Fetch extends Action {
             for(int i=0;i<checklist.size();i++){
                 boolean allTrue=true;
                 for(boolean b:checklist.get(i)){
-                    if(!b){
-                        allTrue=false;
+                    if (!b) {
+                        allTrue = false;
+                        break;
                     }
                 }
                 if(allTrue){

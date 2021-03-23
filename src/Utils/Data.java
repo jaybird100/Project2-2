@@ -152,7 +152,6 @@ public class Data {
         row = reader.readLine();
         while (row != null) {
             String[] data = row.split(",");
-            System.out.println(Arrays.toString(data));
             Event e;
             ExtraText title = new ExtraText(data[0]);
             Time time = new Time(data[1].trim());
@@ -172,15 +171,10 @@ public class Data {
         while (row != null) {
             String[] data = row.split(",");
             trimArray(data);
-            //System.out.println(Arrays.toString(data));
             Medication e;
             ExtraText medTitle = new ExtraText(data[0]);
-            //System.out.println(data[0]);
             ExtraText courseTitle = new ExtraText(data[1]);
-            //System.out.println(data[1]);
             ADeadline medDeadline = new ADeadline(data[2]);
-            System.out.println(data[2]);
-            System.out.println(medDeadline);
 
             e = new Medication(medTitle, courseTitle, medDeadline);
             medications.add(e);

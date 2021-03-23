@@ -5,12 +5,10 @@ import Articles.Lecture;
 import Actions.Fetch;
 import Articles.Notification;
 import Articles.Medication;
-import Articles.Webpage;
 
 import java.util.ArrayList;
 
 public class SEFetch extends SE{
-    Fetch skill = new Fetch();
     public ArrayList<SEFetchArticles> articles = new ArrayList<>();
 
     public SEFetch() {

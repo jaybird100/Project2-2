@@ -1,7 +1,6 @@
 package UI;
 
 import Actions.*;
-import Calc.Calculator;
 import Inputs.SEFetchArticles;
 import Utils.Data;
 import Utils.Parser;
@@ -22,7 +21,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SkillEditor {
 
@@ -296,7 +294,11 @@ public class SkillEditor {
                     new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e)
                         {
-                            commandInput.setText(commandInput.getText().trim()+" "+inputs.getValue());
+                            if(commandInput.getText().length()==0|| commandInput.getText().equalsIgnoreCase(" ")){
+                                commandInput.setText(""+inputs.getValue());
+                            }else {
+                                commandInput.setText(commandInput.getText().trim() + " " + inputs.getValue());
+                            }
                         }
                     };
 

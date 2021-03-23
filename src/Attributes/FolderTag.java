@@ -12,9 +12,6 @@ public class FolderTag extends Attribute{
         return tag;
     }
 
-    public FolderTag(boolean toBeInputted) {
-        super(toBeInputted);
-    }
 
     @Override
     public boolean equalsTo(Attribute input) {

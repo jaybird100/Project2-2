@@ -1,12 +1,7 @@
 package Articles;
 
 import Attributes.Time;
-import Utils.Variables;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-import javafx.scene.control.Label;
 import java.time.LocalTime;
 import java.util.ArrayList;
 

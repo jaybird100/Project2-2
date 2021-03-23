@@ -1,7 +1,6 @@
 package Utils;
 
 import java.awt.*;
-import java.util.Calendar;
 
 public class Variables {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

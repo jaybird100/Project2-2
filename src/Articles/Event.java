@@ -32,9 +32,6 @@ public class Event extends Article{
         this.time=t;
         this.date=d;
     }
-    public Event(ArrayList<Attribute> attributes) {
-        super(attributes);
-    }
     public Event(){
         super(new ArrayList<>());
     }
