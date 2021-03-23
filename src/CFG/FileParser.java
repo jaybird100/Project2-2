@@ -56,7 +56,7 @@ public class FileParser {
         return actionList;
     }
 
-    public static void addSkillRegex(String skill){
+    public static boolean addSkillRegex(String skill){
         Matcher m = Pattern.compile("<.+>").matcher(skill);
 
         StringBuilder sb = new StringBuilder();
@@ -71,6 +71,7 @@ public class FileParser {
 
         HashMap<String, Rule> toAdd = FileParser.ruleRegex(skill);
         InputParser.add(toAdd, FileParser.actionRegex(skill));
+        return true;
     }
     public static HashMap<String, Rule> ruleRegex(String skill){
         HashMap<String, Rule> rules = new HashMap<>();

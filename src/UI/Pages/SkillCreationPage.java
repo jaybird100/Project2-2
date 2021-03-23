@@ -2,16 +2,23 @@ package UI.Pages;
 
 import CFG.FileParser;
 import UI.PageController;
+import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
 import java.io.*;
 
 public class SkillCreationPage extends Page {
 
+    @FXML
+    GridPane gridPane;
     @FXML
     Button backButton;
     @FXML
@@ -28,8 +35,25 @@ public class SkillCreationPage extends Page {
 
     @FXML
     protected void saveButton(Event event){
-        FileParser.addSkillRegex(skillTextArea.getText());
+        boolean saved = FileParser.addSkillRegex(skillTextArea.getText());
         skillTextArea.clear();
+
+        Label l = new Label(saved?"Added": "Failed");
+        l.setStyle(saved?"-fx-text-fill: green":"-fx-text-fill: red");
+        l.setFont(Font.font(20));
+        long curTime = System.currentTimeMillis();
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                double t = (System.currentTimeMillis()-curTime)/(double)1000;
+                if(t>=1.5) {
+                    gridPane.getChildren().remove(l);
+                    this.stop();
+                }
+            }
+        };
+        timer.start();
+        gridPane.add(l, 2, 0);
     }
 
     @FXML

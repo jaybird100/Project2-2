@@ -1,12 +1,4 @@
-* {
-    -primary: #035d4b;
-    -primary_darker: #03372d;
-    -primary_lighter: #078d72;
-    -secondary: #40394a;
-    -secondary_darker: #2d2834;
-    -secondary_lighter: #675c77;
-    -fx-base: #8a939c;
-}
+@import url("light_theme.css");
 .background-color-bg {
     -fx-background-color: transparent;
 }
@@ -37,6 +29,8 @@
 }
 .button{
     -fx-background-color: -primary;
+    -fx-text-fill: -button_text_color;
+    -fx-font-size: 14px;
 }
 .button:hover {
     -fx-cursor: hand;
@@ -49,8 +43,6 @@
 .styled-button {
     -fx-background-radius: 3;
     -fx-padding: 3 30 3 30;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
 }
 .back-button {
     -fx-shape: "M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64z";
