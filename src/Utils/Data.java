@@ -43,6 +43,7 @@ public class Data {
     public static ArrayList<Webpage> webpages= new ArrayList<>();
 
     public static ArrayList<Notification> notifications = new ArrayList<>();
+    public static ArrayList<String> checkNotif=new ArrayList<>();
     public static ArrayList<FolderLocation> folderLocations=new ArrayList<>();
 
     //indices of the below should match
@@ -175,7 +176,7 @@ public class Data {
         row = reader.readLine();
         while (row != null) {
             String[] data = row.split(",");
-            if (!data[0].equals("Course")) {
+
                 Notification n;
                 Course c = new Course(data[0].trim());
                 Time t = new Time(data[1].trim());
@@ -185,6 +186,10 @@ public class Data {
                 n = new Notification(c, t, d, ex);
 
                 notifications.add(n);
+                if(LocalDate.now().isBefore(d.getDate())){
+                    checkNotif.add(row);
+                }
+                row=reader.readLine();
             }
 
             reader = new BufferedReader(new FileReader(Variables.DEFAULT_CSV_FILE_PATH + "Paths.csv"));
@@ -291,13 +296,20 @@ public class Data {
             //read other files....
 
         }
-    }
+
 
         public static void trimArray (String[]in){
             for (int s = 0; s < in.length; s++) {
                 in[s] = in[s].trim();
             }
         }
+        public static String checkNotifications(ArrayList<String> list){
+      String returnString="";
+        for(String n:list){
+            returnString=returnString+n+"\n";
 
+            }
+        return returnString;
+        }
 
 }

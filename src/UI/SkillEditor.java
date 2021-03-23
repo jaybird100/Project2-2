@@ -44,6 +44,7 @@ public class SkillEditor {
     public void createEditor(){
         Label label = new Label("");
         label.setWrapText(true);
+        label.setText(Data.checkNotifications(Data.checkNotif));
 
         Button setName = new Button("Set name");
         setName.setOnAction(action -> {
