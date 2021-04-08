@@ -41,6 +41,10 @@ public class InputParser {
 
     private static String decode(String action, String key, HashMap<String, String> map){
         Rule r = new Rule(ruleDatabase.get(key));
+        // Time complexity: O(n*m^k)
+        // n=# of replacements per rule
+        // m=# of inner rules per rule
+        // k=# of rules explored
         for (int i = 0; i < r.replacements().size(); i++) {
             String firstPartOfString = r.replacements().get(i).split(">", 2)[0];
             String[] toCheck = firstPartOfString.split("<", 2);

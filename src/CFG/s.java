@@ -55,14 +55,14 @@ public class s{
                 "Action <LOCATION> * : <ROOM> is in the first floor\n" +
                 "Action : I have no idea\n" +
                 "Action <GREETING> *: Hello :)";
-        List<Rulev2> rules = new ArrayList<>();
-        List<Action> actions = new ArrayList<>();
-        parseSkill(fileString, rules, actions);
-        for (Rulev2 rulev2 : rules) {
-            System.out.println(rulev2);
-        }
-    }
 
+        FileParser.addSkillRegex(fileString);
+        String input = "which lectures are there on monday AT 9";
+        Match response = InputParser.parse(input);
+        System.out.println(response.getResponse());
+        System.out.println(response);
+    }
+    //CYK algorithm
     public static void parseSkill(String skill, List<Rulev2> rList, List<Action> aList){
         Matcher surfaceMatcher = Pattern.compile(surfaceLvl).matcher(skill);
         while(surfaceMatcher.find()){

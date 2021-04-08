@@ -110,12 +110,6 @@ Medication
 <EXTRA>
 all
 -
-all <EXTRA> medication against <EXTRA>
-Fetch
-Medication
-<EXTRA> && <EXTRA>
-all
--
 all medication till <DEADLINE>
 Fetch
 Medication
