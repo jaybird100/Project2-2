@@ -3,47 +3,29 @@ package CFG;
 import java.util.*;
 
 public class InputParser {
-    public static HashMap<String, Rule> ruleDatabase = new HashMap<>();
-    public static List<Action> actionDatabase = new ArrayList<>();
 
-    public static void init(){
-        ruleDatabase.put("<s>", new Rule("<s>"));
+    // TODO CYK
+
+    // Recursion
+    /**
+     * Extracts terminals from input string using the recursion algorithm and returns best match
+     * @param input string you want to parse with CFG
+     * @return best match if it is viable else null
+     */
+    public static Match parseRecursion(String input){
+        HashMap<String, String> map = extractTerminalRecursion(input);
+        return findBestReply(map, input);
     }
-    protected static void add(HashMap<String, Rule> rules, List<Action> actions){
-        for (Map.Entry<String, Rule> e : rules.entrySet()) {
-            if(InputParser.ruleDatabase.containsKey(e.getKey())){
-                InputParser.ruleDatabase.get(e.getKey()).addAll(e.getValue().replacements());
-            }
-            else{
-                InputParser.ruleDatabase.put(e.getKey(), e.getValue());
-            }
-        }
-        InputParser.actionDatabase.addAll(actions);
-    }
-
-
-    public static Match parse(String action){
-        HashMap<String, String> map = decode(action);
-        List<Match> matches = analyse(map, action);
-        for (Match match : matches) {
-            System.out.println(match);
-        }
-        if(matches.size()!=0 && matches.get(0).isValid(2)){
-            return matches.get(0);
-        }
-        return null;
-    }
-
-    public static HashMap<String, String> decode(String action){
+    
+    private static HashMap<String, String> extractTerminalRecursion(String action){
         action = action.toLowerCase();
         HashMap<String, String> map = new HashMap<>();
         map.put("action", action);
-        decode(action, "<s>", map);
+        extractTerminalRecursion(action, "<s>", map);
         return map;
     }
-
-    private static String decode(String action, String key, HashMap<String, String> map){
-        Rule r = new Rule(ruleDatabase.get(key));
+    private static String extractTerminalRecursion(String action, String key, HashMap<String, String> map){
+        Rule r = new Rule(DataBase.rules().get(key));
         for (int i = 0; i < r.replacements().size(); i++) {
             String firstPartOfString = r.replacements().get(i).split(">", 2)[0];
             String[] toCheck = firstPartOfString.split("<", 2);
@@ -62,12 +44,12 @@ public class InputParser {
                     map.put(key, partMatched);
                     return nonChecked;
                 }
-                String updatedAction = decode(nonChecked, keyChecked, map);
+                String updatedAction = extractTerminalRecursion(nonChecked, keyChecked, map);
                 if(!updatedAction.equals(action)){
                     String s = r.replacements().get(i).split(">", 2)[1];
                     r.replacements().set(i, s);
                     if(updatedAction.equals("") && r.replacements().get(i).equals("")){
-                        map.put(key, ruleDatabase.get(key).replacements().get(i));
+                        map.put(key, DataBase.rules().get(key).replacements().get(i));
                         return updatedAction;
                     }
                     if((updatedAction.equals("") && !r.replacements().get(i).equals(""))
@@ -83,10 +65,31 @@ public class InputParser {
         return action;
     }
 
-
-    public static List<Match> analyse(HashMap<String, String> map, String input){
+    // Post terminal extraction method
+    /**
+     * Calls analyseTerminals and only returns the best one.
+     * Best one means the only with the highest value that also passes a threshold
+     * @param map terminals found
+     * @param input input string
+     * @return best match if it is viable else null
+     */
+    private static Match findBestReply(HashMap<String, String> map, String input){
+        List<Match> matches = analyseTerminals(map, input);
+        if(matches.size()!=0 && matches.get(0).isValid(2)){
+            return matches.get(0);
+        }
+        return null;
+    }
+    /**
+     * For every "action" in the database,
+     * create a match and score it
+     * @param map terminals found
+     * @param input input string
+     * @return sorted list of all matches.
+     */
+    private static List<Match> analyseTerminals(HashMap<String, String> map, String input){
         List<Match> matches = new ArrayList<>();
-        for (Action action : actionDatabase) {
+        for (Action action : DataBase.actions()) {
             matches.add(new Match(map, action, input));
         }
         Collections.sort(matches);
@@ -97,9 +100,9 @@ public class InputParser {
     public static void toCNF(){
         HashMap<String,Rule> cnfdatabase= new HashMap<>();
         System.out.println("__________________________");
-        System.out.println(ruleDatabase.entrySet());
+        System.out.println(DataBase.rules().entrySet());
         System.out.println("__________________________");
-        for(Map.Entry<String,Rule> r: ruleDatabase.entrySet()){
+        for(Map.Entry<String,Rule> r: DataBase.rules().entrySet()){
             // System.out.println(r.getValue().replacements());
             //for every r in rule database
             // r can have only on of

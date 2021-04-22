@@ -52,10 +52,10 @@ public class s{
 
         FileParser.addSkillRegex(fileString);//interprets the rules and actions
         String input = "which lectures are there on monday AT 9";
-        Match response = InputParser.parse(input);
+        Match response = InputParser.parseRecursion(input);
         System.out.println(response.getResponse());
         System.out.println(response);
-        System.out.println(InputParser.ruleDatabase);
+        System.out.println(DataBase.rules());
 //        System.out.println(InputParser.actionDatabase);
 //        InputParser.toCNF();
 

@@ -12,8 +12,6 @@ import Attributes.Attribute;
 import CFG.InputParser;
 import CFG.Match;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
-        Match cfg = InputParser.parse(input);
+        Match cfg = InputParser.parseRecursion(input);
         if(cfg!=null){
             return cfg.getResponse();
         }

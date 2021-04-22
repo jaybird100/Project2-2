@@ -3,8 +3,8 @@
     -primary_darker: #754b20;
     -primary_lighter: #d98d3e;
     -button_text_color: #ffffff;
-    -secondary: #031f3d;
-    -secondary_darker: #021326;
-    -secondary_lighter: #083c73;
-    -fx-base: #2c2c2c;
+    -secondary: #b67634;
+    -secondary_darker: #754b20;
+    -secondary_lighter: #d98d3e;
+    -fx-base: rgb(9, 9, 9);
 }

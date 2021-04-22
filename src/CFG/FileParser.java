@@ -8,35 +8,35 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//TODO complete singleCreateAction
+//TODO failing to load? Can it even happen?
 public class FileParser {
 
-    public static String loadFile(File file){
-        return usingBufferedReader(file);
+    // Using splitting and key words/characters
+    /**
+     * Loads the skill by splitting the input by key words and characters.
+     * @return true if load was successful, else false
+     */
+
+    //DOESNT WORK ATM
+    public static boolean addSkillKeyChar(File file){
+        return addSkillKeyChar(loadFile(file));
     }
-    public static void addSkill(File file){
-        addSkill(loadFile(file));
-    }
-    public static void addSkill(String skill){
+    public static boolean addSkillKeyChar(String skill){
         HashMap<String, List<String>> d = FileParser.extractData(skill);
         HashMap<String, Rule> toAdd = FileParser.createRules(d.get("rule"));
-        InputParser.add(toAdd, createActions(d.get("action")));
+        DataBase.mergeWithDatabase(toAdd, createActions(d.get("action")));
+        return true;
     }
-    private static HashMap<String, List<String>> extractData(String skill){
-        HashMap<String, List<String>> data = new HashMap<>();
-        data.put("action", new ArrayList<>());
-        data.put("rule", new ArrayList<>());
-        skill = skill.toLowerCase();
-
-        String[] lines = skill.split("\n");
-        for (String line : lines) {
-            String[] arr = line.split(" ", 2);
-            String type = arr[0].trim();
-            String rest = arr[1].trim();
-            data.get(type).add(rest);
+    private static HashMap<String, Rule> createRules(List<String> rules){
+        HashMap<String , Rule> ruleList = new HashMap<>();
+        for (String rule : rules) {
+            Rule r = singleCreateRule(rule);
+            ruleList.put(r.id, r);
         }
-        return data;
+        return ruleList;
     }
-    private static Rule createRule(String rule){
+    private static Rule singleCreateRule(String rule){
         String[] data = rule.split(":", 2);
         Rule r = new Rule(data[0].trim());
         String[] replacements = data[1].split("\\|");
@@ -45,27 +45,28 @@ public class FileParser {
         }
         return r;
     }
-    private static HashMap<String, Rule> createRules(List<String> rules){
-        HashMap<String , Rule> ruleList = new HashMap<>();
-        for (String rule : rules) {
-            Rule r = createRule(rule);
-            ruleList.put(r.id, r);
-        }
-        return ruleList;
-    }
-    private static Action createAction(String action){
-        //TODO
-        System.out.println("TODO createAction(String action)");
-        return new Action("", null);
-    }
     private static List<Action> createActions(List<String> actions){
         List<Action> actionList = new ArrayList<>();
         for (String action : actions) {
-            actionList.add(createAction(action));
+            actionList.add(singleCreateAction(action));
         }
         return actionList;
     }
+    private static Action singleCreateAction(String action){
+        //TODO
+        System.out.println("TODO singleCreateAction(String action)");
+        return new Action("", null);
+    }
 
+    // Using Java REGEX
+    /**
+     * Loads the skill using Java Regex.
+     * @return true if load was successful, else false
+     */
+
+    public static boolean addSkillRegex(File file){
+        return addSkillRegex(loadFile(file));
+    }
     public static boolean addSkillRegex(String skill){
         Matcher m = Pattern.compile("<.+>").matcher(skill);
 
@@ -80,10 +81,10 @@ public class FileParser {
         skill = sb.toString();
 
         HashMap<String, Rule> toAdd = FileParser.ruleRegex(skill);
-        InputParser.add(toAdd, FileParser.actionRegex(skill));
+        DataBase.mergeWithDatabase(toAdd, FileParser.actionRegex(skill));
         return true;
     }
-    public static HashMap<String, Rule> ruleRegex(String skill){
+    private static HashMap<String, Rule> ruleRegex(String skill){
         HashMap<String, Rule> rules = new HashMap<>();
         String keyRegex = "<.+?>"; // <*at least 1 character*>
         String repRegex = "[[^\\|]*?\\|?]+?"; // something (| something)*
@@ -100,8 +101,7 @@ public class FileParser {
         }
         return rules;
     }
-
-    public static List<Action> actionRegex(String skill){
+    private static List<Action> actionRegex(String skill){
         List<Action> actions = new ArrayList<>();
         String ruleRegex = "(?im)^\\s*action\\s*.*?:.*?$";
         Matcher m = Pattern.compile(ruleRegex).matcher(skill);
@@ -129,6 +129,16 @@ public class FileParser {
         return actions;
     }
 
+    // QOL: Quality Of Life
+
+    /**
+     * Loads the file that has been passed through
+     * @param file path
+     * @return input of the file as a String
+     */
+    public static String loadFile(File file){
+        return usingBufferedReader(file);
+    }
     private static String usingBufferedReader(File file) {
         StringBuilder contentBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(file)))
@@ -145,5 +155,26 @@ public class FileParser {
             e.printStackTrace();
         }
         return contentBuilder.toString();
+    }
+
+    /**
+     * Separates the file into 2 classes: The rules and the actions.
+     * @param skill to load
+     * @return Hashmap with action and rule as keys.
+     */
+    private static HashMap<String, List<String>> extractData(String skill){
+        HashMap<String, List<String>> data = new HashMap<>();
+        data.put("action", new ArrayList<>());
+        data.put("rule", new ArrayList<>());
+        skill = skill.toLowerCase();
+
+        String[] lines = skill.split("\n");
+        for (String line : lines) {
+            String[] arr = line.split(" ", 2);
+            String type = arr[0].trim();
+            String rest = arr[1].trim();
+            data.get(type).add(rest);
+        }
+        return data;
     }
 }
