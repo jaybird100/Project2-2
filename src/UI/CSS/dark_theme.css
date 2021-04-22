@@ -1,0 +1,10 @@
+* {
+    -primary: #b67634;
+    -primary_darker: #754b20;
+    -primary_lighter: #d98d3e;
+    -button_text_color: #ffffff;
+    -secondary: #b67634;
+    -secondary_darker: #754b20;
+    -secondary_lighter: #d98d3e;
+    -fx-base: #2c2c2c;
+}
