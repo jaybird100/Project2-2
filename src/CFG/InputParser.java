@@ -21,7 +21,9 @@ public class InputParser {
         action = action.toLowerCase();
         HashMap<String, String> map = new HashMap<>();
         map.put("action", action);
-        extractTerminalRecursion(action, "<s>", map);
+        if(DataBase.rules().containsKey("<s>")) {
+            extractTerminalRecursion(action, "<s>", map);
+        }
         return map;
     }
     private static String extractTerminalRecursion(String action, String key, HashMap<String, String> map){
