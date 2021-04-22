@@ -25,9 +25,6 @@ public class Parser {
         if(cfg!=null){
             return cfg.getResponse();
         }
-        if(cfg==null){
-            return "";
-        }
         //split entry by " "
         String[] words = input.split(" ");
         int commandID=-1;
