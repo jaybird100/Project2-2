@@ -64,27 +64,8 @@ public class SkillCreationPage extends Page {
         //fileChooser.getExtensionFilters().add(extFilter);
         File f = fileChooser.showOpenDialog(PageController.getInstance().stage);
         if(f!=null && f.canRead()){
-            String fileString = usingBufferedReader(f);
+            String fileString = FileParser.loadFile(f);
             skillTextArea.setText(fileString);
         }
-    }
-
-    // Utils
-    public static String usingBufferedReader(File file) {
-        StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(file)))
-        {
-
-            String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null)
-            {
-                contentBuilder.append(sCurrentLine).append("\n");
-            }
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
     }
 }

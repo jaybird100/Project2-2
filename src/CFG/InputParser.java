@@ -25,6 +25,9 @@ public class InputParser {
     public static Match parse(String action){
         HashMap<String, String> map = decode(action);
         List<Match> matches = analyse(map, action);
+        for (Match match : matches) {
+            System.out.println(match);
+        }
         if(matches.size()!=0 && matches.get(0).isValid(2)){
             return matches.get(0);
         }

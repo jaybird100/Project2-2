@@ -1,11 +1,21 @@
 package CFG;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileParser {
 
+    public static String loadFile(File file){
+        return usingBufferedReader(file);
+    }
+    public static void addSkill(File file){
+        addSkill(loadFile(file));
+    }
     public static void addSkill(String skill){
         HashMap<String, List<String>> d = FileParser.extractData(skill);
         HashMap<String, Rule> toAdd = FileParser.createRules(d.get("rule"));
@@ -117,5 +127,23 @@ public class FileParser {
             actions.add(a);
         }
         return actions;
+    }
+
+    private static String usingBufferedReader(File file) {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file)))
+        {
+
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null)
+            {
+                contentBuilder.append(sCurrentLine).append("\n");
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
     }
 }

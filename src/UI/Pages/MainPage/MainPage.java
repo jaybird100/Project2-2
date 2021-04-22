@@ -72,13 +72,6 @@ public class MainPage extends Page {
             askTextField.setText("");
             PageController.getInstance().log.add(m);
             String response = Parser.parse(m.message);
-            if(response.equalsIgnoreCase("no match found")){
-                Match result = InputParser.parse(m.message);
-                if(result==null){
-                    return;
-                }
-                response = result.getResponse();
-            }
             m = new Message(response, "Karen");
             ((MessagingBoard) logTextField.getChildren().get(0)).addMessage(m, false);
             PageController.getInstance().log.add(m);

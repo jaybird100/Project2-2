@@ -41,7 +41,7 @@ public class s{
 
     public static void main(String[] args){
         File f = new File("src/CFG/testSkill.txt");
-        String fileString = SkillCreationPage.usingBufferedReader(f);
+        String fileString = FileParser.loadFile(f);
         List<Rulev2> rules = new ArrayList<>();
         List<Action> actions = new ArrayList<>();
         parseSkill(fileString, rules, actions);

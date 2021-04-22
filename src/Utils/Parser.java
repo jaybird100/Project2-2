@@ -9,6 +9,8 @@ import Attributes.*;
 import Actions.Fetch;
 import Articles.Article;
 import Attributes.Attribute;
+import CFG.InputParser;
+import CFG.Match;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -19,6 +21,13 @@ import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
+        Match cfg = InputParser.parse(input);
+        if(cfg!=null){
+            return cfg.getResponse();
+        }
+        if(cfg==null){
+            return "";
+        }
         //split entry by " "
         String[] words = input.split(" ");
         int commandID=-1;
