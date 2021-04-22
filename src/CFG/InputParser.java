@@ -3,6 +3,8 @@ package CFG;
 import java.util.*;
 
 public class InputParser {
+    public static HashMap<String, Rule> ruleDatabase = new HashMap<>();
+    public static List<Action> actionDatabase = new ArrayList<>();
 
     public static void init(){
         ruleDatabase.put("<s>", new Rule("<s>"));
@@ -19,8 +21,6 @@ public class InputParser {
         InputParser.actionDatabase.addAll(actions);
     }
 
-    public static HashMap<String, Rule> ruleDatabase = new HashMap<>();
-    public static List<Action> actionDatabase = new ArrayList<>();
 
     public static Match parse(String action){
         HashMap<String, String> map = decode(action);
@@ -83,6 +83,7 @@ public class InputParser {
         return action;
     }
 
+
     public static List<Match> analyse(HashMap<String, String> map, String input){
         List<Match> matches = new ArrayList<>();
         for (Action action : actionDatabase) {
@@ -92,4 +93,21 @@ public class InputParser {
         return matches;
     }
 
+
+    public static void toCNF(){
+        HashMap<String,Rule> cnfdatabase= new HashMap<>();
+        System.out.println("__________________________");
+        System.out.println(ruleDatabase.entrySet());
+        System.out.println("__________________________");
+        for(Map.Entry<String,Rule> r: ruleDatabase.entrySet()){
+            // System.out.println(r.getValue().replacements());
+            //for every r in rule database
+            // r can have only on of
+            //Nonterminal-terminal
+            //Nonterminal-Nonterminal, non terminal
+
+            r.getValue().cnfSplit();
+
+        }
+    }
 }

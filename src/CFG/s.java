@@ -40,6 +40,7 @@ public class s{
     // base structure (any spaces can [0,inf], will recognize): rule <key> ((dtype)) : op1 [| op2]*
 
     public static void main(String[] args){
+
         File f = new File("src/CFG/testSkill.txt");
         String fileString = FileParser.loadFile(f);
         List<Rulev2> rules = new ArrayList<>();
@@ -48,6 +49,16 @@ public class s{
         for (Rulev2 rulev2 : rules) {
             System.out.println(rulev2);
         }
+
+        FileParser.addSkillRegex(fileString);//interprets the rules and actions
+        String input = "which lectures are there on monday AT 9";
+        Match response = InputParser.parse(input);
+        System.out.println(response.getResponse());
+        System.out.println(response);
+        System.out.println(InputParser.ruleDatabase);
+//        System.out.println(InputParser.actionDatabase);
+//        InputParser.toCNF();
+
     }
 
     public static void parseSkill(String skill, List<Rulev2> rList, List<Action> aList){

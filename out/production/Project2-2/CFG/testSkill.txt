@@ -7,6 +7,8 @@ RULE   <LOCATION>: WHERE IS <ROOM> | HOW DO <PRO> GET TO <ROOM> | WHERE IS <ROOM
 RULE   <PRO>: I | YOU | HE | SHE
 RULE   <ROOM>: DEEPSPACE | SPACEBOX
 RULE   <DAY>: MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY
+"RULE   <DUMMYTEST>: <TIME> on <DAY> by <PRO> in <ROOM>"
+"RULE   <OTHERDUMMYTEST>: <ROOM> owned by <PRO> <TIMEEXPRESSION>"
 RULE <GREETING>: Hi | Hey | Supp
 Action <SCHEDULE> *, <DAY> Monday, <TIME> 9: We have math <TIMEEXPRESSION>
 Action <SCHEDULE> *,  <DAY>  Saturday|Sunday :  There are no lectures on Saturday
