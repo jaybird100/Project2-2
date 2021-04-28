@@ -1,6 +1,7 @@
 package UI;
 
 import org.opencv.core.*;
+import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
@@ -17,12 +18,14 @@ public class FaceDetector{
     public  void init() {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         VideoCapture image = new VideoCapture(0);
-        Mat imageMat = new Mat();
         if (image.isOpened()) {
-            image.retrieve(imageMat);
-            analyseImage(imageMat);
+            while(true) {
+                Mat imageMat = new Mat();
+                image.read(imageMat);
+                analyseImage(imageMat);
+            }
             //System.out.println(imageMat.toString());
-            image.release();
+            //image.release();
         } else {
             System.out.println("Error.");
         }
@@ -33,19 +36,55 @@ public class FaceDetector{
         String eyeCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_eye_tree_eyeglasses.xml";
         CascadeClassifier faceClassifier = new CascadeClassifier(faceCascade);
         CascadeClassifier eyeClassifier = new CascadeClassifier(eyeCascade);
-        MatOfRect detect = new MatOfRect();
-        classifier.detectMultiScale(mat, detect);
-        System.out.println(String.format("Detected %s faces",
-                detect.toArray().length));
-        for (Rect rect : detect.toArray())
+        if(!faceClassifier.load(faceCascade))
         {
-            Imgproc.rectangle(
-                    mat,
-                    new Point(rect.x, rect.y),
-                    new Point(rect.x + rect.width, rect.y + rect.height),
-                    new Scalar(0, 0, 255) );
+            System.out.println("Error loading face cascade");
         }
-        //Imgcodecs.imwrite("C:/facedetect_output1.jpg", mat);
+        else
+        {
+            System.out.println("Success loading face cascade");
+        }
+        if(!eyeClassifier.load(eyeCascade))
+        {
+            System.out.println("Error loading eyes cascade");
+        }
+        else
+        {
+            System.out.println("Success loading eyes cascade");
+        }
+
+        MatOfRect greyMat = new MatOfRect();
+        Imgproc.cvtColor(greyMat, mat, Imgproc.COLOR_BGRA2GRAY);
+        Imgproc.equalizeHist(greyMat, mat);
+
+        MatOfRect faces = new MatOfRect();
+        faceClassifier.detectMultiScale(mat, faces);
+
+
+        Rect[] facesArray = faces.toArray();
+
+        for(int i=0; i<facesArray.length; i++)
+        {
+            Point center = new Point(facesArray[i].x + facesArray[i].width * 0.5, facesArray[i].y + facesArray[i].height * 0.5);
+            Imgproc.ellipse(mat, center, new Size(facesArray[i].width * 0.5, facesArray[i].height * 0.5), 0, 0, 360, new Scalar(255, 0, 255), 4, 8, 0);
+
+            Mat faceROI = greyMat.submat(facesArray[i]);
+            MatOfRect eyes = new MatOfRect();
+
+            //-- In each face, detect eyes
+            eyeClassifier.detectMultiScale(faceROI, eyes, 1.1, 2, 0,new Size(30,30), new Size());
+
+            Rect[] eyesArray = eyes.toArray();
+
+            for (int j = 0; j < eyesArray.length; j++)
+            {
+                Point center1 = new Point(facesArray[i].x + eyesArray[i].x + eyesArray[i].width * 0.5, facesArray[i].y + eyesArray[i].y + eyesArray[i].height * 0.5);
+                int radius = (int) Math.round((eyesArray[i].width + eyesArray[i].height) * 0.25);
+                Imgproc.circle(mat, center1, radius, new Scalar(255, 0, 0), 4, 8, 0);
+            }
+
+        }
+        HighGui.imshow("Camera feed", mat);
         return true;
     }
 
