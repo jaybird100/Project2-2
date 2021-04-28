@@ -69,6 +69,7 @@ all
 Open
 Webpage
 -
+
 go to <WEBTAG>
 Open
 Webpage
@@ -108,12 +109,6 @@ all medication against <EXTRA>
 Fetch
 Medication
 <EXTRA>
-all
--
-all <EXTRA> medication against <EXTRA>
-Fetch
-Medication
-<EXTRA> && <EXTRA>
 all
 -
 all medication till <DEADLINE>

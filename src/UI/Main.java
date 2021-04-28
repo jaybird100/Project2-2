@@ -16,8 +16,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import java.io.*;
-import java.util.Arrays;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main extends Application {
@@ -40,8 +42,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         root = new Group();
         primaryStage.setTitle("Virtual Assistant");
-
-        findName(primaryStage);
+        checkForFace(primaryStage);
         title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
         root.getChildren().add(title);
         title.setLayoutX(180);
@@ -51,19 +52,53 @@ public class Main extends Application {
         Scene scene = new Scene(root, windowWidth, windowHeight, Color.LAVENDER);
         skillEditor = new SkillEditor(primaryStage, root);
 
-        /* TODO parts for face recognition
-        WritableImage writableImage = captureFrame();
-        saveImage();
-        ImageView imageView = new ImageView(writableImage);
-        imageView.setFitHeight(400);
-        imageView.setFitWidth(600);
-        imageView.setPreserveRatio(true);
-        root.getChildren().add(imageView);
-*/
-
         primaryStage.setScene(scene);
 
     }
+
+    public void checkForFace(Stage primaryStage){
+        Group root = new Group();
+        Stage findFace = new Stage();
+        findFace.setTitle("First, a Human Check");
+
+        Label question1 = new Label("First, we need to check if there's a person using the Assistant.");
+        Label question2 = new Label("Click on Enter when you're ready to switch on the camera.");
+        question1.setLayoutX(20);
+        question1.setLayoutY(30);
+        root.getChildren().add(question1);
+        question2.setLayoutX(20);
+        question2.setLayoutY(50);
+        root.getChildren().add(question2);
+
+        Button enter = new Button("ENTER");
+        //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
+        enter.setLayoutX(135);
+        enter.setLayoutY(75
+        );
+        enter.setOnAction(e -> {
+        FaceDetector faceDetector = new FaceDetector();
+        faceDetector.init();
+        findName(primaryStage);
+        });
+        root.getChildren().add(enter);
+
+        Scene scene = new Scene(root, windowWidth / 2, windowHeight / 2, Color.LAVENDER);
+        scene.setOnKeyPressed((KeyEvent ENTER) -> {
+            if (ENTER.getCode().equals(KeyCode.ENTER)) {
+                FaceDetector faceDetector = new FaceDetector();
+                faceDetector.init();
+                findName(primaryStage);
+                findFace.close();
+                primaryStage.show();
+            }
+        });
+
+        findFace.setScene(scene);
+        findFace.setX(windowWidth / 2);
+        findFace.setY(windowHeight / 2);
+        findFace.show();
+    }
+
 
     public static boolean doesTextExist(File file){
         try {
