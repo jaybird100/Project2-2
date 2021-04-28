@@ -32,7 +32,7 @@ public class DataBase {
         }
         for (Map.Entry<String, Rule> e : rules.entrySet()) {
             if (ruleDatabase.containsKey(e.getKey())) {
-                ruleDatabase.get(e.getKey()).addAll(e.getValue().replacements());
+                ruleDatabase.get(e.getKey()).add(e.getValue().replacements());
             } else {
                 ruleDatabase.put(e.getKey(), e.getValue());
             }

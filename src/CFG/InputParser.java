@@ -1,6 +1,8 @@
 package CFG;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputParser {
 
@@ -17,7 +19,7 @@ public class InputParser {
         return findBestReply(map, input);
     }
     
-    private static HashMap<String, String> extractTerminalRecursion(String action){
+    protected static HashMap<String, String> extractTerminalRecursion(String action){
         action = action.toLowerCase();
         HashMap<String, String> map = new HashMap<>();
         map.put("action", action);
@@ -42,7 +44,7 @@ public class InputParser {
             if (action.matches(regex)) {
                 String partMatched = regex.replace(".*", "");
                 String nonChecked = action.replaceFirst(partMatched, "");
-                if(keyChecked.equals("")){
+                if(nonChecked.equals("") || keyChecked.equals("")){
                     map.put(key, partMatched);
                     return nonChecked;
                 }
@@ -77,7 +79,7 @@ public class InputParser {
      */
     private static Match findBestReply(HashMap<String, String> map, String input){
         List<Match> matches = analyseTerminals(map, input);
-        if(matches.size()!=0 && matches.get(0).isValid(2)){
+        if(matches.size()!=0 && matches.get(0).isValid(2.5)){
             return matches.get(0);
         }
         return null;
@@ -91,13 +93,30 @@ public class InputParser {
      */
     private static List<Match> analyseTerminals(HashMap<String, String> map, String input){
         List<Match> matches = new ArrayList<>();
+        String reconstructed = reconstruct(map);
         for (Action action : DataBase.actions()) {
-            matches.add(new Match(map, action, input));
+            matches.add(new Match(map, action, input, reconstructed));
         }
         Collections.sort(matches);
         return matches;
     }
 
+    public static String reconstruct(HashMap<String, String> map){
+        StringBuilder s = new StringBuilder(map.get("<s>"));
+        while(s.toString().matches(".*<\\w+>.*")){
+            List<String> s1 = RegexHelper.extract(s.toString(), "<\\w+>");
+            s = new StringBuilder();
+            for (String s2 : s1) {
+                if(s2.matches("<\\w+>")){
+                    s.append(map.get(s2));
+                }
+                else{
+                    s.append(s2);
+                }
+            }
+        }
+        return s.toString();
+    }
 
     public static void toCNF(){
         HashMap<String,Rule> cnfdatabase= new HashMap<>();

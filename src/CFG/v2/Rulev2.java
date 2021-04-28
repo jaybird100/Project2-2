@@ -1,49 +1,46 @@
 package CFG.v2;
 
-import CFG.v2.Comparators.Comparator;
-import CFG.v2.Comparators.DoubleComparator;
-import CFG.v2.Comparators.IntComparator;
-import CFG.v2.Comparators.StringComparator;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rulev2 {
-    private final String key;
-    private final String dtype;
-    private final Comparator comparator;
-    private List<String> options;
-    public Rulev2(String key, String dtype){
-        this.key = key;
-        this.dtype = dtype==null? "string": dtype;
-        options = new ArrayList<>();
-        switch (this.dtype){
-            case "int":
-                comparator = new IntComparator();
-                break;
-            case "double":
-                comparator = new DoubleComparator();
-                break;
-            default:
-                comparator = new StringComparator();
-        }
-    }
-    public void options(List<String> options){
-        this.options = options;
+class Rulev2 implements Comparable<Rulev2> {
+    String id;
+    int index;
+    List<String> options = new ArrayList<>();
+
+    public Rulev2(String id) {
+        this.id = id;
     }
 
-    public boolean has(String compare){
-        if(!comparator.isSameDType(compare)){
-            return false;
+    public void add(String toAdd) {
+        if (options.contains(toAdd)) {
+            return;
         }
-        for (String option : options) {
-            if(comparator.equals(option, compare)){
-                return true;
-            }
-        }
-        return false;
+        options.add(toAdd);
     }
-    public String toString(){
-        return "key=" + key + " && dtype=" + dtype + " && options: " + options.toString();
+
+    public void add(List<String> toAdd) {
+        for (String s : toAdd) {
+            add(s);
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(").append(index).append(")").append(id);
+        sb.append(" -> ");
+        for (int i = 0; i < options.size(); i++) {
+            if (i != 0) {
+                sb.append(" | ");
+            }
+            sb.append(options.get(i));
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Rulev2 o) {
+        return o.index - index;
     }
 }

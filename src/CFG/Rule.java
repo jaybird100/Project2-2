@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class Rule {
     private int keyIndex = 0;
     public String id;
+    public int index;
     private final List<String> replacements; // *id* can be replaced by any in sentences
 
     public Rule(String id, List<String> replacements) {
@@ -33,7 +34,7 @@ public class Rule {
         replacements.add(toAdd);
     }
 
-    public void addAll(List<String> toAdd) {
+    public void add(List<String> toAdd) {
         for (String s : toAdd) {
             add(s);
         }
@@ -46,7 +47,7 @@ public class Rule {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(id).append(" ");
+        sb.append("(").append(index).append(")").append(id).append(" ");
         sb.append("-> ");
         for (int i = 0; i < replacements.size(); i++) {
             if (i != 0) {

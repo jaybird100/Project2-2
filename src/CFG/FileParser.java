@@ -53,7 +53,6 @@ public class FileParser {
         return actionList;
     }
     private static Action singleCreateAction(String action){
-        //TODO
         System.out.println("TODO singleCreateAction(String action)");
         return new Action("", null);
     }
@@ -68,10 +67,11 @@ public class FileParser {
         return addSkillRegex(loadFile(file));
     }
     public static boolean addSkillRegex(String skill){
-        Matcher m = Pattern.compile("<.+>").matcher(skill);
+        Matcher m = Pattern.compile("<\\w+>").matcher(skill);
 
         StringBuilder sb = new StringBuilder();
         int last = 0;
+        // Lower-cases the keys
         while (m.find()) {
             sb.append(skill, last, m.start());
             sb.append(m.group(0).toLowerCase());
@@ -79,7 +79,6 @@ public class FileParser {
         }
         sb.append(skill.substring(last));
         skill = sb.toString();
-
         HashMap<String, Rule> toAdd = FileParser.ruleRegex(skill);
         DataBase.mergeWithDatabase(toAdd, FileParser.actionRegex(skill));
         return true;
@@ -129,6 +128,21 @@ public class FileParser {
         return actions;
     }
 
+    public static boolean addSkillRegex2(File file){
+        return addSkillRegex2(loadFile(file));
+    }
+    public static boolean addSkillRegex2(String skill){
+        HashMap<String, List<String>> data = extractData(skill);
+        System.out.println("RULES");
+        for (String rule : data.get("rule")) {
+            System.out.println(rule);
+        }
+        System.out.println("ACTION");
+        for (String action : data.get("action")) {
+            System.out.println(action);
+        }
+        return true;
+    }
     // QOL: Quality Of Life
 
     /**
@@ -166,14 +180,27 @@ public class FileParser {
         HashMap<String, List<String>> data = new HashMap<>();
         data.put("action", new ArrayList<>());
         data.put("rule", new ArrayList<>());
-        skill = skill.toLowerCase();
 
         String[] lines = skill.split("\n");
         for (String line : lines) {
-            String[] arr = line.split(" ", 2);
-            String type = arr[0].trim();
-            String rest = arr[1].trim();
-            data.get(type).add(rest);
+            String[] d = line.split(" ", 2);
+            if(d[0].equalsIgnoreCase("rule")){
+                d[1] = d[1].toLowerCase();
+                data.get("rule").add(d[1].toLowerCase().trim());
+            }
+            else if(d[0].equalsIgnoreCase("action")) {
+                Matcher m = Pattern.compile("<\\w+>").matcher(d[1]);
+                StringBuilder sb = new StringBuilder();
+                int last = 0;
+                while (m.find()) {
+                    sb.append(d[1], last, m.start());
+                    sb.append(m.group(0).toLowerCase());
+                    last = m.end();
+                }
+                sb.append(d[1].substring(last));
+                d[1] = sb.toString();
+                data.get("action").add(d[1].trim());
+            }
         }
         return data;
     }
