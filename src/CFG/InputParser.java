@@ -18,7 +18,7 @@ public class InputParser {
         HashMap<String, String> map = extractTerminalRecursion(input);
         return findBestReply(map, input);
     }
-    
+
     protected static HashMap<String, String> extractTerminalRecursion(String action){
         action = action.toLowerCase();
         HashMap<String, String> map = new HashMap<>();
@@ -118,20 +118,5 @@ public class InputParser {
         return s.toString();
     }
 
-    public static void toCNF(){
-        HashMap<String,Rule> cnfdatabase= new HashMap<>();
-        System.out.println("__________________________");
-        System.out.println(DataBase.rules().entrySet());
-        System.out.println("__________________________");
-        for(Map.Entry<String,Rule> r: DataBase.rules().entrySet()){
-            // System.out.println(r.getValue().replacements());
-            //for every r in rule database
-            // r can have only on of
-            //Nonterminal-terminal
-            //Nonterminal-Nonterminal, non terminal
 
-            r.getValue().cnfSplit();
-
-        }
-    }
 }
