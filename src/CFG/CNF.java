@@ -16,7 +16,7 @@ public class CNF {
     }
 
 
-    public ArrayList<Rule> cnfSplit() {
+    public String[][] cnfSplit() {
         newRules = new ArrayList<>(CFGrule.values());
         applyStartRule();
         eliminateEmpty();
@@ -24,7 +24,18 @@ public class CNF {
 
         //convert for cyk
 
-        return newRules;
+        return cykConvert();
+    }
+
+    private String[][] cykConvert(){
+        String[][] res=new String[newRules.size()][];
+
+        for(int i=0;i<newRules.size();i++){
+            res[i]=newRules.get(i).getArrayRep();
+        }
+        System.out.println("_____________________");
+        System.out.println(Arrays.deepToString(res));
+        return res;
     }
 
     private void unitAndLongProduction() {
@@ -43,11 +54,7 @@ public class CNF {
 
 
     }
-    private String[] cykConvert(){
-        String[] res=new String[2];
 
-        return res;
-    }
 
     private void applyStartRule() {
         dummyrep.add(startSymb);

@@ -57,6 +57,15 @@ public class Rule {
         }
         return sb.toString();
     }
-
+    
+    //S->AB    [S,AB]
+    public String[] getArrayRep(){
+        String[] res=new String[replacements.size()+1];//num replacements+ id
+        res[0]=id;
+        for(int i=1;i< res.length;i++){
+            res[i]=replacements.get(i-1);
+        }
+        return res;
+    }
 
 }
