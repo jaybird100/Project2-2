@@ -1,5 +1,7 @@
 package CFG;
 
+import CFG.v2.RegexHelper;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
