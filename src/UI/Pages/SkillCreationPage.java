@@ -1,6 +1,8 @@
 package UI.Pages;
 
 import CFG.FileParser;
+import CFG.v2.CFGSystem;
+import CFG.v2.CNFConverter;
 import UI.PageController;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
@@ -35,11 +37,11 @@ public class SkillCreationPage extends Page {
 
     @FXML
     protected void saveButton(Event event){
-        boolean saved = FileParser.addSkillRegex(skillTextArea.getText());
+        CNFConverter.loadAsCNF(skillTextArea.getText(), CFGSystem.dataBase);
         skillTextArea.clear();
 
-        Label l = new Label(saved?"Added": "Failed");
-        l.setStyle(saved?"-fx-text-fill: green":"-fx-text-fill: red");
+        Label l = new Label("Added");
+        l.setStyle("-fx-text-fill: green");
         l.setFont(Font.font(20));
         long curTime = System.currentTimeMillis();
         AnimationTimer timer = new AnimationTimer() {

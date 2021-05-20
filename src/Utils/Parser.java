@@ -11,6 +11,7 @@ import Articles.Article;
 import Attributes.Attribute;
 import CFG.InputParser;
 import CFG.Match;
+import CFG.v2.CFGSystem;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -19,9 +20,9 @@ import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
-        Match cfg = InputParser.parseRecursion(input);
+        String cfg = CFGSystem.run(input, 0);
         if(cfg!=null){
-            return cfg.getResponse();
+            return cfg;
         }
         //split entry by " "
         String[] words = input.split(" ");
