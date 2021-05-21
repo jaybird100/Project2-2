@@ -41,26 +41,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         root = new Group();
-        primaryStage.setTitle("Virtual Assistant");
         checkForFace(primaryStage);
-        title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
-        root.getChildren().add(title);
-        title.setLayoutX(180);
-        title.setLayoutY(20);
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
-
-        Scene scene = new Scene(root, windowWidth, windowHeight, Color.LAVENDER);
-        skillEditor = new SkillEditor(primaryStage, root);
-
-        primaryStage.setScene(scene);
-
     }
 
     public void checkForFace(Stage primaryStage){
         Group root = new Group();
         Stage findFace = new Stage();
         findFace.setTitle("First, a Human Check");
-
         Label question1 = new Label("First, we need to check if there's a person using the Assistant.");
         Label question2 = new Label("Click on Enter when you're ready to switch on the camera.");
         question1.setLayoutX(20);
@@ -71,32 +58,54 @@ public class Main extends Application {
         root.getChildren().add(question2);
 
         Button enter = new Button("ENTER");
+        FaceDetector faceDetector = new FaceDetector();
         //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
         enter.setLayoutX(135);
-        enter.setLayoutY(75
-        );
+        enter.setLayoutY(75);
         enter.setOnAction(e -> {
-        FaceDetector faceDetector = new FaceDetector();
-        faceDetector.init();
-        findName(primaryStage);
+            faceDetector.init(primaryStage);
+            if(FaceDetector.foundFace) {
+                 Group root1 = new Group();
+                primaryStage.setTitle("Virtual Assistant");
+                findName(primaryStage);
+                title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
+                root1.getChildren().add(title);
+                title.setLayoutX(180);
+                title.setLayoutY(20);
+                title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
+
+                Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
+                skillEditor = new SkillEditor(primaryStage, root1);
+                primaryStage.setScene(scene1);
+            }
         });
         root.getChildren().add(enter);
 
         Scene scene = new Scene(root, windowWidth / 2, windowHeight / 2, Color.LAVENDER);
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
             if (ENTER.getCode().equals(KeyCode.ENTER)) {
-                FaceDetector faceDetector = new FaceDetector();
-                faceDetector.init();
-                findName(primaryStage);
-                findFace.close();
-                primaryStage.show();
+                faceDetector.init(primaryStage);
+                if(FaceDetector.foundFace) {
+                    Group root1 = new Group();
+                    primaryStage.setTitle("Virtual Assistant");
+                    findName(primaryStage);
+                    title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
+                    root1.getChildren().add(title);
+                    title.setLayoutX(180);
+                    title.setLayoutY(20);
+                    title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
+
+                    Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
+                    skillEditor = new SkillEditor(primaryStage, root1);
+                    primaryStage.setScene(scene1);
+                }
             }
         });
-
         findFace.setScene(scene);
         findFace.setX(windowWidth / 2);
         findFace.setY(windowHeight / 2);
         findFace.show();
+
     }
 
 
@@ -165,9 +174,9 @@ public class Main extends Application {
             getName.setScene(scene);
             getName.setX(windowWidth / 2);
             getName.setY(windowHeight / 2);
-
             getName.show();
-        }else{
+        }
+        else{
             try {
                 Scanner scanner = new Scanner(new File("name.txt"));
                 username= scanner.nextLine();

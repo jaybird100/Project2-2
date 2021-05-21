@@ -1,7 +1,7 @@
 package UI;
 
+import javafx.stage.Stage;
 import org.opencv.core.*;
-import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
@@ -15,11 +15,14 @@ import java.io.InputStream;
 
 public class FaceDetector{
 
-    public  void init() {
+    public static boolean foundFace;
+
+    public void init(Stage primaryStage) {
+
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         VideoCapture image = new VideoCapture(0);
         if (image.isOpened()) {
-            while(true) {
+            while (true & !foundFace) {
                 Mat imageMat = new Mat();
                 image.read(imageMat);
                 analyseImage(imageMat);
@@ -29,9 +32,12 @@ public class FaceDetector{
         } else {
             System.out.println("Error.");
         }
+        if(foundFace){
+            System.out.println("hi7");
+        }
     }
 
-    public boolean analyseImage(Mat mat){
+    public void analyseImage(Mat mat){
         String faceCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
         String eyeCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_eye_tree_eyeglasses.xml";
         CascadeClassifier faceClassifier = new CascadeClassifier(faceCascade);
@@ -53,10 +59,6 @@ public class FaceDetector{
             System.out.println("Success loading eyes cascade");
         }
 
-        MatOfRect greyMat = new MatOfRect();
-        Imgproc.cvtColor(greyMat, mat, Imgproc.COLOR_BGRA2GRAY);
-        Imgproc.equalizeHist(greyMat, mat);
-
         MatOfRect faces = new MatOfRect();
         faceClassifier.detectMultiScale(mat, faces);
 
@@ -65,42 +67,46 @@ public class FaceDetector{
 
         for(int i=0; i<facesArray.length; i++)
         {
-            Point center = new Point(facesArray[i].x + facesArray[i].width * 0.5, facesArray[i].y + facesArray[i].height * 0.5);
-            Imgproc.ellipse(mat, center, new Size(facesArray[i].width * 0.5, facesArray[i].height * 0.5), 0, 0, 360, new Scalar(255, 0, 255), 4, 8, 0);
+            Imgproc.rectangle(mat, new Point(facesArray[i].x, facesArray[i].y), new Point(facesArray[i].x + facesArray[i].width, facesArray[i].y + facesArray[i].height),
+                    new Scalar(0, 100, 0),3);
 
-            Mat faceROI = greyMat.submat(facesArray[i]);
             MatOfRect eyes = new MatOfRect();
-
-            //-- In each face, detect eyes
-            eyeClassifier.detectMultiScale(faceROI, eyes, 1.1, 2, 0,new Size(30,30), new Size());
-
+            eyeClassifier.detectMultiScale(mat, eyes);
             Rect[] eyesArray = eyes.toArray();
-
             for (int j = 0; j < eyesArray.length; j++)
             {
-                Point center1 = new Point(facesArray[i].x + eyesArray[i].x + eyesArray[i].width * 0.5, facesArray[i].y + eyesArray[i].y + eyesArray[i].height * 0.5);
-                int radius = (int) Math.round((eyesArray[i].width + eyesArray[i].height) * 0.25);
-                Imgproc.circle(mat, center1, radius, new Scalar(255, 0, 0), 4, 8, 0);
+                Imgproc.rectangle(mat, new Point(eyesArray[i].x, eyesArray[i].y), new Point(eyesArray[i].x + eyesArray[i].width, eyesArray[i].y + eyesArray[i].height),
+                        new Scalar(200, 200, 100),2);
             }
 
         }
-        HighGui.imshow("Camera feed", mat);
-        return true;
+        if(facesArray.length != 0){
+            foundFace = true;
+            System.out.println("Not empty");
+        }
+        /*
+        showResult(mat);  //this displays the camera feed and i don't know how to close it and it's also not super necessary
+        if(foundFace){
+            return;
+        }
+         */
     }
 
     public void showResult(Mat img) {
-        Imgproc.resize(img, img, new Size(640, 480));
         MatOfByte m = new MatOfByte();
         Imgcodecs.imencode(".jpg", img, m);
         byte[] imageData = m.toArray();
-        BufferedImage bufImage = null;
+        BufferedImage buffImage = null;
         try {
             InputStream in = new ByteArrayInputStream(imageData);
-            bufImage = ImageIO.read(in);
+            buffImage = ImageIO.read(in);
             JFrame frame = new JFrame();
-            frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
+            frame.getContentPane().add(new JLabel(new ImageIcon(buffImage)));
             frame.pack();
             frame.setVisible(true);
+            if(foundFace){
+                frame.dispose(); //Destroy the JFrame object
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
