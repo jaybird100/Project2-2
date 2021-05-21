@@ -1,4 +1,1 @@
-<<<<<<< HEAD
 Ranjani
-=======
->>>>>>> backend
