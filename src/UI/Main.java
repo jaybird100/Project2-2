@@ -46,6 +46,8 @@ public class Main extends Application {
 
     public void checkForFace(Stage primaryStage){
         Group root = new Group();
+        Scene scene = new Scene(root, windowWidth / 2, windowHeight / 2, Color.LAVENDER);
+
         Stage findFace = new Stage();
         findFace.setTitle("First, a Human Check");
         Label question1 = new Label("First, we need to check if there's a person using the Assistant.");
@@ -57,35 +59,13 @@ public class Main extends Application {
         question2.setLayoutY(50);
         root.getChildren().add(question2);
 
-        Button enter = new Button("ENTER");
         FaceDetector faceDetector = new FaceDetector();
-        //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
-        enter.setLayoutX(135);
-        enter.setLayoutY(75);
-        enter.setOnAction(e -> {
-            faceDetector.init(primaryStage);
-            if(FaceDetector.foundFace) {
-                 Group root1 = new Group();
-                primaryStage.setTitle("Virtual Assistant");
-                findName(primaryStage);
-                title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
-                root1.getChildren().add(title);
-                title.setLayoutX(180);
-                title.setLayoutY(20);
-                title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
 
-                Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
-                skillEditor = new SkillEditor(primaryStage, root1);
-                primaryStage.setScene(scene1);
-            }
-        });
-        root.getChildren().add(enter);
-
-        Scene scene = new Scene(root, windowWidth / 2, windowHeight / 2, Color.LAVENDER);
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
             if (ENTER.getCode().equals(KeyCode.ENTER)) {
                 faceDetector.init(primaryStage);
                 if(FaceDetector.foundFace) {
+                    findFace.close();
                     Group root1 = new Group();
                     primaryStage.setTitle("Virtual Assistant");
                     findName(primaryStage);
@@ -101,6 +81,31 @@ public class Main extends Application {
                 }
             }
         });
+
+        Button enter = new Button("ENTER");
+        root.getChildren().add(enter);
+        //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
+        enter.setLayoutX(135);
+        enter.setLayoutY(75);
+        enter.setOnAction(e -> {
+            faceDetector.init(primaryStage);
+            if(FaceDetector.foundFace) {
+                findFace.close();
+                Group root1 = new Group();
+                primaryStage.setTitle("Virtual Assistant");
+                findName(primaryStage);
+                title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
+                root1.getChildren().add(title);
+                title.setLayoutX(180);
+                title.setLayoutY(20);
+                title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
+
+                Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
+                skillEditor = new SkillEditor(primaryStage, root1);
+                primaryStage.setScene(scene1);
+            }
+        });
+
         findFace.setScene(scene);
         findFace.setX(windowWidth / 2);
         findFace.setY(windowHeight / 2);
