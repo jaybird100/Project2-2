@@ -1,11 +1,7 @@
 package CFG;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Locale;
 
 public class Rule {
 
@@ -44,6 +40,7 @@ public class Rule {
         return replacements;
     }
 
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -55,9 +52,11 @@ public class Rule {
             }
             sb.append(replacements.get(i));
         }
+        sb.append("\n");
         return sb.toString();
     }
-    
+
+    protected void setId(String i){this.id=i;}
     //S->AB    [S,AB]
     public String[] getArrayRep(){
         String[] res=new String[replacements.size()+1];//num replacements+ id
@@ -66,6 +65,38 @@ public class Rule {
             res[i]=replacements.get(i-1);
         }
         return res;
+    }
+
+    public boolean isTerminalRule(){
+        for(String s: replacements){
+            if(s.contains("<")){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    @Override
+    public boolean equals(Object other){
+        if(other instanceof Rule){
+            Rule o= (Rule) other;
+            if(o.id.equals(id) && o.replacements().size()==replacements.size()){
+                for(int i=0;i<replacements.size();i++){
+                    if(!replacements.get(i).equals(o.replacements().get(i))){
+                        return false;
+                    }
+                }
+
+            }
+        }else
+            return false;
+        return true;
+    }
+    @Override
+    public int hashCode(){
+        return replacements.size();
     }
 
 }
