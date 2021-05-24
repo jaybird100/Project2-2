@@ -41,11 +41,12 @@ public class MainPage extends Page {
     Button calculatorButton;
     @FXML
     Button backButton;
-
     MessagingBoard board;
 
+    String previous ="";
+    String previousUser="";
     public void show(){
-        if(logTextField.getChildren().get(0) instanceof MessagingBoard) {
+        if(logTextField.getChildren().get(0) instanceof MessagingBoard && PageController.getInstance().username.equals(previousUser)) {
             ((MessagingBoard) logTextField.getChildren().get(0)).getVBox().getChildren().clear();
         }else{
             board = new MessagingBoard();
@@ -57,6 +58,7 @@ public class MainPage extends Page {
         if(PageController.getInstance().username.equals("")){
             PageController.getInstance().username ="User";
         }
+        previousUser = PageController.getInstance().username;
         usernameLabel.setText(PageController.getInstance().username+"'s Personal Assistant");
     }
 
@@ -64,6 +66,7 @@ public class MainPage extends Page {
     protected void sendButton(Event event){
         if (event.getSource() == sendButton ||
                 (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)){
+            previous = askTextField.getText();
             if(askTextField.getText().equals("")){
                 return;
             }
@@ -75,6 +78,10 @@ public class MainPage extends Page {
             m = new Message(response, "Karen");
             ((MessagingBoard) logTextField.getChildren().get(0)).addMessage(m, false);
             PageController.getInstance().log.add(m);
+        }
+        if(event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.UP){
+            askTextField.setText(previous);
+            askTextField.positionCaret(previous.length());
         }
     }
 

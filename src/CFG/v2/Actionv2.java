@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Actionv2 {
-    public final List<String> response; // response split into a list with every String in the list is either terminal or a rule ID
+    public final String response; // response split into a list with every String in the list is either terminal or a rule ID
     // ex: [We have math, <timeexpression>, for students in group 1]
     public final List<PreRequisite> preRequisites; // Pre Requisites needed for this action to trigger
 
-    public Actionv2(List<String> response, List<PreRequisite> preRequisites){
+    public Actionv2(String response, List<PreRequisite> preRequisites){
         this.response = response;
         this.preRequisites = preRequisites;
     }
@@ -21,7 +21,7 @@ public class Actionv2 {
      * @param mapFound maps ruleID to all possible correspondents found i nthe input string
      * @return Match class that has all the important stats needed to determine how strong the match
      */
-    public Matchv2 matches(HashMap<String, List<String>> mapFound){
+    public Matchv2 matches(HashMap<String, String> mapFound){
         int strengthNeeded = 0;
         int strengthFound = 0;
         int nbFound = 0;
@@ -30,13 +30,10 @@ public class Actionv2 {
             if(!mapFound.containsKey(pr.ruleID)){
                 continue; // If this rule doesn't exist go next
             }
-            List<String> found = mapFound.get(pr.ruleID);
-            for (String f : found) { // for all values found that the rule of this pre req
-                if(pr.matches(f)){ // check if it matches with the pre req
-                    nbFound++;
-                    strengthFound+= pr.strength;
-                    break;
-                }
+            if(pr.matches(mapFound.get(pr.ruleID))) { // check if it matches with the pre req
+                nbFound++;
+                strengthFound += pr.strength;
+                break;
             }
         }
         return new Matchv2(this,mapFound,strengthFound/(double)strengthNeeded,nbFound/(double)preRequisites.size(), nbFound/(double)mapFound.size());
@@ -108,8 +105,8 @@ class Matchv2 implements Comparable<Matchv2>{
     public final double strength; // Strength based off loading of skill
     public final double neededOverFound; // Needed/Found <- determines how many pre requisites of this action were in the input
     public final double foundOverNeeded; // Found/Needed <- determines how much of the input is used for this action
-    private final HashMap<String, List<String>> map;
-    public Matchv2(Actionv2 action, HashMap<String, List<String>> map ,double strength, double neededOverFound, double foundOverNeeded){
+    private final HashMap<String, String> map;
+    public Matchv2(Actionv2 action, HashMap<String, String> map ,double strength, double neededOverFound, double foundOverNeeded){
         this.action = action;
         this.strength = strength;
         this.neededOverFound = neededOverFound;
@@ -134,27 +131,13 @@ class Matchv2 implements Comparable<Matchv2>{
      * @return response string substituted converted
      */
     public String response(){
-        StringBuilder sb = new StringBuilder();
-        for (String s : action.response) { // for each part of the response
-            if(s.matches("<\\w*>")) { // if it is a rule ID
-                while(s.matches(".*<\\w+>.*")) { // iteratively replace all rule IDs that might be embedded
-                    List<String> we = RegexHelper.extract(s,"<\\w+>");
-                    StringBuilder sBuilder = new StringBuilder();
-                    for (String s1 : we) {
-                        if(map.containsKey(s1)){
-                            s1 = map.get(s1).get(0);
-                        }
-                        sBuilder.append(" ").append(s1);
-                    }
-                    if(s.equals(sBuilder.toString())){
-                        break;
-                    }
-                    s = sBuilder.toString();
-                }
+        String s = action.response;
+        while(s.matches(".*<\\w+>.*")) { // iteratively replace all rule IDs that might be embedded
+            for (String s1 : map.keySet()) {
+                s = s.replace(s1, map.get(s1));
             }
-            sb.append(s);
         }
-        return StringUtils.capitalize(sb.toString().trim());
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 
     @Override

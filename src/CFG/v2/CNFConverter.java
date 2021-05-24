@@ -61,11 +61,14 @@ public class CNFConverter {
         String[] preReqs = temp[0].split(","); // split all pre reqs (separated by ',')
         List<String> response = RegexHelper.extract(temp[1].trim(), "<\\w+>"); // split response s.t rule IDs are separated. Keeps order
         // Set all rule IDs to lower case (for hashmap)
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < response.size(); i++) {
             if(response.get(i).matches("<\\w+>")){
                 response.set(i, response.get(i).toLowerCase());
             }
+            sb.append(response.get(i)).append(" ");
         }
+        sb.replace(sb.length()-1, sb.length(),"");
         // Load all pre requisites
         List<PreRequisite> preRequisites = new ArrayList<>();
         for (String preReq : preReqs) {
@@ -80,7 +83,7 @@ public class CNFConverter {
             }
             preRequisites.add(new PreRequisite(key, values));
         }
-        actionDataBase.addAction(new Actionv2(response, preRequisites));
+        actionDataBase.addAction(new Actionv2(sb.toString(), preRequisites));
     }
 
     /**

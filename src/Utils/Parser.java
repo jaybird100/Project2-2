@@ -20,6 +20,14 @@ import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
+        if(input.equals("ff y")){
+            CFGSystem.fullFeatures(true);
+            return "Approximation and data types enabled";
+        }
+        if(input.equals("ff n")){
+            CFGSystem.fullFeatures(false);
+            return "Approximation and data types disabled";
+        }
         String cfg = CFGSystem.run(input, 0);
         if(cfg!=null){
             return cfg;
