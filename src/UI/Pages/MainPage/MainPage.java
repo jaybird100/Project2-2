@@ -46,8 +46,10 @@ public class MainPage extends Page {
     String previous ="";
     String previousUser="";
     public void show(){
-        if(logTextField.getChildren().get(0) instanceof MessagingBoard && PageController.getInstance().username.equals(previousUser)) {
-            ((MessagingBoard) logTextField.getChildren().get(0)).getVBox().getChildren().clear();
+        if(logTextField.getChildren().get(0) instanceof MessagingBoard) {
+            if(!PageController.getInstance().username.equals(previousUser)) {
+                ((MessagingBoard) logTextField.getChildren().get(0)).getVBox().getChildren().clear();
+            }
         }else{
             board = new MessagingBoard();
             board.setPrefViewportWidth(1000);
