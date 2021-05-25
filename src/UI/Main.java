@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -46,6 +47,13 @@ public class Main extends Application {
 
     public static void changeUser(String username){
         Main.username = username;
+        try {
+            FileWriter writer = new FileWriter("src/UserInfo.txt");
+            writer.write(username);
+            writer.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     public static String username(){
