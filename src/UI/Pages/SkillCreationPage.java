@@ -1,8 +1,8 @@
 package UI.Pages;
 
-import CFG.FileParser;
-import CFG.v2.CFGSystem;
-import CFG.v2.CNFConverter;
+import CFG.CNForm.CNFConverter;
+import CFG.temp.FileParser;
+import CFG.CFGSystem;
 import UI.PageController;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;

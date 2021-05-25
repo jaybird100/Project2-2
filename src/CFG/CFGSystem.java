@@ -1,5 +1,10 @@
-package CFG.v2;
+package CFG;
 
+import CFG.CNForm.*;
+import CFG.Helper.RegexHelper;
+import CFG.temp.FileParser;
+
+import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,7 +33,7 @@ public class CFGSystem {
      * automatically true
      */
     public static void useDataTypesInSearch(boolean b){
-        dataBase.rdb.advanced = b;
+        dataBase.advanced(b);
     }
     /**
      * If set to true, formatInput() will look for similarities in all
@@ -36,6 +41,12 @@ public class CFGSystem {
      */
     public static void approximateInputWords(boolean b){
         approximate = b;
+    }
+    public static void load(String skill){
+        CNFConverter.loadAsCNF(skill, dataBase);
+    }
+    public static void load(File f){
+        CNFConverter.loadAsCNF(FileParser.loadFile(f), dataBase);
     }
 
     /**
@@ -49,7 +60,7 @@ public class CFGSystem {
         List<TreeSet<String>> words = formatInput(input);
         List<List<List<CYKNode>>> r = CYK(words);
         List<HashMap<String, String>> map = parseResults(r);
-        List<Matchv2> m = findMatches(map);
+        List<CNFMatch> m = findMatches(map);
         switch(printSearch){
             case 0:break;
             case 1:printResultsAsMatrix(r, true);break;
@@ -76,7 +87,7 @@ public class CFGSystem {
             w.add(new TreeSet<>());
             w.get(i).add(words[i]);
             if(approximate) {
-                for (String s : dataBase.rdb.optionToRule.keySet()) {
+                for (String s : dataBase.keySet()) {
                     double diff = RegexHelper.levenshteinDifference(words[i], s);
                     if (similarityNeeded <= diff) {
                         w.get(i).add(s);
@@ -95,8 +106,8 @@ public class CFGSystem {
         for (TreeSet<String> word : words) { // INIT first 2 rows (row 0 = input, row 1 = unit rules)
             ArrayList<CYKNode> l = new ArrayList<>();
             for (String s : word) {
-                TreeSet<Rulev2> rules = dataBase.rulesForOption(s);
-                for (Rulev2 r : rules) {
+                TreeSet<CNFRule> rules = dataBase.rulesForOption(s);
+                for (CNFRule r : rules) {
                     l.add(new CYKNode(r.id, s, null));
                 }
             }
@@ -125,8 +136,8 @@ public class CFGSystem {
             for (CYKNode node1 : w.get(idx1[0]).get(idx1[1])) {
                 for (CYKNode node2 : w.get(idx2[0]).get(idx2[1])) {
                     String combo = node1.id+node2.id;
-                    TreeSet<Rulev2> rules = dataBase.rulesForOption(combo);
-                    for (Rulev2 r : rules) {
+                    TreeSet<CNFRule> rules = dataBase.rulesForOption(combo);
+                    for (CNFRule r : rules) {
                         w.get(row).get(col).add(new CYKNode(r.id,combo, new CYKNode[]{node1, node2}));
                     }
                 }
@@ -192,18 +203,18 @@ public class CFGSystem {
 
     // Getting response from CYK results
 
-    private static List<Matchv2> findMatches(List<HashMap<String, String>> maps){
-        List<Matchv2> matches = new ArrayList<>();
+    private static List<CNFMatch> findMatches(List<HashMap<String, String>> maps){
+        List<CNFMatch> matches = new ArrayList<>();
         for (HashMap<String, String> map : maps) {
-            Set<Actionv2> possible = new LinkedHashSet<>();
+            Set<CNFAction> possible = new LinkedHashSet<>();
             for (String s : map.keySet()) {
-                List<Actionv2> a = dataBase.actionForRule(s);
+                List<CNFAction> a = dataBase.actionForRule(s);
                 if (a != null) {
                     possible.addAll(a);
                 }
             }
-            List<Matchv2> m = possible.stream().map(action -> action.matches(map)).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-            for (Matchv2 m1 : m) {
+            List<CNFMatch> m = possible.stream().map(action -> action.matches(map)).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+            for (CNFMatch m1 : m) {
                 if(m1.isValid()){
                     matches.add(m1);
                 }else{
@@ -213,7 +224,7 @@ public class CFGSystem {
         }
         return matches;
     }
-    private static String getResponse(List<Matchv2> confirmedMatches){
+    private static String getResponse(List<CNFMatch> confirmedMatches){
         if(confirmedMatches.size()==0){
             return null;
         }

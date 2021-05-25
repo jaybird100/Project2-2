@@ -1,4 +1,4 @@
-package CFG;
+package CFG.temp;
 
 import java.io.BufferedReader;
 import java.io.File;

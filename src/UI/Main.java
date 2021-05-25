@@ -1,5 +1,6 @@
 package UI;
 
+import CFG.CFGSystem;
 import Utils.Data;
 import javafx.application.Application;
 import javafx.scene.control.Label;
@@ -27,6 +28,7 @@ public class Main extends Application {
         //premptive preparation of data for query answering
         setUsername();
         Data.fillData();
+        CFGSystem.load(new File("src/SkillParserFiles/CFGSkill.txt"));
         launch(args);
     }
 

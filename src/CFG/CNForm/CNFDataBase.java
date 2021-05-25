@@ -1,4 +1,6 @@
-package CFG.v2;
+package CFG.CNForm;
+
+import CFG.Helper.LogicProposition;
 
 import java.util.*;
 
@@ -18,6 +20,9 @@ public class CNFDataBase{
         rdb.clear();
         adb.clear();
     }
+    public void advanced(boolean b){
+        rdb.advanced = b;
+    }
     public void add(CNFDataBase db){
         add(db.rdb, db.adb);
     }
@@ -30,7 +35,7 @@ public class CNFDataBase{
         }
     }
     // Rule methods
-    public void addRule(Rulev2 r) {
+    public void addRule(CNFRule r) {
         addRule(r.id, r.options);
     }
     public void addRule(String key, List<String> replacements) {
@@ -39,7 +44,7 @@ public class CNFDataBase{
     public void addRule(String key, String replacement) {
         rdb.addRule(key, replacement);
     }
-    public void removeRule(Rulev2 r) {
+    public void removeRule(CNFRule r) {
         rdb.removeRule(r.id);
     }
     public void removeRule(String key) {
@@ -51,30 +56,30 @@ public class CNFDataBase{
     public Set<String> keySet() {
         return rdb.keySet();
     }
-    public Rulev2 rule(String key) {
+    public CNFRule rule(String key) {
         return rdb.rule(key);
     }
-    public Rulev2 rule(int idx) {
+    public CNFRule rule(int idx) {
         return rdb.rule(idx);
     }
-    public TreeSet<Rulev2> rulesForOption(String opt) {
+    public TreeSet<CNFRule> rulesForOption(String opt) {
         return rdb.rulesForOption(opt);
     }
 
     // Action methods
-    public void addAction(Actionv2 a) {
+    public void addAction(CNFAction a) {
         adb.addAction(a);
     }
-    public void removeRule(Actionv2 a) {
+    public void removeRule(CNFAction a) {
         adb.removeRule(a);
     }
     public int responseSize() {
         return adb.responseSize();
     }
-    public Actionv2 action(int idx) {
+    public CNFAction action(int idx) {
         return adb.action(idx);
     }
-    public List<Actionv2> actionForRule(String ruleID) {
+    public List<CNFAction> actionForRule(String ruleID) {
         return adb.actionForRule(ruleID);
     }
 
@@ -96,9 +101,9 @@ class RuleDataBase {
         - get all rules that can be replaced by an option |<- Hashmap that maps an option to a list of rules (1 to many)
         - get all options that a rule can take |<- in rule object (1 to many)
      */
-    protected final HashMap<String, Rulev2> keyToRule; // ID -> Rule
-    protected final HashMap<String, TreeSet<Rulev2>> optionToRule; // Option -> Rules
-    protected final List<Rulev2> ruleList; // Index -> Rule
+    protected final HashMap<String, CNFRule> keyToRule; // ID -> Rule
+    protected final HashMap<String, TreeSet<CNFRule>> optionToRule; // Option -> Rules
+    protected final List<CNFRule> ruleList; // Index -> Rule
 
     protected boolean advanced; // True if you want to work with logical components (<%dType *logical prop*%>)
     protected final HashMap<String, LogicProposition> logicOption; // Logic Option <%dType *logical prop*%>-> Rules
@@ -124,11 +129,11 @@ class RuleDataBase {
         logicOption.clear();
     }
     public void add(RuleDataBase rdb) {
-        for (Rulev2 r : rdb.ruleList) {
+        for (CNFRule r : rdb.ruleList) {
             addRule(r);
         }
     }
-    public void addRule(Rulev2 r) {
+    public void addRule(CNFRule r) {
         addRule(r.id, r.options);
     }
     public void addRule(String key, List<String> replacements) {
@@ -136,10 +141,10 @@ class RuleDataBase {
     }
     public void addRule(String key, String replacement) {
         if (keyToRule.containsKey(key)) {
-            Rulev2 r1 = keyToRule.get(key);
+            CNFRule r1 = keyToRule.get(key);
             r1.add(replacement);
         } else {
-            Rulev2 r = new Rulev2(key);
+            CNFRule r = new CNFRule(key);
             r.add(replacement);
             r.index = ruleList.size();
             ruleList.add(r);
@@ -154,11 +159,11 @@ class RuleDataBase {
             addRuleLogic(replacement);
         }
     }
-    public void removeRule(Rulev2 r) {
+    public void removeRule(CNFRule r) {
         removeRule(r.id);
     }
     public void removeRule(String key) {
-        Rulev2 r = keyToRule.remove(key);
+        CNFRule r = keyToRule.remove(key);
         for (int j = r.index; j < ruleList.size(); j++) {
             ruleList.get(j).index--;
         }
@@ -177,15 +182,15 @@ class RuleDataBase {
     public Set<String> keySet() {
         return keyToRule.keySet();
     }
-    public Rulev2 rule(String key) {
+    public CNFRule rule(String key) {
         return keyToRule.get(key);
     }
-    public Rulev2 rule(int idx) {
+    public CNFRule rule(int idx) {
         return ruleList.get(idx);
     }
-    public TreeSet<Rulev2> rulesForOption(String opt) {
-        TreeSet<Rulev2> rules = new TreeSet<>();
-        TreeSet<Rulev2> r = optionToRule.get(opt);
+    public TreeSet<CNFRule> rulesForOption(String opt) {
+        TreeSet<CNFRule> rules = new TreeSet<>();
+        TreeSet<CNFRule> r = optionToRule.get(opt);
         if(r!=null) {
             rules.addAll(r);
         }
@@ -194,8 +199,8 @@ class RuleDataBase {
         }
         return rules;
     }
-    private TreeSet<Rulev2> rulesForOptionLogic(String opt){
-        TreeSet<Rulev2> rules = new TreeSet<>();
+    private TreeSet<CNFRule> rulesForOptionLogic(String opt){
+        TreeSet<CNFRule> rules = new TreeSet<>();
         for (String k : logicOption.keySet()) {
             if(logicOption.get(k).match(opt)){
                 rules.addAll(optionToRule.get(logicOption.get(k).full));
@@ -208,12 +213,12 @@ class RuleDataBase {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("RULES (").append(ruleList.size()).append("):\n");
-        for (Rulev2 rule : ruleList) {
+        for (CNFRule rule : ruleList) {
             sb.append("\t-").append(rule).append("\n");
         }
         return sb.toString();
     }
-    public static List<String> ruleIDs(TreeSet<Rulev2> r) {
+    public static List<String> ruleIDs(TreeSet<CNFRule> r) {
         if (r == null || r.size()==0) {
             return new ArrayList<>();
         }
@@ -236,8 +241,8 @@ class ActionDataBase{
         - get all pre reqs needed for an action |<- in action object (many to 1)
         - get response for a given action |<- in action object (1 to 1)
      */
-    protected final LinkedList<Actionv2> actionList;
-    protected final HashMap<String, List<Actionv2>> ruleToAction;
+    protected final LinkedList<CNFAction> actionList;
+    protected final HashMap<String, List<CNFAction>> ruleToAction;
 
     public ActionDataBase() {
         actionList = new LinkedList<>();
@@ -249,11 +254,11 @@ class ActionDataBase{
         ruleToAction.clear();
     }
     public void add(ActionDataBase adb) {
-        for (Actionv2 a : adb.actionList) {
+        for (CNFAction a : adb.actionList) {
             addAction(a);
         }
     }
-    public void addAction(Actionv2 a) {
+    public void addAction(CNFAction a) {
         actionList.add(a);
         for (PreRequisite preRequisite : a.preRequisites) {
             if(!ruleToAction.containsKey(preRequisite.ruleID)){
@@ -262,7 +267,7 @@ class ActionDataBase{
             ruleToAction.get(preRequisite.ruleID).add(a);
         }
     }
-    public void removeRule(Actionv2 a) {
+    public void removeRule(CNFAction a) {
         actionList.remove(a);
         for (PreRequisite preRequisite : a.preRequisites) {
             ruleToAction.get(preRequisite.ruleID).remove(a);
@@ -272,17 +277,17 @@ class ActionDataBase{
     public int responseSize() {
         return actionList.size();
     }
-    public Actionv2 action(int idx) {
+    public CNFAction action(int idx) {
         return actionList.get(idx);
     }
-    public List<Actionv2> actionForRule(String ruleID) {
+    public List<CNFAction> actionForRule(String ruleID) {
         return ruleToAction.get(ruleID);
     }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Actions (").append(actionList.size()).append("):\n");
-        for (Actionv2 a : actionList) {
+        for (CNFAction a : actionList) {
             sb.append("\t-").append(a).append("\n");
         }
         return sb.toString();

@@ -1,6 +1,6 @@
-package CFG;
+package CFG.temp;
 
-import CFG.v2.RegexHelper;
+import CFG.Helper.RegexHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

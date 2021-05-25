@@ -6,7 +6,7 @@ import Articles.FolderLocation;
 import Articles.Timer;
 import Articles.Webpage;
 import Attributes.*;
-import CFG.v2.CFGSystem;
+import CFG.CFGSystem;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

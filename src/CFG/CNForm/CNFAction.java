@@ -1,15 +1,17 @@
-package CFG.v2;
+package CFG.CNForm;
+
+import CFG.Helper.LogicProposition;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class Actionv2 {
+public class CNFAction {
     public final String response; // response split into a list with every String in the list is either terminal or a rule ID
     // ex: [We have math, <timeexpression>, for students in group 1]
     public final List<PreRequisite> preRequisites; // Pre Requisites needed for this action to trigger
 
-    public Actionv2(String response, List<PreRequisite> preRequisites){
+    public CNFAction(String response, List<PreRequisite> preRequisites){
         this.response = response;
         this.preRequisites = preRequisites;
     }
@@ -19,7 +21,7 @@ public class Actionv2 {
      * @param mapFound maps ruleID to all possible correspondents found i nthe input string
      * @return Match class that has all the important stats needed to determine how strong the match
      */
-    public Matchv2 matches(HashMap<String, String> mapFound){
+    public CNFMatch matches(HashMap<String, String> mapFound){
         int strengthNeeded = 0;
         int strengthFound = 0;
         int nbFound = 0;
@@ -34,7 +36,7 @@ public class Actionv2 {
                 break;
             }
         }
-        return new Matchv2(this,mapFound,strengthFound/(double)strengthNeeded,nbFound/(double)preRequisites.size(), nbFound/(double)mapFound.size());
+        return new CNFMatch(this,mapFound,strengthFound/(double)strengthNeeded,nbFound/(double)preRequisites.size(), nbFound/(double)mapFound.size());
     }
 
     @Override
@@ -95,56 +97,5 @@ class PreRequisite{
     @Override
     public String toString(){
         return ruleID + " (" + strength + ") -> " + Arrays.toString(valuesWanted);
-    }
-}
-
-class Matchv2 implements Comparable<Matchv2>{
-    public final Actionv2 action; // Action this match represents
-    public final double strength; // Strength based off loading of skill
-    public final double neededOverFound; // Needed/Found <- determines how many pre requisites of this action were in the input
-    public final double foundOverNeeded; // Found/Needed <- determines how much of the input is used for this action
-    private final HashMap<String, String> map;
-    public Matchv2(Actionv2 action, HashMap<String, String> map ,double strength, double neededOverFound, double foundOverNeeded){
-        this.action = action;
-        this.strength = strength;
-        this.neededOverFound = neededOverFound;
-        this.foundOverNeeded = foundOverNeeded;
-        this.map = map;
-    }
-
-    /**
-     * strength > Found/Needed > Needed/Found
-     * @return value of match based off line above
-     */
-    public double value(){
-        return strength*10000+foundOverNeeded*100+neededOverFound;
-    }
-
-    public boolean isValid(){
-        return strength==1;
-    }
-    /**
-     * Returns the response action this match represents by replacing the rule IDs
-     * in the response by what is found
-     * @return response string substituted converted
-     */
-    public String response(){
-        String s = action.response;
-        while(s.matches(".*<\\w+>.*")) { // iteratively replace all rule IDs that might be embedded
-            for (String s1 : map.keySet()) {
-                s = s.replace(s1, map.get(s1));
-            }
-        }
-        return s.substring(0, 1).toUpperCase() + s.substring(1);
-    }
-
-    @Override
-    public String toString(){
-        return action+", value="+value()+", strength="+strength+", "+" Needed/Found="+ neededOverFound +", Found/Needed="+ foundOverNeeded;
-    }
-
-    @Override
-    public int compareTo(Matchv2 o) {
-        return Double.compare(value(), o.value());
     }
 }

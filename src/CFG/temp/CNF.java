@@ -1,4 +1,4 @@
-package CFG;
+package CFG.temp;
 
 import java.util.ArrayList;
 import java.util.HashMap;

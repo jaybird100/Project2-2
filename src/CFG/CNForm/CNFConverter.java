@@ -1,10 +1,12 @@
-package CFG.v2;
+package CFG.CNForm;
+
+import CFG.Helper.RegexHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CNFConverter {
-    static final String converterID = "cnf"; //lower case might not be necessary
+    public static final String converterID = "cnf"; //lower case might not be necessary
 
     /**
      * Converts the String of a skill into CNF
@@ -83,7 +85,7 @@ public class CNFConverter {
             }
             preRequisites.add(new PreRequisite(key, values));
         }
-        actionDataBase.addAction(new Actionv2(sb.toString(), preRequisites));
+        actionDataBase.addAction(new CNFAction(sb.toString(), preRequisites));
     }
 
     /**
@@ -144,11 +146,11 @@ public class CNFConverter {
      */
     public static void CNFUnit(RuleDataBase ruleDataBase, List<String> recentlyAdded){
         for (String s : recentlyAdded) { // for each recently added rule
-            Rulev2 rule = ruleDataBase.keyToRule.get(s);
+            CNFRule rule = ruleDataBase.keyToRule.get(s);
             for (int i = 0; i < rule.options.size(); i++) { // for each option of this rule
                 String o = rule.options.get(i);
                 if(o.matches("<\\w+>")){ // if the option is a unit (only <id>)
-                    Rulev2 r2 = ruleDataBase.rule(o);
+                    CNFRule r2 = ruleDataBase.rule(o);
                     rule.add(r2.options);
                     for (String option : r2.options) {
                         if(ruleDataBase.optionToRule.containsKey(option)) {

@@ -1,14 +1,14 @@
-package CFG.v2;
+package CFG.CNForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class Rulev2 implements Comparable<Rulev2> {
-    String id;
+public class CNFRule implements Comparable<CNFRule> {
+    public final String id;
     int index;
     List<String> options = new ArrayList<>();
 
-    public Rulev2(String id) {
+    public CNFRule(String id) {
         this.id = id;
     }
 
@@ -40,7 +40,7 @@ class Rulev2 implements Comparable<Rulev2> {
     }
 
     @Override
-    public int compareTo(Rulev2 o) {
+    public int compareTo(CNFRule o) {
         return o.index - index;
     }
 }

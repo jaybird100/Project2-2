@@ -1,4 +1,4 @@
-package CFG;
+package CFG.temp;
 
 public class CYK {
 	public static int grammar_len;
