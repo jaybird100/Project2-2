@@ -6,14 +6,15 @@ import UI.Pages.Page;
 import UI.Pages.PopUpWindows.Calculator;
 import UI.Pages.PopUpWindows.HelpWindow;
 import UI.Pages.PopUpWindows.SkillEditor;
+import Utils.Data;
 import Utils.Parser;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class MainPage extends Page {
     @FXML
     Label usernameLabel;
     @FXML
-    VBox logTextField;
+    VBox messagingBoardHolder;
     @FXML
     TextField askTextField;
     @FXML
@@ -40,21 +41,24 @@ public class MainPage extends Page {
     Button calculatorButton;
     @FXML
     Button backButton;
+    @FXML
+    TextArea reminderArea;
     MessagingBoard board;
 
     String previous ="";
     String previousUser="";
     public void show(){
-        if(logTextField.getChildren().get(0) instanceof MessagingBoard) {
+        reminderArea.setText(Data.checkNotifications(Data.checkNotif));
+        if(messagingBoardHolder.getChildren().get(0) instanceof MessagingBoard) {
             if(!Main.username().equals(previousUser)) {
-                ((MessagingBoard) logTextField.getChildren().get(0)).getVBox().getChildren().clear();
+                ((MessagingBoard) messagingBoardHolder.getChildren().get(0)).getVBox().getChildren().clear();
             }
         }else{
             board = new MessagingBoard();
             board.setPrefViewportWidth(1000);
             board.setPrefViewportHeight(1000);
             board.keep = 20;
-            logTextField.getChildren().add(0, board);
+            messagingBoardHolder.getChildren().add(0, board);
         }
         if(Main.username().equals("")){
             Main.changeUser("User");
@@ -72,12 +76,12 @@ public class MainPage extends Page {
                 return;
             }
             Message m = new Message(askTextField.getText(), Main.username(), LocalDateTime.now());
-            ((MessagingBoard)logTextField.getChildren().get(0)).addMessage(m, true);
+            ((MessagingBoard)messagingBoardHolder.getChildren().get(0)).addMessage(m, true);
             askTextField.setText("");
             PageController.getInstance().log.add(m);
             String response = Parser.parse(m.message);
             m = new Message(response, "Karen");
-            ((MessagingBoard) logTextField.getChildren().get(0)).addMessage(m, false);
+            ((MessagingBoard) messagingBoardHolder.getChildren().get(0)).addMessage(m, false);
             PageController.getInstance().log.add(m);
         }
         if(event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.UP){
