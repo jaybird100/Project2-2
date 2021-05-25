@@ -1,5 +1,6 @@
 package UI.Pages.Calendar;
 
+import UI.PageController;
 import UI.Pages.Page;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -58,6 +59,7 @@ public class Calendar extends Page {
     }
 
     public void InitializeCalendar() throws IOException {
+        root.getChildren().clear();
         WeekFields wf = WeekFields.of(Locale.getDefault()) ;
         weekCurrent = Integer.parseInt(String.format("%02d",date.get(wf.weekOfWeekBasedYear())));
         weekTemp = weekCurrent;
@@ -185,8 +187,8 @@ public class Calendar extends Page {
         Button reset = new Button("RESET");
         reset.setTextAlignment(TextAlignment.CENTER);
         reset.setTranslateX(535);
-        reset.setTranslateY(37);
-        reset.setPrefSize(50, 10);
+        reset.setTranslateY(20);
+        reset.setPrefSize(100, 10);
         root.getChildren().add(reset);
         reset.setOnAction(e -> {
             week.setText("Week " + (weekCurrent));
@@ -213,12 +215,30 @@ public class Calendar extends Page {
                     }} catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                dateLabels[i].setText(formatter.format(dates[i].getDate()));
-                lectureLabels[i].setText(Integer.toString(dates[i].getLectures().size()));
+                if(i!=7) {
+                    dateLabels[i].setText(formatter.format(dates[i].getDate()));
+                    lectureLabels[i].setText(Integer.toString(dates[i].getLectures().size()));
+                }
             }
         });
+
+        Button backButton = new Button("Back");
+        backButton.setTextAlignment(TextAlignment.CENTER);
+        backButton.setTranslateX(20);
+        backButton.setTranslateY(20);
+        backButton.setPrefSize(100, 10);
+        root.getChildren().add(backButton);
+        backButton.setOnAction(e -> {
+            try {
+                PageController.scene("mainpage");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
     }
 
+//temp
     private void fillMiniAgenda(){
         for(int i=0; i<dates.length; i++){
             Rectangle rectangle = dates[i].getMiniAgenda()[0];

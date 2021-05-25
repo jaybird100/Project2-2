@@ -1,32 +1,12 @@
 package Actions;
 
-import Articles.Event;
-import Articles.Lecture;
-import Articles.Article;
+import Articles.*;
 import Attributes.Attribute;
 import Utils.Data;
 
 import java.util.ArrayList;
 
 public class Fetch extends Action {
-    public void setType(Article type) {
-        this.type = type;
-    }
-
-    public void setLimiter(Attribute limiter) {
-        this.limiters.add(limiter);
-        noLimit=false;
-    }
-
-    public void setAttributeIDs(ArrayList<Integer> attributeIDs) {
-        this.attributeIDs = attributeIDs;
-        allAtt=false;
-    }
-
-    public void setLimiters(ArrayList<Attribute> limiters) {
-        this.limiters = limiters;
-    }
-
     Article type;
     ArrayList<Attribute> limiters = new ArrayList<>();
     boolean noLimit=true;
@@ -70,8 +50,9 @@ public class Fetch extends Action {
             for(int i=0;i<checklist.size();i++){
                 boolean allTrue=true;
                 for(boolean b:checklist.get(i)){
-                    if(!b){
-                        allTrue=false;
+                    if (!b) {
+                        allTrue = false;
+                        break;
                     }
                 }
                 if(allTrue){
@@ -101,8 +82,9 @@ public class Fetch extends Action {
             for(int i=0;i<checklist.size();i++){
                 boolean allTrue=true;
                 for(boolean b:checklist.get(i)){
-                    if(!b){
-                        allTrue=false;
+                    if (!b) {
+                        allTrue = false;
+                        break;
                     }
                 }
                 if(allTrue){
@@ -110,18 +92,87 @@ public class Fetch extends Action {
                 }
             }
         }
+        if(type instanceof Notification){
+            ArrayList<ArrayList<Boolean>> checklist=new ArrayList<>();
+            for(Notification n:Data.notifications){
+                if(noLimit){
+                    items.add(n);
+                } else{
+                    ArrayList<Boolean> temp=new ArrayList<>();
+                    for(Attribute limit:limiters){
+                        boolean t=false;
+                        for(Attribute a:n.attributes){
+                            if(a.equalsTo(limit)){
+                                t=true;
+                            }
+                        }
+                        temp.add(t);
+                    }
+                    checklist.add(temp);
+                }
+            }
+            for(int i=0;i<checklist.size();i++){
+                boolean allTrue=true;
+                for(boolean b:checklist.get(i)){
+                    if (!b) {
+                        allTrue = false;
+                        break;
+                    }
+                }
+                if(allTrue){
+                    items.add(Data.notifications.get(i));
+                }
+            }
+        }
+        if(type instanceof Medication) {
+            ArrayList<ArrayList<Boolean>> checklist=new ArrayList<>();
+            for(Medication n:Data.medications){
+                if(noLimit){
+                    items.add(n);
+                } else{
+                    ArrayList<Boolean> temp=new ArrayList<>();
+                    for(Attribute limit:limiters) {
+                        boolean t=false;
+                        for(Attribute a:n.attributes){
+                            if(a.equalsTo(limit)){
+                                t=true;
+                            }
+                        }
+                        temp.add(t);
+                    }
+                    checklist.add(temp);
+                }
+            }
+            for(int i=0;i<checklist.size();i++){
+                boolean allTrue=true;
+                for(boolean b:checklist.get(i)){
+                    if (!b) {
+                        allTrue = false;
+                        break;
+                    }
+                }
+                if(allTrue){
+                    items.add(Data.medications.get(i));
+                }
+            }
+        }
+
         ArrayList<String> toReturn = new ArrayList<>();
         for(Article a:items){
             String toAdd = "";
             if(!allAtt) {
                 for (Integer i : attributeIDs) {
                     if(i<a.attributes.size()) {
-                        toAdd += a.attributes.get(i).toString() + " ";
+                        if(!a.attributes.get(i).toBeInputted) {
+                            toAdd += a.attributes.get(i).toString() + " ";
+                        }
                     }
                 }
             }else{
                 for(Attribute at:a.attributes){
-                    toAdd+=at.toString()+" ";
+                    if(!at.toBeInputted) {
+                        toAdd += at.toString() + " ";
+                    }
                 }
             }
             toReturn.add(toAdd);

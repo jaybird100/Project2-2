@@ -1,5 +1,6 @@
 package UI.Pages.Calendar;
 
+import Utils.Variables;
 import javafx.scene.shape.Rectangle;
 
 import java.io.BufferedReader;
@@ -28,8 +29,8 @@ public class Date {
     }
 
     private void setLectures() throws IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
-        File file = new File("src/CSVFiles/Lectures.csv");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        File file = new File(Variables.DEFAULT_CSV_FILE_PATH+"Lectures.csv");
         Scanner sc = new Scanner(file);
         String line = "";
         try {

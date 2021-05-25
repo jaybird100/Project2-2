@@ -4,12 +4,11 @@ import Articles.Event;
 import Articles.Lecture;
 import Actions.Fetch;
 import Articles.Notification;
-import Articles.Webpage;
+import Articles.Medication;
 
 import java.util.ArrayList;
 
 public class SEFetch extends SE{
-    Fetch skill = new Fetch();
     public ArrayList<SEFetchArticles> articles = new ArrayList<>();
 
     public SEFetch() {
@@ -17,6 +16,7 @@ public class SEFetch extends SE{
         articles.add(new SEFetchArticles(new Lecture()));
         articles.add(new SEFetchArticles(new Event()));
         articles.add(new SEFetchArticles(new Notification()));
+        articles.add(new SEFetchArticles(new Medication()));
     }
 
 

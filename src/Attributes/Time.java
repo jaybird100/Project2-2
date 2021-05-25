@@ -1,8 +1,10 @@
 package Attributes;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class Time extends Attribute {
+    public boolean couldParseTime=true;
     LocalTime time;
     public Time(LocalTime t){
         super(false);
@@ -10,7 +12,12 @@ public class Time extends Attribute {
     }
     public Time(String input){
         super(false);
-        time=LocalTime.parse(input);
+        try{
+            time=LocalTime.parse(input);
+        }catch(DateTimeParseException e){
+            couldParseTime=false;
+            toBeInputted=true;
+        }
     }
     public Time(){
         super(true);

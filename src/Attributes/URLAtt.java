@@ -20,6 +20,6 @@ public class URLAtt extends Attribute{
         if(url==null){
             return "<URL>";
         }
-        return url.toString();
+        return url;
     }
 }

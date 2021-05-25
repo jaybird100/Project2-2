@@ -1,5 +1,6 @@
 package UI.Pages;
 
+import UI.Main;
 import UI.PageController;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ public class FrontPage extends Page {
     public void onButtonPress(Event event) throws IOException {
         if (event.getSource() == mainPageButton ||
                 (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)){
-            PageController.getInstance().username = usernameTextField.getText();
+            Main.changeUser(usernameTextField.getText());
             PageController.scene("mainpage");
         }
     }

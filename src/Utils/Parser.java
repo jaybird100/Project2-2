@@ -1,16 +1,9 @@
 package Utils;
 
-import Actions.Create;
-import Actions.Open;
-import Articles.Event;
-import Articles.Lecture;
-import Articles.Webpage;
+import Actions.*;
+import Articles.*;
 import Attributes.*;
-import Actions.Fetch;
-import Articles.Article;
 import Attributes.Attribute;
-import CFG.InputParser;
-import CFG.Match;
 import CFG.v2.CFGSystem;
 
 import java.time.DayOfWeek;
@@ -29,8 +22,13 @@ public class Parser {
             return "Approximation and data types disabled";
         }
         String cfg = CFGSystem.run(input, 0);
-        if(cfg!=null){
+        if(cfg!=null) {
             return cfg;
+        }
+        Calc calc = new Calc(input);
+        calc.action();
+        if(calc.isCalc){
+            return calc.action();
         }
         //split entry by " "
         String[] words = input.split(" ");
@@ -42,10 +40,12 @@ public class Parser {
         ArrayList<Integer> numPlacement= new ArrayList<>();
         ArrayList<Integer> dayPlacement = new ArrayList<>();
         ArrayList<Integer> extraPlacement = new ArrayList<>();
+        ArrayList<Integer> deadlinePlacement = new ArrayList<>();
         ArrayList<Integer> webPageTagPlacement = new ArrayList<>();
         ArrayList<Integer> urlPlacenment = new ArrayList<>();
+        ArrayList<Integer> pathPlacement = new ArrayList<>();
+        ArrayList<Integer> folderTagPlacement = new ArrayList<>();
         ArrayList<Integer> articlePlacement = new ArrayList<>();
-        System.out.println("W: "+Arrays.deepToString(words));
         for(int i = 0; i< Data.commands.size(); i++){
             ArrayList<Integer> tempDatePlacements= new ArrayList<>();
             ArrayList<Integer> tempCoursePlacements= new ArrayList<>();
@@ -53,14 +53,16 @@ public class Parser {
             ArrayList<Integer> tempNumPlacements= new ArrayList<>();
             ArrayList<Integer> tempDayPlacements = new ArrayList<>();
             ArrayList<Integer> tempExtraPlacements = new ArrayList<>();
+            ArrayList<Integer> tempDeadlinePlacement = new ArrayList<>();
             ArrayList<Integer> tempWebPageTagPlacement = new ArrayList<>();
             ArrayList<Integer> tempURLPlacement = new ArrayList<>();
+            ArrayList<Integer> tempPathPlacement = new ArrayList<>();
+            ArrayList<Integer> tempFolderTagPlacement = new ArrayList<>();
             ArrayList<Integer> tempArticlePlacement = new ArrayList<>();
             ArrayList<Integer> codeIDs = new ArrayList<>();
             //split the current query
             String[] command = Data.commands.get(i).split(" ");
             if(words.length==command.length) {
-                System.out.println(Arrays.deepToString(command));
                 for (int q = 0; q < command.length; q++) {
                     for (int a = 0; a < Data.codes.size(); a++) {
                         if (command[q].equalsIgnoreCase(Data.codes.get(a))) {
@@ -79,9 +81,6 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<DAY>")){
                                 tempDayPlacements.add(q);
                             }
-                            if(command[q].equalsIgnoreCase("<TIME>")){
-                                tempExtraPlacements.add(q);
-                            }
                             if(command[q].equalsIgnoreCase("<WEBTAG>")){
                                 tempWebPageTagPlacement.add(q);
                             }
@@ -91,13 +90,25 @@ public class Parser {
                             if(command[q].equalsIgnoreCase("<ARTICLE>")){
                                 tempArticlePlacement.add(q);
                             }
+                            if(command[q].equalsIgnoreCase("<PATH>")){
+                                tempPathPlacement.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase("<FOLDERTAG>")){
+                               tempFolderTagPlacement.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase("<EXTRA>")){
+                                tempExtraPlacements.add(q);
+                            }
+                            if(command[q].equalsIgnoreCase("<DEADLINE>")){
+                                tempDeadlinePlacement.add(q);
+                            }
+
                             codeIDs.add(q);
                         }
                     }
                 }
                 boolean everyWordMatch = true;
                 for (int v = 0; v < command.length; v++) {
-                    System.out.println(command[v]);
                     if (!codeIDs.contains(v)) {
                         //if the index v in command is not a code, it should match the index v in the query(words),
                         // otherwise, every word does not match
@@ -116,9 +127,12 @@ public class Parser {
                     timePlacement=tempTimePlacements;
                     dayPlacement=tempDayPlacements;
                     extraPlacement=tempExtraPlacements;
+                    deadlinePlacement=tempDeadlinePlacement;
                     webPageTagPlacement=tempWebPageTagPlacement;
                     urlPlacenment=tempURLPlacement;
                     articlePlacement=tempArticlePlacement;
+                    folderTagPlacement=tempFolderTagPlacement;
+                    pathPlacement=tempPathPlacement;
                     commandID = i;
                     break;
                 }
@@ -131,6 +145,7 @@ public class Parser {
         int timeCounter =0;
         int dayCounter =0;
         int extraCounter =0;
+        int deadlineCounter = 0;
         if(commandID==-1){
             return "No command recognized";
         }
@@ -152,12 +167,20 @@ public class Parser {
                                 int id = ((ADate) theLimiters.get(i)).id;
                                 if (id == -1) {
                                     ADate date = new ADate(words[datePlacements.get(dateCounter)]);
+                                    if(!date.recognizedDate){
+                                        return "Date not recognized, must be in dd/MM/yy format";
+                                    }
                                     dateCounter++;
                                     theLimiters.remove(i);
                                     theLimiters.add(i, date);
                                 }
                                 if (id == 0) {
-                                    int num = Integer.parseInt(words[numPlacement.get(numCounter)]);
+                                    int num;
+                                    try{
+                                        num = Integer.parseInt(words[numPlacement.get(numCounter)]);
+                                    }catch (NumberFormatException a){
+                                        return "Number not recognized";
+                                    }
                                     numCounter++;
                                     ADate date;
                                     if(num>=0) {
@@ -173,7 +196,12 @@ public class Parser {
                                     String theDay = words[dayPlacement.get(dayCounter)];
                                     dayCounter++;
                                     theDay=theDay.toUpperCase();
-                                    DayOfWeek day = DayOfWeek.valueOf(theDay);
+                                    DayOfWeek day;
+                                    try{
+                                        day = DayOfWeek.valueOf(theDay);
+                                    }catch (IllegalArgumentException f){
+                                        return "Does not recognize day";
+                                    }
                                     LocalDate date = Data.today.date.plusDays(1);
                                     while (!date.getDayOfWeek().equals(day)) {
                                         date = date.plusDays(1);
@@ -208,6 +236,14 @@ public class Parser {
                                 theLimiters.add(i,e);
                             }
                         }
+                        if(theLimiters.get(i) instanceof ADeadline){
+                            if(theLimiters.get(i).toBeInputted){
+                                ADeadline e = new ADeadline(words[deadlinePlacement.get(deadlineCounter)]);
+                                deadlineCounter++;
+                                theLimiters.remove(i);
+                                theLimiters.add(i,e);
+                            }
+                        }
                     }
                 }
 
@@ -218,7 +254,6 @@ public class Parser {
         }else if(Data.toCall.get(commandID) instanceof Open){
             Article theObject = Data.objectsFromTxt.get(commandID);
             if(theObject instanceof Webpage){
-                System.out.println("WEBPAGE: "+webPageTagPlacement.size()+" URL: "+urlPlacenment.size());
                 if(webPageTagPlacement.size()==1) {
                     theObject = new Webpage(new WebpageTag(words[webPageTagPlacement.get(0)]));
                 }
@@ -226,18 +261,41 @@ public class Parser {
                     theObject=new Webpage(words[urlPlacenment.get(0)]);
                 }
             }
+
+            else if(theObject instanceof FolderLocation){
+                if(folderTagPlacement.size()==1) {
+                    theObject = new FolderLocation(new FolderTag(words[folderTagPlacement.get(0)]));
+                }
+                if(pathPlacement.size()==1){
+                    theObject=new FolderLocation(words[pathPlacement.get(0)]);
+                }
+            }
+
             Open o= new Open(theObject);
             return o.action();
+
+
         }else if(Data.toCall.get(commandID) instanceof Create){
             String word = words[articlePlacement.get(0)];
-            if(word.equalsIgnoreCase("Lecture")){
-                Create c = new Create(new Lecture());
-                return c.action();
+            for(Article a:Data.allArticle){
+                if(word.equalsIgnoreCase(a.toString())){
+                    Create c = new Create(a);
+                    return c.action();
+                }
             }
-            if(word.equalsIgnoreCase("Event")){
-                Create c = new Create(new Event());
-                return c.action();
+        }else if(Data.toCall.get(commandID) instanceof Set){
+            Article theObject = Data.objectsFromTxt.get(commandID);
+            if(theObject instanceof Timer &&timePlacement.size()==1){
+                Time time = new Time(words[timePlacement.get(0)]);
+                if(!time.couldParseTime){
+                    return "Couldn't parse time correctly, make sure it's in hh:mm or hh:mm:ss format";
+                }
+                theObject= new Timer(time);
             }
+            Set s = new Set(theObject);
+            return s.action();
+
+
         }
         return "No match found";
     }

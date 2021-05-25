@@ -2,6 +2,7 @@ package UI.Pages.MainPage;
 
 import CFG.InputParser;
 import CFG.Match;
+import UI.Main;
 import UI.PageController;
 import UI.Pages.Page;
 import UI.Pages.PopUpWindows.Calculator;
@@ -47,7 +48,7 @@ public class MainPage extends Page {
     String previousUser="";
     public void show(){
         if(logTextField.getChildren().get(0) instanceof MessagingBoard) {
-            if(!PageController.getInstance().username.equals(previousUser)) {
+            if(!Main.username().equals(previousUser)) {
                 ((MessagingBoard) logTextField.getChildren().get(0)).getVBox().getChildren().clear();
             }
         }else{
@@ -57,11 +58,11 @@ public class MainPage extends Page {
             board.keep = 20;
             logTextField.getChildren().add(0, board);
         }
-        if(PageController.getInstance().username.equals("")){
-            PageController.getInstance().username ="User";
+        if(Main.username().equals("")){
+            Main.changeUser("User");
         }
-        previousUser = PageController.getInstance().username;
-        usernameLabel.setText(PageController.getInstance().username+"'s Personal Assistant");
+        previousUser = Main.username();
+        usernameLabel.setText(Main.username()+"'s Personal Assistant");
     }
 
     @FXML
@@ -72,7 +73,7 @@ public class MainPage extends Page {
             if(askTextField.getText().equals("")){
                 return;
             }
-            Message m = new Message(askTextField.getText(), PageController.getInstance().username, LocalDateTime.now());
+            Message m = new Message(askTextField.getText(), Main.username(), LocalDateTime.now());
             ((MessagingBoard)logTextField.getChildren().get(0)).addMessage(m, true);
             askTextField.setText("");
             PageController.getInstance().log.add(m);

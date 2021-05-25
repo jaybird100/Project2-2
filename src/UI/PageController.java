@@ -29,7 +29,6 @@ import java.util.Scanner;
 
 public class PageController {
 
-    public String username="";
     public List<Message> log = new ArrayList<>();
 
     private static PageController instance;
@@ -45,17 +44,10 @@ public class PageController {
         return instance;
     }
     private static void init() throws IOException {
-        File f = new File("src/UserInfo.txt");
-        if(!f.isFile()) {
+        if(Main.username().equals("")){
             getInstance().setScene("frontpage");
         }else{
-            try {
-                Scanner scanner = new Scanner(f);
-                getInstance().username= scanner.nextLine();
-                getInstance().setScene("mainpage");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            getInstance().setScene("mainpage");
         }
     }
 
