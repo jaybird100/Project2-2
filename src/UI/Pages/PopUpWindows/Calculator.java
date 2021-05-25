@@ -7,6 +7,7 @@ public class Calculator {
         Calc.Calculator calc2 = new Calc.Calculator();
         Stage sta = new Stage();
         calc2.start(sta);
+        sta.getScene().getStylesheets().add("UI/CSS/theme.css");
         sta.show();
     }
 }

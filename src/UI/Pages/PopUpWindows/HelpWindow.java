@@ -1,26 +1,40 @@
 package UI.Pages.PopUpWindows;
 
+import Utils.Data;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class HelpWindow {
-    public static void open(){
-        VBox root = new VBox();
+    public static void open() {
+        Pane root = new Pane();
         Stage hint = new Stage();
-        hint.setTitle("Help");
-        Label explain = new Label("Displays the entire calendar");
-        Label t1 = new Label("Enter \"ff y\" or \"ff n\" to turn on or off autocorrect and logic parsing features");
+        hint.setTitle("Command Help");
+        TextArea explain = new TextArea();
+        StringBuilder ex = new StringBuilder();
+        for (int i = 0; i < Data.commands.size(); i++) {
+            ex.append(Data.commands.get(i)).append("\n");
+        }
+        ex.append("\"ff y\" to turn on autocorrect and logic parsing features\n");
+        ex.append("\"ff n\" to turn off autocorrect and logic parsing features\n");
+        explain.setText(ex.toString());
+        explain.setTranslateX(20);
+        explain.setTranslateY(20);
+        explain.setPrefWidth(360);
+        explain.setPrefHeight(340);
+        explain.setEditable(false);
         root.getChildren().add(explain);
-        root.getChildren().add(t1);
 
-        Scene scene = new Scene(root, 500, 200);
-        scene.getStylesheets().add("UI/CSS/theme.css");
-        hint.setScene(scene);
-        hint.setX(700);
+        hint.setScene(new Scene(root, 400, 400));
+        hint.setX(400);
         hint.setY(250);
+        hint.getScene().getStylesheets().add("UI/CSS/theme.css");
         hint.show();
     }
 }
