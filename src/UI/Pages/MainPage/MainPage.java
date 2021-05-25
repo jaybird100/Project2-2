@@ -1,7 +1,5 @@
 package UI.Pages.MainPage;
 
-import CFG.InputParser;
-import CFG.Match;
 import UI.Main;
 import UI.PageController;
 import UI.Pages.Page;

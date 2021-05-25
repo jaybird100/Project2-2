@@ -1,15 +1,16 @@
 package Utils;
 
 import Actions.*;
-import Articles.*;
+import Articles.Article;
+import Articles.FolderLocation;
+import Articles.Timer;
+import Articles.Webpage;
 import Attributes.*;
-import Attributes.Attribute;
 import CFG.v2.CFGSystem;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){

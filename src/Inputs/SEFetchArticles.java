@@ -1,8 +1,8 @@
 package Inputs;
 
 import Articles.*;
-import Attributes.*;
 import Attributes.Number;
+import Attributes.*;
 
 import java.util.ArrayList;
 

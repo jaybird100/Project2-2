@@ -2,9 +2,10 @@ package CFG;
 
 import CFG.v2.RegexHelper;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class InputParser {
 
