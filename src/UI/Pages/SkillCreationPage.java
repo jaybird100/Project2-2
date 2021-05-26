@@ -65,7 +65,7 @@ public class SkillCreationPage extends Page {
         fileChooser.setTitle("Open Resource File");
         //FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         //fileChooser.getExtensionFilters().add(extFilter);
-        File f = fileChooser.showOpenDialog(PageController.getInstance().stage);
+        File f = fileChooser.showOpenDialog(PageController.instance().stage);
         if(f!=null && f.canRead()){
             String fileString = FileParser.loadFile(f);
             skillTextArea.setText(fileString);
