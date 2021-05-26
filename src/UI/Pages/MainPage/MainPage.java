@@ -78,11 +78,11 @@ public class MainPage extends Page {
             Message m = new Message(askTextField.getText(), Main.username(), LocalDateTime.now());
             ((MessagingBoard)messagingBoardHolder.getChildren().get(0)).addMessage(m, true);
             askTextField.setText("");
-            PageController.getInstance().log.add(m);
+            PageController.instance().log.add(m);
             String response = Parser.parse(m.message);
             m = new Message(response, Main.botName);
             ((MessagingBoard) messagingBoardHolder.getChildren().get(0)).addMessage(m, false);
-            PageController.getInstance().log.add(m);
+            PageController.instance().log.add(m);
         }
         if(event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.UP){
             i = Math.min(i+1, board.messageList.size());

@@ -1,5 +1,6 @@
 package UI.Pages.PopUpWindows;
 
+import CFG.CFGSystem;
 import Utils.Data;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -21,8 +22,9 @@ public class HelpWindow {
         for (int i = 0; i < Data.commands.size(); i++) {
             ex.append(Data.commands.get(i)).append("\n");
         }
-        ex.append("\"ff y\" to turn on autocorrect and logic parsing features\n");
-        ex.append("\"ff n\" to turn off autocorrect and logic parsing features\n");
+        for (String command : CFGSystem.commands) {
+            ex.append(command).append("\n");
+        }
         explain.setText(ex.toString());
         explain.setTranslateX(20);
         explain.setTranslateY(20);

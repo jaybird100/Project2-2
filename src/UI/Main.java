@@ -41,7 +41,8 @@ public class Main extends Application {
     public void startCFGAgent(Stage primaryStage) {
         primaryStage.setTitle("Virtual Assistant");
         try {
-            controller = PageController.createInstance(primaryStage, windowWidth, windowHeight);
+            controller = PageController.instance(primaryStage, windowWidth, windowHeight);
+            PageController.init();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(0);
