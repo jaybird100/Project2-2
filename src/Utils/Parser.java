@@ -4,6 +4,7 @@ import Actions.*;
 import Articles.*;
 import Attributes.*;
 import Attributes.Attribute;
+import CFG.CFGSystem;
 
 
 import java.time.DayOfWeek;
@@ -13,6 +14,10 @@ import java.util.Arrays;
 
 public class Parser {
     public static String parse(String input){
+        String cfg = CFGSystem.run(input);
+        if(cfg!=null) {
+            return cfg;
+        }
         Calc calc = new Calc(input);
         calc.action();
         if(calc.isCalc){
