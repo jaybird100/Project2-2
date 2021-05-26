@@ -22,8 +22,10 @@ public class ClassifierFaceDetector implements FaceDetector {
     }
 
     public void analyseImage(Mat mat){
-        String faceCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
-        String eyeCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_eye_tree_eyeglasses.xml";
+        //String faceCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
+        //String eyeCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_eye_tree_eyeglasses.xml";
+        String faceCascade = "./res/haarcascade_frontalface_alt.xml";
+        String eyeCascade = "./res/haarcascade_eye_tree_eyeglasses.xml";
         CascadeClassifier faceClassifier = new CascadeClassifier(faceCascade);
         CascadeClassifier eyeClassifier = new CascadeClassifier(eyeCascade);
         if(!faceClassifier.load(faceCascade))

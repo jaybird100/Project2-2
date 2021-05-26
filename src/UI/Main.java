@@ -59,6 +59,8 @@ public class Main extends Application {
         question2.setLayoutY(50);
         root.getChildren().add(question2);
 
+        // COMMENT here to switch between face detection methods
+        //FaceDetector faceDetector = new ClassifierFaceDetector();
         FaceDetector faceDetector = new HOGFaceDetector();
 
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
