@@ -85,7 +85,8 @@ public class FaceDetector {
     }
     public void saveImage() {
         // Saving the Image
-        String file = "E:/OpenCV/chap22/sanpshot.jpg";
+        //String file = "E:/OpenCV/chap22/sanpshot.jpg";
+        String file = "./res/snapshot.jpg";
 
         // Instantiating the imgcodecs class
         Imgcodecs imageCodecs = new Imgcodecs();
