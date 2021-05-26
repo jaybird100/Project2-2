@@ -1,5 +1,6 @@
 package UI;
 
+import CFG.CFGSystem;
 import Utils.Data;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -35,6 +36,7 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException {
         //premptive preparation of data for query answering
         Data.fillData();
+        CFGSystem.load(new File("src/SkillParserFiles/CFGSkill.txt"));
         launch(args);
     }
 
