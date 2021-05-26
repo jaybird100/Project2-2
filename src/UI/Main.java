@@ -51,7 +51,7 @@ public class Main extends Application {
 
     public void checkForFace(Stage primaryStage) {
         Group root = new Group();
-        Scene scene = new Scene(root, windowWidth / 2, windowHeight / 2, Color.LAVENDER);
+        Scene scene = new Scene(root, windowWidth * 3 / 4, windowHeight / 4, Color.LAVENDER);
 
         Stage findFace = new Stage();
         findFace.setTitle("First, a Human Check");

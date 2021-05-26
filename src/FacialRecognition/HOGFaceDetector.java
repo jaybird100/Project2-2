@@ -117,7 +117,7 @@ public class HOGFaceDetector implements FaceDetector {
 
 
         float val = svm.predict(hogimage.reshape(1,1));
-        System.out.println(val);
+        System.out.println(val == 1 ? "face found" : "face not found");
         foundFace= val == 1;
 
     }
