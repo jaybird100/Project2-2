@@ -8,8 +8,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MessagingBoard extends ScrollPane {
     public int keep = Integer.MAX_VALUE;
+    public List<Message> messageList;
     public MessagingBoard(){
         super();
         setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -19,6 +23,7 @@ public class MessagingBoard extends ScrollPane {
         setContent(new VBox(10));
         vvalueProperty().bind(getVBox().heightProperty());
         getVBox().setAlignment(Pos.BOTTOM_CENTER);
+        messageList = new ArrayList<>();
     }
     public VBox getVBox(){
         return (VBox)getContent();
@@ -29,9 +34,11 @@ public class MessagingBoard extends ScrollPane {
         t.setTextAlignment(user? TextAlignment.RIGHT:TextAlignment.LEFT);
         ObservableList<Node> children = getVBox().getChildren();
         children.add(t);
+        messageList.add(0,message);
         if(children.size()>=keep) {
             while (children.size() >= keep) {
                 children.remove(0);
+                messageList.remove(0);
             }
         }
     }
@@ -41,5 +48,19 @@ public class MessagingBoard extends ScrollPane {
         for (Node child : getVBox().getChildren()) {
             ((Text)child).setWrappingWidth(getWidth()-20);
         }
+    }
+
+    public String getPrevious(int i, String by){
+        int c = 0;
+        while(c<messageList.size()-1){
+            if(messageList.get(c).id.equals(by)){
+                i--;
+                if(i==0){
+                    return messageList.get(c).message;
+                }
+            }
+            c++;
+        }
+        return messageList.size()==0? "":messageList.get(c).message;
     }
 }

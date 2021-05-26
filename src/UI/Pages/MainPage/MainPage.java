@@ -45,8 +45,8 @@ public class MainPage extends Page {
     TextArea reminderArea;
     MessagingBoard board;
 
-    String previous ="";
     String previousUser="";
+    int i=0;
     public void show(){
         reminderArea.setText(Data.checkNotifications(Data.checkNotif));
         if(messagingBoardHolder.getChildren().get(0) instanceof MessagingBoard) {
@@ -71,7 +71,7 @@ public class MainPage extends Page {
     protected void sendButton(Event event){
         if (event.getSource() == sendButton ||
                 (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)){
-            previous = askTextField.getText();
+            i=0;
             if(askTextField.getText().equals("")){
                 return;
             }
@@ -80,13 +80,21 @@ public class MainPage extends Page {
             askTextField.setText("");
             PageController.getInstance().log.add(m);
             String response = Parser.parse(m.message);
-            m = new Message(response, "Karen");
+            m = new Message(response, Main.botName);
             ((MessagingBoard) messagingBoardHolder.getChildren().get(0)).addMessage(m, false);
             PageController.getInstance().log.add(m);
         }
         if(event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.UP){
-            askTextField.setText(previous);
-            askTextField.positionCaret(previous.length());
+            i = Math.min(i+1, board.messageList.size());
+            String p = board.getPrevious(i, Main.username());
+            askTextField.setText(p);
+            askTextField.positionCaret(p.length());
+        }
+        if(event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.DOWN){
+            i = Math.max(i-1, 0);
+            String p = board.getPrevious(i, Main.username());
+            askTextField.setText(p);
+            askTextField.positionCaret(p.length());
         }
     }
 

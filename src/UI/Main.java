@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Main extends Application {
     public final int windowWidth= 700;
     public final int windowHeight = 500;
+    public static String botName = "Karen";
     public static Label title;
     private static String username;
 

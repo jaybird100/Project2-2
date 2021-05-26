@@ -5,9 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Message {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    final String message;
-    final String id;
-    final LocalDateTime time;
+    public final String message;
+    public final String id;
+    public final LocalDateTime time;
+
     public Message(String m, String id, LocalDateTime t){
         this.message = m;
         this.id = id;

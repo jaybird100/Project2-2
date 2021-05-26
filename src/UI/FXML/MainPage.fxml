@@ -53,7 +53,7 @@
       <URL value="@../CSS/mainPage.css" />
    </stylesheets>
    <bottom>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="679.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="calculatorButton" mnemonicParsing="false" onAction="#calculatorButton" styleClass="styled-button" text="Calculator" />
             <Button fx:id="createSkillButton" mnemonicParsing="false" onAction="#createSkillButton" styleClass="styled-button" text="Create skill" />
@@ -63,10 +63,7 @@
       </HBox>
    </bottom>
    <top>
-      <BorderPane prefHeight="39.0" prefWidth="679.0" BorderPane.alignment="TOP_LEFT">
-         <left>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButton" prefHeight="0.0" prefWidth="0.0" styleClass="back-button" BorderPane.alignment="CENTER" />
-         </left>
+      <BorderPane prefHeight="39.0" prefWidth="679.0" BorderPane.alignment="CENTER">
          <center>
             <Label fx:id="usernameLabel" text="Label" underline="true" BorderPane.alignment="CENTER">
                <styleClass>
@@ -75,16 +72,18 @@
                </styleClass>
             </Label>
          </center>
-         <top>
-            <HBox prefHeight="32.0" prefWidth="679.0" BorderPane.alignment="TOP_LEFT">
-               <children>
-                  <Button fx:id="helpButton" mnemonicParsing="false" onAction="#helpButton" text="?" />
-               </children>
-            </HBox>
-         </top>
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
+         <right>
+            <Button fx:id="helpButton" mnemonicParsing="false" onAction="#helpButton" text="?" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButton" prefHeight="0.0" prefWidth="0.0" styleClass="back-button" BorderPane.alignment="CENTER" />
+         </left>
+         <padding>
+            <Insets bottom="10.0" top="3.0" />
+         </padding>
       </BorderPane>
    </top>
    <center>
@@ -102,6 +101,9 @@
             </VBox>
             <TextArea fx:id="reminderArea" editable="false" prefHeight="319.0" prefWidth="205.0" wrapText="true" />
         </items>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
       </SplitPane>
    </center>
 </BorderPane>
