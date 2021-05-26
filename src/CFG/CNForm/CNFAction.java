@@ -77,7 +77,7 @@ class PreRequisite{
                     return false;
                 }
             }else{
-                accepted = matches(found, s);
+                accepted = accepted || matches(found, s);
             }
         }
         return accepted;

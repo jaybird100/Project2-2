@@ -84,6 +84,10 @@ public class CFGSystem {
             case 2:printResultsAsMatrix(r, false); break;
             case 3:map.forEach(System.out::println); break;
             case 4:m.forEach(System.out::println); break;
+            case 5:
+                printResultsAsMatrix(r, false);
+                map.forEach(System.out::println);
+                m.forEach(System.out::println); break;
         }
         return getResponse(m);
     }

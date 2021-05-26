@@ -2,8 +2,7 @@ package CFG.CNForm;
 
 import CFG.Helper.RegexHelper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CNFConverter {
     public static final String converterID = "cnf"; //lower case might not be necessary
@@ -28,6 +27,7 @@ public class CNFConverter {
                 addAction(line, dataBase.adb);
             }
         }
+        CNFDel(dataBase.rdb, recentlyAdded);
         CNFUnit(dataBase.rdb, recentlyAdded); // Apply unit rule to database at the end to make sure you don't miss a rule
         return dataBase;
     }
@@ -139,6 +139,31 @@ public class CNFConverter {
         ruleDataBase.addRule(mainKey, keys[0]+previousRule);
         return additionalKey;
     }
+
+    public static void CNFDel(RuleDataBase rdb, List<String> recentlyAdded){
+        for (String s : recentlyAdded) { // for each recently added rule
+            CNFRule rule = rdb.keyToRule.get(s);
+            for (int i = 0; i < rule.options.size(); i++) { // for each option of this rule
+                String o = rule.options.get(i);
+                if(o.matches("\\*epsilon\\*")){ // if the option is a unit (only <id>)
+                    CNFDel(rdb, rule);
+                }
+            }
+        }
+    }
+    private static void CNFDel(RuleDataBase rdb, CNFRule r){
+        HashMap<String, String> toAdd = new HashMap<>();
+        for (String s : rdb.keySet(false)) {
+            if(s.contains(r.id)){
+                String optToAdd = s.replace(r.id, "");
+                List<String> ruleIDs = RuleDataBase.ruleIDs(rdb.rulesForOption(s));
+                for (String ruleID : ruleIDs) {
+                    toAdd.put(ruleID, optToAdd);
+                }
+            }
+        }
+        toAdd.forEach(rdb::addRule);
+    }
     /**
      * Loops through all recently added rules and if they are unit rules (rule ID1 -> rule ID2), propagate it's possible replacements up
      * Does so immediately into ruleDataBase
@@ -150,18 +175,21 @@ public class CNFConverter {
             for (int i = 0; i < rule.options.size(); i++) { // for each option of this rule
                 String o = rule.options.get(i);
                 if(o.matches("<\\w+>")){ // if the option is a unit (only <id>)
-                    CNFRule r2 = ruleDataBase.rule(o);
-                    rule.add(r2.options);
-                    for (String option : r2.options) {
-                        if(ruleDataBase.optionToRule.containsKey(option)) {
-                            ruleDataBase.optionToRule.get(option).add(rule);
-                        }
-                    }
+                    CNFUnit(ruleDataBase, rule, o);
                 }
             }
         }
     }
 
+    private static void CNFUnit(RuleDataBase ruleDataBase, CNFRule rule, String o){
+        CNFRule r2 = ruleDataBase.rule(o);
+        rule.add(r2.options);
+        for (String option : r2.options) {
+            if(ruleDataBase.optionToRule.containsKey(option)) {
+                ruleDataBase.optionToRule.get(option).add(rule);
+            }
+        }
+    }
     /**
      * Adds all special characters from array in RegexHelper to database
      * @param ruleDataBase to add to
