@@ -71,10 +71,10 @@ public class CFGSystem {
         List<CNFMatch> m = findMatches(map);
         switch(print){
             case 0:break;
-            case 1:printResultsAsMatrix(r, true);
-            case 2:printResultsAsMatrix(r, false);
-            case 3:map.forEach(System.out::println);
-            case 4:m.forEach(System.out::println);
+            case 1:printResultsAsMatrix(r, true); break;
+            case 2:printResultsAsMatrix(r, false); break;
+            case 3:map.forEach(System.out::println); break;
+            case 4:m.forEach(System.out::println); break;
         }
         return getResponse(m);
     }
@@ -297,12 +297,16 @@ public class CFGSystem {
             StringBuilder l1 = new StringBuilder();
             for (List<CYKNode> string : strings) {
                 StringBuilder s = new StringBuilder();
-                if(string.size()!=0) {
-                    if(one){
-                        string.forEach(n -> s.append(n.toString()).append(","));
-                    }else {
-                        string.forEach(n -> s.append(n.id).append(","));
+                for (CYKNode n : string) {
+                    if (!removeCNF || !n.id.endsWith(CNFConverter.converterID + ">")) {
+                        if (one) {
+                            s.append(n.toString()).append(",");
+                        } else {
+                            s.append(n.id).append(",");
+                        }
                     }
+                }
+                if(s.length()!=0) {
                     s.delete(s.length() - 1, s.length());
                 }
                 while(s.length()<max){

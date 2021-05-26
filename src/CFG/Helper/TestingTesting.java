@@ -3,12 +3,8 @@ package CFG.Helper;
 import CFG.CFGSystem;
 import CFG.CNForm.CNFConverter;
 import CFG.temp.FileParser;
-import UI.Pages.MainPage.Message;
-import UI.Pages.MainPage.MessagingBoard;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestingTesting {
     public static void main(String[] args) {

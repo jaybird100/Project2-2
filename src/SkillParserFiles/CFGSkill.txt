@@ -17,3 +17,4 @@ Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 12: On Monday at noon we have Theora
 Action <LOCaTION> *,  <ROOM> DeepSpace : DeepSpace is the first room after the entrance
 Action <LOCATION> * : <ROOM> is in the first floor
 Action <GREETING> *: Hello :);
+CFGSystem.load(new File("src/SkillParserFiles/CFGSkill.txt"));
