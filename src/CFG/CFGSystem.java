@@ -22,7 +22,7 @@ public class CFGSystem {
     // 1 = print only original rules,
     // 2 = print all including rules added by CNF conversion
     // 3 = print results
-    private static boolean approximate = false;
+    private static boolean approximate = true;
 
     /**
      * Approximate input + data types
