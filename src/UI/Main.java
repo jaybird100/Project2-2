@@ -23,7 +23,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Virtual Assistant");
-        controller = PageController.createInstance(primaryStage, windowWidth, windowHeight);
+        controller = PageController.instance(primaryStage, windowWidth, windowHeight);
+        PageController.init();
     }
 
     public static void main(String[] args) throws IOException {
@@ -43,7 +44,6 @@ public class Main extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void changeUser(String username){

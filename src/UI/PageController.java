@@ -25,21 +25,21 @@ public class PageController {
     final int windowHeight;
     HashMap<String, Page> controllers = new HashMap<>();
 
-    public static PageController createInstance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
-        instance = new PageController(primaryStage, windowWidth, windowHeight);
-        init();
-        return instance;
-    }
-    private static void init() throws IOException {
-        if(Main.username().equals("")){
-            getInstance().setScene("frontpage");
-        }else{
-            getInstance().setScene("mainpage");
+    public static PageController instance(Stage primaryStage, int windowWidth, int windowHeight) throws IOException {
+        if(instance==null) {
+            instance = new PageController(primaryStage, windowWidth, windowHeight);
         }
-    }
-
-    public static PageController getInstance(){
         return instance;
+    }
+    public static PageController instance(){
+        return instance;
+    }
+    public static void init() throws IOException {
+        if(Main.username().equals("")){
+            instance().setScene("frontpage");
+        }else{
+            instance().setScene("mainpage");
+        }
     }
 
     public static void scene(String scene) throws IOException {
