@@ -59,13 +59,13 @@ public class Main extends Application {
         question2.setLayoutY(50);
         root.getChildren().add(question2);
 
-        FaceDetector faceDetector = new FaceDetector();
+        FaceDetector faceDetector = new HOGFaceDetector();
 
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
             if (ENTER.getCode().equals(KeyCode.ENTER)) {
                 faceDetector.init(primaryStage);
                 faceDetector.findFace();
-                if(FaceDetector.foundFace) {
+                if(faceDetector.isFaceFound()) {
                     findFace.close();
                     Group root1 = new Group();
                     primaryStage.setTitle("Virtual Assistant");
@@ -91,7 +91,7 @@ public class Main extends Application {
         enter.setOnAction(e -> {
             faceDetector.init(primaryStage);
             faceDetector.findFace();
-            if(FaceDetector.foundFace) {
+            if(faceDetector.isFaceFound()) {
                 findFace.close();
                 Group root1 = new Group();
                 primaryStage.setTitle("Virtual Assistant");
