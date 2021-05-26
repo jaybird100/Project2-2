@@ -12,5 +12,6 @@ public class TestingTesting {
         CFGSystem.fullFeatures(true);
         CFGSystem.print = 0;
         System.out.println(CFGSystem.run("which lectures are there on saturday"));
+        //System.out.println(CFGSystem.dataBase);
     }
 }
