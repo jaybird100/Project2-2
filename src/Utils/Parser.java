@@ -14,20 +14,7 @@ import java.util.ArrayList;
 
 public class Parser {
     public static String parse(String input){
-        if(input.equals("ff y")){
-            CFGSystem.fullFeatures(true);
-            return "Approximation and data types enabled";
-        }
-        else if(input.equals("ff n")){
-            CFGSystem.fullFeatures(false);
-            return "Approximation and data types disabled";
-        }
-        else if(input.matches("print [0-9]")){
-            int p = Integer.parseInt(input.split("print ")[1]);
-            CFGSystem.print = p;
-            return "CFG printing set to "+p;
 
-        }
         String cfg = CFGSystem.run(input);
         if(cfg!=null) {
             return cfg;

@@ -53,8 +53,8 @@ public class CNFDataBase{
     public int grammarSize() {
         return rdb.grammarSize();
     }
-    public Set<String> keySet() {
-        return rdb.keySet();
+    public Set<String> keySet(boolean id) {
+        return rdb.keySet(id);
     }
     public CNFRule rule(String key) {
         return rdb.rule(key);
@@ -179,8 +179,14 @@ class RuleDataBase {
     public int grammarSize() {
         return ruleList.size();
     }
-    public Set<String> keySet() {
-        return keyToRule.keySet();
+
+    /**
+     *
+     * @param id true for all rule IDs, true for all rule options
+     * @return
+     */
+    public Set<String> keySet(boolean id) {
+        return id? keyToRule.keySet() : optionToRule.keySet();
     }
     public CNFRule rule(String key) {
         return keyToRule.get(key);

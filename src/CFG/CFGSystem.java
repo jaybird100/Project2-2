@@ -61,6 +61,10 @@ public class CFGSystem {
      * @return response from grammar
      */
     public static String run(String input){
+        String temp = extraCommands(input);
+        if(temp!=null){
+            return temp;
+        }
         List<TreeSet<String>> words = formatInput(input);
         List<List<List<CYKNode>>> r = CYK(words);
         List<HashMap<String, String>> map = parseResults(r);
@@ -73,6 +77,23 @@ public class CFGSystem {
             case 4:m.forEach(System.out::println);
         }
         return getResponse(m);
+    }
+    private static String extraCommands(String input) {
+        if(input.equals("ff y")){
+            CFGSystem.fullFeatures(true);
+            return "Approximation and data types enabled";
+        }
+        else if(input.equals("ff n")){
+            CFGSystem.fullFeatures(false);
+            return "Approximation and data types disabled";
+        }
+        else if(input.matches("print [0-9]")){
+            int p = Integer.parseInt(input.split("print ")[1]);
+            CFGSystem.print = p;
+            return "CFG printing set to "+p;
+
+        }
+        return null;
     }
 
     /**
@@ -93,7 +114,7 @@ public class CFGSystem {
             w.add(new TreeSet<>());
             w.get(i).add(words[i]);
             if(approximate) {
-                for (String s : dataBase.keySet()) {
+                for (String s : dataBase.keySet(false)) {
                     double diff = RegexHelper.levenshteinDifference(words[i], s);
                     if (similarityNeeded <= diff) {
                         w.get(i).add(s);
