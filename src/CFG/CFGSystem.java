@@ -17,6 +17,11 @@ public class CFGSystem {
 
     public final static CNFDataBase dataBase = new CNFDataBase();
     public static double similarityNeeded = 0.7;
+    public static int print = 0;
+    // 0 = no print,
+    // 1 = print only original rules,
+    // 2 = print all including rules added by CNF conversion
+    // 3 = print results
     private static boolean approximate = false;
 
     /**
@@ -53,18 +58,19 @@ public class CFGSystem {
      * Executes CYK search on input, then parses the results of the CYK to final return the response of what was said
      * (if the input is in the grammar)
      * @param input string to analyse
-     * @param printSearch 0 = no print, 1 = print only original grammar, 2 = print all including rules added by CNF conversion
      * @return response from grammar
      */
-    public static String run(String input, int printSearch){
+    public static String run(String input){
         List<TreeSet<String>> words = formatInput(input);
         List<List<List<CYKNode>>> r = CYK(words);
         List<HashMap<String, String>> map = parseResults(r);
         List<CNFMatch> m = findMatches(map);
-        switch(printSearch){
+        switch(print){
             case 0:break;
-            case 1:printResultsAsMatrix(r, true);break;
-            case 2:printResultsAsMatrix(r, false);break;
+            case 1:printResultsAsMatrix(r, true);
+            case 2:printResultsAsMatrix(r, false);
+            case 3:map.forEach(System.out::println);
+            case 4:m.forEach(System.out::println);
         }
         return getResponse(m);
     }
@@ -245,24 +251,37 @@ public class CFGSystem {
 
     private static void printResultsAsMatrix(List<List<List<CYKNode>>> w, boolean removeCNF){
         int max =0;
+        boolean one = true;
         for (List<List<CYKNode>> rows : w) {
             for (List<CYKNode> point : rows) {
-                int size = point.stream().mapToInt(n -> (n.id.length() + 1)).sum();
+                int size;
+                if(one){
+                    size = point.stream().mapToInt(n -> (n.toString().length() + 1)).sum();
+                }
+                else {
+                    size = point.stream().mapToInt(n -> (n.id.length() + 1)).sum();
+                }
                 if (size > max) {
                     max = size;
                 }
             }
+            one = false;
         }
         StringBuilder line = new StringBuilder();
         for (int i = 0; i < max; i++) {
             line.append("_");
         }
+        one = true;
         for (List<List<CYKNode>> strings : w) {
             StringBuilder l1 = new StringBuilder();
             for (List<CYKNode> string : strings) {
                 StringBuilder s = new StringBuilder();
                 if(string.size()!=0) {
-                    string.forEach(n -> s.append(n.id).append(","));
+                    if(one){
+                        string.forEach(n -> s.append(n.toString()).append(","));
+                    }else {
+                        string.forEach(n -> s.append(n.id).append(","));
+                    }
                     s.delete(s.length() - 1, s.length());
                 }
                 while(s.length()<max){
@@ -271,6 +290,7 @@ public class CFGSystem {
                 System.out.print(s+"|");
                 l1.append("_").append(line);
             }
+            one = false;
             System.out.println("\n"+l1);
         }
     }
@@ -285,6 +305,9 @@ class CYKNode{
         this.id = id;
         this.correspondence = correspondence;
         this.nodes = nodes;
+    }
+    public String toString(){
+        return id+"="+correspondence;
     }
 }
 

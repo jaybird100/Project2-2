@@ -33,7 +33,6 @@ public class CNFAction {
             if(pr.matches(mapFound.get(pr.ruleID))) { // check if it matches with the pre req
                 nbFound++;
                 strengthFound += pr.strength;
-                break;
             }
         }
         return new CNFMatch(this,mapFound,strengthFound/(double)strengthNeeded,nbFound/(double)preRequisites.size(), nbFound/(double)mapFound.size());

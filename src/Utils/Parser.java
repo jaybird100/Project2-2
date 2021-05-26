@@ -18,11 +18,17 @@ public class Parser {
             CFGSystem.fullFeatures(true);
             return "Approximation and data types enabled";
         }
-        if(input.equals("ff n")){
+        else if(input.equals("ff n")){
             CFGSystem.fullFeatures(false);
             return "Approximation and data types disabled";
         }
-        String cfg = CFGSystem.run(input, 0);
+        else if(input.matches("print [0-9]")){
+            int p = Integer.parseInt(input.split("print ")[1]);
+            CFGSystem.print = p;
+            return "CFG printing set to "+p;
+
+        }
+        String cfg = CFGSystem.run(input);
         if(cfg!=null) {
             return cfg;
         }
