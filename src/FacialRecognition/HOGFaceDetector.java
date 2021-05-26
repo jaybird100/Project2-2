@@ -103,7 +103,7 @@ public class HOGFaceDetector implements FaceDetector {
 
     @Override
     public void findFace() {
-        SVM svm = SVM.load("src/model.xml");
+        SVM svm = SVM.load("res/model.xml");
         Mat bicubic = new Mat();
         Imgproc.resize(matrix,bicubic,dim,0,0,Imgproc.INTER_CUBIC);
         Mat grey = new Mat();
