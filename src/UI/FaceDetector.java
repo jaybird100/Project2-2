@@ -22,7 +22,7 @@ public class FaceDetector {
 
     public static boolean foundFace;
     private Mat matrix;
-    Size dim = new Size(256,128);
+    Size dim = new Size(128,64);
 
     public void init(Stage stage) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -96,7 +96,7 @@ public class FaceDetector {
 
 
     public void findFace() {
-        SVM svm = SVM.load("model.xml");
+        SVM svm = SVM.load("src/model.xml");
         Mat bicubic = new Mat();
         Imgproc.resize(matrix,bicubic,dim,0,0,Imgproc.INTER_CUBIC);
         Mat grey = new Mat();
