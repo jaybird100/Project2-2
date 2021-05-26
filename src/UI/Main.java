@@ -64,6 +64,7 @@ public class Main extends Application {
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
             if (ENTER.getCode().equals(KeyCode.ENTER)) {
                 faceDetector.init(primaryStage);
+                faceDetector.findFace();
                 if(FaceDetector.foundFace) {
                     findFace.close();
                     Group root1 = new Group();
@@ -89,6 +90,7 @@ public class Main extends Application {
         enter.setLayoutY(75);
         enter.setOnAction(e -> {
             faceDetector.init(primaryStage);
+            faceDetector.findFace();
             if(FaceDetector.foundFace) {
                 findFace.close();
                 Group root1 = new Group();

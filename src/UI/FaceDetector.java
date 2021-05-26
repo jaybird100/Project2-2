@@ -1,117 +1,117 @@
 package UI;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.ml.SVM;
+import org.opencv.objdetect.HOGDescriptor;
 import org.opencv.videoio.VideoCapture;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
 
-public class FaceDetector{
+
+public class FaceDetector {
 
     public static boolean foundFace;
+    private Mat matrix;
+    Size dim = new Size(256,128);
 
-    public void init(Stage primaryStage) {
-
+    public void init(Stage stage) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        VideoCapture image = new VideoCapture(0);
-        if (image.isOpened()) {
-            while (true & !foundFace) {
-                Mat imageMat = new Mat();
-                image.read(imageMat);
-                analyseImage(imageMat);
-            }
-            //System.out.println(imageMat.toString());
-            //image.release();
-        } else {
-            System.out.println("Error.");
-        }
-        if(foundFace){
-            System.out.println("hi7");
-        }
-    }
+        WritableImage writableImage = captureSnapShot();
+        saveImage();
+        ImageView imageView = new ImageView(writableImage);
+        imageView.setFitHeight(400);
+        imageView.setFitWidth(600);
 
-    public void analyseImage(Mat mat){
-        String faceCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
-        String eyeCascade = "C:\\Users\\ranja\\Downloads\\opencv\\sources\\data\\haarcascades\\haarcascade_eye_tree_eyeglasses.xml";
-        CascadeClassifier faceClassifier = new CascadeClassifier(faceCascade);
-        CascadeClassifier eyeClassifier = new CascadeClassifier(eyeCascade);
-        if(!faceClassifier.load(faceCascade))
-        {
-            System.out.println("Error loading face cascade");
-        }
-        else
-        {
-            System.out.println("Success loading face cascade");
-        }
-        if(!eyeClassifier.load(eyeCascade))
-        {
-            System.out.println("Error loading eyes cascade");
-        }
-        else
-        {
-            System.out.println("Success loading eyes cascade");
-        }
+        // Setting the preserve ratio of the image view
+        imageView.setPreserveRatio(true);
 
-        MatOfRect faces = new MatOfRect();
-        faceClassifier.detectMultiScale(mat, faces);
+        // Creating a Group object
+        Group root = new Group(imageView);
 
+        // Creating a scene object
+        Scene scene = new Scene(root, 600, 400);
 
-        Rect[] facesArray = faces.toArray();
+        // Setting title to the Stage
+        stage.setTitle("Capturing an image");
 
-        for(int i=0; i<facesArray.length; i++)
-        {
-            Imgproc.rectangle(mat, new Point(facesArray[i].x, facesArray[i].y), new Point(facesArray[i].x + facesArray[i].width, facesArray[i].y + facesArray[i].height),
-                    new Scalar(0, 100, 0),3);
+        // Adding scene to the stage
+        stage.setScene(scene);
 
-            MatOfRect eyes = new MatOfRect();
-            eyeClassifier.detectMultiScale(mat, eyes);
-            Rect[] eyesArray = eyes.toArray();
-            for (int j = 0; j < eyesArray.length; j++)
-            {
-                Imgproc.rectangle(mat, new Point(eyesArray[i].x, eyesArray[i].y), new Point(eyesArray[i].x + eyesArray[i].width, eyesArray[i].y + eyesArray[i].height),
-                        new Scalar(200, 200, 100),2);
-            }
-
-        }
-        if(facesArray.length != 0){
-            foundFace = true;
-            System.out.println("Not empty");
-        }
-        /*
-        showResult(mat);  //this displays the camera feed and i don't know how to close it and it's also not super necessary
-        if(foundFace){
-            return;
-        }
-         */
-    }
-
-    public void showResult(Mat img) {
-        MatOfByte m = new MatOfByte();
-        Imgcodecs.imencode(".jpg", img, m);
-        byte[] imageData = m.toArray();
-        BufferedImage buffImage = null;
-        try {
-            InputStream in = new ByteArrayInputStream(imageData);
-            buffImage = ImageIO.read(in);
-            JFrame frame = new JFrame();
-            frame.getContentPane().add(new JLabel(new ImageIcon(buffImage)));
-            frame.pack();
-            frame.setVisible(true);
-            if(foundFace){
-                frame.dispose(); //Destroy the JFrame object
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Displaying the contents of the stage
+        stage.show();
 
     }
 
+    public WritableImage captureSnapShot() {
+        WritableImage WritableImage = null;
+
+        // Loading the OpenCV core library
+        System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+
+        // Instantiating the VideoCapture class (camera:: 0)
+        VideoCapture capture = new VideoCapture(0);
+
+        // Reading the next video frame from the camera
+        Mat matrix = new Mat();
+        capture.read(matrix);
+
+        // If camera is opened
+        if( capture.isOpened()) {
+            // If there is next video frame
+            if (capture.read(matrix)) {
+                // Creating BuffredImage from the matrix
+                BufferedImage image = new BufferedImage(matrix.width(), matrix.height(), BufferedImage.TYPE_3BYTE_BGR);
+                WritableRaster raster = image.getRaster();
+                DataBufferByte dataBuffer = (DataBufferByte) raster.getDataBuffer();
+                byte[] data = dataBuffer.getData();
+                matrix.get(0, 0, data);
+                this.matrix = matrix;
+
+                // Creating the Writable Image
+                WritableImage = SwingFXUtils.toFXImage(image, null);
+            }
+        }
+        return WritableImage;
+    }
+    public void saveImage() {
+        // Saving the Image
+        String file = "E:/OpenCV/chap22/sanpshot.jpg";
+
+        // Instantiating the imgcodecs class
+        Imgcodecs imageCodecs = new Imgcodecs();
+
+        // Saving it again
+        imageCodecs.imwrite(file, matrix);
+    }
+
+
+    public void findFace() {
+        SVM svm = SVM.load("model.xml");
+        Mat bicubic = new Mat();
+        Imgproc.resize(matrix,bicubic,dim,0,0,Imgproc.INTER_CUBIC);
+        Mat grey = new Mat();
+        Imgproc.cvtColor(bicubic,grey,Imgproc.COLOR_BGR2GRAY);
+        MatOfInt uint8 = new MatOfInt();
+        grey.convertTo(uint8,CvType.CV_8U);
+
+        HOGDescriptor hog = new HOGDescriptor(dim,new Size(16,16),new Size(8,8),new Size(8,8),9,1,4.,0,2.0000000000000001e-01,false,64);
+        MatOfFloat hogimage = new MatOfFloat();
+        hog.compute(uint8,hogimage);
+
+
+        float val = svm.predict(hogimage.reshape(1,1));
+        System.out.println(val);
+        foundFace= val == 1;
+
+    }
 }
