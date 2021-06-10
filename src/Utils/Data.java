@@ -2,9 +2,8 @@ package Utils;
 
 import Actions.*;
 import Articles.*;
-import Attributes.*;
 import Attributes.Number;
-import Attributes.Attribute;
+import Attributes.*;
 import Inputs.SEFetch;
 import Inputs.SEOpen;
 
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Data {
 

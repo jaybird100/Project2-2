@@ -1,7 +1,6 @@
 package Articles;
 
 import Attributes.ADate;
-import Attributes.Attribute;
 import Attributes.ExtraText;
 import Attributes.Time;
 

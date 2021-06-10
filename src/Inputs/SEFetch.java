@@ -1,10 +1,10 @@
 package Inputs;
 
+import Actions.Fetch;
 import Articles.Event;
 import Articles.Lecture;
-import Actions.Fetch;
-import Articles.Notification;
 import Articles.Medication;
+import Articles.Notification;
 
 import java.util.ArrayList;
 

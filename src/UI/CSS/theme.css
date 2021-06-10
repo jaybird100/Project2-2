@@ -1,0 +1,99 @@
+@import url("dark_theme.css");
+.background-color-bg {
+    -fx-background-color: transparent;
+}
+.primary-color-text {
+    -fx-text-fill: -primary;
+}
+.primary-color-bg {
+    -fx-background-color: -primary;
+}
+.secondary-color-text {
+    -fx-text-fill: -secondary;
+}
+.secondary-color-bg {
+    -fx-background-color: -secondary;
+}
+
+.root{
+    -fx-font-family: "Arial";
+}
+.title-size {
+    -fx-font-size: 25px;
+}
+.label{
+    -fx-text-fill: -primary;
+}
+.text{
+    -fx-text-fill: -primary;
+}
+.button{
+    -fx-background-color: -primary;
+    -fx-text-fill: -button_text_color;
+    -fx-font-size: 14px;
+}
+.button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: -primary_lighter;
+}
+.button:pressed {
+    -fx-background-color: -primary_darker;
+}
+
+.styled-button {
+    -fx-background-radius: 3;
+    -fx-padding: 3 30 3 30;
+}
+.back-button {
+    -fx-shape: "M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64z";
+}
+/*https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css*/
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0;
+    -fx-border-radius :2.0;
+}
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0;
+    -fx-padding :0.0 0.0 10.0 0.0;
+
+}
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0;
+    -fx-padding :0.0 10.0 0.0 0.0;
+
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15 0.0;
+}
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15;
+}
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -secondary;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0;
+}
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color : -secondary_lighter;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0;
+}
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed{
+    -fx-background-color : -secondary_darker;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0;
+}

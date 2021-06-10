@@ -1,6 +1,8 @@
 package Articles;
 
-import Attributes.*;
+import Attributes.ADeadline;
+import Attributes.ExtraText;
+
 import java.util.ArrayList;
 
 public class Medication extends Article {

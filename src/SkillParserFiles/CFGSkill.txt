@@ -1,0 +1,21 @@
+RULE    <S>:    <ACTION>
+RULE   <ACTION>:   <LOCATION> | <SCHEDULE> | <Greeting>
+RULE   <SCHEDULE>: WHICH LECTURES ARE THERE <TIMEEXPRESSION> | <TIMEEXPRESSION> WHICH LECTURES ARE THERE
+RULE   <TIMEEXPRESSION>:  <TIMEEXP1> ON <DAY> | ON <DAY> <TIMEEXP1>
+RULE <TIMEEXP1>: AT <TIME> | *epsilon*
+RULE   <TIME>: <%intx>=1and(x<0orx>0)andx<24%>
+RULE   <LOCATION>: WHERE IS <ROOM> | HOW DO <PRO> GET TO <ROOM> | WHERE IS <ROOM> LOCATED
+RULE   <PRO>: I | YOU | HE | SHE
+RULE   <ROOM>: DEEPSPACE | SPACEBOX
+RULE   <DAY>: MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY
+"RULE   <DUMMYTEST>: <TIME> on <DAY> by <PRO> in <ROOM>"
+"RULE   <OTHERDUMMYTEST>: <ROOM> owned by <PRO> <TIMEEXPRESSION>"
+RULE <GREETING>: Hi | Hey | Supp
+Action <SCHEDULE> *, <DAY> Monday, <TIME> 9: We have math <TIMEEXPRESSION>
+Action <SCHEDULE> *,  <DAY>  Saturday|Sunday :  There are no lectures on Saturday
+Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 9 : We start the week with math
+Action <SCHEDULE> *,  <DAY>  Monday, <TIME> 12: On Monday at noon we have Theoratical Computer Science
+Action <LOCaTION> *,  <ROOM> DeepSpace : DeepSpace is the first room after the entrance
+Action <LOCATION> * : <ROOM> is in the first floor
+Action <GREETING> *: Hello :);
+CFGSystem.load(new File("src/SkillParserFiles/CFGSkill.txt"));

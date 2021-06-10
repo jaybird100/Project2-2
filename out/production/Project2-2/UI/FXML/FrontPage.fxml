@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Pages.FrontPage">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Hello">
+               <styleClass>
+                  <String fx:value="hello-size" />
+                  <String fx:value="primary-color-text" />
+               </styleClass>
+            </Label>
+            <TextField fx:id="usernameTextField" alignment="CENTER" onKeyReleased="#onButtonPress" promptText="username">
+               <font>
+                  <Font size="43.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="hello-size" />
+                  <String fx:value="background-color-bg" />
+               </styleClass>
+            </TextField>
+            <Button fx:id="mainPageButton" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="34.0" prefWidth="36.0" styleClass="arrow-button">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </center>
+   <stylesheets>
+      <URL value="@../CSS/frontPage.css" />
+      <URL value="@../CSS/theme.css" />
+   </stylesheets>
+</BorderPane>
