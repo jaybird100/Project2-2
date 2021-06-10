@@ -16,6 +16,9 @@ public class CNFConverter {
         return loadAsCNF(skill, new CNFDataBase(new RuleDataBase(advanced), new ActionDataBase()));
     }
     public static CNFDataBase loadAsCNF(String skill, CNFDataBase dataBase){
+        return loadAsCNF(skill, dataBase, true, true);
+    }
+    public static CNFDataBase loadAsCNF(String skill, CNFDataBase dataBase, boolean delRule, boolean unitRule){
         List<String> recentlyAdded = new ArrayList<>(); // saves the IDs of the rules the have been added this method call
         String[] lines = skill.split("\n");
         for (String line : lines) { // for each line in skill String
@@ -27,8 +30,12 @@ public class CNFConverter {
                 addAction(line, dataBase.adb);
             }
         }
-        CNFDel(dataBase.rdb, recentlyAdded);
-        CNFUnit(dataBase.rdb, recentlyAdded); // Apply unit rule to database at the end to make sure you don't miss a rule
+        if(delRule) {
+            CNFDel(dataBase.rdb, recentlyAdded);
+        }
+        if(unitRule) {
+            CNFUnit(dataBase.rdb, recentlyAdded); // Apply unit rule to database at the end to make sure you don't miss a rule
+        }
         return dataBase;
     }
 

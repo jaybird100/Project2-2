@@ -23,7 +23,7 @@ public class CFGSystem {
             "\"ff n\" = turn off autocorrect and logic parsing features",
             "\"print 0\" = no print",
             "\"print 1\" = print OG rules",
-            "\"print 2\" = print OG rules",
+            "\"print 2\" = print all rules",
             "\"print 3\" = print rule to word map found",
             "\"print 4\" = print matches/actions accepted"
     };

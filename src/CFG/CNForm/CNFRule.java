@@ -25,6 +25,14 @@ public class CNFRule implements Comparable<CNFRule> {
         }
     }
 
+    public int size(){
+        return options.size();
+    }
+
+    public String get(int i){
+        return options.get(i);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
