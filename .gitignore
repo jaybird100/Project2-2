@@ -19,3 +19,5 @@ out/production/Project2-2/sample/Controller.class
 out/production/Project2-2/sample/Lecture.class
 out/production/Project2-2/sample/Data.class
 out/production/Project2-2/sample/Main.class
+*.iml
+.DS_Store
