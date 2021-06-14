@@ -1,6 +1,7 @@
 package UI.Pages;
 
 import CFG.CNForm.CNFConverter;
+import CFG.Helper.FileReader;
 import CFG.temp.FileParser;
 import CFG.CFGSystem;
 import UI.PageController;
@@ -67,7 +68,7 @@ public class SkillCreationPage extends Page {
         //fileChooser.getExtensionFilters().add(extFilter);
         File f = fileChooser.showOpenDialog(PageController.instance().stage);
         if(f!=null && f.canRead()){
-            String fileString = FileParser.loadFile(f);
+            String fileString = FileReader.loadFile(f);
             skillTextArea.setText(fileString);
         }
     }
