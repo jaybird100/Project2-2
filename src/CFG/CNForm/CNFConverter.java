@@ -49,12 +49,16 @@ public class CNFConverter {
         int i=0;
         String[] s = rule.split("<", 2);
         String key = "<"+s[1].split(">", 2)[0]+">";
+        if(ruleDataBase.rule(key)!=null){
+            i = ruleDataBase.rule(key).extraRules+1;
+        }
         String[] replacements = s[1].split(":", 2)[1].split("\\|");
         for (String replacement : replacements) { // for each replacement found for this rule
             replacement = replacement.trim();
             replacement = CNFTerm(replacement, ruleDataBase); // Apply Term rule
             i = CNFBin(replacement, key, i, ruleDataBase); // Apply Bin rule
         }
+        ruleDataBase.rule(key).extraRules = i;
         return key;
     }
 
