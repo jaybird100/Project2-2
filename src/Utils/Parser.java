@@ -7,6 +7,7 @@ import Articles.Timer;
 import Articles.Webpage;
 import Attributes.*;
 import CFG.CFGSystem;
+import CFG.ChatBot;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class Parser {
     public static String parse(String input){
 
-        String cfg = CFGSystem.run(input);
+        String cfg = ChatBot.run(input);
         if(cfg!=null) {
             return cfg;
         }
