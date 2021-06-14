@@ -5,7 +5,7 @@ import CFG.Helper.LogicProposition;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
+//TODO make multiple responses possible for randomization
 public class CNFAction {
     public final String response; // response split into a list with every String in the list is either terminal or a rule ID
     // ex: [We have math, <timeexpression>, for students in group 1]

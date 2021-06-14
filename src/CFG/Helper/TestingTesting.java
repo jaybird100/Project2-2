@@ -1,11 +1,20 @@
 package CFG.Helper;
 
+import CFG.CFGSystem;
+import CFG.ChatBot;
+
 import java.io.File;
-import java.util.List;
+import java.util.Scanner;
 
 public class TestingTesting {
     public static void main(String[] args) {
-        List<String> generated = new Generator(new File("src/skillParserFiles/CFGSkill.txt"), 0).generate(100);
-        Generator.histogram(generated);
+        CFGSystem.load(new File("src/skillParserFiles/CFGSkill.txt"));
+
+        Scanner s = new Scanner(System.in);
+        while(true) {
+            String input = s.nextLine();
+            System.out.println(ChatBot.run(input));
+        }
     }
+
 }
