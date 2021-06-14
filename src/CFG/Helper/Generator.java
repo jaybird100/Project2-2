@@ -6,8 +6,11 @@ import CFG.CNForm.CNFRule;
 import CFG.temp.FileParser;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
+//TODO make generate method that can create utterances that aren't accepted by grammar
 // Disclaimer: letting loadAsCNF do the del and unit rules will give some rules way bigger odds of happening.
 // Method added to allows loadAsCNF to skip those rules. Generator(File, Integer) automatically skips them as well.
 public class Generator {
@@ -31,7 +34,7 @@ public class Generator {
      * @param seed for randomizer (if null = no seed)
      */
     public Generator(File fileOfSkill, Integer seed){
-        this(CNFConverter.loadAsCNF(FileParser.loadFile(fileOfSkill),new CNFDataBase() ,false, false), seed);
+        this(CNFConverter.loadAsCNF(FileReader.loadFile(fileOfSkill),new CNFDataBase() ,false, false), seed);
     }
 
     /**
@@ -89,6 +92,16 @@ public class Generator {
         return l;
     }
 
+    public static void write(List<String> utterances, String fileName){
+        try (PrintWriter writer = new PrintWriter("res/"+fileName+".csv")) {
+            StringBuilder sb = new StringBuilder();
+            utterances.forEach(u -> sb.append(u).append('\n'));
+            writer.write(sb.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void histogram(List<String> utterances){
         HashMap<String, Integer> counts = new HashMap<>();
         for (String s : utterances) {
@@ -101,4 +114,5 @@ public class Generator {
                 .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))
                 .forEach(k -> System.out.println(k.getKey() + ": " + k.getValue()));
     }
+
 }
