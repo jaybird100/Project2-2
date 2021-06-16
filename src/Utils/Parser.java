@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Parser {
     public static String parse(String input){
 
-        String cfg = ChatBot.run(input);
+        String cfg = CFGSystem.run(input);
         if(cfg!=null) {
             return cfg;
         }

@@ -67,9 +67,15 @@ public class CFGSystem {
      * Executes CYK search on input, then parses the results of the CYK to final return the response of what was said
      * (if the input is in the grammar)
      * @param input string to analyse
-     * @return response from grammar
+     * @return response from grammar, null if nothing found
      */
     public static String run(String input){
+        if(ChatBot.isActive()){
+            input = ChatBot.dialogue(input);
+            if(ChatBot.isActive()){
+                return input;
+            }
+        }
         String temp = extraCommands(input);
         if(temp!=null){
             return temp;
@@ -78,6 +84,14 @@ public class CFGSystem {
         List<List<List<CYKNode>>> r = CYK(words);
         List<HashMap<String, String>> map = parseResults(r);
         List<CNFMatch> m = findMatches(map);
+        print(r, map, m);
+        if(m.size()==0){
+            return ChatBot.initiate(r);
+        }
+        return getResponse(m);
+    }
+
+    static void print(List<List<List<CYKNode>>> r, List<HashMap<String, String>> map, List<CNFMatch> m){
         switch(print){
             case 0:break;
             case 1:printResultsAsMatrix(r, true); break;
@@ -89,7 +103,6 @@ public class CFGSystem {
                 map.forEach(System.out::println);
                 m.forEach(System.out::println); break;
         }
-        return getResponse(m);
     }
     static String extraCommands(String input) {
         if(input.equals("ff y")){
@@ -346,4 +359,3 @@ class CYKNode{
         return id+"="+fullCorrespondence;
     }
 }
-
