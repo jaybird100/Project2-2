@@ -16,6 +16,9 @@ public class CNFConverter {
         return loadAsCNF(skill, new CNFDataBase(new RuleDataBase(advanced), new ActionDataBase()));
     }
     public static CNFDataBase loadAsCNF(String skill, CNFDataBase dataBase){
+        return loadAsCNF(skill, dataBase, true, true);
+    }
+    public static CNFDataBase loadAsCNF(String skill, CNFDataBase dataBase, boolean delRule, boolean unitRule){
         List<String> recentlyAdded = new ArrayList<>(); // saves the IDs of the rules the have been added this method call
         String[] lines = skill.split("\n");
         for (String line : lines) { // for each line in skill String
@@ -27,8 +30,12 @@ public class CNFConverter {
                 addAction(line, dataBase.adb);
             }
         }
-        CNFDel(dataBase.rdb, recentlyAdded);
-        CNFUnit(dataBase.rdb, recentlyAdded); // Apply unit rule to database at the end to make sure you don't miss a rule
+        if(delRule) {
+            CNFDel(dataBase.rdb, recentlyAdded);
+        }
+        if(unitRule) {
+            CNFUnit(dataBase.rdb, recentlyAdded); // Apply unit rule to database at the end to make sure you don't miss a rule
+        }
         return dataBase;
     }
 
@@ -42,12 +49,16 @@ public class CNFConverter {
         int i=0;
         String[] s = rule.split("<", 2);
         String key = "<"+s[1].split(">", 2)[0]+">";
+        if(ruleDataBase.rule(key)!=null){
+            i = ruleDataBase.rule(key).extraRules+1;
+        }
         String[] replacements = s[1].split(":", 2)[1].split("\\|");
         for (String replacement : replacements) { // for each replacement found for this rule
             replacement = replacement.trim();
             replacement = CNFTerm(replacement, ruleDataBase); // Apply Term rule
             i = CNFBin(replacement, key, i, ruleDataBase); // Apply Bin rule
         }
+        ruleDataBase.rule(key).extraRules = i;
         return key;
     }
 

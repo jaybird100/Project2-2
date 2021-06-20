@@ -1,0 +1,1573 @@
+,utterance,intension
+0,which lectures are there on wednesday at 2,Schedule
+1,is there a lecture at 16 on monday,Schedule
+2,on sunday at 18 which lectures are there,Schedule
+3,on tuesday at 22 which lectures are there,Schedule
+4,hello where is room 7 located,Location
+5,which lectures are there at 10 on friday,Schedule
+6,which lectures are there on tuesday at 17,Schedule
+7,hey where is room 10,Location
+8,is there a lecture on monday at 5,Schedule
+9,on thursday at 3 which lectures are there,Schedule
+10,at 3 on wednesday which lectures are there,Schedule
+11,hi How to find room 19,Location
+12,at 23 on friday which lectures are there,Schedule
+13,hi how does she get to room 19,Location
+14,which lectures are there on saturday at 8,Schedule
+15,at 15 on thursday which lectures are there,Schedule
+16,which lectures are there on sunday at 9,Schedule
+17,which lectures are there at 7 on monday,Schedule
+18,is there a lecture at 0 on friday,Schedule
+19,on friday at 8 which lectures are there,Schedule
+20,is there a lecture on monday at 10,Schedule
+21,hello where is room 6 located,Location
+22,which lectures are there at 5 on tuesday,Schedule
+23,which lectures are there on tuesday at 21,Schedule
+24,hi how do you get to room 4,Location
+25,is there a lecture at 23 on saturday,Schedule
+26,is there a lecture at 20 on saturday,Schedule
+27,is there a lecture on friday at 2,Schedule
+28,hi how do you get to room 14,Location
+29,hey where is room 19,Location
+30,hey what is the location of room 7,Location
+31,is there a lecture on tuesday at 13,Schedule
+32,is there a lecture at 22 on sunday,Schedule
+33,which lectures are there at 8 on sunday,Schedule
+34,at 19 on monday which lectures are there,Schedule
+35,hi How to find room 4,Location
+36,at 17 on wednesday which lectures are there,Schedule
+37,is there a lecture today,Schedule
+38,which lectures are there on monday at 17,Schedule
+39,hi how do we get to room 17,Location
+40,at 12 on monday which lectures are there,Schedule
+41,on monday at 23 which lectures are there,Schedule
+42,is there a lecture at 2 on sunday,Schedule
+43,at 2 on friday which lectures are there,Schedule
+44,hey where is room 12 located,Location
+45,hi how does she get to room 15,Location
+46,on saturday at 19 which lectures are there,Schedule
+47,which lectures are there at 14 on wednesday,Schedule
+48,on thursday at 12 which lectures are there,Schedule
+49,hey where is room 3 located,Location
+50,which lectures are there at 5 on saturday,Schedule
+51,hello what is the location of room 17,Location
+52,which lectures are there on tuesday,Schedule
+53,hello where is room 9,Location
+54,at 9 on wednesday which lectures are there,Schedule
+55,at 13 on thursday which lectures are there,Schedule
+56,on wednesday at 1 which lectures are there,Schedule
+57,on saturday at 7 which lectures are there,Schedule
+58,at 7 on saturday which lectures are there,Schedule
+59,which lectures are there on sunday at 1,Schedule
+60,on thursday which lectures are there,Schedule
+61,at 15 on friday which lectures are there,Schedule
+62,hey How to find room 1,Location
+63,hi how do we get to room 1,Location
+64,is there a lecture on saturday at 10,Schedule
+65,is there a lecture at 19 on thursday,Schedule
+66,hi how does he get to room 15,Location
+67,at 5 on sunday which lectures are there,Schedule
+68,which lectures are there on thursday at 4,Schedule
+69,at 6 on thursday which lectures are there,Schedule
+70,hello How to find room 6,Location
+71,on monday at 18 which lectures are there,Schedule
+72,is there a lecture on friday at 9,Schedule
+73,which lectures are there at 6 on wednesday,Schedule
+74,which lectures are there on wednesday at 14,Schedule
+75,on monday at 17 which lectures are there,Schedule
+76,on tuesday at 16 which lectures are there,Schedule
+77,on friday at 10 which lectures are there,Schedule
+78,at 23 on saturday which lectures are there,Schedule
+79,which lectures are there on wednesday,Schedule
+80,at 14 on friday which lectures are there,Schedule
+81,on wednesday at 12 which lectures are there,Schedule
+82,at 9 on tuesday which lectures are there,Schedule
+83,hi where is room 16 located,Location
+84,which lectures are there at 3 on saturday,Schedule
+85,which lectures are there on friday at 21,Schedule
+86,hi where is room 13 located,Location
+87,is there a lecture on friday at 11,Schedule
+88,which lectures are there on tuesday at 19,Schedule
+89,is there a lecture on monday at 19,Schedule
+90,hello how do I get to room 16,Location
+91,which lectures are there at 13 on wednesday,Schedule
+92,hello what is the location of room 8,Location
+93,is there a lecture on friday at 12,Schedule
+94,is there a lecture at 13 on thursday,Schedule
+95,on sunday at 21 which lectures are there,Schedule
+96,which lectures are there on friday at 19,Schedule
+97,which lectures are there at 13 on saturday,Schedule
+98,which lectures are there at 14 on thursday,Schedule
+99,hey how does she get to room 11,Location
+100,hello how does she get to room 8,Location
+101,which lectures are there on saturday at 12,Schedule
+102,which lectures are there at 14 on monday,Schedule
+103,hey where is room 7 located,Location
+104,is there a lecture on saturday at 17,Schedule
+105,at 11 on monday which lectures are there,Schedule
+106,hello how does he get to room 17,Location
+107,which lectures are there on monday at 22,Schedule
+108,how do i get to spacebox,Location
+109,on tuesday at 6 which lectures are there,Schedule
+110,hi what is the location of room 3,Location
+111,is there a lecture on tuesday at 20,Schedule
+112,hi how does he get to room 18,Location
+113,which lectures are there at 18 on thursday,Schedule
+114,on sunday which lectures are there,Schedule
+115,hi where is room 8 located,Location
+116,hello how do you get to room 11,Location
+117,is there a lecture at 9 on saturday,Schedule
+118,at 6 on tuesday which lectures are there,Schedule
+119,is there a lecture at 13 on saturday,Schedule
+120,which lectures are there on thursday at 19,Schedule
+121,which lectures are there at 18 on friday,Schedule
+122,is there a lecture on thursday,Schedule
+123,hey how do you get to room 13,Location
+124,on friday at 22 which lectures are there,Schedule
+125,which lectures are there at 1 on saturday,Schedule
+126,hello where is room 3,Location
+127,on monday at 19 which lectures are there,Schedule
+128,is there a lecture on monday at 1,Schedule
+129,hello how do we get to room 14,Location
+130,is there a lecture on monday at 7,Schedule
+131,hey how does she get to room 16,Location
+132,which lectures are there at 19 on wednesday,Schedule
+133,on tuesday at 0 which lectures are there,Schedule
+134,is there a lecture at 19 on wednesday,Schedule
+135,on monday at 20 which lectures are there,Schedule
+136,at 16 on tuesday which lectures are there,Schedule
+137,hey what is the location of room 17,Location
+138,is there a lecture at 22 on friday,Schedule
+139,hello how do you get to room 2,Location
+140,hey where is room 15,Location
+141,is there a lecture at 19 on sunday,Schedule
+142,at 23 on thursday which lectures are there,Schedule
+143,at 10 on tuesday which lectures are there,Schedule
+144,hi How to find room 8,Location
+145,which lectures are there on saturday at 19,Schedule
+146,which lectures are there at 10 on tuesday,Schedule
+147,at 23 on sunday which lectures are there,Schedule
+148,which lectures are there on sunday at 7,Schedule
+149,hello how do we get to room 3,Location
+150,which lectures are there on sunday at 8,Schedule
+151,which lectures are there on friday at 12,Schedule
+152,hello how does he get to room 1,Location
+153,which lectures are there at 4 on monday,Schedule
+154,which lectures are there on monday at 14,Schedule
+155,how do i get to deepspace,Location
+156,on thursday at 6 which lectures are there,Schedule
+157,hello how do you get to room 5,Location
+158,which lectures are there on saturday,Schedule
+159,is there a lecture on tuesday at 10,Schedule
+160,which lectures are there on thursday at 9,Schedule
+161,hello how do we get to room 17,Location
+162,is there a lecture on thursday at 3,Schedule
+163,on tuesday at 4 which lectures are there,Schedule
+164,at 16 on monday which lectures are there,Schedule
+165,which lectures are there at 13 on sunday,Schedule
+166,hey how does she get to room 6,Location
+167,which lectures are there on wednesday at 18,Schedule
+168,is there a lecture at 9 on sunday,Schedule
+169,is there a lecture at 5 on sunday,Schedule
+170,hi where is room 5 located,Location
+171,is there a lecture on thursday at 23,Schedule
+172,on monday at 14 which lectures are there,Schedule
+173,is there a lecture at 10 on tuesday,Schedule
+174,on tuesday at 3 which lectures are there,Schedule
+175,hey how do you get to room 10,Location
+176,hey how do we get to room 12,Location
+177,is there a lecture at 11 on friday,Schedule
+178,which lectures are there at 12 on wednesday,Schedule
+179,hey where is room 20,Location
+180,hey how do you get to room 6,Location
+181,at 5 on monday which lectures are there,Schedule
+182,hello how do I get to room 10,Location
+183,on monday at 0 which lectures are there,Schedule
+184,is there a lecture at 19 on monday,Schedule
+185,at 20 on sunday which lectures are there,Schedule
+186,is there a lecture on thursday at 8,Schedule
+187,which lectures are there at 20 on sunday,Schedule
+188,is there a lecture at 0 on tuesday,Schedule
+189,which lectures are there on tuesday at 2,Schedule
+190,which lectures are there on monday at 12,Schedule
+191,hi what is the location of room 14,Location
+192,is there a lecture at 6 on friday,Schedule
+193,at 14 on sunday which lectures are there,Schedule
+194,hey where is room 18 located,Location
+195,on saturday which lectures are there,Schedule
+196,at 7 on wednesday which lectures are there,Schedule
+197,hi how do I get to room 4,Location
+198,is there a lecture on thursday at 22,Schedule
+199,which lectures are there at 10 on sunday,Schedule
+200,hello How to find room 20,Location
+201,is there a lecture on sunday at 2,Schedule
+202,hey how do we get to room 19,Location
+203,is there a lecture at 11 on saturday,Schedule
+204,hello how do we get to room 13,Location
+205,hello how do you get to room 16,Location
+206,at 15 on tuesday which lectures are there,Schedule
+207,is there a lecture at 22 on thursday,Schedule
+208,which lectures are there at 9 on saturday,Schedule
+209,hey how does he get to room 10,Location
+210,hi How to find room 11,Location
+211,at 21 on sunday which lectures are there,Schedule
+212,is there a lecture on sunday at 1,Schedule
+213,is there a lecture at 8 on monday,Schedule
+214,hey how do you get to room 3,Location
+215,at 19 on sunday which lectures are there,Schedule
+216,which lectures are there at 9 on monday,Schedule
+217,which lectures are there at 4 on tuesday,Schedule
+218,is there a lecture at 5 on tuesday,Schedule
+219,is there a lecture at 11 on monday,Schedule
+220,is there a lecture at 15 on friday,Schedule
+221,at 2 on saturday which lectures are there,Schedule
+222,which lectures are there on saturday at 22,Schedule
+223,hi what is the location of room 1,Location
+224,hello where is room 14,Location
+225,hi how do we get to room 5,Location
+226,is there a lecture at 16 on saturday,Schedule
+227,is there a lecture on monday at 3,Schedule
+228,is there a lecture on monday at 21,Schedule
+229,hi where is room 10,Location
+230,is there a lecture at 8 on saturday,Schedule
+231,is there a lecture on friday at 22,Schedule
+232,on tuesday which lectures are there,Schedule
+233,is there a lecture on monday at 0,Schedule
+234,on saturday at 16 which lectures are there,Schedule
+235,is there a lecture on saturday at 19,Schedule
+236,which lectures are there at 15 on friday,Schedule
+237,hi how does he get to room 10,Location
+238,which lectures are there on saturday at 17,Schedule
+239,which lectures are there on tuesday at 18,Schedule
+240,at 22 on saturday which lectures are there,Schedule
+241,which lectures are there on sunday at 13,Schedule
+242,is there a lecture at 1 on saturday,Schedule
+243,hi where is room 7 located,Location
+244,which lectures are there on monday at 7,Schedule
+245,on monday at 11 which lectures are there,Schedule
+246,is there a lecture at 23 on wednesday,Schedule
+247,is there a lecture on tuesday at 4,Schedule
+248,which lectures are there at 2 on friday,Schedule
+249,which lectures are there at 23 on friday,Schedule
+250,on wednesday at 15 which lectures are there,Schedule
+251,on friday at 19 which lectures are there,Schedule
+252,hello how does she get to room 19,Location
+253,hello what is the location of room 14,Location
+254,is there a lecture at 9 on thursday,Schedule
+255,hey where is room 4 located,Location
+256,at 14 on monday which lectures are there,Schedule
+257,is there a lecture on friday at 18,Schedule
+258,at 0 on thursday which lectures are there,Schedule
+259,hey where is room 18,Location
+260,on wednesday at 21 which lectures are there,Schedule
+261,hello how does she get to room 1,Location
+262,hey how do I get to room 10,Location
+263,on friday at 11 which lectures are there,Schedule
+264,is there a lecture on saturday at 1,Schedule
+265,hello How to find room 18,Location
+266,at 1 on sunday which lectures are there,Schedule
+267,is there a lecture on tuesday at 15,Schedule
+268,is there a lecture at 16 on wednesday,Schedule
+269,is there a lecture on friday at 8,Schedule
+270,which lectures are there at 10 on wednesday,Schedule
+271,hello how do we get to room 16,Location
+272,is there a lecture at 0 on wednesday,Schedule
+273,at 19 on saturday which lectures are there,Schedule
+274,hi how do we get to room 12,Location
+275,is there a lecture at 15 on tuesday,Schedule
+276,is there a lecture on thursday at 20,Schedule
+277,which lectures are there at 19 on friday,Schedule
+278,is there a lecture on monday at 11,Schedule
+279,is there a lecture at 14 on wednesday,Schedule
+280,hello where is room 20,Location
+281,on friday at 4 which lectures are there,Schedule
+282,hi How to find room 6,Location
+283,which lectures are there on friday at 18,Schedule
+284,which lectures are there at 12 on friday,Schedule
+285,is there a lecture on friday at 10,Schedule
+286,which lectures are there at 3 on thursday,Schedule
+287,which lectures are there on thursday at 1,Schedule
+288,hi How to find room 18,Location
+289,is there a lecture on wednesday at 10,Schedule
+290,hi where is room 18,Location
+291,on monday at 1 which lectures are there,Schedule
+292,on sunday at 11 which lectures are there,Schedule
+293,at 13 on friday which lectures are there,Schedule
+294,on saturday at 8 which lectures are there,Schedule
+295,at 22 on friday which lectures are there,Schedule
+296,which lectures are there at 15 on monday,Schedule
+297,which lectures are there at 9 on friday,Schedule
+298,which lectures are there at 5 on thursday,Schedule
+299,on wednesday at 8 which lectures are there,Schedule
+300,is there a lecture on saturday at 11,Schedule
+301,hi where is room 14,Location
+302,which lectures are there at 19 on tuesday,Schedule
+303,on saturday at 20 which lectures are there,Schedule
+304,hi where is room 13,Location
+305,hi How to find room 14,Location
+306,is there a lecture on sunday at 4,Schedule
+307,hey how do I get to room 4,Location
+308,at 23 on wednesday which lectures are there,Schedule
+309,hey How to find room 3,Location
+310,is there a lecture at 11 on tuesday,Schedule
+311,hi how do you get to room 5,Location
+312,on friday at 7 which lectures are there,Schedule
+313,which lectures are there on thursday at 17,Schedule
+314,hey how do you get to room 17,Location
+315,hello how does she get to room 7,Location
+316,which lectures are there on sunday at 16,Schedule
+317,hello where is room 8 located,Location
+318,is there a lecture on sunday at 9,Schedule
+319,hello How to find room 9,Location
+320,is there a lecture on saturday at 14,Schedule
+321,hey how do you get to room 19,Location
+322,hello how do you get to room 9,Location
+323,which lectures are there on sunday at 19,Schedule
+324,hi How to find room 16,Location
+325,is there a lecture at 17 on tuesday,Schedule
+326,is there a lecture on friday at 3,Schedule
+327,which lectures are there at 6 on monday,Schedule
+328,is there a lecture at 20 on wednesday,Schedule
+329,is there a lecture on friday at 21,Schedule
+330,on wednesday at 16 which lectures are there,Schedule
+331,on thursday at 22 which lectures are there,Schedule
+332,on tuesday at 23 which lectures are there,Schedule
+333,is there a lecture at 8 on tuesday,Schedule
+334,is there a lecture on friday at 5,Schedule
+335,hello how does he get to room 10,Location
+336,which lectures are there on wednesday at 3,Schedule
+337,is there a lecture on sunday at 0,Schedule
+338,hi how do you get to room 11,Location
+339,hello how does she get to room 15,Location
+340,which lectures are there on monday at 16,Schedule
+341,hey how do I get to room 11,Location
+342,which lectures are there on saturday at 10,Schedule
+343,is there a lecture at 23 on thursday,Schedule
+344,hello where is room 12,Location
+345,is there a lecture on wednesday at 21,Schedule
+346,which lectures are there at 4 on friday,Schedule
+347,hi what is the location of room 2,Location
+348,which lectures are there at 11 on sunday,Schedule
+349,hey where is room 6,Location
+350,which lectures are there at 21 on friday,Schedule
+351,at 14 on tuesday which lectures are there,Schedule
+352,hey how does he get to room 12,Location
+353,hello what is the location of room 3,Location
+354,at 13 on sunday which lectures are there,Schedule
+355,hi what is the location of room 6,Location
+356,which lectures are there at 1 on tuesday,Schedule
+357,hey how do we get to room 11,Location
+358,is there a lecture at 1 on tuesday,Schedule
+359,hello how does he get to room 14,Location
+360,is there a lecture at 17 on friday,Schedule
+361,is there a lecture on monday at 2,Schedule
+362,which lectures are there at 15 on sunday,Schedule
+363,is there a lecture on tuesday at 14,Schedule
+364,at 22 on sunday which lectures are there,Schedule
+365,at 17 on monday which lectures are there,Schedule
+366,hello what is the location of room 4,Location
+367,which lectures are there on wednesday at 17,Schedule
+368,which lectures are there at 6 on sunday,Schedule
+369,is there a lecture at 7 on friday,Schedule
+370,hi how does she get to room 16,Location
+371,hi what is the location of room 11,Location
+372,hi how do you get to room 13,Location
+373,which lectures are there at 22 on sunday,Schedule
+374,is there a lecture at 21 on monday,Schedule
+375,hi How to find room 13,Location
+376,hi where is room 15,Location
+377,on wednesday at 0 which lectures are there,Schedule
+378,which lectures are there at 15 on wednesday,Schedule
+379,how do he get to deepspace,Location
+380,which lectures are there at 8 on friday,Schedule
+381,which lectures are there on sunday at 5,Schedule
+382,hey how does he get to room 7,Location
+383,is there a lecture at 7 on saturday,Schedule
+384,hi how do I get to room 15,Location
+385,hi how do we get to room 3,Location
+386,which lectures are there at 2 on saturday,Schedule
+387,which lectures are there on saturday at 18,Schedule
+388,is there a lecture on sunday at 3,Schedule
+389,on thursday at 9 which lectures are there,Schedule
+390,on monday at 10 which lectures are there,Schedule
+391,at 3 on friday which lectures are there,Schedule
+392,at 1 on wednesday which lectures are there,Schedule
+393,which lectures are there at 16 on sunday,Schedule
+394,hey where is room 6 located,Location
+395,at 4 on monday which lectures are there,Schedule
+396,is there a lecture at 4 on monday,Schedule
+397,hello how do I get to room 4,Location
+398,hi where is room 20,Location
+399,is there a lecture on wednesday at 12,Schedule
+400,hello where is room 1 located,Location
+401,on thursday at 4 which lectures are there,Schedule
+402,which lectures are there on thursday at 13,Schedule
+403,at 12 on sunday which lectures are there,Schedule
+404,hello how do you get to room 10,Location
+405,hello where is room 7,Location
+406,at 8 on wednesday which lectures are there,Schedule
+407,is there a lecture at 5 on monday,Schedule
+408,on wednesday at 10 which lectures are there,Schedule
+409,hello how do I get to room 8,Location
+410,hello what is the location of room 7,Location
+411,is there a lecture at 8 on sunday,Schedule
+412,at 15 on monday which lectures are there,Schedule
+413,hi How to find room 9,Location
+414,at 9 on sunday which lectures are there,Schedule
+415,hi where is room 10 located,Location
+416,which lectures are there on thursday at 20,Schedule
+417,which lectures are there at 8 on wednesday,Schedule
+418,at 20 on thursday which lectures are there,Schedule
+419,hello where is room 13 located,Location
+420,is there a lecture at 10 on saturday,Schedule
+421,which lectures are there at 7 on tuesday,Schedule
+422,which lectures are there at 3 on friday,Schedule
+423,hello How to find room 17,Location
+424,hey how does he get to room 9,Location
+425,hi how does she get to room 13,Location
+426,hello where is room 14 located,Location
+427,hello how do you get to room 7,Location
+428,is there a lecture at 13 on monday,Schedule
+429,which lectures are there at 21 on thursday,Schedule
+430,hi where is room 11 located,Location
+431,is there a lecture on thursday at 1,Schedule
+432,is there a lecture at 10 on sunday,Schedule
+433,on friday at 0 which lectures are there,Schedule
+434,is there a lecture on saturday at 7,Schedule
+435,at 20 on monday which lectures are there,Schedule
+436,hey where is room 7,Location
+437,at 21 on thursday which lectures are there,Schedule
+438,is there a lecture at 7 on sunday,Schedule
+439,hey where is room 20 located,Location
+440,is there a lecture on friday at 7,Schedule
+441,is there a lecture at 15 on thursday,Schedule
+442,at 10 on sunday which lectures are there,Schedule
+443,hi where is room 4 located,Location
+444,at 2 on thursday which lectures are there,Schedule
+445,on thursday at 17 which lectures are there,Schedule
+446,which lectures are there at 20 on friday,Schedule
+447,is there a lecture at 7 on thursday,Schedule
+448,is there a lecture on thursday at 7,Schedule
+449,which lectures are there at 6 on tuesday,Schedule
+450,hello where is room 2,Location
+451,at 8 on sunday which lectures are there,Schedule
+452,is there a lecture on wednesday at 4,Schedule
+453,hello where is room 5 located,Location
+454,at 23 on tuesday which lectures are there,Schedule
+455,hi where is room 19 located,Location
+456,is there a lecture on wednesday at 8,Schedule
+457,is there a lecture at 14 on tuesday,Schedule
+458,hey what is the location of room 2,Location
+459,on friday at 15 which lectures are there,Schedule
+460,is there a lecture on monday at 17,Schedule
+461,which lectures are there at 1 on wednesday,Schedule
+462,is there a lecture on friday at 0,Schedule
+463,is there a lecture on monday at 14,Schedule
+464,at 4 on friday which lectures are there,Schedule
+465,is there a lecture at 4 on thursday,Schedule
+466,on wednesday which lectures are there,Schedule
+467,on tuesday at 12 which lectures are there,Schedule
+468,hello how do you get to room 4,Location
+469,hello How to find room 19,Location
+470,is there a lecture on friday at 15,Schedule
+471,which lectures are there on sunday at 20,Schedule
+472,hello How to find room 12,Location
+473,hi how do I get to room 18,Location
+474,is there a lecture on tuesday at 11,Schedule
+475,hello how do you get to room 15,Location
+476,is there a lecture at 17 on monday,Schedule
+477,at 5 on tuesday which lectures are there,Schedule
+478,hello How to find room 10,Location
+479,which lectures are there on saturday at 15,Schedule
+480,is there a lecture at 5 on friday,Schedule
+481,is there a lecture on sunday at 11,Schedule
+482,which lectures are there on tuesday at 4,Schedule
+483,is there a lecture on wednesday at 0,Schedule
+484,on monday which lectures are there,Schedule
+485,hi how does she get to room 7,Location
+486,is there a lecture at 17 on thursday,Schedule
+487,hi how does he get to room 16,Location
+488,which lectures are there at 12 on tuesday,Schedule
+489,is there a lecture on thursday at 17,Schedule
+490,at 0 on saturday which lectures are there,Schedule
+491,hi how do I get to room 9,Location
+492,on tuesday at 15 which lectures are there,Schedule
+493,at 16 on sunday which lectures are there,Schedule
+494,at 13 on wednesday which lectures are there,Schedule
+495,which lectures are there at 22 on tuesday,Schedule
+496,is there a lecture at 7 on monday,Schedule
+497,hi where is room 5,Location
+498,hey How to find room 15,Location
+499,hey how does he get to room 5,Location
+500,is there a lecture on monday at 20,Schedule
+501,is there a lecture on wednesday at 18,Schedule
+502,hey How to find room 13,Location
+503,which lectures are there on sunday at 18,Schedule
+504,which lectures are there on wednesday at 15,Schedule
+505,where is spacebox,Location
+506,is there a lecture on monday at 12,Schedule
+507,hey how do we get to room 3,Location
+508,which lectures are there on tuesday at 5,Schedule
+509,is there a lecture on thursday at 12,Schedule
+510,at 0 on wednesday which lectures are there,Schedule
+511,which lectures are there at 21 on wednesday,Schedule
+512,which lectures are there on tuesday at 3,Schedule
+513,which lectures are there on monday at 11,Schedule
+514,hi what is the location of room 4,Location
+515,is there a lecture on friday at 6,Schedule
+516,on tuesday at 14 which lectures are there,Schedule
+517,hey how do we get to room 13,Location
+518,hello how do I get to room 13,Location
+519,which lectures are there at 18 on wednesday,Schedule
+520,on thursday at 1 which lectures are there,Schedule
+521,on wednesday at 7 which lectures are there,Schedule
+522,which lectures are there at 11 on tuesday,Schedule
+523,is there a lecture at 21 on wednesday,Schedule
+524,on monday at 2 which lectures are there,Schedule
+525,is there a lecture at 22 on tuesday,Schedule
+526,is there a lecture on monday at 22,Schedule
+527,hello how do I get to room 2,Location
+528,hello what is the location of room 10,Location
+529,is there a lecture on sunday at 22,Schedule
+530,on saturday at 18 which lectures are there,Schedule
+531,hi How to find room 5,Location
+532,which lectures are there at 8 on thursday,Schedule
+533,is there a lecture at 0 on saturday,Schedule
+534,which lectures are there on thursday at 12,Schedule
+535,is there a lecture at 1 on friday,Schedule
+536,hello how do you get to room 6,Location
+537,hey how do we get to room 9,Location
+538,hey how does she get to room 19,Location
+539,at 22 on tuesday which lectures are there,Schedule
+540,which lectures are there on thursday at 21,Schedule
+541,which lectures are there on tuesday at 23,Schedule
+542,hey How to find room 8,Location
+543,on tuesday at 17 which lectures are there,Schedule
+544,on sunday at 23 which lectures are there,Schedule
+545,which lectures are there on monday at 19,Schedule
+546,hello how do you get to room 1,Location
+547,which lectures are there on tuesday at 22,Schedule
+548,which lectures are there on monday at 6,Schedule
+549,is there a lecture on tuesday,Schedule
+550,hey how do I get to room 1,Location
+551,at 6 on saturday which lectures are there,Schedule
+552,hey how do we get to room 18,Location
+553,hey where is room 17 located,Location
+554,is there a lecture at 20 on sunday,Schedule
+555,on thursday at 11 which lectures are there,Schedule
+556,at 18 on sunday which lectures are there,Schedule
+557,hello How to find room 8,Location
+558,on tuesday at 9 which lectures are there,Schedule
+559,is there a lecture on saturday at 0,Schedule
+560,at 13 on tuesday which lectures are there,Schedule
+561,at 15 on sunday which lectures are there,Schedule
+562,hey where is room 11 located,Location
+563,which lectures are there at 10 on monday,Schedule
+564,which lectures are there on sunday at 10,Schedule
+565,on friday at 18 which lectures are there,Schedule
+566,at 7 on thursday which lectures are there,Schedule
+567,hello how do I get to room 7,Location
+568,is there a lecture on wednesday at 1,Schedule
+569,hey how do you get to room 5,Location
+570,on saturday at 6 which lectures are there,Schedule
+571,hey how do we get to room 17,Location
+572,on friday which lectures are there,Schedule
+573,hi how do you get to room 19,Location
+574,is there a lecture at 18 on wednesday,Schedule
+575,is there a lecture on sunday at 15,Schedule
+576,hi what is the location of room 20,Location
+577,which lectures are there at 23 on thursday,Schedule
+578,on saturday at 2 which lectures are there,Schedule
+579,which lectures are there on friday at 22,Schedule
+580,is there a lecture at 0 on sunday,Schedule
+581,which lectures are there on friday at 5,Schedule
+582,is there a lecture at 18 on sunday,Schedule
+583,is there a lecture at 18 on tuesday,Schedule
+584,hey where is room 3,Location
+585,hello how does he get to room 13,Location
+586,hey how does she get to room 15,Location
+587,which lectures are there on saturday at 5,Schedule
+588,hello how does she get to room 17,Location
+589,hi,Greeting
+590,is there a lecture at 12 on wednesday,Schedule
+591,hey what is the location of room 1,Location
+592,hello how do we get to room 9,Location
+593,how do she get to deepspace,Location
+594,hi How to find room 17,Location
+595,is there a lecture at 6 on tuesday,Schedule
+596,hello how does he get to room 8,Location
+597,hello How to find room 15,Location
+598,is there a lecture on saturday at 6,Schedule
+599,which lectures are there on friday at 3,Schedule
+600,on friday at 16 which lectures are there,Schedule
+601,which lectures are there at 17 on sunday,Schedule
+602,which lectures are there on saturday at 9,Schedule
+603,which lectures are there on monday at 5,Schedule
+604,hey how do I get to room 7,Location
+605,hey what is the location of room 18,Location
+606,is there a lecture at 5 on saturday,Schedule
+607,which lectures are there on sunday,Schedule
+608,at 10 on saturday which lectures are there,Schedule
+609,is there a lecture on saturday at 3,Schedule
+610,hey where is room 13,Location
+611,on monday at 21 which lectures are there,Schedule
+612,is there a lecture at 21 on sunday,Schedule
+613,is there a lecture at 22 on saturday,Schedule
+614,hi how do we get to room 8,Location
+615,is there a lecture on wednesday at 11,Schedule
+616,is there a lecture at 12 on friday,Schedule
+617,on monday at 3 which lectures are there,Schedule
+618,on monday at 15 which lectures are there,Schedule
+619,hey how does she get to room 4,Location
+620,is there a lecture on saturday at 13,Schedule
+621,hey how do we get to room 7,Location
+622,hey how does he get to room 4,Location
+623,which lectures are there on thursday at 5,Schedule
+624,hey How to find room 18,Location
+625,which lectures are there on friday at 2,Schedule
+626,is there a lecture on thursday at 10,Schedule
+627,hi how does she get to room 10,Location
+628,on thursday at 16 which lectures are there,Schedule
+629,on friday at 12 which lectures are there,Schedule
+630,is there a lecture at 17 on saturday,Schedule
+631,which lectures are there at 4 on saturday,Schedule
+632,which lectures are there at 19 on monday,Schedule
+633,which lectures are there on tuesday at 14,Schedule
+634,on wednesday at 11 which lectures are there,Schedule
+635,hey how does she get to room 1,Location
+636,hi where is room 3 located,Location
+637,on monday at 16 which lectures are there,Schedule
+638,at 12 on friday which lectures are there,Schedule
+639,hello how do we get to room 11,Location
+640,at 21 on wednesday which lectures are there,Schedule
+641,hello where is room 12 located,Location
+642,is there a lecture at 10 on wednesday,Schedule
+643,at 23 on monday which lectures are there,Schedule
+644,is there a lecture at 23 on sunday,Schedule
+645,at 3 on saturday which lectures are there,Schedule
+646,is there a lecture on wednesday at 2,Schedule
+647,hey where is room 2 located,Location
+648,on saturday at 22 which lectures are there,Schedule
+649,hi how do I get to room 10,Location
+650,which lectures are there on sunday at 21,Schedule
+651,which lectures are there on wednesday at 20,Schedule
+652,at 17 on sunday which lectures are there,Schedule
+653,which lectures are there on saturday at 0,Schedule
+654,hello where is room 19,Location
+655,hello what is the location of room 13,Location
+656,is there a lecture at 2 on tuesday,Schedule
+657,is there a lecture on tuesday at 19,Schedule
+658,hey how does she get to room 14,Location
+659,is there a lecture on wednesday at 15,Schedule
+660,on monday at 6 which lectures are there,Schedule
+661,hey where is room 5 located,Location
+662,which lectures are there on friday at 15,Schedule
+663,which lectures are there on wednesday at 22,Schedule
+664,hello how does he get to room 5,Location
+665,is there a lecture on saturday at 23,Schedule
+666,hi how does he get to room 5,Location
+667,on sunday at 14 which lectures are there,Schedule
+668,is there a lecture at 15 on sunday,Schedule
+669,is there a lecture at 9 on wednesday,Schedule
+670,hi what is the location of room 16,Location
+671,hey how do I get to room 16,Location
+672,at 13 on saturday which lectures are there,Schedule
+673,is there a lecture at 16 on friday,Schedule
+674,on monday at 4 which lectures are there,Schedule
+675,on sunday at 0 which lectures are there,Schedule
+676,is there a lecture on thursday at 2,Schedule
+677,on saturday at 21 which lectures are there,Schedule
+678,which lectures are there on monday at 21,Schedule
+679,hey how does she get to room 10,Location
+680,hi how does she get to room 2,Location
+681,hello how does he get to room 4,Location
+682,is there a lecture at 22 on monday,Schedule
+683,on friday at 17 which lectures are there,Schedule
+684,hello How to find room 16,Location
+685,is there a lecture at 18 on monday,Schedule
+686,hello how do we get to room 15,Location
+687,is there a lecture on saturday at 9,Schedule
+688,which lectures are there at 13 on thursday,Schedule
+689,hey how do we get to room 16,Location
+690,is there a lecture on friday at 17,Schedule
+691,which lectures are there at 2 on monday,Schedule
+692,at 18 on thursday which lectures are there,Schedule
+693,which lectures are there at 19 on sunday,Schedule
+694,hello where is room 5,Location
+695,at 18 on friday which lectures are there,Schedule
+696,at 15 on saturday which lectures are there,Schedule
+697,hi how do we get to room 10,Location
+698,on thursday at 8 which lectures are there,Schedule
+699,hi how does he get to room 12,Location
+700,hey how do I get to room 8,Location
+701,is there a lecture on saturday at 12,Schedule
+702,hello where is room 11 located,Location
+703,on monday at 9 which lectures are there,Schedule
+704,is there a lecture at 18 on saturday,Schedule
+705,on saturday at 23 which lectures are there,Schedule
+706,hey where is room 13 located,Location
+707,is there a lecture on thursday at 16,Schedule
+708,which lectures are there on friday at 1,Schedule
+709,hi how do I get to room 3,Location
+710,which lectures are there at 5 on wednesday,Schedule
+711,hey how do I get to room 19,Location
+712,hi how do I get to room 2,Location
+713,is there a lecture on thursday at 18,Schedule
+714,at 16 on wednesday which lectures are there,Schedule
+715,at 6 on monday which lectures are there,Schedule
+716,hey what is the location of room 8,Location
+717,hi how do you get to room 6,Location
+718,which lectures are there at 9 on thursday,Schedule
+719,is there a lecture at 14 on saturday,Schedule
+720,is there a lecture at 3 on thursday,Schedule
+721,hey where is room 19 located,Location
+722,which lectures are there at 15 on thursday,Schedule
+723,which lectures are there at 5 on friday,Schedule
+724,hello where is room 16,Location
+725,on friday at 6 which lectures are there,Schedule
+726,on sunday at 2 which lectures are there,Schedule
+727,which lectures are there on wednesday at 10,Schedule
+728,hello what is the location of room 2,Location
+729,on monday at 12 which lectures are there,Schedule
+730,today which lectures are there,Schedule
+731,on wednesday at 3 which lectures are there,Schedule
+732,hello how does he get to room 12,Location
+733,hey how do I get to room 3,Location
+734,hello how does he get to room 15,Location
+735,at 20 on saturday which lectures are there,Schedule
+736,at 12 on saturday which lectures are there,Schedule
+737,which lectures are there on tuesday at 16,Schedule
+738,at 20 on friday which lectures are there,Schedule
+739,hey how does he get to room 14,Location
+740,which lectures are there at 20 on monday,Schedule
+741,hello how does she get to room 9,Location
+742,is there a lecture on monday at 16,Schedule
+743,hey where is room 8,Location
+744,hi how does she get to room 4,Location
+745,at 2 on wednesday which lectures are there,Schedule
+746,which lectures are there on saturday at 4,Schedule
+747,which lectures are there on friday at 14,Schedule
+748,which lectures are there at 11 on friday,Schedule
+749,at 19 on wednesday which lectures are there,Schedule
+750,which lectures are there at 2 on sunday,Schedule
+751,is there a lecture at 19 on saturday,Schedule
+752,hello How to find room 13,Location
+753,supp,Greeting
+754,which lectures are there at 14 on sunday,Schedule
+755,at 8 on thursday which lectures are there,Schedule
+756,hello how do we get to room 1,Location
+757,at 16 on thursday which lectures are there,Schedule
+758,is there a lecture on friday,Schedule
+759,is there a lecture at 7 on tuesday,Schedule
+760,hi where is room 4,Location
+761,is there a lecture on friday at 19,Schedule
+762,which lectures are there at 13 on monday,Schedule
+763,hi how does he get to room 19,Location
+764,hey what is the location of room 19,Location
+765,hello How to find room 7,Location
+766,hey how does he get to room 16,Location
+767,hi how does he get to room 4,Location
+768,hi what is the location of room 10,Location
+769,on thursday at 5 which lectures are there,Schedule
+770,which lectures are there at 2 on thursday,Schedule
+771,at 1 on monday which lectures are there,Schedule
+772,hey how do we get to room 8,Location
+773,which lectures are there on sunday at 6,Schedule
+774,is there a lecture at 20 on tuesday,Schedule
+775,is there a lecture on wednesday at 20,Schedule
+776,which lectures are there on sunday at 15,Schedule
+777,hello how do you get to room 8,Location
+778,which lectures are there at 9 on tuesday,Schedule
+779,hey how do I get to room 13,Location
+780,on thursday at 23 which lectures are there,Schedule
+781,is there a lecture at 8 on wednesday,Schedule
+782,which lectures are there today,Schedule
+783,which lectures are there on wednesday at 5,Schedule
+784,hello How to find room 2,Location
+785,which lectures are there at 1 on sunday,Schedule
+786,which lectures are there at 18 on saturday,Schedule
+787,on friday at 5 which lectures are there,Schedule
+788,hello how does she get to room 3,Location
+789,which lectures are there at 4 on wednesday,Schedule
+790,on tuesday at 19 which lectures are there,Schedule
+791,is there a lecture on tuesday at 12,Schedule
+792,which lectures are there on thursday at 16,Schedule
+793,hello how does he get to room 9,Location
+794,hello what is the location of room 11,Location
+795,on saturday at 3 which lectures are there,Schedule
+796,where is deepspace located,Location
+797,hello How to find room 14,Location
+798,at 11 on saturday which lectures are there,Schedule
+799,hey how do I get to room 2,Location
+800,which lectures are there at 14 on tuesday,Schedule
+801,which lectures are there at 12 on saturday,Schedule
+802,is there a lecture on tuesday at 18,Schedule
+803,on thursday at 7 which lectures are there,Schedule
+804,which lectures are there on tuesday at 9,Schedule
+805,is there a lecture on sunday at 14,Schedule
+806,which lectures are there at 11 on saturday,Schedule
+807,hello how do I get to room 17,Location
+808,hey How to find room 11,Location
+809,which lectures are there at 8 on tuesday,Schedule
+810,on sunday at 6 which lectures are there,Schedule
+811,is there a lecture at 6 on wednesday,Schedule
+812,hey what is the location of room 6,Location
+813,which lectures are there at 21 on sunday,Schedule
+814,hello how do I get to room 19,Location
+815,is there a lecture on tuesday at 17,Schedule
+816,is there a lecture at 13 on tuesday,Schedule
+817,is there a lecture at 6 on thursday,Schedule
+818,is there a lecture on saturday at 16,Schedule
+819,hello how does she get to room 4,Location
+820,hey How to find room 10,Location
+821,which lectures are there on saturday at 2,Schedule
+822,which lectures are there on wednesday at 11,Schedule
+823,on thursday at 18 which lectures are there,Schedule
+824,which lectures are there on wednesday at 0,Schedule
+825,is there a lecture on saturday at 15,Schedule
+826,which lectures are there at 9 on wednesday,Schedule
+827,hi where is room 2 located,Location
+828,hi How to find room 10,Location
+829,which lectures are there on sunday at 22,Schedule
+830,is there a lecture at 17 on wednesday,Schedule
+831,hi where is room 17 located,Location
+832,hey How to find room 19,Location
+833,hello How to find room 1,Location
+834,hey how do we get to room 14,Location
+835,which lectures are there at 6 on friday,Schedule
+836,hi how does she get to room 6,Location
+837,which lectures are there on friday at 17,Schedule
+838,which lectures are there on friday at 9,Schedule
+839,hi How to find room 1,Location
+840,which lectures are there at 0 on sunday,Schedule
+841,which lectures are there at 7 on thursday,Schedule
+842,on sunday at 13 which lectures are there,Schedule
+843,on sunday at 15 which lectures are there,Schedule
+844,which lectures are there at 13 on tuesday,Schedule
+845,hello how do I get to room 11,Location
+846,is there a lecture at 3 on monday,Schedule
+847,at 1 on saturday which lectures are there,Schedule
+848,hello how does she get to room 16,Location
+849,is there a lecture at 19 on friday,Schedule
+850,how do she get to spacebox,Location
+851,hi how does he get to room 8,Location
+852,which lectures are there at 6 on thursday,Schedule
+853,hey how do I get to room 17,Location
+854,is there a lecture on thursday at 14,Schedule
+855,hey how do you get to room 4,Location
+856,on saturday at 15 which lectures are there,Schedule
+857,which lectures are there on thursday at 23,Schedule
+858,hi where is room 1 located,Location
+859,at 8 on saturday which lectures are there,Schedule
+860,hi where is room 14 located,Location
+861,hey how do we get to room 2,Location
+862,hello where is room 6,Location
+863,hey where is room 16 located,Location
+864,which lectures are there on sunday at 17,Schedule
+865,is there a lecture on wednesday at 17,Schedule
+866,on thursday at 15 which lectures are there,Schedule
+867,at 17 on saturday which lectures are there,Schedule
+868,hello where is room 2 located,Location
+869,is there a lecture at 12 on tuesday,Schedule
+870,hey where is room 2,Location
+871,which lectures are there at 20 on wednesday,Schedule
+872,which lectures are there at 19 on saturday,Schedule
+873,hi what is the location of room 15,Location
+874,hi where is room 15 located,Location
+875,is there a lecture at 6 on saturday,Schedule
+876,hey where is room 12,Location
+877,hello what is the location of room 1,Location
+878,hello where is room 17 located,Location
+879,is there a lecture on tuesday at 9,Schedule
+880,hello how does he get to room 2,Location
+881,is there a lecture on saturday,Schedule
+882,is there a lecture at 2 on friday,Schedule
+883,hey what is the location of room 20,Location
+884,which lectures are there on monday at 18,Schedule
+885,at 14 on thursday which lectures are there,Schedule
+886,is there a lecture on sunday at 20,Schedule
+887,hello how does she get to room 6,Location
+888,which lectures are there at 4 on sunday,Schedule
+889,hi where is room 17,Location
+890,which lectures are there at 11 on thursday,Schedule
+891,which lectures are there on sunday at 2,Schedule
+892,at 22 on monday which lectures are there,Schedule
+893,hi where is room 20 located,Location
+894,hey how does she get to room 5,Location
+895,which lectures are there at 14 on friday,Schedule
+896,which lectures are there on tuesday at 20,Schedule
+897,is there a lecture at 11 on thursday,Schedule
+898,which lectures are there on monday at 8,Schedule
+899,hi how do you get to room 9,Location
+900,which lectures are there on thursday at 10,Schedule
+901,hello what is the location of room 15,Location
+902,hello how do I get to room 3,Location
+903,hi how do you get to room 2,Location
+904,hey where is room 11,Location
+905,on wednesday at 22 which lectures are there,Schedule
+906,is there a lecture on thursday at 6,Schedule
+907,which lectures are there on wednesday at 4,Schedule
+908,is there a lecture on monday at 15,Schedule
+909,hello how does he get to room 11,Location
+910,on sunday at 10 which lectures are there,Schedule
+911,which lectures are there at 23 on sunday,Schedule
+912,which lectures are there at 18 on monday,Schedule
+913,at 9 on saturday which lectures are there,Schedule
+914,hello how do I get to room 6,Location
+915,hello how does she get to room 2,Location
+916,is there a lecture at 20 on friday,Schedule
+917,hello how does he get to room 6,Location
+918,on tuesday at 18 which lectures are there,Schedule
+919,which lectures are there at 16 on thursday,Schedule
+920,hi How to find room 2,Location
+921,at 12 on wednesday which lectures are there,Schedule
+922,hey,Greeting
+923,at 20 on wednesday which lectures are there,Schedule
+924,on tuesday at 20 which lectures are there,Schedule
+925,is there a lecture at 20 on thursday,Schedule
+926,is there a lecture at 16 on sunday,Schedule
+927,hey how does she get to room 9,Location
+928,is there a lecture at 3 on wednesday,Schedule
+929,is there a lecture at 2 on wednesday,Schedule
+930,on saturday at 13 which lectures are there,Schedule
+931,hey how does she get to room 17,Location
+932,at 9 on thursday which lectures are there,Schedule
+933,is there a lecture on wednesday at 5,Schedule
+934,hi where is room 7,Location
+935,which lectures are there on saturday at 16,Schedule
+936,at 7 on tuesday which lectures are there,Schedule
+937,on sunday at 12 which lectures are there,Schedule
+938,hello how does she get to room 12,Location
+939,hey how does he get to room 6,Location
+940,at 6 on sunday which lectures are there,Schedule
+941,at 11 on wednesday which lectures are there,Schedule
+942,hi where is room 2,Location
+943,which lectures are there at 1 on thursday,Schedule
+944,is there a lecture at 10 on monday,Schedule
+945,is there a lecture at 2 on monday,Schedule
+946,hey How to find room 14,Location
+947,which lectures are there at 0 on monday,Schedule
+948,is there a lecture at 7 on wednesday,Schedule
+949,hey how does she get to room 12,Location
+950,is there a lecture on saturday at 8,Schedule
+951,hello where is room 19 located,Location
+952,which lectures are there at 7 on saturday,Schedule
+953,which lectures are there at 3 on wednesday,Schedule
+954,hello how do you get to room 3,Location
+955,which lectures are there at 12 on thursday,Schedule
+956,is there a lecture on saturday at 18,Schedule
+957,which lectures are there on tuesday at 10,Schedule
+958,at 2 on monday which lectures are there,Schedule
+959,at 18 on tuesday which lectures are there,Schedule
+960,which lectures are there on sunday at 0,Schedule
+961,which lectures are there at 16 on friday,Schedule
+962,is there a lecture at 13 on wednesday,Schedule
+963,which lectures are there on friday at 23,Schedule
+964,at 9 on friday which lectures are there,Schedule
+965,at 22 on thursday which lectures are there,Schedule
+966,hey where is room 8 located,Location
+967,which lectures are there at 23 on monday,Schedule
+968,is there a lecture at 11 on wednesday,Schedule
+969,on monday at 22 which lectures are there,Schedule
+970,hello what is the location of room 5,Location
+971,hello where is room 4 located,Location
+972,hey how does she get to room 13,Location
+973,is there a lecture at 21 on tuesday,Schedule
+974,on saturday at 0 which lectures are there,Schedule
+975,hi how do I get to room 19,Location
+976,hi how does she get to room 3,Location
+977,is there a lecture at 13 on sunday,Schedule
+978,which lectures are there on monday at 2,Schedule
+979,is there a lecture on saturday at 22,Schedule
+980,which lectures are there on thursday at 7,Schedule
+981,at 5 on saturday which lectures are there,Schedule
+982,hey How to find room 2,Location
+983,hello How to find room 4,Location
+984,hi where is room 18 located,Location
+985,is there a lecture at 17 on sunday,Schedule
+986,is there a lecture on sunday at 5,Schedule
+987,at 12 on thursday which lectures are there,Schedule
+988,which lectures are there on wednesday at 21,Schedule
+989,how do you get to spacebox,Location
+990,hi where is room 8,Location
+991,at 8 on friday which lectures are there,Schedule
+992,hello how does he get to room 7,Location
+993,hi how do we get to room 7,Location
+994,which lectures are there on wednesday at 16,Schedule
+995,hi what is the location of room 7,Location
+996,is there a lecture at 14 on monday,Schedule
+997,which lectures are there on friday,Schedule
+998,hey where is room 9 located,Location
+999,is there a lecture at 21 on saturday,Schedule
+1000,at 10 on friday which lectures are there,Schedule
+1001,on tuesday at 8 which lectures are there,Schedule
+1002,which lectures are there at 17 on wednesday,Schedule
+1003,which lectures are there at 18 on sunday,Schedule
+1004,hi how do we get to room 4,Location
+1005,which lectures are there at 23 on saturday,Schedule
+1006,which lectures are there on tuesday at 11,Schedule
+1007,hi How to find room 3,Location
+1008,which lectures are there on sunday at 3,Schedule
+1009,where is deepspace,Location
+1010,on saturday at 12 which lectures are there,Schedule
+1011,which lectures are there at 7 on wednesday,Schedule
+1012,at 1 on thursday which lectures are there,Schedule
+1013,hey how does he get to room 19,Location
+1014,is there a lecture at 15 on monday,Schedule
+1015,which lectures are there at 17 on thursday,Schedule
+1016,hello where is room 20 located,Location
+1017,on wednesday at 19 which lectures are there,Schedule
+1018,at 6 on friday which lectures are there,Schedule
+1019,hey how does he get to room 17,Location
+1020,hi how do you get to room 8,Location
+1021,hello How to find room 3,Location
+1022,is there a lecture on tuesday at 22,Schedule
+1023,how do you get to deepspace,Location
+1024,hi how do you get to room 16,Location
+1025,is there a lecture on wednesday at 19,Schedule
+1026,which lectures are there on thursday at 0,Schedule
+1027,is there a lecture on tuesday at 6,Schedule
+1028,which lectures are there at 17 on saturday,Schedule
+1029,which lectures are there on thursday at 22,Schedule
+1030,which lectures are there at 9 on sunday,Schedule
+1031,which lectures are there at 1 on monday,Schedule
+1032,at 22 on wednesday which lectures are there,Schedule
+1033,which lectures are there on friday at 10,Schedule
+1034,which lectures are there on friday at 13,Schedule
+1035,at 2 on tuesday which lectures are there,Schedule
+1036,hi where is room 19,Location
+1037,hi how do I get to room 12,Location
+1038,hey How to find room 17,Location
+1039,hi How to find room 7,Location
+1040,which lectures are there at 8 on saturday,Schedule
+1041,which lectures are there on friday at 7,Schedule
+1042,at 14 on saturday which lectures are there,Schedule
+1043,hey how do I get to room 9,Location
+1044,is there a lecture at 2 on saturday,Schedule
+1045,is there a lecture on saturday at 21,Schedule
+1046,hello where is room 18,Location
+1047,at 10 on monday which lectures are there,Schedule
+1048,which lectures are there at 5 on sunday,Schedule
+1049,at 4 on sunday which lectures are there,Schedule
+1050,on thursday at 21 which lectures are there,Schedule
+1051,at 12 on tuesday which lectures are there,Schedule
+1052,is there a lecture at 5 on wednesday,Schedule
+1053,which lectures are there at 17 on tuesday,Schedule
+1054,hi how do you get to room 18,Location
+1055,at 18 on monday which lectures are there,Schedule
+1056,at 4 on tuesday which lectures are there,Schedule
+1057,hi what is the location of room 17,Location
+1058,which lectures are there at 21 on tuesday,Schedule
+1059,at 17 on tuesday which lectures are there,Schedule
+1060,which lectures are there at 0 on tuesday,Schedule
+1061,at 7 on sunday which lectures are there,Schedule
+1062,hi what is the location of room 8,Location
+1063,hi how does she get to room 18,Location
+1064,on sunday at 1 which lectures are there,Schedule
+1065,hello how do we get to room 10,Location
+1066,is there a lecture on monday at 4,Schedule
+1067,which lectures are there at 0 on thursday,Schedule
+1068,at 5 on wednesday which lectures are there,Schedule
+1069,is there a lecture at 23 on monday,Schedule
+1070,on tuesday at 5 which lectures are there,Schedule
+1071,hello where is room 10,Location
+1072,is there a lecture on tuesday at 23,Schedule
+1073,at 17 on friday which lectures are there,Schedule
+1074,which lectures are there on thursday at 6,Schedule
+1075,at 19 on tuesday which lectures are there,Schedule
+1076,hello where is room 11,Location
+1077,at 8 on tuesday which lectures are there,Schedule
+1078,hey how does she get to room 18,Location
+1079,which lectures are there on thursday at 8,Schedule
+1080,is there a lecture on thursday at 4,Schedule
+1081,hey how does she get to room 7,Location
+1082,which lectures are there at 22 on monday,Schedule
+1083,which lectures are there on monday at 4,Schedule
+1084,which lectures are there at 4 on thursday,Schedule
+1085,hi where is room 12 located,Location
+1086,which lectures are there on saturday at 6,Schedule
+1087,hey how does he get to room 18,Location
+1088,which lectures are there on monday at 1,Schedule
+1089,at 15 on wednesday which lectures are there,Schedule
+1090,hi how do I get to room 16,Location
+1091,at 3 on sunday which lectures are there,Schedule
+1092,hi how does she get to room 12,Location
+1093,is there a lecture on thursday at 15,Schedule
+1094,hey How to find room 20,Location
+1095,is there a lecture on sunday at 17,Schedule
+1096,is there a lecture on wednesday at 23,Schedule
+1097,hi how does he get to room 6,Location
+1098,hey how does she get to room 3,Location
+1099,which lectures are there on monday at 0,Schedule
+1100,is there a lecture at 15 on saturday,Schedule
+1101,is there a lecture at 1 on thursday,Schedule
+1102,is there a lecture at 15 on wednesday,Schedule
+1103,is there a lecture on saturday at 2,Schedule
+1104,at 11 on thursday which lectures are there,Schedule
+1105,is there a lecture on sunday at 23,Schedule
+1106,hey How to find room 12,Location
+1107,is there a lecture on friday at 16,Schedule
+1108,is there a lecture on wednesday at 22,Schedule
+1109,on sunday at 22 which lectures are there,Schedule
+1110,hi where is room 9,Location
+1111,hi where is room 3,Location
+1112,hello where is room 16 located,Location
+1113,hi how does he get to room 2,Location
+1114,which lectures are there at 15 on saturday,Schedule
+1115,is there a lecture at 9 on tuesday,Schedule
+1116,is there a lecture at 4 on wednesday,Schedule
+1117,which lectures are there at 10 on thursday,Schedule
+1118,hello where is room 4,Location
+1119,which lectures are there at 16 on saturday,Schedule
+1120,which lectures are there at 12 on monday,Schedule
+1121,which lectures are there on monday at 9,Schedule
+1122,hi how do I get to room 14,Location
+1123,which lectures are there at 17 on friday,Schedule
+1124,which lectures are there on sunday at 12,Schedule
+1125,hi how do we get to room 15,Location
+1126,hello what is the location of room 12,Location
+1127,hey what is the location of room 5,Location
+1128,at 7 on monday which lectures are there,Schedule
+1129,which lectures are there at 16 on wednesday,Schedule
+1130,hi how do you get to room 3,Location
+1131,is there a lecture on thursday at 5,Schedule
+1132,hey where is room 1,Location
+1133,on thursday at 14 which lectures are there,Schedule
+1134,which lectures are there on saturday at 21,Schedule
+1135,is there a lecture on wednesday at 16,Schedule
+1136,is there a lecture at 12 on sunday,Schedule
+1137,which lectures are there at 5 on monday,Schedule
+1138,which lectures are there on saturday at 1,Schedule
+1139,hey where is room 9,Location
+1140,is there a lecture at 6 on sunday,Schedule
+1141,hello where is room 18 located,Location
+1142,at 18 on wednesday which lectures are there,Schedule
+1143,on tuesday at 2 which lectures are there,Schedule
+1144,hello how do we get to room 19,Location
+1145,which lectures are there at 23 on wednesday,Schedule
+1146,hi how does she get to room 1,Location
+1147,at 6 on wednesday which lectures are there,Schedule
+1148,hi how does he get to room 17,Location
+1149,is there a lecture at 12 on thursday,Schedule
+1150,hi where is room 6 located,Location
+1151,at 13 on monday which lectures are there,Schedule
+1152,is there a lecture on sunday,Schedule
+1153,on wednesday at 4 which lectures are there,Schedule
+1154,at 21 on monday which lectures are there,Schedule
+1155,on friday at 1 which lectures are there,Schedule
+1156,hey how do I get to room 15,Location
+1157,hey what is the location of room 11,Location
+1158,hey how does he get to room 1,Location
+1159,hi where is room 9 located,Location
+1160,on thursday at 19 which lectures are there,Schedule
+1161,hi how do we get to room 16,Location
+1162,is there a lecture at 12 on monday,Schedule
+1163,hi how do I get to room 6,Location
+1164,which lectures are there on monday at 13,Schedule
+1165,is there a lecture on thursday at 0,Schedule
+1166,which lectures are there at 22 on saturday,Schedule
+1167,hi how does she get to room 5,Location
+1168,hello how do I get to room 9,Location
+1169,which lectures are there on monday at 23,Schedule
+1170,hi where is room 12,Location
+1171,which lectures are there on thursday at 14,Schedule
+1172,is there a lecture at 3 on friday,Schedule
+1173,at 21 on saturday which lectures are there,Schedule
+1174,at 1 on friday which lectures are there,Schedule
+1175,hello where is room 10 located,Location
+1176,on friday at 3 which lectures are there,Schedule
+1177,is there a lecture at 1 on monday,Schedule
+1178,which lectures are there at 11 on wednesday,Schedule
+1179,is there a lecture on sunday at 21,Schedule
+1180,is there a lecture at 16 on tuesday,Schedule
+1181,at 10 on wednesday which lectures are there,Schedule
+1182,is there a lecture on friday at 23,Schedule
+1183,at 0 on tuesday which lectures are there,Schedule
+1184,hey where is room 17,Location
+1185,is there a lecture at 8 on thursday,Schedule
+1186,is there a lecture on thursday at 21,Schedule
+1187,on saturday at 10 which lectures are there,Schedule
+1188,at 21 on tuesday which lectures are there,Schedule
+1189,which lectures are there on thursday at 15,Schedule
+1190,which lectures are there at 20 on thursday,Schedule
+1191,hey how does he get to room 2,Location
+1192,is there a lecture at 3 on sunday,Schedule
+1193,is there a lecture on sunday at 10,Schedule
+1194,on sunday at 4 which lectures are there,Schedule
+1195,on saturday at 5 which lectures are there,Schedule
+1196,hi what is the location of room 9,Location
+1197,which lectures are there on tuesday at 8,Schedule
+1198,is there a lecture at 16 on thursday,Schedule
+1199,at 11 on sunday which lectures are there,Schedule
+1200,hey how does he get to room 3,Location
+1201,at 2 on sunday which lectures are there,Schedule
+1202,which lectures are there on saturday at 20,Schedule
+1203,at 7 on friday which lectures are there,Schedule
+1204,at 11 on friday which lectures are there,Schedule
+1205,at 4 on thursday which lectures are there,Schedule
+1206,hello what is the location of room 19,Location
+1207,hi how does he get to room 9,Location
+1208,which lectures are there on sunday at 23,Schedule
+1209,which lectures are there on friday at 6,Schedule
+1210,which lectures are there on saturday at 3,Schedule
+1211,which lectures are there on wednesday at 1,Schedule
+1212,on friday at 13 which lectures are there,Schedule
+1213,is there a lecture on tuesday at 3,Schedule
+1214,which lectures are there at 2 on tuesday,Schedule
+1215,which lectures are there at 22 on friday,Schedule
+1216,at 8 on monday which lectures are there,Schedule
+1217,hi how does he get to room 13,Location
+1218,hi how does she get to room 17,Location
+1219,on friday at 2 which lectures are there,Schedule
+1220,at 3 on tuesday which lectures are there,Schedule
+1221,on sunday at 5 which lectures are there,Schedule
+1222,on sunday at 7 which lectures are there,Schedule
+1223,on thursday at 13 which lectures are there,Schedule
+1224,hey what is the location of room 9,Location
+1225,at 16 on saturday which lectures are there,Schedule
+1226,on monday at 7 which lectures are there,Schedule
+1227,on tuesday at 21 which lectures are there,Schedule
+1228,hi how do we get to room 14,Location
+1229,is there a lecture on monday at 13,Schedule
+1230,on sunday at 16 which lectures are there,Schedule
+1231,at 3 on thursday which lectures are there,Schedule
+1232,at 1 on tuesday which lectures are there,Schedule
+1233,at 5 on friday which lectures are there,Schedule
+1234,hello how do I get to room 12,Location
+1235,hello how do you get to room 12,Location
+1236,which lectures are there at 17 on monday,Schedule
+1237,hey where is room 10 located,Location
+1238,on thursday at 10 which lectures are there,Schedule
+1239,is there a lecture on monday at 9,Schedule
+1240,which lectures are there at 15 on tuesday,Schedule
+1241,on wednesday at 20 which lectures are there,Schedule
+1242,is there a lecture on thursday at 9,Schedule
+1243,hi how do we get to room 18,Location
+1244,is there a lecture at 11 on sunday,Schedule
+1245,hi how do we get to room 2,Location
+1246,which lectures are there at 22 on thursday,Schedule
+1247,hello how do you get to room 14,Location
+1248,which lectures are there on wednesday at 7,Schedule
+1249,hello how do I get to room 5,Location
+1250,which lectures are there at 0 on saturday,Schedule
+1251,at 3 on monday which lectures are there,Schedule
+1252,hey what is the location of room 12,Location
+1253,which lectures are there on friday at 16,Schedule
+1254,is there a lecture at 10 on thursday,Schedule
+1255,which lectures are there on tuesday at 7,Schedule
+1256,is there a lecture on tuesday at 7,Schedule
+1257,hey How to find room 4,Location
+1258,on saturday at 14 which lectures are there,Schedule
+1259,hey what is the location of room 10,Location
+1260,which lectures are there on friday at 11,Schedule
+1261,hi how do you get to room 17,Location
+1262,hello how do we get to room 7,Location
+1263,hello how do I get to room 1,Location
+1264,is there a lecture on friday at 14,Schedule
+1265,hi how do we get to room 13,Location
+1266,hi how does she get to room 14,Location
+1267,is there a lecture on thursday at 19,Schedule
+1268,which lectures are there on monday,Schedule
+1269,hey how does he get to room 8,Location
+1270,hello what is the location of room 16,Location
+1271,is there a lecture on sunday at 19,Schedule
+1272,hi what is the location of room 5,Location
+1273,hello how do you get to room 13,Location
+1274,hello how does she get to room 10,Location
+1275,hey how do you get to room 12,Location
+1276,hey where is room 14 located,Location
+1277,is there a lecture at 14 on sunday,Schedule
+1278,hi how do you get to room 1,Location
+1279,is there a lecture on sunday at 7,Schedule
+1280,hi how do you get to room 10,Location
+1281,hi how does she get to room 11,Location
+1282,hi how do I get to room 7,Location
+1283,hello how does he get to room 18,Location
+1284,which lectures are there on saturday at 14,Schedule
+1285,is there a lecture on monday at 8,Schedule
+1286,on wednesday at 14 which lectures are there,Schedule
+1287,hey how do you get to room 1,Location
+1288,is there a lecture at 4 on friday,Schedule
+1289,which lectures are there on sunday at 4,Schedule
+1290,hi how does he get to room 7,Location
+1291,which lectures are there on saturday at 23,Schedule
+1292,which lectures are there at 18 on tuesday,Schedule
+1293,hello how do we get to room 4,Location
+1294,hello how does she get to room 18,Location
+1295,hi what is the location of room 19,Location
+1296,at 9 on monday which lectures are there,Schedule
+1297,which lectures are there on sunday at 14,Schedule
+1298,is there a lecture on wednesday at 3,Schedule
+1299,is there a lecture on saturday at 4,Schedule
+1300,hey how do you get to room 16,Location
+1301,hi how does he get to room 3,Location
+1302,is there a lecture at 0 on monday,Schedule
+1303,is there a lecture at 18 on friday,Schedule
+1304,on thursday at 0 which lectures are there,Schedule
+1305,which lectures are there on thursday at 18,Schedule
+1306,which lectures are there at 0 on wednesday,Schedule
+1307,which lectures are there on tuesday at 13,Schedule
+1308,which lectures are there at 19 on thursday,Schedule
+1309,on friday at 14 which lectures are there,Schedule
+1310,is there a lecture at 4 on tuesday,Schedule
+1311,hello how do we get to room 8,Location
+1312,which lectures are there on wednesday at 19,Schedule
+1313,hello how do we get to room 12,Location
+1314,which lectures are there on wednesday at 13,Schedule
+1315,hello where is room 15,Location
+1316,on sunday at 20 which lectures are there,Schedule
+1317,which lectures are there at 21 on saturday,Schedule
+1318,is there a lecture at 1 on sunday,Schedule
+1319,hey how do you get to room 8,Location
+1320,on friday at 20 which lectures are there,Schedule
+1321,which lectures are there on friday at 4,Schedule
+1322,hey what is the location of room 15,Location
+1323,on sunday at 3 which lectures are there,Schedule
+1324,on wednesday at 5 which lectures are there,Schedule
+1325,hi where is room 11,Location
+1326,hi how do I get to room 17,Location
+1327,is there a lecture at 22 on wednesday,Schedule
+1328,at 0 on monday which lectures are there,Schedule
+1329,is there a lecture on monday at 6,Schedule
+1330,at 14 on wednesday which lectures are there,Schedule
+1331,hello how does he get to room 16,Location
+1332,is there a lecture at 21 on thursday,Schedule
+1333,is there a lecture on tuesday at 21,Schedule
+1334,hey how do you get to room 9,Location
+1335,hey what is the location of room 3,Location
+1336,which lectures are there at 16 on tuesday,Schedule
+1337,which lectures are there on wednesday at 9,Schedule
+1338,hi how do you get to room 7,Location
+1339,which lectures are there on thursday,Schedule
+1340,is there a lecture on saturday at 5,Schedule
+1341,which lectures are there on wednesday at 23,Schedule
+1342,which lectures are there at 2 on wednesday,Schedule
+1343,is there a lecture at 13 on friday,Schedule
+1344,hi how do I get to room 11,Location
+1345,which lectures are there on friday at 0,Schedule
+1346,at 0 on sunday which lectures are there,Schedule
+1347,is there a lecture at 23 on friday,Schedule
+1348,hello how do we get to room 6,Location
+1349,hello how does she get to room 5,Location
+1350,hello how do I get to room 15,Location
+1351,hey how does she get to room 8,Location
+1352,hello where is room 17,Location
+1353,which lectures are there at 23 on tuesday,Schedule
+1354,which lectures are there at 3 on tuesday,Schedule
+1355,hey where is room 1 located,Location
+1356,which lectures are there on wednesday at 12,Schedule
+1357,hi How to find room 12,Location
+1358,on sunday at 9 which lectures are there,Schedule
+1359,hey how do we get to room 15,Location
+1360,at 21 on friday which lectures are there,Schedule
+1361,on wednesday at 2 which lectures are there,Schedule
+1362,hey what is the location of room 14,Location
+1363,is there a lecture on wednesday at 14,Schedule
+1364,on monday at 5 which lectures are there,Schedule
+1365,is there a lecture at 10 on friday,Schedule
+1366,at 17 on thursday which lectures are there,Schedule
+1367,at 10 on thursday which lectures are there,Schedule
+1368,is there a lecture on friday at 4,Schedule
+1369,is there a lecture at 9 on friday,Schedule
+1370,is there a lecture on friday at 13,Schedule
+1371,which lectures are there on tuesday at 1,Schedule
+1372,which lectures are there at 11 on monday,Schedule
+1373,on wednesday at 13 which lectures are there,Schedule
+1374,hi what is the location of room 13,Location
+1375,hey How to find room 7,Location
+1376,which lectures are there at 14 on saturday,Schedule
+1377,on wednesday at 18 which lectures are there,Schedule
+1378,on wednesday at 17 which lectures are there,Schedule
+1379,hey How to find room 5,Location
+1380,is there a lecture at 6 on monday,Schedule
+1381,is there a lecture on monday at 18,Schedule
+1382,hello how do you get to room 18,Location
+1383,is there a lecture on wednesday at 6,Schedule
+1384,is there a lecture on tuesday at 16,Schedule
+1385,which lectures are there on friday at 8,Schedule
+1386,hello how do we get to room 5,Location
+1387,on tuesday at 10 which lectures are there,Schedule
+1388,at 4 on wednesday which lectures are there,Schedule
+1389,hey how do you get to room 14,Location
+1390,on tuesday at 7 which lectures are there,Schedule
+1391,on friday at 23 which lectures are there,Schedule
+1392,hi how do we get to room 19,Location
+1393,hey where is room 14,Location
+1394,is there a lecture on friday at 1,Schedule
+1395,hello how does she get to room 11,Location
+1396,is there a lecture on wednesday at 9,Schedule
+1397,is there a lecture at 0 on thursday,Schedule
+1398,hi how do we get to room 11,Location
+1399,which lectures are there at 0 on friday,Schedule
+1400,which lectures are there at 8 on monday,Schedule
+1401,hello how do we get to room 18,Location
+1402,hey how do we get to room 4,Location
+1403,hi how do we get to room 6,Location
+1404,is there a lecture at 14 on thursday,Schedule
+1405,which lectures are there at 7 on friday,Schedule
+1406,is there a lecture at 2 on thursday,Schedule
+1407,on saturday at 17 which lectures are there,Schedule
+1408,which lectures are there at 22 on wednesday,Schedule
+1409,on tuesday at 1 which lectures are there,Schedule
+1410,hi how do I get to room 13,Location
+1411,is there a lecture on wednesday,Schedule
+1412,which lectures are there on sunday at 11,Schedule
+1413,hello what is the location of room 20,Location
+1414,hi how does he get to room 1,Location
+1415,is there a lecture at 21 on friday,Schedule
+1416,is there a lecture on monday at 23,Schedule
+1417,which lectures are there on tuesday at 6,Schedule
+1418,hello where is room 1,Location
+1419,at 4 on saturday which lectures are there,Schedule
+1420,on saturday at 9 which lectures are there,Schedule
+1421,on tuesday at 11 which lectures are there,Schedule
+1422,hello what is the location of room 18,Location
+1423,how do he get to spacebox,Location
+1424,is there a lecture at 3 on saturday,Schedule
+1425,hey how does he get to room 15,Location
+1426,hi how do you get to room 12,Location
+1427,hey how do we get to room 5,Location
+1428,which lectures are there at 12 on sunday,Schedule
+1429,on sunday at 8 which lectures are there,Schedule
+1430,is there a lecture on sunday at 16,Schedule
+1431,is there a lecture on thursday at 11,Schedule
+1432,hi How to find room 15,Location
+1433,hi how does he get to room 11,Location
+1434,at 18 on saturday which lectures are there,Schedule
+1435,on thursday at 2 which lectures are there,Schedule
+1436,which lectures are there on friday at 20,Schedule
+1437,hello how does he get to room 19,Location
+1438,hi How to find room 20,Location
+1439,which lectures are there at 21 on monday,Schedule
+1440,at 19 on friday which lectures are there,Schedule
+1441,hey how do I get to room 14,Location
+1442,hi how do I get to room 8,Location
+1443,hello how does she get to room 13,Location
+1444,is there a lecture at 23 on tuesday,Schedule
+1445,at 19 on thursday which lectures are there,Schedule
+1446,hey where is room 16,Location
+1447,on monday at 8 which lectures are there,Schedule
+1448,on saturday at 1 which lectures are there,Schedule
+1449,is there a lecture on tuesday at 1,Schedule
+1450,which lectures are there on thursday at 11,Schedule
+1451,which lectures are there at 7 on sunday,Schedule
+1452,hello where is room 3 located,Location
+1453,hi where is room 1,Location
+1454,is there a lecture at 4 on sunday,Schedule
+1455,hey How to find room 6,Location
+1456,which lectures are there on tuesday at 12,Schedule
+1457,hello How to find room 5,Location
+1458,hi how does he get to room 14,Location
+1459,is there a lecture on sunday at 13,Schedule
+1460,hi how do I get to room 5,Location
+1461,which lectures are there on monday at 10,Schedule
+1462,on wednesday at 9 which lectures are there,Schedule
+1463,on thursday at 20 which lectures are there,Schedule
+1464,which lectures are there on saturday at 7,Schedule
+1465,at 20 on tuesday which lectures are there,Schedule
+1466,is there a lecture on thursday at 13,Schedule
+1467,is there a lecture on tuesday at 2,Schedule
+1468,is there a lecture on wednesday at 13,Schedule
+1469,hello where is room 13,Location
+1470,at 5 on thursday which lectures are there,Schedule
+1471,hey how do we get to room 1,Location
+1472,hey how do you get to room 15,Location
+1473,hello what is the location of room 9,Location
+1474,is there a lecture at 18 on thursday,Schedule
+1475,which lectures are there on wednesday at 8,Schedule
+1476,hi how do I get to room 1,Location
+1477,which lectures are there on wednesday at 6,Schedule
+1478,is there a lecture at 9 on monday,Schedule
+1479,on tuesday at 13 which lectures are there,Schedule
+1480,hello where is room 8,Location
+1481,hey what is the location of room 4,Location
+1482,is there a lecture at 19 on tuesday,Schedule
+1483,hello where is room 15 located,Location
+1484,on saturday at 4 which lectures are there,Schedule
+1485,hello how do you get to room 17,Location
+1486,which lectures are there on tuesday at 0,Schedule
+1487,is there a lecture at 12 on saturday,Schedule
+1488,which lectures are there at 20 on saturday,Schedule
+1489,at 11 on tuesday which lectures are there,Schedule
+1490,hello what is the location of room 6,Location
+1491,hey how do I get to room 5,Location
+1492,is there a lecture at 20 on monday,Schedule
+1493,is there a lecture on wednesday at 7,Schedule
+1494,hello how do you get to room 19,Location
+1495,which lectures are there at 3 on sunday,Schedule
+1496,is there a lecture on sunday at 6,Schedule
+1497,which lectures are there on monday at 3,Schedule
+1498,which lectures are there on thursday at 2,Schedule
+1499,hey where is room 4,Location
+1500,hey how do we get to room 6,Location
+1501,hey How to find room 9,Location
+1502,which lectures are there on tuesday at 15,Schedule
+1503,hey how do I get to room 6,Location
+1504,hey what is the location of room 16,Location
+1505,on wednesday at 6 which lectures are there,Schedule
+1506,on sunday at 17 which lectures are there,Schedule
+1507,is there a lecture at 1 on wednesday,Schedule
+1508,is there a lecture at 5 on thursday,Schedule
+1509,hey how does she get to room 2,Location
+1510,which lectures are there on thursday at 3,Schedule
+1511,on friday at 21 which lectures are there,Schedule
+1512,is there a lecture on friday at 20,Schedule
+1513,hey how do you get to room 2,Location
+1514,at 16 on friday which lectures are there,Schedule
+1515,hello how does he get to room 3,Location
+1516,on sunday at 19 which lectures are there,Schedule
+1517,hey how do you get to room 18,Location
+1518,which lectures are there on saturday at 11,Schedule
+1519,on monday at 13 which lectures are there,Schedule
+1520,hey where is room 15 located,Location
+1521,hey what is the location of room 13,Location
+1522,hey how do you get to room 11,Location
+1523,hi how does she get to room 8,Location
+1524,hi what is the location of room 18,Location
+1525,which lectures are there at 16 on monday,Schedule
+1526,on saturday at 11 which lectures are there,Schedule
+1527,hey how does he get to room 11,Location
+1528,which lectures are there at 1 on friday,Schedule
+1529,hi how do we get to room 9,Location
+1530,hello how do I get to room 14,Location
+1531,which lectures are there at 20 on tuesday,Schedule
+1532,which lectures are there at 13 on friday,Schedule
+1533,at 0 on friday which lectures are there,Schedule
+1534,which lectures are there at 3 on monday,Schedule
+1535,hi how do you get to room 15,Location
+1536,is there a lecture on sunday at 18,Schedule
+1537,is there a lecture on sunday at 8,Schedule
+1538,is there a lecture at 4 on saturday,Schedule
+1539,which lectures are there at 6 on saturday,Schedule
+1540,is there a lecture on monday,Schedule
+1541,is there a lecture on sunday at 12,Schedule
+1542,is there a lecture on tuesday at 0,Schedule
+1543,which lectures are there at 10 on saturday,Schedule
+1544,hey how do we get to room 10,Location
+1545,is there a lecture at 8 on friday,Schedule
+1546,is there a lecture on tuesday at 5,Schedule
+1547,hey how do I get to room 12,Location
+1548,which lectures are there on monday at 20,Schedule
+1549,where is spacebox located,Location
+1550,which lectures are there on monday at 15,Schedule
+1551,which lectures are there on saturday at 13,Schedule
+1552,hello how does she get to room 14,Location
+1553,hey where is room 5,Location
+1554,hi what is the location of room 12,Location
+1555,hi how does she get to room 9,Location
+1556,hello how do I get to room 18,Location
+1557,is there a lecture at 3 on tuesday,Schedule
+1558,hello How to find room 11,Location
+1559,hi where is room 16,Location
+1560,hey how do I get to room 18,Location
+1561,hi where is room 6,Location
+1562,is there a lecture at 14 on friday,Schedule
+1563,hey How to find room 16,Location
+1564,is there a lecture on tuesday at 8,Schedule
+1565,on friday at 9 which lectures are there,Schedule
+1566,hey how does he get to room 13,Location
+1567,hello how do we get to room 2,Location
+1568,is there a lecture on saturday at 20,Schedule
+1569,hello where is room 9 located,Location
+1570,hey how do you get to room 7,Location
+1571,on wednesday at 23 which lectures are there,Schedule

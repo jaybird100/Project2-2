@@ -1,8 +1,8 @@
 package CFG;
 
 import CFG.CNForm.*;
+import CFG.Helper.FileReader;
 import CFG.Helper.RegexHelper;
-import CFG.temp.FileParser;
 
 import java.io.File;
 import java.util.*;
@@ -23,7 +23,7 @@ public class CFGSystem {
             "\"ff n\" = turn off autocorrect and logic parsing features",
             "\"print 0\" = no print",
             "\"print 1\" = print OG rules",
-            "\"print 2\" = print OG rules",
+            "\"print 2\" = print all rules",
             "\"print 3\" = print rule to word map found",
             "\"print 4\" = print matches/actions accepted"
     };
@@ -60,16 +60,22 @@ public class CFGSystem {
         CNFConverter.loadAsCNF(skill, dataBase);
     }
     public static void load(File f){
-        CNFConverter.loadAsCNF(FileParser.loadFile(f), dataBase);
+        CNFConverter.loadAsCNF(FileReader.loadFile(f), dataBase);
     }
 
     /**
      * Executes CYK search on input, then parses the results of the CYK to final return the response of what was said
      * (if the input is in the grammar)
      * @param input string to analyse
-     * @return response from grammar
+     * @return response from grammar, null if nothing found
      */
     public static String run(String input){
+        if(ChatBot.isActive()){
+            input = ChatBot.dialogue(input);
+            if(ChatBot.isActive()){
+                return input;
+            }
+        }
         String temp = extraCommands(input);
         if(temp!=null){
             return temp;
@@ -78,6 +84,14 @@ public class CFGSystem {
         List<List<List<CYKNode>>> r = CYK(words);
         List<HashMap<String, String>> map = parseResults(r);
         List<CNFMatch> m = findMatches(map);
+        print(r, map, m);
+        if(m.size()==0){
+            return ChatBot.initiate(r);
+        }
+        return getResponse(m);
+    }
+
+    static void print(List<List<List<CYKNode>>> r, List<HashMap<String, String>> map, List<CNFMatch> m){
         switch(print){
             case 0:break;
             case 1:printResultsAsMatrix(r, true); break;
@@ -89,9 +103,8 @@ public class CFGSystem {
                 map.forEach(System.out::println);
                 m.forEach(System.out::println); break;
         }
-        return getResponse(m);
     }
-    private static String extraCommands(String input) {
+    static String extraCommands(String input) {
         if(input.equals("ff y")){
             CFGSystem.fullFeatures(true);
             return "Approximation and data types enabled";
@@ -120,7 +133,7 @@ public class CFGSystem {
      * @param input string to format
      * @return formatted input string
      */
-    private static List<TreeSet<String>> formatInput(String input){
+    static List<TreeSet<String>> formatInput(String input){
         String[] words = RegexHelper.convertToSplitFriendly(input.toLowerCase()).split("\\s+");
         List<TreeSet<String>> w = new ArrayList<>();
         for(int i=0; i<words.length;i++){
@@ -140,7 +153,7 @@ public class CFGSystem {
 
     // CYK
 
-    private static List<List<List<CYKNode>>> CYK(List<TreeSet<String>> words){
+    static List<List<List<CYKNode>>> CYK(List<TreeSet<String>> words){
         List<List<List<CYKNode>>> w = new ArrayList<>();
         w.add(new ArrayList<>());
         for (TreeSet<String> word : words) { // INIT first 2 rows (row 0 = input, row 1 = unit rules)
@@ -203,7 +216,7 @@ public class CFGSystem {
 
     //Extracting IDs and their equalities from Result
 
-    private static List<HashMap<String, String>> parseResults(List<List<List<CYKNode>>> r){
+    static List<HashMap<String, String>> parseResults(List<List<List<CYKNode>>> r){
         List<HashMap<String, String>> maps = new ArrayList<>();
         for (List<List<CYKNode>> l1 : r) {
             for (List<CYKNode> l2 : l1) {
@@ -225,7 +238,7 @@ public class CFGSystem {
     }
     private static String recursiveAdd(HashMap<String, String> map, CYKNode node){
         if(node.nodes==null){
-            if(node.id.endsWith(CNFConverter.converterID+">")){
+            if(node.cnfNode){
                 return node.correspondence;
             }
             map.put(node.id, node.correspondence.trim());
@@ -235,7 +248,7 @@ public class CFGSystem {
             String s = recursiveAdd(map, cykNode);
             node.correspondence = node.correspondence.replace(cykNode.id, s+" ");
         }
-        if(!node.id.endsWith(CNFConverter.converterID+">")) {
+        if(!node.cnfNode) {
             map.put(node.id, node.correspondence.trim());
         }
         return node.correspondence;
@@ -243,7 +256,7 @@ public class CFGSystem {
 
     // Getting response from CYK results
 
-    private static List<CNFMatch> findMatches(List<HashMap<String, String>> maps){
+    static List<CNFMatch> findMatches(List<HashMap<String, String>> maps){
         List<CNFMatch> matches = new ArrayList<>();
         for (HashMap<String, String> map : maps) {
             Set<CNFAction> possible = new LinkedHashSet<>();
@@ -264,7 +277,7 @@ public class CFGSystem {
         }
         return matches;
     }
-    private static String getResponse(List<CNFMatch> confirmedMatches){
+    static String getResponse(List<CNFMatch> confirmedMatches){
         if(confirmedMatches.size()==0){
             return null;
         }
@@ -283,40 +296,27 @@ public class CFGSystem {
 
     // Printing
 
-    private static void printResultsAsMatrix(List<List<List<CYKNode>>> w, boolean removeCNF){
+    static void printResultsAsMatrix(List<List<List<CYKNode>>> w, boolean removeCNF){
         int max =0;
-        boolean one = true;
         for (List<List<CYKNode>> rows : w) {
             for (List<CYKNode> point : rows) {
-                int size;
-                if(one){
-                    size = point.stream().mapToInt(n -> (n.toString().length() + 1)).sum();
-                }
-                else {
-                    size = point.stream().mapToInt(n -> (n.id.length() + 1)).sum();
-                }
+                int size = point.stream().mapToInt(n -> (n.toString().length() + 1)).sum();
                 if (size > max) {
                     max = size;
                 }
             }
-            one = false;
         }
         StringBuilder line = new StringBuilder();
         for (int i = 0; i < max; i++) {
             line.append("_");
         }
-        one = true;
         for (List<List<CYKNode>> strings : w) {
             StringBuilder l1 = new StringBuilder();
             for (List<CYKNode> string : strings) {
                 StringBuilder s = new StringBuilder();
                 for (CYKNode n : string) {
-                    if (!removeCNF || !n.id.endsWith(CNFConverter.converterID + ">")) {
-                        if (one) {
-                            s.append(n.toString()).append(",");
-                        } else {
-                            s.append(n.id).append(",");
-                        }
+                    if (!removeCNF || !n.cnfNode) {
+                        s.append(n.toString()).append(",");
                     }
                 }
                 if(s.length()!=0) {
@@ -328,7 +328,6 @@ public class CFGSystem {
                 System.out.print(s+"|");
                 l1.append("_").append(line);
             }
-            one = false;
             System.out.println("\n"+l1);
         }
     }
@@ -337,15 +336,26 @@ public class CFGSystem {
 
 class CYKNode{
     final String id;
+    final boolean cnfNode;
     String correspondence;
     final CYKNode[] nodes;
+    final String fullCorrespondence;
+    boolean used = false;
     CYKNode(String id, String correspondence, CYKNode[] nodes){
         this.id = id;
         this.correspondence = correspondence;
         this.nodes = nodes;
+        cnfNode = id.endsWith(CNFConverter.converterID+">");
+        if(nodes!=null) {
+            nodes[0].used = true;
+            nodes[1].used = true;
+            fullCorrespondence = nodes[0].fullCorrespondence+" "+nodes[1].fullCorrespondence;
+        }else{
+            fullCorrespondence = correspondence;
+        }
     }
     public String toString(){
-        return id+"="+correspondence;
+        //return nodes==null? id+"="+correspondence : id;
+        return id+"="+fullCorrespondence;
     }
 }
-
