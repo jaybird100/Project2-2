@@ -1,0 +1,89 @@
+utterance,intension
+What is the address of the lecture at 9,Location
+What do we have at 12,Schedule
+What time is the lecture on Tuesday,Schedule
+"Hello, does she have a lecture on Sunday",Schedule
+How do we find the address for lecture at 11,Location
+How are you,Greeting
+In what address do we have the lecture on Friday at 8,Location
+What’s up,Greeting
+At what time on Thursday does he have his first lecture,Schedule
+What lecture do we have on Monday,Schedule
+Hi is there a lecture in room deepspace at 9 for us,Schedule
+Is our lecture on Saturday scheduled,Schedule
+Is the time for our lecture on Wednesday at 10 changed,Schedule
+Is the room for her lecture on Saturday unchanged,Schedule
+How can he find his lecture at 17 on Friday,Location
+"Hello, what is the room for the lecture at 9",Location
+What is the address of the lecture at 9,Location
+What do we have at 1 pm on Friday,Schedule
+What time is our first class on Tuesday,Schedule
+Does she have a lecture on Sunday,Schedule
+How do we find the address for lecture at 11,Location
+How are you,Greeting
+"How are you, In what room do we have the lecture on Friday at 8",Location
+At what time on Thursday does he have his first lecture,Schedule
+What lecture do we have on Monday,Schedule
+Hi is there a class in room 1 at 18 for her,Schedule
+Is our lecture on Saturday unchanged ,Schedule
+Is the time for our lecture on Wednesday at 10 changed,Schedule
+Is the room for her class on Monday still the same,Schedule
+Hi how do we get to our lecture at 17 on Friday,Location
+What is the address of the lecture at 9 today ,Location
+What do we have at 12 today,Schedule
+Hello what time is the last class today ,Schedule
+Does he have a lecture tomorrow,Schedule
+How do we find the room for lecture at 10,Location
+How are you,Greeting
+In what address do we have the class on Friday at 8,Location
+At what time on Friday does he have his second lecture,Schedule
+What lecture do we have today,Schedule
+Hi are there any lectures in room deepspace at 9 for us,Schedule
+Hey Is our lecture on Saturday scheduled,Schedule
+Is the time for our lecture on Wednesday at 10 changed,Schedule
+Is the room for her lecture on Monday remain the same,Schedule
+How do we get to our lecture at 17 today ,Location
+Where is our lecture at 8 on Friday located,Location
+What does he have today,Schedule
+What time is our first lecture today,Schedule
+"Hello, tomorrow do we have class",Schedule
+How do we find the room for class at 11 tomorrow,Location
+How is its going,Greeting
+Where do we have the lecture on Friday at 8,Location
+What up,Greeting
+what time on Thursday is our first lecture,Schedule
+What lecture do we have tomorrow,Schedule
+Hi is there a lecture in room no 2 at 12,Schedule
+Is our lecture today still the same,Schedule
+When Is the time for our lecture on Wednesday at 10 changed to,Schedule
+Is the room for her lecture on Saturday unchanged,Schedule
+How can she find the address for his lecture at 10 today ,Location
+"Hi, what is the time for the lecture on Saturday",Location
+What is the address of our second class,Location
+What do we have at 12 pm on Friday,Schedule
+What time is our second class on Tuesday,Schedule
+Do you have a lecture on Sunday,Schedule
+How do we find the classroom for lecture now,Location
+How are you doing,Greeting
+"How are you, which address do we have the lecture on Friday at 15",Location
+what time on Tuesday is his first lecture,Schedule
+What do we have on Monday,Schedule
+Hi is there a lecture in room 3 at 14,Schedule
+Is our lecture on Saturday unchanged ,Schedule
+Is the time for our lecture on Wednesday at 10 rescheduled,Schedule
+Is the room for our lecture on Monday still on time,Schedule
+Hi how do we get to our class at 17 on Friday,Location
+What is the location of the lecture at 9 today ,Location
+What do we have at 12 today,Schedule
+Hello what time is the last lecture today ,Schedule
+Does he have a class tomorrow,Schedule
+How do we find the room for lecture at 10,Location
+How are you,Greeting
+In what room do we have the lecture on Friday at 8,Location
+At what time on Friday does he have his second class,Schedule
+Do we have anything today,Schedule
+Hi is there a lecture in this classroom at 11,Schedule
+Hey Is our lecture on Sunday scheduled,Schedule
+Is our lecture on Wednesday changed to 9,Schedule
+Is the location for my lecture tomorrow remain the same,Schedule
+How do we find the place for our lecture at 10 today ,Location
