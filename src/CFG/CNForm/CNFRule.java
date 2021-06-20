@@ -1,5 +1,7 @@
 package CFG.CNForm;
 
+import CFG.CFGSystem;
+
 import java.util.ArrayList;
 import java.util.List;
 //TODO make options a Set not a list??
@@ -40,6 +42,17 @@ public class CNFRule implements Comparable<CNFRule> {
         return options.get(i);
     }
 
+    public String simpleString(){
+        StringBuilder sb= new StringBuilder();
+        sb.append(id).append(" -> ");
+        for (int i = 0; i < options.size(); i++) {
+            if (i != 0) {
+                sb.append(" | ");
+            }
+            sb.append(expand(options.get(i)));
+        }
+        return sb.toString();
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -47,13 +60,7 @@ public class CNFRule implements Comparable<CNFRule> {
         if(!fromConversion){
             sb.append("extra=").append(extraRules).append(", ");
         }
-        sb.append(id).append(" -> ");
-        for (int i = 0; i < options.size(); i++) {
-            if (i != 0) {
-                sb.append(" | ");
-            }
-            sb.append(options.get(i));
-        }
+        sb.append(simpleString());
         return sb.toString();
     }
 
@@ -64,5 +71,16 @@ public class CNFRule implements Comparable<CNFRule> {
 
     public boolean accepts(String input) {
         return options.contains(input);
+    }
+
+    public static String expand(String opt){
+        if(opt.matches("<\\w+?"+CNFConverter.converterID+">")){
+            return expand(CFGSystem.dataBase.rule(opt).get(0));
+        }
+        if(opt.matches("<\\w+><\\w+>")){
+            String[] a = opt.replace("><","> <").split(" ");
+            return expand(a[0])+" "+expand(a[1]);
+        }
+        return opt;
     }
 }

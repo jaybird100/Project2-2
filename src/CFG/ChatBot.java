@@ -2,9 +2,11 @@ package CFG;
 
 import CFG.CNForm.CNFConverter;
 import CFG.CNForm.CNFRule;
+import CFG.Helper.RegexHelper;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /*
@@ -57,8 +59,12 @@ public class ChatBot {
             List<String> temp = perm.stream().map(n->n.id).collect(Collectors.toList());
             possible.forEach(opt -> opt.setSimilarity(temp));
         });
-        // Filter for 70% similarity
-        List<ChatBotOption> options = possible.stream().filter(o -> o.similarity()>0.7).collect(Collectors.toList());
+        // Get highest similarity and keep only the options that have it
+        AtomicReference<Double> maxSim = new AtomicReference<>((double) 0);
+        possible.forEach(o -> {
+            maxSim.set(Math.max(maxSim.get(), o.similarity));
+        });
+        List<ChatBotOption> options = possible.stream().filter(o -> o.similarity()==maxSim.get()).collect(Collectors.toList());
         // Fill options with known/derivable info
         options.forEach(o -> o.fillUnknown(map));
         if(options.size()==0){
@@ -171,14 +177,20 @@ public class ChatBot {
         if(opt.size()==0){
             return null;
         }
+        String r;
         if(opt.size()==1){
-            return "Did you mean '"+opt.get(0).filled()+"'?";
+            r = "Did you mean '"+opt.get(0).filled()+"'?";
+        }else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Did you mean: ");
+            AtomicInteger i = new AtomicInteger(1);
+            opt.forEach(o -> sb.append("\n\t").append(i.getAndIncrement()).append(".").append(o.filled()));
+            r = sb.toString();
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Did you mean: ");
-        AtomicInteger i = new AtomicInteger(1);
-        opt.forEach(o -> sb.append("\n\t").append(i.getAndIncrement()).append(".").append(o.filled()));
-        return sb.toString();
+        if(opt.get(0).missing().size()!=0) {
+            r+="\nFor more information, ask 'what is "+opt.get(0).missing().get(0)+"?' for example.";
+        }
+        return r;
     }
     /*
     ChatBot Dialogue:
@@ -196,6 +208,16 @@ public class ChatBot {
             deactivate();
             return "";
         }
+        if(input.matches("what is <\\w+>.*")){
+            List<String> l = RegexHelper.extract(input, "<\\w+>");
+            StringBuilder sb = new StringBuilder();
+            l.forEach(id ->{
+                if(id.matches("<\\w+>")){
+                    sb.append(CFGSystem.dataBase.rule(id).simpleString()).append("\n");
+                }
+            });
+            return sb.deleteCharAt(sb.length()-1).toString();
+        }
         if(chosen==null){
             int idx = getChosenIndex(input);
             if(idx==-1 || idx>memory.size()){
@@ -210,7 +232,7 @@ public class ChatBot {
                 chosen.fill(missing.get(0), input);
             }
             if(missing.size()!=0){
-                return missing.get(0)+"?";
+                return "What was "+missing.get(0)+" supposed to be?";
             }
         }
         String r = chosen.filled();
@@ -265,7 +287,7 @@ public class ChatBot {
          * @param minEdits optimization feature. If current branch will lead to more edits than the cur minimum, skip it
          * @return min nb of edits found in all branches explored
          */
-        private int similarity(List<String> o, List<String> botRowOrder, Set<Edits> list, Edits cur, int minEdits) {
+        private double similarity(List<String> o, List<String> botRowOrder, Set<Edits> list, Edits cur, double minEdits) {
             if(botRowOrder.size()==0){
                 cur.add(o, null);
                 list.add(cur);
@@ -317,25 +339,25 @@ public class ChatBot {
             return sb.toString();
         }
         static class Edits implements Comparable<Edits>{
-            private final List<String> added;
+            private final List<String> addedAtEnd;
             private final List<String> skipped;
-            private int edits;
-            public Edits(List<String> added, List<String> skipped){
-                this.added = new ArrayList<>(added);
+            private double edits;
+            public Edits(List<String> addedAtEnd, List<String> skipped){
+                this.addedAtEnd = new ArrayList<>(addedAtEnd);
                 this.skipped = new ArrayList<>(skipped);
-                edits+= added.size();
+                edits+= addedAtEnd.size()*1.5;
                 edits+= skipped.size();
             }
             public Edits(){
                 this(new ArrayList<>(), new ArrayList<>());
             }
             public Edits(Edits e){
-                this(e.added, e.skipped);
+                this(e.addedAtEnd, e.skipped);
             }
 
             public void add(List<String> added ,List<String> skipped){
                 if(added!=null){
-                    this.added.addAll(added);
+                    this.addedAtEnd.addAll(added);
                     edits+= added.size();
                 }
                 if(skipped!=null){
@@ -344,17 +366,17 @@ public class ChatBot {
                 }
             }
             public void found(String id){
-                if(added.remove(id)) edits--;
+                if(addedAtEnd.remove(id)) edits-=1.5;
             }
 
             public List<String> missing(){
-                return added;
+                return addedAtEnd;
             }
-            public int edits(){
+            public double edits(){
                 return edits;
             }
             public String toString(){
-                return "Changed: "+edits+", Ask for: "+added+", Skipped: "+skipped;
+                return "Changed: "+edits+", Ask for: "+ addedAtEnd +", Skipped: "+skipped;
             }
 
             @Override
@@ -362,7 +384,7 @@ public class ChatBot {
                 if(edits == o.edits){
                     return 1;
                 }
-                return Integer.compare(edits, o.edits);
+                return Double.compare(edits, o.edits);
             }
         }
     }
