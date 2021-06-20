@@ -3,7 +3,6 @@ package CFG.Helper;
 import CFG.CNForm.CNFConverter;
 import CFG.CNForm.CNFDataBase;
 import CFG.CNForm.CNFRule;
-import CFG.temp.FileParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;

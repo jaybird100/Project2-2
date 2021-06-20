@@ -2,7 +2,6 @@ package UI.Pages;
 
 import CFG.CNForm.CNFConverter;
 import CFG.Helper.FileReader;
-import CFG.temp.FileParser;
 import CFG.CFGSystem;
 import UI.PageController;
 import javafx.animation.AnimationTimer;
