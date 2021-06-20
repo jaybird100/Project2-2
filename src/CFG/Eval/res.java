@@ -15,7 +15,9 @@ public class res {
         String[] s= utterances.split("\n");
         int len=s.length;
         String[][] g= new String[len][4];
-        double[][] r= { { 0.0 , 0.0 , 0.0 , 0.5 },
+        double[][] r= {
+                //{0,0,0,0},
+                { 0.0 , 0.0 , 0.0 , 0.5 },
                 { 0.0 , 0.0 , 0.5 , 0.0 },
                 { 0.0 , 0.0 , 0.5 , 0.5 },
                 { 0.0 , 0.5 , 0.0 , 0.0 },
@@ -44,17 +46,20 @@ public class res {
                 g[i][2] = e.generateErr(s[i]);
                 g[i][3] = CFGSystem.run(g[i][2]);
 
-                if (g[i][0].equals(g[i][2])) {
-                    if (g[i][1].equals(g[i][3])) {
-                        ++fn;
-                    } else {
+                if (g[i][0].equals(g[i][2])) {//input before/after scramble is same
+                    if (g[i][1].equals(g[i][3])) {//output before.after scramble is same
+                        ++fp;
+                    } else {//output before/after scramble is changed
+
                         ++tn;
                     }
-                } else {
-                    if (g[i][1].equals(g[i][3])) {
+                } else {//input before/after scramble is changed
+                    if (g[i][1].equals(g[i][3])) {//output before/after scramble is same
                         ++tp;
-                    } else {
-                        ++fp;
+                    } else {//output before/after scramble is changed
+                        ++fn;
+                        System.out.println("FN"+ Arrays.toString(g[i]));
+
                     }
                 }
             }
