@@ -1,39 +1,35 @@
 package FacialRecognition;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.opencv.core.*;
-import org.opencv.dnn.Dnn;
-import org.opencv.dnn.Net;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.ml.SVM;
-import org.opencv.objdetect.HOGDescriptor;
 import org.opencv.videoio.VideoCapture;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
+import static org.opencv.core.Core.PCACompute;
 
-public class HOGFaceDetector implements FaceDetector {
-
-    public static boolean foundFace;
-    private Mat matrix;
-    Stage stage;
-    Group root;
+public class PCAtoMLP implements FaceDetector{
+    Mat matrix;
+    Boolean foundFace;
     Size dim = new Size(128,64);
 
     @Override
@@ -43,7 +39,6 @@ public class HOGFaceDetector implements FaceDetector {
 
     @Override
     public void init(Stage stage) {
-        this.stage=stage;
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         WritableImage writableImage = captureSnapShot();
         saveImage();
@@ -55,7 +50,7 @@ public class HOGFaceDetector implements FaceDetector {
         imageView.setPreserveRatio(true);
 
         // Creating a Group object
-        root = new Group(imageView);
+        Group root = new Group(imageView);
 
         // Creating a scene object
         Scene scene = new Scene(root, 600, 400);
@@ -114,50 +109,34 @@ public class HOGFaceDetector implements FaceDetector {
         imageCodecs.imwrite(file, matrix);
     }
 
+
     @Override
     public void findFace() {
-        SVM svm = SVM.load("detect.xml");
+        ArrayList<Double> means = new ArrayList<>();
+        ArrayList<ArrayList<Double>> eigenVectors = new ArrayList<>();
+        try {
+            Scanner br = new Scanner(new FileReader("pcaMean.txt"));
+            while(br.hasNext()){
+                means.add(Double.parseDouble(br.nextLine()));
+            }
+            Scanner br1 = new Scanner(new FileReader("pcaEigen.txt"));
+            while(br1.hasNext()){
+                ArrayList<Double> row = new ArrayList<>();
+                while(br1.hasNextDouble()){
+                    row.add(br.nextDouble());
+                }
+                eigenVectors.add(row);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         Mat bicubic = new Mat();
         Imgproc.resize(matrix,bicubic,dim,0,0,Imgproc.INTER_CUBIC);
         Mat grey = new Mat();
         Imgproc.cvtColor(bicubic,grey,Imgproc.COLOR_BGR2GRAY);
-        MatOfInt uint8 = new MatOfInt();
-        grey.convertTo(uint8,CvType.CV_8U);
+        Mat mean = new Mat();
+        Mat eigen = new Mat();
+        PCACompute(grey,mean,eigen);
 
-        HOGDescriptor hog = new HOGDescriptor(dim,new Size(16,16),new Size(8,8),new Size(8,8),9,1,4.,0,2.0000000000000001e-01,false,64);
-        MatOfFloat hogimage = new MatOfFloat();
-        hog.compute(uint8,hogimage);
-
-
-        float val = svm.predict(hogimage.reshape(1,1));
-        String name = "";
-        System.out.println(val == 1 ? "face found" : "face not found");
-        foundFace= val == 1;
-        if(foundFace){
-            SVM svm1 = SVM.load("recogmodel.xml");
-            float val1 = svm1.predict(hogimage.reshape(1,1));
-            System.out.println(val1);
-            if(val1==0){
-                name = "Alaa";
-            }
-            if(val1==1){
-                name = "Jonathon";
-            }
-            if(val1==2){
-                name = "Jonathon";
-            }
-            if(val1==3){
-                name= "Davit";
-            }
-            if(val1==4){
-                name = "Ivan";
-            }
-            Label result = new Label(name);
-            result.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 80, 0.7), new CornerRadii(5.0), new Insets(-5.0))));
-            result.setFont(new Font("Arial", 30));
-            result.setTextFill(Color.WHITE);
-            root.getChildren().add(result);
-            stage.show();
-        }
     }
 }

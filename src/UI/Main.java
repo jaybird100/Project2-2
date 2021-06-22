@@ -51,7 +51,7 @@ public class Main extends Application {
 
     public void checkForFace(Stage primaryStage) {
         Group root = new Group();
-        Scene scene = new Scene(root, windowWidth * 3 / 4, windowHeight / 4, Color.LAVENDER);
+        Scene scene = new Scene(root, windowWidth * 3 / 4, windowHeight / 2, Color.LAVENDER);
 
         Stage findFace = new Stage();
         findFace.setTitle("First, a Human Check");
@@ -66,7 +66,7 @@ public class Main extends Application {
 
         // COMMENT here to switch between face detection methods
         //FaceDetector faceDetector = new ClassifierFaceDetector();
-        FaceDetector faceDetector = new HOGFaceDetector();
+        FaceDetector faceDetector = new YOLOFaceDetector();
 
         scene.setOnKeyPressed((KeyEvent ENTER) -> {
             if (ENTER.getCode().equals(KeyCode.ENTER)) {
@@ -75,7 +75,6 @@ public class Main extends Application {
                 faceDetector.init(primaryStage);
                 faceDetector.findFace();
                 if(faceDetector.isFaceFound()) {
-                    findFace.close();
                     //Group root1 = new Group();
                     //primaryStage.setTitle("Virtual Assistant");
                     //findName(primaryStage);
@@ -84,7 +83,7 @@ public class Main extends Application {
                     //title.setLayoutX(180);
                     //title.setLayoutY(20);
                     //title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
-                    startCFGAgent(primaryStage);
+                    startCFGAgent(new Stage());
                     //Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
                     //skillEditor = new SkillEditor(primaryStage, root1);
                     //primaryStage.setScene(scene1);
@@ -92,7 +91,7 @@ public class Main extends Application {
             }
         });
 
-        Button enter = new Button("ENTER");
+        Button enter = new Button("YOLOv4");
         root.getChildren().add(enter);
         //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
         enter.setLayoutX(135);
@@ -103,7 +102,6 @@ public class Main extends Application {
             faceDetector.init(primaryStage);
             faceDetector.findFace();
             if(faceDetector.isFaceFound()) {
-                findFace.close();
                 //Group root1 = new Group();
                 //primaryStage.setTitle("Virtual Assistant");
                 //findName(primaryStage);
@@ -112,7 +110,58 @@ public class Main extends Application {
                 //title.setLayoutX(180);
                 //title.setLayoutY(20);
                 //title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
-                startCFGAgent(primaryStage);
+                startCFGAgent(new Stage());
+                //Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
+                //skillEditor = new SkillEditor(primaryStage, root1);
+                //primaryStage.setScene(scene1);
+            }
+        });
+        Button enter1 = new Button("HoG into SVM");
+        FaceDetector faceDetector1 = new HOGFaceDetector();
+        root.getChildren().add(enter1);
+        //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
+        enter1.setLayoutX(135);
+        enter1.setLayoutY(105);
+        enter1.setOnAction(e -> {
+            //System.out.println("lol");
+            //startCFGAgent(primaryStage);
+            faceDetector1.init(primaryStage);
+            faceDetector1.findFace();
+            if(faceDetector1.isFaceFound()) {
+                //Group root1 = new Group();
+                //primaryStage.setTitle("Virtual Assistant");
+                //findName(primaryStage);
+                //title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
+                //root1.getChildren().add(title);
+                //title.setLayoutX(180);
+                //title.setLayoutY(20);
+                //title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
+                startCFGAgent(new Stage());
+                //Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
+                //skillEditor = new SkillEditor(primaryStage, root1);
+                //primaryStage.setScene(scene1);
+            }
+        });
+        Button enter2 = new Button("PCA into MLP");
+        root.getChildren().add(enter2);
+        //enter.setGraphic(new ImageView(new Image("Skins/Next.jpg", 25, 25, true, true)));
+        enter2.setLayoutX(135);
+        enter2.setLayoutY(145);
+        enter2.setOnAction(e -> {
+            //System.out.println("lol");
+            //startCFGAgent(primaryStage);
+            faceDetector1.init(primaryStage);
+            faceDetector1.findFace();
+            if(faceDetector1.isFaceFound()) {
+                //Group root1 = new Group();
+                //primaryStage.setTitle("Virtual Assistant");
+                //findName(primaryStage);
+                //title = new Label(username + "'s Personal Assistant"); //it doesn't work without this for some reason
+                //root1.getChildren().add(title);
+                //title.setLayoutX(180);
+                //title.setLayoutY(20);
+                //title.setFont(Font.font("Arial", FontWeight.BOLD, 18.0));
+                startCFGAgent(new Stage());
                 //Scene scene1 = new Scene(root1, windowWidth, windowHeight, Color.LAVENDER);
                 //skillEditor = new SkillEditor(primaryStage, root1);
                 //primaryStage.setScene(scene1);

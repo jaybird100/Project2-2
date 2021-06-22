@@ -18,29 +18,21 @@ import org.opencv.dnn.Dnn;
 import org.opencv.dnn.Net;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.ml.SVM;
-import org.opencv.objdetect.HOGDescriptor;
 import org.opencv.videoio.VideoCapture;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-
-public class HOGFaceDetector implements FaceDetector {
-
+public class YOLOFaceDetector implements FaceDetector{
     public static boolean foundFace;
     private Mat matrix;
     Stage stage;
     Group root;
-    Size dim = new Size(128,64);
-
-    @Override
-    public boolean isFaceFound() {
-        return foundFace;
-    }
-
     @Override
     public void init(Stage stage) {
         this.stage=stage;
@@ -68,9 +60,7 @@ public class HOGFaceDetector implements FaceDetector {
 
         // Displaying the contents of the stage
         stage.show();
-
     }
-
     public WritableImage captureSnapShot() {
         WritableImage WritableImage = null;
 
@@ -116,48 +106,66 @@ public class HOGFaceDetector implements FaceDetector {
 
     @Override
     public void findFace() {
-        SVM svm = SVM.load("detect.xml");
-        Mat bicubic = new Mat();
-        Imgproc.resize(matrix,bicubic,dim,0,0,Imgproc.INTER_CUBIC);
+        String weightsPath = "yolov4-obj_last.weights";
+        String configPath = "yolov4-obj.cfg";
+        Net net = Dnn.readNetFromDarknet(configPath,weightsPath);
         Mat grey = new Mat();
-        Imgproc.cvtColor(bicubic,grey,Imgproc.COLOR_BGR2GRAY);
-        MatOfInt uint8 = new MatOfInt();
-        grey.convertTo(uint8,CvType.CV_8U);
-
-        HOGDescriptor hog = new HOGDescriptor(dim,new Size(16,16),new Size(8,8),new Size(8,8),9,1,4.,0,2.0000000000000001e-01,false,64);
-        MatOfFloat hogimage = new MatOfFloat();
-        hog.compute(uint8,hogimage);
-
-
-        float val = svm.predict(hogimage.reshape(1,1));
-        String name = "";
-        System.out.println(val == 1 ? "face found" : "face not found");
-        foundFace= val == 1;
-        if(foundFace){
-            SVM svm1 = SVM.load("recogmodel.xml");
-            float val1 = svm1.predict(hogimage.reshape(1,1));
-            System.out.println(val1);
-            if(val1==0){
-                name = "Alaa";
-            }
-            if(val1==1){
-                name = "Jonathon";
-            }
-            if(val1==2){
-                name = "Jonathon";
-            }
-            if(val1==3){
-                name= "Davit";
-            }
-            if(val1==4){
-                name = "Ivan";
-            }
-            Label result = new Label(name);
-            result.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 80, 0.7), new CornerRadii(5.0), new Insets(-5.0))));
-            result.setFont(new Font("Arial", 30));
-            result.setTextFill(Color.WHITE);
-            root.getChildren().add(result);
-            stage.show();
+        Imgproc.cvtColor(matrix,grey,Imgproc.COLOR_BGR2RGB);
+        List<String> ln1 = net.getLayerNames();
+        int[] pp = net.getUnconnectedOutLayers().toArray();
+        ArrayList<String> ln = new ArrayList<>();
+        for(int i:pp){
+            ln.add(ln1.get(i-1));
         }
+        System.out.println(Arrays.toString(ln.toArray()));
+        Mat blob =  Dnn.blobFromImage(grey,1/255.0,new Size(416, 416));
+        net.setInput(blob);
+        Mat layerOutputs = net.forward(String.valueOf(ln.get(1)));
+        double maxConf=-1;
+        int maxID=-1;
+        for(int i = 0;i<layerOutputs.size().height;i++){
+            for(int b = 5;b<10;b++){
+                System.out.println(Arrays.toString(layerOutputs.get(i,b)));
+                if(layerOutputs.get(i,b)[0]>maxConf){
+                    maxConf=layerOutputs.get(i,b)[0];
+                    maxID=b-5;
+                }
+            }
+        }
+        System.out.println(maxID+" / "+maxConf);
+        String name = "";
+        if(maxID==0){
+            name="Jonathon";
+        }else{
+            if(maxID==1){
+                name = "Alaa";
+            }else{
+                if(maxID==2){
+                    name = "Davit";
+                }else{
+                    if(maxID==3){
+                        name = "Ivan";
+                    }else{
+                        if(maxID==4){
+                            name = "Ranjani";
+                        }
+                    }
+                }
+            }
+        }
+        Label result = new Label(name+" / "+maxConf);
+        result.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 80, 0.7), new CornerRadii(5.0), new Insets(-5.0))));
+        result.setFont(new Font("Arial", 30));
+        result.setTextFill(Color.WHITE);
+        root.getChildren().add(result);
+        stage.show();
+        if(maxConf>0.8){
+            foundFace=true;
+        }
+    }
+
+    @Override
+    public boolean isFaceFound() {
+        return foundFace;
     }
 }
