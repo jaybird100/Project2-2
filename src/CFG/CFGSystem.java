@@ -70,11 +70,14 @@ public class CFGSystem {
      * @return response from grammar, null if nothing found
      */
     public static String run(String input){
+        input = input.toLowerCase();
+        boolean chatbot = false;
         if(ChatBot.isActive()){
             input = ChatBot.dialogue(input);
             if(ChatBot.isActive()){
                 return input;
             }
+            chatbot = true;
         }
         String temp = extraCommands(input);
         if(temp!=null){
@@ -83,10 +86,13 @@ public class CFGSystem {
         List<TreeSet<String>> words = formatInput(input);
         List<List<List<CYKNode>>> r = CYK(words);
         List<HashMap<String, String>> map = parseResults(r);
+        if(map.size()==0){
+            return ChatBot.initiate(r);
+        }
         List<CNFMatch> m = findMatches(map);
         print(r, map, m);
-        if(m.size()==0){
-            return ChatBot.initiate(r);
+        if(m.size()==0 && chatbot){
+            return "I don't know";
         }
         return getResponse(m);
     }

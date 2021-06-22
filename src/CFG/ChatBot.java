@@ -57,10 +57,12 @@ public class ChatBot {
         // For every permutations of the bottom row and every option, set similarity
         botRowPermutations.forEach(perm ->{
             List<String> temp = perm.stream().map(n->n.id).collect(Collectors.toList());
-            possible.forEach(opt -> opt.setSimilarity(temp));
+            possible.forEach(opt -> {
+                opt.setSimilarity(temp);
+            });
         });
         // Get highest similarity and keep only the options that have it
-        AtomicReference<Double> maxSim = new AtomicReference<>((double) 0);
+        AtomicReference<Double> maxSim = new AtomicReference<>(0.7);
         possible.forEach(o -> {
             maxSim.set(Math.max(maxSim.get(), o.similarity));
         });
@@ -295,7 +297,7 @@ public class ChatBot {
             }
             for (int j = 0; j < o.size(); j++) {
                 for (int i = 0; i < botRowOrder.size(); i++) {
-                    if (botRowOrder.get(i).equals(o.get(j))) {
+                    if (botRowOrder.get(i).equals(o.get(j)) || i==botRowOrder.size()-1) {
                         Edits branch = new Edits(cur);
                         branch.add(o.subList(0, j), botRowOrder.subList(0, i));
                         if(branch.edits()<minEdits){
