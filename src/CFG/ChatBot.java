@@ -271,7 +271,8 @@ public class ChatBot {
          */
         public void setSimilarity(List<String> botRowOrder) {
             TreeSet<Edits> l = new TreeSet<>();
-            similarity(order, botRowOrder, l, new Edits(), Integer.MAX_VALUE);
+            boolean debug = false;
+            similarity(order, botRowOrder, l, new Edits(), Integer.MAX_VALUE, debug);
             if(l.size()!=0 && (e==null || e.edits()>l.first().edits())) {
                 e = l.first();
                 similarity = 1 - e.edits() / (double) (order.size() + botRowOrder.size());
@@ -287,9 +288,9 @@ public class ChatBot {
          * @param minEdits optimization feature. If current branch will lead to more edits than the cur minimum, skip it
          * @return min nb of edits found in all branches explored
          */
-        private double similarity(List<String> o, List<String> botRowOrder, Set<Edits> list, Edits cur, double minEdits) {
+        private double similarity(List<String> o, List<String> botRowOrder, Set<Edits> list, Edits cur, double minEdits, boolean debug) {
             if(botRowOrder.size()==0){
-                cur.add(o, null);
+                cur.add(o, botRowOrder);
                 list.add(cur);
                 return cur.edits();
             }
@@ -299,7 +300,13 @@ public class ChatBot {
                         Edits branch = new Edits(cur);
                         branch.add(o.subList(0, j), botRowOrder.subList(0, i));
                         if(branch.edits()<minEdits){
-                            minEdits = Math.min(minEdits, similarity(o.subList(j+1, o.size()), botRowOrder.subList(i + 1, botRowOrder.size()), list, branch, minEdits));
+                            minEdits = Math.min(minEdits, similarity(o.subList(j+1, o.size()), botRowOrder.subList(i + 1, botRowOrder.size()), list, branch, minEdits, debug));
+                        }
+                    }else if(i==botRowOrder.size()-1){
+                        Edits branch = new Edits(cur);
+                        branch.add(o.subList(0, j+1), botRowOrder.subList(0, i+1));
+                        if(branch.edits()<minEdits){
+                            minEdits = Math.min(minEdits, similarity(o.subList(j+1, o.size()), botRowOrder.subList(i + 1, botRowOrder.size()), list, branch, minEdits, debug));
                         }
                     }
                 }

@@ -70,11 +70,14 @@ public class CFGSystem {
      * @return response from grammar, null if nothing found
      */
     public static String run(String input){
+        input = input.toLowerCase().trim();
+        boolean chatBot = false;
         if(ChatBot.isActive()){
             input = ChatBot.dialogue(input);
             if(ChatBot.isActive()){
                 return input;
             }
+            chatBot = true;
         }
         String temp = extraCommands(input);
         if(temp!=null){
@@ -85,6 +88,9 @@ public class CFGSystem {
         List<HashMap<String, String>> map = parseResults(r);
         List<CNFMatch> m = findMatches(map);
         print(r, map, m);
+        if(chatBot){
+            return "I don't know";
+        }
         if(m.size()==0){
             return ChatBot.initiate(r);
         }
