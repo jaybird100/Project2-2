@@ -89,7 +89,7 @@ public class CFGSystem {
         List<CNFMatch> m = findMatches(map);
         print(r, map, m);
         if(chatBot){
-            return "I don't know";
+            return "No results found";
         }
         if(m.size()==0){
             return ChatBot.initiate(r);
